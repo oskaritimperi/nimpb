@@ -254,50 +254,50 @@ proc genWriteField(field: NimNode): NimNode =
         writer = ident("write" & getFieldTypeAsString(field))
         fname = newDotExpr(ident("message"), ident(getFieldName(field)))
         wiretype = ident(wiretype(field))
+        sizeproc = ident("sizeOf" & getFieldTypeAsString(field))
+        hasproc = ident(fieldProcName("has", field))
 
     if not isRepeated(field):
         result.add quote do:
-            writeTag(stream, `number`, `wiretype`)
-            `writer`(stream, `fname`)
+            if `hasproc`(message):
+                writeTag(stream, `number`, `wiretype`)
+                `writer`(stream, `fname`)
         if isMessage(field):
-            insert(result[^1], 1, newCall(ident("writeVarint"), ident("stream"),
-                newCall(ident("sizeOf" & getFieldTypeAsString(field)), fname)))
+            insert(result[0][0][1], 1, quote do:
+                writeVarint(stream, `sizeproc`(`fname`))
+            )
     else:
+        let valueId = ident("value")
         if isPacked(field):
             result.add quote do:
                 writeTag(stream, `number`, WireType.LengthDelimited)
                 writeVarInt(stream, packedFieldSize(`fname`, `wiretype`))
-                for value in `fname`:
-                    `writer`(stream, value)
+                for `valueId` in `fname`:
+                    `writer`(stream, `valueId`)
         else:
-            let valueId = ident("value")
             result.add quote do:
                 for `valueId` in `fname`:
                     writeTag(stream, `number`, `wiretype`)
                     `writer`(stream, `valueId`)
             if isMessage(field):
-                insert(result[^1][^1], 1, newCall(ident("writeVarint"), ident("stream"),
-                    newCall(ident("sizeOf" & getFieldTypeAsString(field)), valueId)))
+                insert(result[^1][^1], 1, quote do:
+                    writeVarint(stream, `sizeproc`(`valueId`))
+                )
 
 proc generateWriteMessageProc(desc: NimNode): NimNode =
-    let body = newStmtList()
-
-    let name = getMessageName(desc)
+    let
+        messageId = ident("message")
+        mtype = ident(getMessageName(desc))
+        procName = postfix(ident("write" & getMessageName(desc)), "*")
+        body = newStmtList()
+        stream = ident("stream")
 
     for field in fields(desc):
-        add(body, nnkIfStmt.newTree(
-            nnkElifBranch.newTree(
-                newCall(ident("has" & capitalizeAscii(getFieldName(field))),
-                    ident("message")),
-                genWriteField(field)
-            )
-        ))
+        add(body, genWriteField(field))
 
-    result = newProc(postfix(ident("write" & name), "*"),
-        @[newEmptyNode(),
-          newIdentDefs(ident("stream"), ident("ProtobufStream")),
-          newIdentDefs(ident("message"), ident(name))],
-        body)
+    result = quote do:
+        proc `procName`(`stream`: ProtobufStream, `messageId`: `mtype`) =
+            `body`
 
 proc generateReadMessageProc(desc: NimNode): NimNode =
     let name = getMessageName(desc)
