@@ -178,84 +178,70 @@ proc generateNewMessageProc(desc: NimNode): NimNode =
         @[ident(getMessageName(desc))],
         body)
 
+proc fieldProcName(prefix: string, field: NimNode): string =
+    result = prefix & capitalizeAscii(getFieldName(field))
+
+proc fieldProcIdent(prefix: string, field: NimNode): NimNode =
+    result = postfix(ident(fieldProcName(prefix, field)), "*")
+
 proc generateClearFieldProc(desc, field: NimNode): NimNode =
-    let body = nnkStmtList.newTree()
+    let
+        messageId = ident("message")
+        fname = newDotExpr(messageId, ident(getFieldName(field)))
+        defvalue = defaultValue(field)
+        hasField = newDotExpr(messageId, ident("hasField"))
+        number = getFieldNumber(field)
+        procName = fieldProcIdent("clear", field)
+        mtype = ident(getMessageName(desc))
 
-    let messageName = getMessageName(desc)
-    let fieldName = getFieldName(field)
-
-    add(body, fieldInitializer("message", field))
-
-    add(body, nnkCall.newTree(
-        ident("excl"),
-        nnkDotExpr.newTree(
-            ident("message"),
-            ident("hasField")
-        ),
-        newLit(getFieldNumber(field))
-    ))
-
-    result = newProc(postfix(ident("clear" & capitalizeAscii(fieldName)), "*"),
-        @[newEmptyNode(), newIdentDefs(ident("message"), ident(messageName))],
-        body)
+    result = quote do:
+        proc `procName`(`messageId`: `mtype`) =
+            `fname` = `defvalue`
+            excl(`hasfield`, `number`)
 
 proc generateHasFieldProc(desc, field: NimNode): NimNode =
-    let body = nnkCall.newTree(
-        ident("contains"),
-        newDotExpr(ident("message"), ident("hasField")),
-        newLit(getFieldNumber(field))
-    )
+    let
+        messageId = ident("message")
+        hasField = newDotExpr(messageId, ident("hasField"))
+        number = getFieldNumber(field)
+        mtype = ident(getMessageName(desc))
+        procName = fieldProcIdent("has", field)
 
-    let messageName = getMessageName(desc)
-    let fieldName = getFieldName(field)
-
-    result = newProc(postfix(ident("has" & capitalizeAscii(fieldName)), "*"),
-        @[ident("bool"), newIdentDefs(ident("message"), ident(messageName))],
-        body)
+    result = quote do:
+        proc `procName`(`messageId`: `mtype`): bool =
+            contains(`hasfield`, `number`)
 
 proc generateSetFieldProc(desc, field: NimNode): NimNode =
-    # let body = nnkStmtList.newTree(nnkDiscardStmt.newTree(newEmptyNode()))
+    let
+        messageId = ident("message")
+        hasField = newDotExpr(messageId, ident("hasField"))
+        number = getFieldNumber(field)
+        valueId = ident("value")
+        fname = newDotExpr(messageId, ident(getFieldName(field)))
+        procName = fieldProcIdent("set", field)
+        mtype = ident(getMessageName(desc))
+        ftype = getFullFieldType(field)
 
-    let body = newStmtList()
-
-    let messageName = getMessageName(desc)
-    let fieldName = getFieldName(field)
-
-    add(body, newAssignment(newDotExpr(ident("message"), ident(fieldName)), ident("value")))
-
-    add(body, newCall("incl", newDotExpr(ident("message"), ident("hasField")),
-        newLit(getFieldNumber(field))))
-
-    let ftype = getFullFieldType(field)
-
-    result = newProc(postfix(ident("set" & capitalizeAscii(fieldName)), "*"),
-        @[newEmptyNode(), newIdentDefs(ident("message"),
-            ident(messageName)),
-            newIdentDefs(ident("value"), ftype)],
-        body)
+    result = quote do:
+        proc `procName`(`messageId`: `mtype`, `valueId`: `ftype`) =
+            `fname` = `valueId`
+            incl(`hasfield`, `number`)
 
 proc generateAddToFieldProc(desc, field: NimNode): NimNode =
-    let body = newStmtList()
+    let
+        procName = fieldProcIdent("add", field)
+        messageId = ident("message")
+        mtype = ident(getMessageName(desc))
+        valueId = ident("value")
+        ftype = ident(getFieldTypeAsString(field))
+        hasField = newDotExpr(messageId, ident("hasField"))
+        number = getFieldNumber(field)
+        fname = newDotExpr(messageId, ident(getFieldName(field)))
 
-    let messageName = getMessageName(desc)
-    let fieldName = getFieldName(field)
-
-    add(body, newCall(
-        ident("add"),
-        newDotExpr(ident("message"), ident(fieldName)),
-        ident("value")
-    ))
-
-    add(body, newCall("incl", newDotExpr(ident("message"), ident("hasField")),
-        newLit(getFieldNumber(field))))
-
-    let ftype = ident(getFieldTypeAsString(field))
-
-    result = newProc(postfix(ident("add" & capitalizeAscii(fieldName)), "*"),
-        @[newEmptyNode(), newIdentDefs(ident("message"),
-            ident(messageName)),
-            newIdentDefs(ident("value"), ftype)],
-        body)
+    result = quote do:
+        proc `procName`(`messageId`: `mtype`, `valueId`: `ftype`) =
+            add(`fname`, `valueId`)
+            incl(`hasfield`, `number`)
 
 proc ident(wt: WireType): NimNode =
     result = newDotExpr(ident("WireType"), ident($wt))
