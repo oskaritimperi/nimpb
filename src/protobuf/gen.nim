@@ -21,27 +21,6 @@ type
         typeName*: string
         packed*: bool
 
-proc toNimNode(ftype: FieldType): NimNode {.compileTime.} =
-    case ftype
-    of FieldType.Double: result = ident("float64")
-    of FieldType.Float: result = ident("float32")
-    of FieldType.Int64: result = ident("int64")
-    of FieldType.UInt64: result = ident("uint64")
-    of FieldType.Int32: result = ident("int32")
-    of FieldType.Fixed64: result = ident("fixed64")
-    of FieldType.Fixed32: result = ident("fixed32")
-    of FieldType.Bool: result = ident("bool")
-    of FieldType.String: result = ident("string")
-    of FieldType.Group: result = ident("NOTIMPLEMENTED")
-    of FieldType.Message: result = ident("TODO")
-    of FieldType.Bytes: result = ident("bytes")
-    of FieldType.UInt32: result = ident("uint32")
-    of FieldType.Enum: result = ident("TODO")
-    of FieldType.SFixed32: result = ident("sfixed32")
-    of FieldType.SFixed64: result = ident("sfixed64")
-    of FieldType.SInt32: result = ident("sint32")
-    of FieldType.SInt64: result = ident("sint64")
-
 proc findColonExpr(parent: NimNode, s: string): NimNode =
     for child in parent:
         if child.kind != nnkExprColonExpr:
@@ -79,12 +58,30 @@ proc getFieldTypeName(field: NimNode): string =
     let node = findColonExpr(field, "typeName")
     result = $node[1]
 
-proc getFullFieldType(field: NimNode): NimNode =
-    let ftype = getFieldType(field)
-    if ftype == FieldType.Message:
-        result = ident(getFieldTypeName(field))
+proc getFieldTypeAsString(field: NimNode): string =
+    if isMessage(field):
+        result = getFieldTypeName(field)
     else:
-        result = toNimNode(ftype)
+        case getFieldType(field)
+        of FieldType.Double: result = "float64"
+        of FieldType.Float: result = "float32"
+        of FieldType.Int64: result = "int64"
+        of FieldType.UInt64: result = "uint64"
+        of FieldType.Int32: result = "int32"
+        of FieldType.Fixed64: result = "fixed64"
+        of FieldType.Fixed32: result = "fixed32"
+        of FieldType.Bool: result = "bool"
+        of FieldType.String: result = "string"
+        of FieldType.Bytes: result = "bytes"
+        of FieldType.UInt32: result = "uint32"
+        of FieldType.SFixed32: result = "sfixed32"
+        of FieldType.SFixed64: result = "sfixed64"
+        of FieldType.SInt32: result = "sint32"
+        of FieldType.SInt64: result = "sint64"
+        else: result = "AYBABTU"
+
+proc getFullFieldType(field: NimNode): NimNode =
+    result = ident(getFieldTypeAsString(field))
     if isRepeated(field):
         result = nnkBracketExpr.newTree(ident("seq"), result)
 
@@ -112,7 +109,7 @@ proc defaultValue(field: NimNode): NimNode =
     of FieldType.Bool: result = newLit(false)
     of FieldType.String: result = newLit("")
     of FieldType.Group: result = newLit("NOTIMPLEMENTED")
-    of FieldType.Message: result = newCall(ident("new" & getFieldTypeName(field)))
+    of FieldType.Message: result = newCall(ident("new" & getFieldTypeAsString(field)))
     of FieldType.Bytes: result = newCall(ident("bytes"), newLit(""))
     of FieldType.UInt32: result = newLit(0'u32)
     of FieldType.Enum: result = newLit("TODO")
@@ -252,11 +249,7 @@ proc generateAddToFieldProc(desc, field: NimNode): NimNode =
     add(body, newCall("incl", newDotExpr(ident("message"), ident("hasField")),
         newLit(getFieldNumber(field))))
 
-    let ftype =
-        if isMessage(field):
-            ident(getFieldTypeName(field))
-        else:
-            toNimNode(getFieldType(field))
+    let ftype = ident(getFieldTypeAsString(field))
 
     result = newProc(postfix(ident("add" & capitalizeAscii(fieldName)), "*"),
         @[newEmptyNode(), newIdentDefs(ident("message"),
@@ -272,11 +265,7 @@ proc genWriteField(field: NimNode): NimNode =
 
     let
         number = getFieldNumber(field)
-        writer =
-            if isMessage(field):
-                ident("write" & getFieldTypeName(field))
-            else:
-                ident("write" & $getFieldType(field))
+        writer = ident("write" & getFieldTypeAsString(field))
         fname = newDotExpr(ident("message"), ident(getFieldName(field)))
         wiretype = ident(wiretype(field))
 
@@ -286,7 +275,7 @@ proc genWriteField(field: NimNode): NimNode =
             `writer`(stream, `fname`)
         if isMessage(field):
             insert(result[^1], 1, newCall(ident("writeVarint"), ident("stream"),
-                newCall(ident("sizeOf" & getFieldTypeName(field)), fname)))
+                newCall(ident("sizeOf" & getFieldTypeAsString(field)), fname)))
     else:
         if isPacked(field):
             result.add quote do:
@@ -302,7 +291,7 @@ proc genWriteField(field: NimNode): NimNode =
                     `writer`(stream, `valueId`)
             if isMessage(field):
                 insert(result[^1][^1], 1, newCall(ident("writeVarint"), ident("stream"),
-                    newCall(ident("sizeOf" & getFieldTypeName(field)), valueId)))
+                    newCall(ident("sizeOf" & getFieldTypeAsString(field)), valueId)))
 
 proc generateWriteMessageProc(desc: NimNode): NimNode =
     let body = newStmtList()
@@ -350,11 +339,7 @@ proc generateReadMessageProc(desc: NimNode): NimNode =
         let number = getFieldNumber(field)
         if isRepeated(field):
             let adder = ident("add" & capitalizeAscii(getFieldName(field)))
-            let reader =
-                if isMessage(field):
-                    ident("read" & getFieldTypeName(field))
-                else:
-                    ident("read" & $getFieldType(field))
+            let reader = ident("read" & getFieldTypeAsString(field))
             if isNumeric(getFieldType(field)):
                 add(caseNode, nnkOfBranch.newTree(newLit(number), quote do:
                     if `wiretypeId` == WireType.LengthDelimited:
@@ -385,11 +370,7 @@ proc generateReadMessageProc(desc: NimNode): NimNode =
                     ))
         else:
             let setter = ident("set" & capitalizeAscii(getFieldName(field)))
-            let reader =
-                if isMessage(field):
-                    ident("read" & getFieldTypeName(field))
-                else:
-                    ident("read" & $getFieldType(field))
+            let reader = ident("read" & getFieldTypeAsString(field))
             if isMessage(field):
                 add(caseNode, nnkOfBranch.newTree(newLit(number), quote do:
                     let size = readVarint(stream)
@@ -422,11 +403,7 @@ proc generateSizeOfMessageProc(desc: NimNode): NimNode =
     for field in fields(desc):
         let
             hasproc = ident("has" & capitalizeAscii(getFieldName(field)))
-            sizeofproc =
-                if isMessage(field):
-                    ident("sizeOf" & getFieldTypeName(field))
-                else:
-                    ident("sizeOf" & $getFieldType(field))
+            sizeofproc = ident("sizeOf" & getFieldTypeAsString(field))
             fname = newDotExpr(messageId, ident(getFieldName(field)))
             number = getFieldNumber(field)
             wiretype = ident(wiretype(field))
