@@ -72,6 +72,9 @@ proc getFieldType(field: NimNode): FieldType =
     let node = findColonExpr(field, "ftype")
     result = FieldType(node[1].intVal)
 
+proc isMessage(field: NimNode): bool =
+    result = getFieldType(field) == FieldType.Message
+
 proc getFieldTypeName(field: NimNode): string =
     let node = findColonExpr(field, "typeName")
     result = $node[1]
@@ -250,7 +253,7 @@ proc generateAddToFieldProc(desc, field: NimNode): NimNode =
         newLit(getFieldNumber(field))))
 
     let ftype =
-        if getFieldType(field) == FieldType.Message:
+        if isMessage(field):
             ident(getFieldTypeName(field))
         else:
             toNimNode(getFieldType(field))
@@ -270,7 +273,7 @@ proc genWriteField(field: NimNode): NimNode =
     let
         number = getFieldNumber(field)
         writer =
-            if getFieldType(field) == FieldType.Message:
+            if isMessage(field):
                 ident("write" & getFieldTypeName(field))
             else:
                 ident("write" & $getFieldType(field))
@@ -281,7 +284,7 @@ proc genWriteField(field: NimNode): NimNode =
         result.add quote do:
             writeTag(stream, `number`, `wiretype`)
             `writer`(stream, `fname`)
-        if getFieldType(field) == FieldType.Message:
+        if isMessage(field):
             insert(result[^1], 1, newCall(ident("writeVarint"), ident("stream"),
                 newCall(ident("sizeOf" & getFieldTypeName(field)), fname)))
     else:
@@ -297,7 +300,7 @@ proc genWriteField(field: NimNode): NimNode =
                 for `valueId` in `fname`:
                     writeTag(stream, `number`, `wiretype`)
                     `writer`(stream, `valueId`)
-            if getFieldType(field) == FieldType.Message:
+            if isMessage(field):
                 insert(result[^1][^1], 1, newCall(ident("writeVarint"), ident("stream"),
                     newCall(ident("sizeOf" & getFieldTypeName(field)), valueId)))
 
@@ -348,7 +351,7 @@ proc generateReadMessageProc(desc: NimNode): NimNode =
         if isRepeated(field):
             let adder = ident("add" & capitalizeAscii(getFieldName(field)))
             let reader =
-                if getFieldType(field) == FieldType.Message:
+                if isMessage(field):
                     ident("read" & getFieldTypeName(field))
                 else:
                     ident("read" & $getFieldType(field))
@@ -369,7 +372,7 @@ proc generateReadMessageProc(desc: NimNode): NimNode =
                         `adder`(`resultId`, `reader`(stream))
                 ))
             else:
-                if getFieldType(field) == FieldType.Message:
+                if isMessage(field):
                     add(caseNode, nnkOfBranch.newTree(newLit(number), quote do:
                         let size = readVarint(stream)
                         let data = readStr(stream, int(size))
@@ -383,11 +386,11 @@ proc generateReadMessageProc(desc: NimNode): NimNode =
         else:
             let setter = ident("set" & capitalizeAscii(getFieldName(field)))
             let reader =
-                if getFieldType(field) == FieldType.Message:
+                if isMessage(field):
                     ident("read" & getFieldTypeName(field))
                 else:
                     ident("read" & $getFieldType(field))
-            if getFieldType(field) == FieldType.Message:
+            if isMessage(field):
                 add(caseNode, nnkOfBranch.newTree(newLit(number), quote do:
                     let size = readVarint(stream)
                     let data = readStr(stream, int(size))
@@ -420,7 +423,7 @@ proc generateSizeOfMessageProc(desc: NimNode): NimNode =
         let
             hasproc = ident("has" & capitalizeAscii(getFieldName(field)))
             sizeofproc =
-                if getFieldType(field) == FieldType.Message:
+                if isMessage(field):
                     ident("sizeOf" & getFieldTypeName(field))
                 else:
                     ident("sizeOf" & $getFieldType(field))
@@ -441,7 +444,7 @@ proc generateSizeOfMessageProc(desc: NimNode): NimNode =
                             sizeOfUint64(sizeOfField) +
                             tagSize
         else:
-            if getFieldType(field) == FieldType.Message:
+            if isMessage(field):
                 body.add quote do:
                     if `hasproc`(`messageId`):
                         let
