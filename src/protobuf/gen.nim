@@ -377,10 +377,18 @@ proc generateSizeOfMessageProc(desc: NimNode): NimNode =
         body = newStmtList()
         messageId = ident("message")
         resultId = ident("result")
+        procName = postfix(ident("sizeOf" & getMessageName(desc)), "*")
+        mtype = ident(getMessageName(desc))
+
+    result = quote do:
+        proc `procName`(`messageId`: `mtype`): uint64 =
+            `resultId` = 0
+
+    let procBody = body(result)
 
     for field in fields(desc):
         let
-            hasproc = ident("has" & capitalizeAscii(getFieldName(field)))
+            hasproc = ident(fieldProcName("has", field))
             sizeofproc = ident("sizeOf" & getFieldTypeAsString(field))
             fname = newDotExpr(messageId, ident(getFieldName(field)))
             number = getFieldNumber(field)
@@ -388,36 +396,30 @@ proc generateSizeOfMessageProc(desc: NimNode): NimNode =
 
         # TODO: packed
         if isRepeated(field):
-            body.add quote do:
-                if `hasproc`(`messageId`):
-                    for value in `fname`:
-                        let
-                            sizeOfField = `sizeofproc`(value)
-                            tagSize = sizeOfUint32(uint32(makeTag(`number`, `wiretype`)))
-                        `resultId` = `resultId` +
-                            sizeOfField +
-                            sizeOfUint64(sizeOfField) +
-                            tagSize
+            procBody.add quote do:
+                for value in `fname`:
+                    let
+                        sizeOfField = `sizeofproc`(value)
+                        tagSize = sizeOfUint32(uint32(makeTag(`number`, `wiretype`)))
+                    `resultId` = `resultId` +
+                        sizeOfField +
+                        sizeOfUint64(sizeOfField) +
+                        tagSize
         else:
-            if isMessage(field):
-                body.add quote do:
-                    if `hasproc`(`messageId`):
-                        let
-                            sizeOfField = `sizeofproc`(`fname`)
-                            tagSize = sizeOfUint32(uint32(makeTag(`number`, `wiretype`)))
-                        `resultId` = `resultId` + sizeOfField + tagSize +
-                            sizeOfUint64(sizeOfField)
-            else:
-                body.add quote do:
-                    if `hasproc`(`messageId`):
-                        let
-                            sizeOfField = `sizeofproc`(`fname`)
-                            tagSize = sizeOfUint32(uint32(makeTag(`number`, `wiretype`)))
-                        `resultId` = `resultId` + sizeOfField + tagSize
+            let sizeOfFieldId = ident("sizeOfField")
 
-    result = newProc(postfix(ident("sizeOf" & name), "*"),
-        @[ident("uint64"), newIdentDefs(messageId, ident(name))],
-        body)
+            procBody.add quote do:
+                if `hasproc`(`messageId`):
+                    let
+                        `sizeOfFieldId` = `sizeofproc`(`fname`)
+                        tagSize = sizeOfUint32(uint32(makeTag(`number`, `wiretype`)))
+                    `resultId` = `resultId` + sizeOfField + tagSize
+
+            if isMessage(field):
+                # For messages we need to include the size of the encoded size
+                let asgn = procBody[^1][0][1][1]
+                asgn[1] = infix(asgn[1], "+", newCall(ident("sizeOfUint64"),
+                    sizeOfFieldId))
 
 macro generateMessageProcs*(x: typed): typed =
     let
