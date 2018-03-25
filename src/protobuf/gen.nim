@@ -168,7 +168,7 @@ macro generateMessageType*(desc: typed): typed =
     for field in fields(impl):
         let ftype = getFullFieldType(field)
         let name = ident(getFieldName(field))
-        add(reclist, newIdentDefs(name, ftype))
+        add(reclist, newIdentDefs(postfix(name, "*"), ftype))
 
     add(reclist, nnkIdentDefs.newTree(
         ident("hasField"), ident("IntSet"), newEmptyNode()))
@@ -487,7 +487,7 @@ macro generateEnumType*(x: typed): typed =
 
     result = newStmtList(nnkTypeSection.newTree(
         nnkTypeDef.newTree(
-            ident(name),
+            postfix(ident(name), "*"),
             newEmptyNode(),
             enumTy
         )
