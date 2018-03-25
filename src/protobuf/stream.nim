@@ -263,7 +263,7 @@ proc packedFieldSize*[T](values: seq[T], wiretype: WireType): uint64 =
         for value in values:
             result += sizeOfVarint(value)
     else:
-        discard
+        raise newException(Exception, "invalid wiretype")
 
 proc sizeOfString*(s: string): uint64 =
     result = sizeOfVarint(len(s).uint64) + len(s).uint64

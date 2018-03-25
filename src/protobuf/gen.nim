@@ -396,15 +396,24 @@ proc generateSizeOfMessageProc(desc: NimNode): NimNode =
 
         # TODO: packed
         if isRepeated(field):
-            procBody.add quote do:
-                for value in `fname`:
-                    let
-                        sizeOfField = `sizeofproc`(value)
-                        tagSize = sizeOfUint32(uint32(makeTag(`number`, `wiretype`)))
-                    `resultId` = `resultId` +
-                        sizeOfField +
-                        sizeOfUint64(sizeOfField) +
-                        tagSize
+            if isPacked(field):
+                procBody.add quote do:
+                    if `hasproc`(`messageId`):
+                        let
+                            tagSize = sizeOfUint32(uint32(makeTag(`number`, WireType.LengthDelimited)))
+                            dataSize = packedFieldSize(`fname`, `wiretype`)
+                            sizeOfSize = sizeOfUint64(dataSize)
+                        `resultId` = tagSize + dataSize + sizeOfSize
+            else:
+                procBody.add quote do:
+                    for value in `fname`:
+                        let
+                            sizeOfField = `sizeofproc`(value)
+                            tagSize = sizeOfUint32(uint32(makeTag(`number`, `wiretype`)))
+                        `resultId` = `resultId` +
+                            sizeOfField +
+                            sizeOfUint64(sizeOfField) +
+                            tagSize
         else:
             let sizeOfFieldId = ident("sizeOfField")
 
