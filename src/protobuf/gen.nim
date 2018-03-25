@@ -328,7 +328,8 @@ proc generateReadMessageProc(desc: NimNode): NimNode =
                     `tagId` = readTag(`streamId`)
                     `wiretypeId` = getTagWireType(`tagId`)
                 case getTagFieldNumber(`tagId`)
-                else: raise newException(Exception, "unknown field")
+                else:
+                    skipField(`streamId`, `wiretypeId`)
 
     let caseNode = body(result)[1][1][1]
 

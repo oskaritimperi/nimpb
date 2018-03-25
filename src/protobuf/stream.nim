@@ -309,3 +309,17 @@ proc sizeOfSInt64*(value: int64): uint64 =
 
 proc sizeOfEnum*[T](value: T): uint64 =
     result = sizeOfUInt32(value.uint32)
+
+proc skipField*(stream: ProtobufStream, wiretype: WireType) =
+    case wiretype
+    of WireType.Varint:
+        discard readVarint(stream)
+    of WireType.Fixed64:
+        discard readFixed64(stream)
+    of WireType.Fixed32:
+        discard readFixed32(stream)
+    of WireType.LengthDelimited:
+        let size = readVarint(stream)
+        discard readStr(stream, int(size))
+    else:
+        raise newException(Exception, "unsupported wiretype: " & $wiretype)
