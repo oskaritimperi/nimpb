@@ -21,6 +21,14 @@ type
         typeName*: string
         packed*: bool
 
+    EnumDesc* = object
+        name*: string
+        values*: seq[EnumValueDesc]
+
+    EnumValueDesc* = object
+        name*: string
+        number*: int
+
 proc findColonExpr(parent: NimNode, s: string): NimNode =
     for child in parent:
         if child.kind != nnkExprColonExpr:
@@ -54,12 +62,15 @@ proc getFieldType(field: NimNode): FieldType =
 proc isMessage(field: NimNode): bool =
     result = getFieldType(field) == FieldType.Message
 
+proc isEnum(field: NimNode): bool =
+    result = getFieldType(field) == FieldType.Enum
+
 proc getFieldTypeName(field: NimNode): string =
     let node = findColonExpr(field, "typeName")
     result = $node[1]
 
 proc getFieldTypeAsString(field: NimNode): string =
-    if isMessage(field):
+    if isMessage(field) or isEnum(field):
         result = getFieldTypeName(field)
     else:
         case getFieldType(field)
@@ -112,7 +123,7 @@ proc defaultValue(field: NimNode): NimNode =
     of FieldType.Message: result = newCall(ident("new" & getFieldTypeAsString(field)))
     of FieldType.Bytes: result = newCall(ident("bytes"), newLit(""))
     of FieldType.UInt32: result = newLit(0'u32)
-    of FieldType.Enum: result = newLit("TODO")
+    of FieldType.Enum: result = newCall(ident(getFieldTypeAsString(field)), newLit(0))
     of FieldType.SFixed32: result = newCall(ident("sfixed32"), newLit(0))
     of FieldType.SFixed64: result = newCall(ident("sfixed64"), newLit(0))
     of FieldType.SInt32: result = newCall(ident("sint32"), newLit(0))
@@ -449,6 +460,59 @@ macro generateMessageProcs*(x: typed): typed =
     add(result, generateWriteMessageProc(desc))
     add(result, generateReadMessageProc(desc))
     add(result, generateSizeOfMessageProc(desc))
+
+    when defined(debug):
+        hint(repr(result))
+
+macro generateEnumType*(x: typed): typed =
+    let
+        impl = getImpl(symbol(x))
+        name = $findColonExpr(impl, "name")[1]
+        values = findColonExpr(impl, "values")[1]
+
+    let enumTy = nnkEnumTy.newTree(newEmptyNode())
+
+    for valueNode in values:
+        let
+            name = $findColonExpr(valueNode, "name")[1]
+            number = findColonExpr(valueNode, "number")[1]
+
+        add(enumTy, nnkEnumFieldDef.newTree(ident(name), number))
+
+    result = newStmtList(nnkTypeSection.newTree(
+        nnkTypeDef.newTree(
+            ident(name),
+            newEmptyNode(),
+            enumTy
+        )
+    ))
+
+    when defined(debug):
+        hint(repr(result))
+
+macro generateEnumProcs*(x: typed): typed =
+    let
+        impl = getImpl(symbol(x))
+        name = $findColonExpr(impl, "name")[1]
+        nameId = ident(name)
+        values = findColonExpr(impl, "values")[1]
+        readProc = postfix(ident("read" & name), "*")
+        writeProc = postfix(ident("write" & name), "*")
+        sizeProc = postfix(ident("sizeOf" & name), "*")
+        resultId = ident("result")
+
+    result = newStmtList()
+
+    add(result, quote do:
+        proc `readProc`(stream: ProtobufStream): `nameId` =
+            `resultId` = `nameId`(readUInt32(stream))
+
+        proc `writeProc`(stream: ProtobufStream, value: `nameId`) =
+            writeEnum(stream, value)
+
+        proc `sizeProc`(value: `nameId`): uint64 =
+            `resultId` = sizeOfUInt32(uint32(value))
+    )
 
     when defined(debug):
         hint(repr(result))
