@@ -123,7 +123,12 @@ proc defaultValue(field: NimNode): NimNode =
     of FieldType.Message: result = newCall(ident("new" & getFieldTypeAsString(field)))
     of FieldType.Bytes: result = newCall(ident("bytes"), newLit(""))
     of FieldType.UInt32: result = newLit(0'u32)
-    of FieldType.Enum: result = newCall(ident(getFieldTypeAsString(field)), newLit(0))
+    of FieldType.Enum:
+        let
+            descId = ident(getFieldTypeAsString(field) & "Desc")
+            nameId = ident(getFieldTypeAsString(field))
+        result = quote do:
+            `nameId`(`descId`.values[0].number)
     of FieldType.SFixed32: result = newCall(ident("sfixed32"), newLit(0))
     of FieldType.SFixed64: result = newCall(ident("sfixed64"), newLit(0))
     of FieldType.SInt32: result = newCall(ident("sint32"), newLit(0))
