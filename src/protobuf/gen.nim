@@ -300,84 +300,76 @@ proc generateWriteMessageProc(desc: NimNode): NimNode =
             `body`
 
 proc generateReadMessageProc(desc: NimNode): NimNode =
-    let name = getMessageName(desc)
+    let
+        procName = postfix(ident("read" & getMessageName(desc)), "*")
+        newproc = ident("new" & getMessageName(desc))
+        streamId = ident("stream")
+        mtype = ident(getMessageName(desc))
+        tagId = ident("tag")
+        wiretypeId = ident("wiretype")
+        resultId = ident("result")
 
-    let resultId = ident("result")
+    result = quote do:
+        proc `procName`(`streamId`: ProtobufStream): `mtype` =
+            `resultId` = `newproc`()
+            while not atEnd(stream):
+                let
+                    `tagId` = readTag(`streamId`)
+                    `wiretypeId` = getTagWireType(`tagId`)
+                case getTagFieldNumber(`tagId`)
+                else: raise newException(Exception, "unknown field")
 
-    let body = newStmtList(
-        newAssignment(resultId, newCall(ident("new" & getMessageName(desc))))
-    )
-
-    let tagid = ident("tag")
-    let wiretypeId = ident("wiretype")
-
-    body.add quote do:
-        while not atEnd(stream):
-            let
-                `tagId` = readTag(stream)
-                `wiretypeId` = getTagWireType(`tagId`)
-            case getTagFieldNumber(`tagId`)
-
-    let caseNode = body[^1][1][1]
+    let caseNode = body(result)[1][1][1]
 
     # TODO: check wiretypes and fail if it doesn't match
     for field in fields(desc):
-        let number = getFieldNumber(field)
+        let
+            number = getFieldNumber(field)
+            reader = ident("read" & getFieldTypeAsString(field))
+            setproc =
+                if isRepeated(field):
+                    ident("add" & capitalizeAscii(getFieldName(field)))
+                else:
+                    ident("set" & capitalizeAscii(getFieldName(field)))
         if isRepeated(field):
-            let adder = ident("add" & capitalizeAscii(getFieldName(field)))
-            let reader = ident("read" & getFieldTypeAsString(field))
             if isNumeric(getFieldType(field)):
-                add(caseNode, nnkOfBranch.newTree(newLit(number), quote do:
+                insert(caseNode, 1, nnkOfBranch.newTree(newLit(number), quote do:
                     if `wiretypeId` == WireType.LengthDelimited:
-                        # TODO: do this only if it makes sense, i.e. with primitives?
                         let
                             size = readVarint(stream)
                             start = getPosition(stream).uint64
                         var consumed = 0'u64
                         while consumed < size:
-                            `adder`(`resultId`, `reader`(stream))
+                            `setproc`(`resultId`, `reader`(stream))
                             consumed = getPosition(stream).uint64 - start
                         if consumed != size:
                             raise newException(Exception, "packed field size mismatch")
                     else:
-                        `adder`(`resultId`, `reader`(stream))
+                        `setproc`(`resultId`, `reader`(stream))
                 ))
-            else:
-                if isMessage(field):
-                    add(caseNode, nnkOfBranch.newTree(newLit(number), quote do:
-                        let size = readVarint(stream)
-                        let data = readStr(stream, int(size))
-                        let stream2 = newProtobufStream(newStringStream(data))
-                        `adder`(`resultId`, `reader`(stream2))
-                    ))
-                else:
-                    add(caseNode, nnkOfBranch.newTree(newLit(number), quote do:
-                        `adder`(`resultId`, `reader`(stream))
-                    ))
-        else:
-            let setter = ident("set" & capitalizeAscii(getFieldName(field)))
-            let reader = ident("read" & getFieldTypeAsString(field))
-            if isMessage(field):
-                add(caseNode, nnkOfBranch.newTree(newLit(number), quote do:
+            elif isMessage(field):
+                insert(caseNode, 1, nnkOfBranch.newTree(newLit(number), quote do:
                     let size = readVarint(stream)
                     let data = readStr(stream, int(size))
                     let stream2 = newProtobufStream(newStringStream(data))
-                    `setter`(`resultId`, `reader`(stream2))
+                    `setproc`(`resultId`, `reader`(stream2))
                 ))
             else:
-                add(caseNode, nnkOfBranch.newTree(newLit(number), quote do:
-                    `setter`(`resultId`, `reader`(stream))
+                insert(caseNode, 1, nnkOfBranch.newTree(newLit(number), quote do:
+                    `setproc`(`resultId`, `reader`(stream))
                 ))
-
-
-    # TODO: generate code to skip unknown fields
-    add(caseNode, nnkElse.newTree(quote do:
-        raise newException(Exception, "unknown field")
-    ))
-
-    result = newProc(postfix(ident("read" & name), "*"),
-        @[ident(name), newIdentDefs(ident("stream"), ident("ProtobufStream"))],
-        body)
+        else:
+            if isMessage(field):
+                insert(caseNode, 1, nnkOfBranch.newTree(newLit(number), quote do:
+                    let size = readVarint(stream)
+                    let data = readStr(stream, int(size))
+                    let stream2 = newProtobufStream(newStringStream(data))
+                    `setproc`(`resultId`, `reader`(stream2))
+                ))
+            else:
+                insert(caseNode, 1, nnkOfBranch.newTree(newLit(number), quote do:
+                    `setproc`(`resultId`, `reader`(stream))
+                ))
 
 proc generateSizeOfMessageProc(desc: NimNode): NimNode =
     let
