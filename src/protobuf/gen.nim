@@ -307,11 +307,14 @@ proc generateWriteMessageProc(desc: NimNode): NimNode =
         procName = postfix(ident("write" & getMessageName(desc)), "*")
         body = newStmtList()
         stream = ident("stream")
+        sizeproc = postfix(ident("sizeOf" & getMessageName(desc)), "*")
 
     for field in fields(desc):
         add(body, genWriteField(field))
 
     result = quote do:
+        proc `sizeproc`(`messageId`: `mtype`): uint64
+
         proc `procName`(`stream`: ProtobufStream, `messageId`: `mtype`) =
             `body`
 
