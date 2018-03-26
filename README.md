@@ -40,7 +40,7 @@ generateMessageProcs(Test1Desc)
 
 And you can use it like this:
 
-```
+```nim
 let message = newTest1()
 setA(message, 150)
 let pbso = newProtobufStream(newFileStream(stdout))
