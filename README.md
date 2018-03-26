@@ -2,7 +2,7 @@
 
 A pure Nim library for dealing with protobuf serialization and deserialization. A `protoc` plugin is also included which can be used for generating Nim code, usable by the library, from `.proto` files.
 
-At the moment this is at a very rough state. Do not use for any kind of production use.
+At the moment this is at a very rough state. Do not use for any kind of production use. Anything can change at any time. You've been warned.
 
 # Example
 
