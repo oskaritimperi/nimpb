@@ -100,6 +100,14 @@ const
                 typeName: "EnumDescriptorProto",
                 packed: false
             ),
+            FieldDesc(
+                name: "oneof_decl",
+                number: 8,
+                ftype: FieldType.Message,
+                label: FieldLabel.Repeated,
+                typeName: "OneofDescriptorProto",
+                packed: false
+            ),
         ]
     )
 
@@ -198,6 +206,14 @@ const
                 typeName: "FieldOptions",
                 packed: false
             ),
+            FieldDesc(
+                name: "oneof_index",
+                number: 9,
+                ftype: FieldType.Int32,
+                label: FieldLabel.Optional,
+                typeName: "",
+                packed: false
+            ),
         ]
     )
 
@@ -248,6 +264,20 @@ const
         ]
     )
 
+    OneofDescriptorProtoDesc = MessageDesc(
+        name: "OneofDescriptorProto",
+        fields: @[
+            FieldDesc(
+                name: "name",
+                number: 1,
+                ftype: FieldType.String,
+                label: FieldLabel.Optional,
+                typeName: "",
+                packed: false
+            ),
+        ]
+    )
+
 generateEnumType(FieldDescriptorProto_LabelDesc)
 generateEnumProcs(FieldDescriptorProto_LabelDesc)
 
@@ -265,6 +295,9 @@ generateMessageProcs(FieldOptionsDesc)
 
 generateMessageType(FieldDescriptorProtoDesc)
 generateMessageProcs(FieldDescriptorProtoDesc)
+
+generateMessageType(OneofDescriptorProtoDesc)
+generateMessageProcs(OneofDescriptorProtoDesc)
 
 generateMessageType(DescriptorProtoDesc)
 generateMessageProcs(DescriptorProtoDesc)

@@ -27,10 +27,12 @@ type
         ftype: FieldType
         typeName: string
         packed: bool
+        oneofIdx: int
 
     Message = ref object
         names: Names
         fields: seq[Field]
+        oneofs: seq[string]
 
     ProcessedFile = ref object
         name: string
@@ -89,6 +91,11 @@ proc newField(desc: FieldDescriptorProto): Field =
     result.ftype = convertFieldType(desc.type)
     result.typeName = ""
     result.packed = desc.options.packed
+    result.oneofIdx =
+        if hasOneof_index(desc):
+            desc.oneof_index
+        else:
+            -1
 
     if result.ftype == FieldType.Message or result.ftype == FieldType.Enum:
         result.typeName = $initNamesFromTypeName(desc.type_name)
@@ -100,11 +107,15 @@ proc newMessage(names: Names, desc: DescriptorProto): Message =
 
     result.names = names
     result.fields = @[]
+    result.oneofs = @[]
 
     log(&"newMessage {$result.names}")
 
     for field in desc.field:
         add(result.fields, newField(field))
+
+    for oneof in desc.oneof_decl:
+        add(result.oneofs, oneof.name)
 
 proc newEnum(names: Names, desc: EnumDescriptorProto): Enum =
     new(result)
@@ -238,6 +249,7 @@ proc generateDesc(field: Field): string =
     addLine(result, &"label: FieldLabel.{field.label},", 16)
     addLine(result, &"typeName: \"{field.typeName}\",", 16)
     addLine(result, &"packed: {field.packed},", 16)
+    addLine(result, &"oneofIdx: {field.oneofIdx},", 16)
     addLine(result, "),", 12)
 
 proc generateDesc(message: Message): string =
@@ -247,7 +259,11 @@ proc generateDesc(message: Message): string =
     addLine(result, "fields: @[", 8)
     for field in message.fields:
         result &= generateDesc(field)
-    addLine(result, "]", 8)
+    addLine(result, "],", 8)
+    addLine(result, "oneofs: @[", 8)
+    for oneof in message.oneofs:
+        addLine(result, &"\"{oneof}\",", 12)
+    addLine(result, "],", 8)
     addLine(result, ")", 4)
 
 proc generateDesc(e: Enum): string =
