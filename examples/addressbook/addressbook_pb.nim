@@ -6,36 +6,9 @@ import protobuf/gen
 import protobuf/stream
 import protobuf/types
 
+import phonenumber_pb
+
 const
-    Person_PhoneTypeDesc = EnumDesc(
-        name: "Person_PhoneType",
-        values: @[
-            EnumValueDesc(name: "MOBILE", number: 0),
-            EnumValueDesc(name: "HOME", number: 1),
-            EnumValueDesc(name: "WORK", number: 2),
-        ]
-    )
-    Person_PhoneNumberDesc = MessageDesc(
-        name: "Person_PhoneNumber",
-        fields: @[
-            FieldDesc(
-                name: "number",
-                number: 1,
-                ftype: FieldType.String,
-                label: FieldLabel.Optional,
-                typeName: "",
-                packed: false,
-            ),
-            FieldDesc(
-                name: "type",
-                number: 2,
-                ftype: FieldType.Enum,
-                label: FieldLabel.Optional,
-                typeName: "Person_PhoneType",
-                packed: false,
-            ),
-        ]
-    )
     PersonDesc = MessageDesc(
         name: "Person",
         fields: @[
@@ -68,7 +41,7 @@ const
                 number: 4,
                 ftype: FieldType.Message,
                 label: FieldLabel.Repeated,
-                typeName: "Person_PhoneNumber",
+                typeName: "PhoneNumber",
                 packed: false,
             ),
         ]
@@ -86,10 +59,6 @@ const
             ),
         ]
     )
-generateEnumType(Person_PhoneTypeDesc)
-generateEnumProcs(Person_PhoneTypeDesc)
-generateMessageType(Person_PhoneNumberDesc)
-generateMessageProcs(Person_PhoneNumberDesc)
 generateMessageType(PersonDesc)
 generateMessageProcs(PersonDesc)
 generateMessageType(AddressBookDesc)

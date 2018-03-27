@@ -8,5 +8,5 @@ writer: writer.nim addressbook_pb.nim
 reader: reader.nim addressbook_pb.nim
 	nim c reader.nim
 
-addressbook_pb.nim: addressbook.proto
-	protoc --plugin=protoc-gen-nim=$(PLUGIN) --nim_out=. -I. addressbook.proto
+addressbook_pb.nim: addressbook.proto phonenumber.proto
+	protoc --plugin=protoc-gen-nim=$(PLUGIN) --nim_out=. -I. addressbook.proto phonenumber.proto

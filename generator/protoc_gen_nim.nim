@@ -267,8 +267,6 @@ proc processFile(filename: string, fdesc: FileDescriptorProto,
 
     log(&"processing {filename}: {pbfilename}")
 
-    # TODO: handle file dependencies
-
     new(result)
     result.name = pbfilename
     result.data = ""
@@ -281,6 +279,14 @@ proc processFile(filename: string, fdesc: FileDescriptorProto,
     addLine(result.data, "import protobuf/stream")
     addLine(result.data, "import protobuf/types")
     addLine(result.data, "")
+
+    for dep in fdesc.dependency:
+        var (dir, depname, _) = splitFile(dep)
+        var deppbname = (dir / depname) & "_pb"
+        addLine(result.data, &"import {deppbname}")
+
+    if hasDependency(fdesc):
+        addLine(result.data, "")
 
     let parsed = parseFile(filename, fdesc)
 

@@ -3,6 +3,7 @@ import streams
 import protobuf/stream
 
 import addressbook_pb
+import phonenumber_pb
 
 let addressBook = newAddressBook()
 
@@ -12,12 +13,12 @@ setId(john, 1)
 setEmail(john, "john.doe@example.com")
 addPeople(addressBook, john)
 
-let johnPhone1 = newPerson_PhoneNumber()
+let johnPhone1 = newPhoneNumber()
 setNumber(johnPhone1, "1234")
 setType(johnPhone1, MOBILE)
 addPhones(john, johnPhone1)
 
-let johnPhone2 = newPerson_PhoneNumber()
+let johnPhone2 = newPhoneNumber()
 setNumber(johnPhone2, "5566")
 setType(johnPhone2, WORK)
 addPhones(john, johnPhone2)
@@ -28,7 +29,7 @@ setId(jane, 2)
 setEmail(jane, "jane.doe@example.com")
 addPeople(addressBook, jane)
 
-let janePhone1 = newPerson_PhoneNumber()
+let janePhone1 = newPhoneNumber()
 setNumber(janePhone1, "1432")
 setType(janePhone1, HOME)
 addPhones(jane, janePhone1)
