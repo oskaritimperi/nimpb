@@ -1,10 +1,4 @@
 type
-    fixed32* = distinct uint32
-    fixed64* = distinct uint64
-    sfixed32* = distinct int32
-    sfixed64* = distinct int64
-    sint32* = distinct int32
-    sint64* = distinct int64
     bytes* = distinct string
 
     # int32 # varint, no zigzag

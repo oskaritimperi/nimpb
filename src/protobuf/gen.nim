@@ -79,16 +79,16 @@ proc getFieldTypeAsString(field: NimNode): string =
         of FieldType.Int64: result = "int64"
         of FieldType.UInt64: result = "uint64"
         of FieldType.Int32: result = "int32"
-        of FieldType.Fixed64: result = "fixed64"
-        of FieldType.Fixed32: result = "fixed32"
+        of FieldType.Fixed64: result = "uint64"
+        of FieldType.Fixed32: result = "uint32"
         of FieldType.Bool: result = "bool"
         of FieldType.String: result = "string"
         of FieldType.Bytes: result = "bytes"
         of FieldType.UInt32: result = "uint32"
-        of FieldType.SFixed32: result = "sfixed32"
-        of FieldType.SFixed64: result = "sfixed64"
-        of FieldType.SInt32: result = "sint32"
-        of FieldType.SInt64: result = "sint64"
+        of FieldType.SFixed32: result = "int32"
+        of FieldType.SFixed64: result = "int64"
+        of FieldType.SInt32: result = "int32"
+        of FieldType.SInt64: result = "int64"
         else: result = "AYBABTU"
 
 proc getFullFieldType(field: NimNode): NimNode =
@@ -129,10 +129,10 @@ proc defaultValue(field: NimNode): NimNode =
             nameId = ident(getFieldTypeAsString(field))
         result = quote do:
             `nameId`(`descId`.values[0].number)
-    of FieldType.SFixed32: result = newCall(ident("sfixed32"), newLit(0))
-    of FieldType.SFixed64: result = newCall(ident("sfixed64"), newLit(0))
-    of FieldType.SInt32: result = newCall(ident("sint32"), newLit(0))
-    of FieldType.SInt64: result = newCall(ident("sint64"), newLit(0))
+    of FieldType.SFixed32: result = newLit(0'u32)
+    of FieldType.SFixed64: result = newLit(0'u32)
+    of FieldType.SInt32: result = newLit(0)
+    of FieldType.SInt64: result = newLit(0)
 
 proc wiretype(field: NimNode): WireType =
     result = wiretype(getFieldType(field))

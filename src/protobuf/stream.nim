@@ -163,25 +163,25 @@ proc writeBool*(stream: ProtobufStream, value: bool) =
 proc readBool*(stream: ProtobufStream): bool =
     result = readVarint(stream).bool
 
-proc writeFixed64*(stream: ProtobufStream, value: fixed64) =
+proc writeFixed64*(stream: ProtobufStream, value: uint64) =
     var
         input = value
-        output: fixed64
+        output: uint64
 
     littleEndian64(addr(output), addr(input))
 
     write(stream, output)
 
-proc readFixed64*(stream: ProtobufStream): fixed64 =
-    var tmp: fixed64
+proc readFixed64*(stream: ProtobufStream): uint64 =
+    var tmp: uint64
     discard readData(stream, addr(tmp), sizeof(tmp))
     littleEndian64(addr(result), addr(tmp))
 
-proc writeSFixed64*(stream: ProtobufStream, value: sfixed64) =
-    writeFixed64(stream, cast[fixed64](value))
+proc writeSFixed64*(stream: ProtobufStream, value: int64) =
+    writeFixed64(stream, cast[uint64](value))
 
-proc readSFixed64*(stream: ProtobufStream): sfixed64 =
-    result = cast[sfixed64](readFixed64(stream))
+proc readSFixed64*(stream: ProtobufStream): int64 =
+    result = cast[int64](readFixed64(stream))
 
 proc writeDouble*(stream: ProtobufStream, value: float64) =
     var
@@ -197,25 +197,25 @@ proc readDouble*(stream: ProtobufStream): float64 =
     discard readData(stream, addr(tmp), sizeof(tmp))
     littleEndian64(addr(tmp), addr(result))
 
-proc writeFixed32*(stream: ProtobufStream, value: fixed32) =
+proc writeFixed32*(stream: ProtobufStream, value: uint32) =
     var
         input = value
-        output: fixed32
+        output: uint32
 
     littleEndian32(addr(output), addr(input))
 
     write(stream, output)
 
-proc readFixed32*(stream: ProtobufStream): fixed32 =
+proc readFixed32*(stream: ProtobufStream): uint32 =
     var tmp: uint32
     discard readData(stream, addr(tmp), sizeof(tmp))
     littleEndian32(addr(tmp), addr(result))
 
-proc writeSFixed32*(stream: ProtobufStream, value: sfixed32) =
-    writeFixed32(stream, cast[fixed32](value))
+proc writeSFixed32*(stream: ProtobufStream, value: int32) =
+    writeFixed32(stream, cast[uint32](value))
 
-proc readSFixed32*(stream: ProtobufStream): sfixed32 =
-    result = cast[sfixed32](readFixed32(stream))
+proc readSFixed32*(stream: ProtobufStream): int32 =
+    result = cast[int32](readFixed32(stream))
 
 proc writeFloat*(stream: ProtobufStream, value: float32) =
     var
