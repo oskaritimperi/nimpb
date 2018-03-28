@@ -14,7 +14,8 @@ const
                 ftype: FieldType.Message,
                 label: FieldLabel.Repeated,
                 typeName: "FileDescriptorProto",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             )
         ]
     )
@@ -28,7 +29,8 @@ const
                 ftype: FieldType.String,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "package",
@@ -36,7 +38,8 @@ const
                 ftype: FieldType.String,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "dependency",
@@ -44,7 +47,8 @@ const
                 ftype: FieldType.String,
                 label: FieldLabel.Repeated,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "message_type",
@@ -52,7 +56,8 @@ const
                 ftype: FieldType.Message,
                 label: FieldLabel.Repeated,
                 typeName: "DescriptorProto",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "enum_type",
@@ -60,7 +65,8 @@ const
                 ftype: FieldType.Message,
                 label: FieldLabel.Repeated,
                 typeName: "EnumDescriptorProto",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
         ]
     )
@@ -74,7 +80,8 @@ const
                 ftype: FieldType.String,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "field",
@@ -82,7 +89,8 @@ const
                 ftype: FieldType.Message,
                 label: FieldLabel.Repeated,
                 typeName: "FieldDescriptorProto",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "nested_type",
@@ -90,7 +98,8 @@ const
                 ftype: FieldType.Message,
                 label: FieldLabel.Repeated,
                 typeName: "DescriptorProto",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "enum_type",
@@ -98,7 +107,8 @@ const
                 ftype: FieldType.Message,
                 label: FieldLabel.Repeated,
                 typeName: "EnumDescriptorProto",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "oneof_decl",
@@ -106,7 +116,8 @@ const
                 ftype: FieldType.Message,
                 label: FieldLabel.Repeated,
                 typeName: "OneofDescriptorProto",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
         ]
     )
@@ -120,7 +131,8 @@ const
                 ftype: FieldType.String,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "value",
@@ -128,7 +140,8 @@ const
                 ftype: FieldType.Message,
                 label: FieldLabel.Repeated,
                 typeName: "EnumValueDescriptorProto",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
         ]
     )
@@ -142,7 +155,8 @@ const
                 ftype: FieldType.String,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "number",
@@ -150,7 +164,8 @@ const
                 ftype: FieldType.Int32,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
         ]
     )
@@ -164,7 +179,8 @@ const
                 ftype: FieldType.String,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "number",
@@ -172,7 +188,8 @@ const
                 ftype: FieldType.Int32,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "label",
@@ -180,7 +197,8 @@ const
                 ftype: FieldType.Enum,
                 label: FieldLabel.Optional,
                 typeName: "FieldDescriptorProto_Label",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "type",
@@ -188,7 +206,8 @@ const
                 ftype: FieldType.Enum,
                 label: FieldLabel.Optional,
                 typeName: "FieldDescriptorProto_Type",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "type_name",
@@ -196,7 +215,8 @@ const
                 ftype: FieldType.String,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "options",
@@ -204,7 +224,8 @@ const
                 ftype: FieldType.Message,
                 label: FieldLabel.Optional,
                 typeName: "FieldOptions",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "oneof_index",
@@ -212,7 +233,8 @@ const
                 ftype: FieldType.Int32,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
         ]
     )
@@ -259,7 +281,8 @@ const
                 ftype: FieldType.Bool,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
         ]
     )
@@ -273,7 +296,8 @@ const
                 ftype: FieldType.String,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
         ]
     )

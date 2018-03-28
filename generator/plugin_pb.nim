@@ -16,7 +16,8 @@ const
                 ftype: FieldType.Int32,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "minor",
@@ -24,7 +25,8 @@ const
                 ftype: FieldType.Int32,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "patch",
@@ -32,7 +34,8 @@ const
                 ftype: FieldType.Int32,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "suffix",
@@ -40,7 +43,8 @@ const
                 ftype: FieldType.String,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             )
         ]
     )
@@ -54,7 +58,8 @@ const
                 ftype: FieldType.String,
                 label: FieldLabel.Repeated,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "parameter",
@@ -62,7 +67,8 @@ const
                 ftype: FieldType.String,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "proto_file",
@@ -70,7 +76,8 @@ const
                 ftype: FieldType.Message,
                 label: FieldLabel.Repeated,
                 typeName: "FileDescriptorProto",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "compiler_version",
@@ -78,7 +85,8 @@ const
                 ftype: FieldType.Message,
                 label: FieldLabel.Optional,
                 typeName: "Version",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             )
         ]
     )
@@ -92,7 +100,8 @@ const
                 ftype: FieldType.String,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "file",
@@ -100,7 +109,8 @@ const
                 ftype: FieldType.Message,
                 label: FieldLabel.Repeated,
                 typeName: "CodeGeneratorResponse_File",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
         ]
     )
@@ -114,7 +124,8 @@ const
                 ftype: FieldType.String,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "insertion_point",
@@ -122,7 +133,8 @@ const
                 ftype: FieldType.String,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
             FieldDesc(
                 name: "content",
@@ -130,7 +142,8 @@ const
                 ftype: FieldType.String,
                 label: FieldLabel.Optional,
                 typeName: "",
-                packed: false
+                packed: false,
+                oneofIdx: -1,
             ),
         ]
     )
