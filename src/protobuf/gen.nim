@@ -544,6 +544,35 @@ proc generateSizeOfMessageProc(desc: NimNode): NimNode =
                 asgn[1] = infix(asgn[1], "+", newCall(ident("sizeOfUint64"),
                     sizeOfFieldId))
 
+proc generateSerializeProc(desc: NimNode): NimNode =
+    let
+        mtype = ident(getMessageName(desc))
+        procName = postfix(ident("serialize"), "*")
+        writer = ident("write" & getMessageName(desc))
+        resultId = ident("result")
+
+    result = quote do:
+        proc `procName`(message: `mtype`): string =
+            let
+                ss = newStringStream()
+                pbs = newProtobufStream(ss)
+            `writer`(pbs, message)
+            `resultId` = ss.data
+
+proc generateDeserializeProc(desc: NimNode): NimNode =
+    let
+        mtype = ident(getMessageName(desc))
+        procName = postfix(ident("new" & getMessageName(desc)), "*")
+        reader = ident("read" & getMessageName(desc))
+        resultId = ident("result")
+
+    result = quote do:
+        proc `procName`(data: string): `mtype` =
+            let
+                ss = newStringStream(data)
+                pbs = newProtobufStream(ss)
+            `resultId` = `reader`(pbs)
+
 macro generateMessageProcs*(x: typed): typed =
     let
         desc = getImpl(symbol(x))
@@ -563,6 +592,8 @@ macro generateMessageProcs*(x: typed): typed =
     add(result, generateWriteMessageProc(desc))
     add(result, generateReadMessageProc(desc))
     add(result, generateSizeOfMessageProc(desc))
+    add(result, generateSerializeProc(desc))
+    add(result, generateDeserializeProc(desc))
 
     when defined(debug):
         hint(repr(result))
