@@ -223,7 +223,11 @@ proc parseFile(name: string, fdesc: FileDescriptorProto): ProtoFile =
     result.messages = @[]
     result.enums = @[]
 
-    let basename: Names = Names(@[])
+    let basename =
+        if hasPackage(fdesc):
+            Names(split(fdesc.package, "."))
+        else:
+            Names(@[])
 
     for e in fdesc.enum_type:
         add(result.enums, newEnum(basename, e))
