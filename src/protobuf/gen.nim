@@ -584,7 +584,10 @@ macro generateEnumType*(x: typed): typed =
 
     result = newStmtList(nnkTypeSection.newTree(
         nnkTypeDef.newTree(
-            postfix(ident(name), "*"),
+            nnkPragmaExpr.newTree(
+                postfix(ident(name), "*"),
+                nnkPragma.newTree(ident("pure"))
+            ),
             newEmptyNode(),
             enumTy
         )
