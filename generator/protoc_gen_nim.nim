@@ -23,16 +23,20 @@ type
     Field = ref object
         number: int
         name: string
-        label: FieldLabel
-        ftype: FieldType
+        label: FieldDescriptorProto_Label
+        ftype: FieldDescriptorProto_Type
         typeName: string
         packed: bool
-        oneofIdx: int
+        oneof: Oneof
 
     Message = ref object
         names: Names
         fields: seq[Field]
-        oneofs: seq[string]
+        oneofs: seq[Oneof]
+
+    Oneof = ref object
+        name: string
+        fields: seq[Field]
 
     ProcessedFile = ref object
         name: string
@@ -42,6 +46,11 @@ type
         fdesc: FileDescriptorProto
         enums: seq[Enum]
         messages: seq[Message]
+        syntax: Syntax
+
+    Syntax {.pure.} = enum
+        Proto2
+        Proto3
 
 when defined(debug):
     proc log(msg: string) =
@@ -49,9 +58,6 @@ when defined(debug):
         stderr.write("\n")
 else:
     proc log(msg: string) = discard
-
-proc initNames(n: seq[string]): Names =
-    result = Names(n)
 
 proc initNamesFromTypeName(typename: string): Names =
     if typename[0] != '.':
@@ -66,43 +72,181 @@ proc `$`(names: Names): string =
 proc add(names: var Names, s: string) =
     add(seq[string](names), s)
 
-proc add(names: var Names, other: Names) =
-    names = Names(seq[string](names) & seq[string](other))
-
 proc `&`(names: Names, s: string): Names =
     result = names
     add(result, s)
 
-proc `==`(a, b: Names): bool =
-    result = seq[string](a) == seq[string](b)
+proc isRepeated(field: Field): bool =
+    result = field.label == FieldDescriptorProtoLabel.LabelRepeated
 
-proc convertFieldType(t: FieldDescriptorProto_Type): FieldType =
-    result = FieldType(int(t))
+proc isMessage(field: Field): bool =
+    result = field.ftype == FieldDescriptorProtoType.TypeMessage
 
-proc convertFieldLabel(t: FieldDescriptorProto_Label): FieldLabel =
-    result = FieldLabel(int(t))
+proc isEnum(field: Field): bool =
+    result = field.ftype == FieldDescriptorProtoType.TypeEnum
 
-proc newField(desc: FieldDescriptorProto): Field =
+proc isNumeric(field: Field): bool =
+    case field.ftype
+    of FieldDescriptorProtoType.TypeDouble, FieldDescriptorProtoType.TypeFloat,
+       FieldDescriptorProtoType.TypeInt64, FieldDescriptorProtoType.TypeUInt64,
+       FieldDescriptorProtoType.TypeInt32, FieldDescriptorProtoType.TypeFixed64,
+       FieldDescriptorProtoType.TypeFixed32, FieldDescriptorProtoType.TypeBool,
+       FieldDescriptorProtoType.TypeUInt32, FieldDescriptorProtoType.TypeEnum,
+       FieldDescriptorProtoType.TypeSFixed32, FieldDescriptorProtoType.TypeSFixed64,
+       FieldDescriptorProtoType.TypeSInt32, FieldDescriptorProtoType.TypeSInt64:
+       result = true
+    else: discard
+
+proc nimTypeName(field: Field): string =
+    case field.ftype
+    of FieldDescriptorProtoType.TypeDouble: result = "float64"
+    of FieldDescriptorProtoType.TypeFloat: result = "float32"
+    of FieldDescriptorProtoType.TypeInt64: result = "int64"
+    of FieldDescriptorProtoType.TypeUInt64: result = "uint64"
+    of FieldDescriptorProtoType.TypeInt32: result = "int32"
+    of FieldDescriptorProtoType.TypeFixed64: result = "uint64"
+    of FieldDescriptorProtoType.TypeFixed32: result = "uint32"
+    of FieldDescriptorProtoType.TypeBool: result = "bool"
+    of FieldDescriptorProtoType.TypeString: result = "string"
+    of FieldDescriptorProtoType.TypeGroup: result = ""
+    of FieldDescriptorProtoType.TypeMessage: result = field.typeName
+    of FieldDescriptorProtoType.TypeBytes: result = "bytes"
+    of FieldDescriptorProtoType.TypeUInt32: result = "uint32"
+    of FieldDescriptorProtoType.TypeEnum: result = field.typeName
+    of FieldDescriptorProtoType.TypeSFixed32: result = "int32"
+    of FieldDescriptorProtoType.TypeSFixed64: result = "int64"
+    of FieldDescriptorProtoType.TypeSInt32: result = "int32"
+    of FieldDescriptorProtoType.TypeSInt64: result = "int64"
+
+proc `$`(ft: FieldDescriptorProtoType): string =
+    case ft
+    of FieldDescriptorProtoType.TypeDouble: result = "Double"
+    of FieldDescriptorProtoType.TypeFloat: result = "Float"
+    of FieldDescriptorProtoType.TypeInt64: result = "Int64"
+    of FieldDescriptorProtoType.TypeUInt64: result = "UInt64"
+    of FieldDescriptorProtoType.TypeInt32: result = "Int32"
+    of FieldDescriptorProtoType.TypeFixed64: result = "Fixed64"
+    of FieldDescriptorProtoType.TypeFixed32: result = "Fixed32"
+    of FieldDescriptorProtoType.TypeBool: result = "Bool"
+    of FieldDescriptorProtoType.TypeString: result = "String"
+    of FieldDescriptorProtoType.TypeGroup: result = "Group"
+    of FieldDescriptorProtoType.TypeMessage: result = "Message"
+    of FieldDescriptorProtoType.TypeBytes: result = "Bytes"
+    of FieldDescriptorProtoType.TypeUInt32: result = "UInt32"
+    of FieldDescriptorProtoType.TypeEnum: result = "Enum"
+    of FieldDescriptorProtoType.TypeSFixed32: result = "SFixed32"
+    of FieldDescriptorProtoType.TypeSFixed64: result = "SFixed64"
+    of FieldDescriptorProtoType.TypeSInt32: result = "SInt32"
+    of FieldDescriptorProtoType.TypeSInt64: result = "SInt64"
+
+proc defaultValue(field: Field): string =
+    if isRepeated(field):
+        return "@[]"
+
+    case field.ftype
+    of FieldDescriptorProtoType.TypeDouble: result = "0"
+    of FieldDescriptorProtoType.TypeFloat: result = "0"
+    of FieldDescriptorProtoType.TypeInt64: result = "0"
+    of FieldDescriptorProtoType.TypeUInt64: result = "0"
+    of FieldDescriptorProtoType.TypeInt32: result = "0"
+    of FieldDescriptorProtoType.TypeFixed64: result = "0"
+    of FieldDescriptorProtoType.TypeFixed32: result = "0"
+    of FieldDescriptorProtoType.TypeBool: result = "false"
+    of FieldDescriptorProtoType.TypeString: result = "\"\""
+    of FieldDescriptorProtoType.TypeGroup: result = ""
+    of FieldDescriptorProtoType.TypeMessage: result = "nil"
+    of FieldDescriptorProtoType.TypeBytes: result = "bytes(\"\")"
+    of FieldDescriptorProtoType.TypeUInt32: result = "0"
+    of FieldDescriptorProtoType.TypeEnum: result = &"{field.typeName}(0)"
+    of FieldDescriptorProtoType.TypeSFixed32: result = "0"
+    of FieldDescriptorProtoType.TypeSFixed64: result = "0"
+    of FieldDescriptorProtoType.TypeSInt32: result = "0"
+    of FieldDescriptorProtoType.TypeSInt64: result = "0"
+
+proc wiretypeStr(field: Field): string =
+    result = "WireType."
+    case field.ftype
+    of FieldDescriptorProtoType.TypeDouble: result &= "Fixed64"
+    of FieldDescriptorProtoType.TypeFloat: result &= "Fixed32"
+    of FieldDescriptorProtoType.TypeInt64: result &= "Varint"
+    of FieldDescriptorProtoType.TypeUInt64: result &= "Varint"
+    of FieldDescriptorProtoType.TypeInt32: result &= "Varint"
+    of FieldDescriptorProtoType.TypeFixed64: result &= "Fixed64"
+    of FieldDescriptorProtoType.TypeFixed32: result &= "Fixed32"
+    of FieldDescriptorProtoType.TypeBool: result &= "Varint"
+    of FieldDescriptorProtoType.TypeString: result &= "LengthDelimited"
+    of FieldDescriptorProtoType.TypeGroup: result &= ""
+    of FieldDescriptorProtoType.TypeMessage: result &= "LengthDelimited"
+    of FieldDescriptorProtoType.TypeBytes: result &= "LengthDelimited"
+    of FieldDescriptorProtoType.TypeUInt32: result &= "Varint"
+    of FieldDescriptorProtoType.TypeEnum: result &= &"Varint"
+    of FieldDescriptorProtoType.TypeSFixed32: result &= "Fixed32"
+    of FieldDescriptorProtoType.TypeSFixed64: result &= "Fixed64"
+    of FieldDescriptorProtoType.TypeSInt32: result &= "Varint"
+    of FieldDescriptorProtoType.TypeSInt64: result &= "Varint"
+
+proc isKeyword(s: string): bool =
+    case s
+    of "addr", "and", "as", "asm", "bind", "block", "break", "case", "cast",
+       "concept", "const", "continue", "converter", "defer", "discard",
+       "distinct", "div", "do", "elif", "else", "end", "enum", "except",
+       "export", "finally", "for", "from", "func", "if", "import", "in",
+       "include", "interface", "is", "isnot", "iterator", "let", "macro",
+       "method", "mixin", "mod", "nil", "not", "notin", "object", "of", "or",
+       "out", "proc", "ptr", "raise", "ref", "return", "shl", "shr", "static",
+       "template", "try", "tuple", "type", "using", "var", "when", "while",
+       "xor", "yield":
+        result = true
+    else:
+        result = false
+
+proc newField(file: ProtoFile, message: Message, desc: FieldDescriptorProto): Field =
     new(result)
 
     result.name = desc.name
     result.number = desc.number
-    result.label = convertFieldLabel(desc.label)
-    result.ftype = convertFieldType(desc.type)
+    result.label = desc.label
+    result.ftype = desc.type
     result.typeName = ""
-    result.packed = desc.options.packed
-    result.oneofIdx =
-        if hasOneof_index(desc):
-            desc.oneof_index
+    result.packed = false
+
+    if isKeyword(result.name):
+        result.name = "f" & result.name
+
+    if isNumeric(result):
+        if hasOptions(desc):
+            if hasPacked(desc.options):
+                result.packed = desc.options.packed
+            else:
+                result.packed =
+                    if file.syntax == Syntax.Proto2:
+                        false
+                    else:
+                        true
         else:
-            -1
+            result.packed =
+                if file.syntax == Syntax.Proto2:
+                    false
+                else:
+                    true
 
-    if result.ftype == FieldType.Message or result.ftype == FieldType.Enum:
+    if hasOneof_index(desc):
+        result.oneof = message.oneofs[desc.oneof_index]
+        add(result.oneof.fields, result)
+
+    if isMessage(result) or isEnum(result):
         result.typeName = $initNamesFromTypeName(desc.type_name)
+    else:
+        result.typeName = $result.ftype
 
-    log(&"newField {result.name} {$result.ftype} {result.typeName}")
+    log(&"newField {result.name} {$result.ftype} {result.typeName} PACKED={result.packed} SYNTAX={file.syntax}")
 
-proc newMessage(names: Names, desc: DescriptorProto): Message =
+proc newOneof(name: string): Oneof =
+    new(result)
+    result.fields = @[]
+    result.name = name
+
+proc newMessage(file: ProtoFile, names: Names, desc: DescriptorProto): Message =
     new(result)
 
     result.names = names
@@ -111,11 +255,11 @@ proc newMessage(names: Names, desc: DescriptorProto): Message =
 
     log(&"newMessage {$result.names}")
 
-    for field in desc.field:
-        add(result.fields, newField(field))
-
     for oneof in desc.oneof_decl:
-        add(result.oneofs, oneof.name)
+        add(result.oneofs, newOneof(oneof.name))
+
+    for field in desc.field:
+        add(result.fields, newField(file, result, field))
 
 proc newEnum(names: Names, desc: EnumDescriptorProto): Enum =
     new(result)
@@ -151,10 +295,21 @@ iterator messages(fdesc: FileDescriptorProto, names: Names): tuple[names: Names,
         for x in messages(desc, subnames):
             yield x
 
+proc quoteReserved(name: string): string =
+    case name
+    of "type": result = &"`{name}`"
+    else: result = name
+
+proc accessor(field: Field): string =
+    if field.oneof != nil:
+        result = &"{field.oneof.name}.{quoteReserved(field.name)}"
+    else:
+        result = quoteReserved(field.name)
+
 proc dependencies(field: Field): seq[string] =
     result = @[]
 
-    if field.ftype == FieldType.Message or field.ftype == FieldType.Enum:
+    if isMessage(field) or isEnum(field):
         add(result, field.typeName)
 
 proc dependencies(message: Message): seq[string] =
@@ -182,7 +337,8 @@ proc toposort(graph: TableRef[string, HashSet[string]]): seq[string] =
                         Unknown
 
                 if sk == Gray:
-                    raise newException(Exception, "cycle detected")
+                    # cycle
+                    continue
                 elif sk == Black:
                     continue
 
@@ -223,6 +379,16 @@ proc parseFile(name: string, fdesc: FileDescriptorProto): ProtoFile =
     result.messages = @[]
     result.enums = @[]
 
+    if hasSyntax(fdesc):
+        if fdesc.syntax == "proto2":
+            result.syntax = Syntax.Proto2
+        elif fdesc.syntax == "proto3":
+            result.syntax = Syntax.Proto3
+        else:
+            raise newException(Exception, "unrecognized syntax: " & fdesc.syntax)
+    else:
+        result.syntax = Syntax.Proto2
+
     let basename =
         if hasPackage(fdesc):
             Names(split(fdesc.package, "."))
@@ -233,52 +399,247 @@ proc parseFile(name: string, fdesc: FileDescriptorProto): ProtoFile =
         add(result.enums, newEnum(basename, e))
 
     for name, message in messages(fdesc, basename):
-        add(result.messages, newMessage(name, message))
+        add(result.messages, newMessage(result, name, message))
 
         for e in message.enum_type:
             add(result.enums, newEnum(name, e))
 
-proc addLine(s: var string, line: string, indent: int = 0) =
-    if indent > 0:
-        s &= repeat(' ', indent)
-    s &= line
+proc addLine(s: var string, line: string) =
+    if not isNilOrWhitespace(line):
+        s &= line
     s &= "\n"
 
-proc generateDesc(field: Field): string =
-    result = ""
-    addLine(result, "FieldDesc(", 12)
-    addLine(result, &"name: \"{field.name}\",", 16)
-    addLine(result, &"number: {field.number},", 16)
-    addLine(result, &"ftype: FieldType.{field.ftype},", 16)
-    addLine(result, &"label: FieldLabel.{field.label},", 16)
-    addLine(result, &"typeName: \"{field.typeName}\",", 16)
-    addLine(result, &"packed: {field.packed},", 16)
-    addLine(result, &"oneofIdx: {field.oneofIdx},", 16)
-    addLine(result, "),", 12)
+iterator genType(e: Enum): string =
+    yield &"{e.names}* {{.pure.}} = enum"
+    for item in e.values:
+        let (name, number) = item
+        yield indent(&"{name} = {number}", 4)
 
-proc generateDesc(message: Message): string =
-    result = ""
-    addLine(result, &"{message.names}Desc = MessageDesc(", 4)
-    addLine(result, &"name: \"{message.names}\",", 8)
-    addLine(result, "fields: @[", 8)
+proc fullType(field: Field): string =
+    result = field.nimTypeName
+    if isRepeated(field):
+        result = &"seq[{result}]"
+
+iterator genType(message: Message): string =
+    yield &"{message.names}* = ref {message.names}Obj"
+    yield &"{message.names}Obj* = object of RootObj"
+    yield indent(&"hasField: IntSet", 4)
+
     for field in message.fields:
-        result &= generateDesc(field)
-    addLine(result, "],", 8)
-    addLine(result, "oneofs: @[", 8)
-    for oneof in message.oneofs:
-        addLine(result, &"\"{oneof}\",", 12)
-    addLine(result, "],", 8)
-    addLine(result, ")", 4)
+        if field.oneof == nil:
+            yield indent(&"{quoteReserved(field.name)}: {field.fullType}", 4)
 
-proc generateDesc(e: Enum): string =
-    result = ""
-    addLine(result, &"{e.names}Desc = EnumDesc(", 4)
-    addLine(result, &"name: \"{e.names}\",", 8)
-    addLine(result, "values: @[", 8)
-    for v in e.values:
-        addLine(result, &"EnumValueDesc(name: \"{v.name}\", number: {v.number}),", 12)
-    addLine(result, "]", 8)
-    addLine(result, ")", 4)
+    for oneof in message.oneofs:
+        yield indent(&"{oneof.name}: {message.names}_{oneof.name}_OneOf", 4)
+
+    for oneof in message.oneofs:
+        yield ""
+        yield &"{message.names}_{oneof.name}_OneOf* {{.union.}} = object"
+        for field in oneof.fields:
+            yield indent(&"{quoteReserved(field.name)}: {field.fullType}", 4)
+
+iterator genProcs(e: Enum): string =
+    yield &"proc read{e.names}*(stream: ProtobufStream): {e.names} ="
+    yield indent(&"{e.names}(readUInt32(stream))", 4)
+    yield ""
+    yield &"proc write{e.names}*(stream: ProtobufStream, value: {e.names}) ="
+    yield indent(&"writeUInt32(stream, uint32(value))", 4)
+    yield ""
+    yield &"proc sizeOf{e.names}*(value: {e.names}): uint64 ="
+    yield indent(&"sizeOfUInt32(uint32(value))", 4)
+
+iterator genNewMessageProc(msg: Message): string =
+    yield &"proc new{msg.names}*(): {msg.names} ="
+    yield indent("new(result)", 4)
+    yield indent("result.hasField = initIntSet()", 4)
+    for field in msg.fields:
+        yield indent(&"result.{field.accessor} = {defaultValue(field)}", 4)
+    yield ""
+
+iterator oneofSiblings(field: Field): Field =
+    if field.oneof != nil:
+        for sibling in field.oneof.fields:
+            if sibling == field:
+                continue
+            yield sibling
+
+iterator genClearFieldProc(msg: Message, field: Field): string =
+    yield &"proc clear{field.name}*(message: {msg.names}) ="
+    yield indent(&"message.{field.accessor} = {defaultValue(field)}", 4)
+    yield indent(&"excl(message.hasField, {field.number})", 4)
+    for sibling in oneofSiblings(field):
+        yield indent(&"excl(message.hasField, {sibling.number})", 4)
+    yield ""
+
+iterator genHasFieldProc(msg: Message, field: Field): string =
+    yield &"proc has{field.name}*(message: {msg.names}): bool ="
+    yield indent(&"result = contains(message.hasField, {field.number})", 4)
+    yield ""
+
+iterator genSetFieldProc(msg: Message, field: Field): string =
+    yield &"proc set{field.name}*(message: {msg.names}, value: {field.fullType}) ="
+    yield indent(&"message.{field.accessor} = value", 4)
+    yield indent(&"incl(message.hasField, {field.number})", 4)
+    for sibling in oneofSiblings(field):
+        yield indent(&"excl(message.hasField, {sibling.number})", 4)
+    yield ""
+
+iterator genAddToFieldProc(msg: Message, field: Field): string =
+    yield &"proc add{field.name}*(message: {msg.names}, value: {field.nimTypeName}) ="
+    yield indent(&"add(message.{field.name}, value)", 4)
+    yield indent(&"incl(message.hasField, {field.number})", 4)
+    yield ""
+
+iterator genFieldAccessorProcs(msg: Message, field: Field): string =
+    yield &"proc {quoteReserved(field.name)}*(message: {msg.names}): {field.fullType} {{.inline.}} ="
+    yield indent(&"message.{field.accessor}", 4)
+    yield ""
+
+    yield &"proc `{field.name}=`*(message: {msg.names}, value: {field.fullType}) {{.inline.}} ="
+    yield indent(&"set{field.name}(message, value)", 4)
+    yield ""
+
+iterator genWriteMessageProc(msg: Message): string =
+    yield &"proc write{msg.names}*(stream: ProtobufStream, message: {msg.names}) ="
+    for field in msg.fields:
+        let writer = "write" & field.typeName
+        if isRepeated(field):
+            if field.packed:
+                yield indent(&"if has{field.name}(message):", 4)
+                yield indent(&"writeTag(stream, {field.number}, WireType.LengthDelimited)", 8)
+                yield indent(&"writeVarint(stream, packedFieldSize(message.{field.name}, {wiretypeStr(field)}))", 8)
+                yield indent(&"for value in message.{field.name}:", 8)
+                yield indent(&"{writer}(stream, value)", 12)
+            else:
+                yield indent(&"for value in message.{field.name}:", 4)
+                yield indent(&"writeTag(stream, {field.number}, {wiretypeStr(field)})", 8)
+                if isMessage(field):
+                    yield indent(&"writeVarint(stream, sizeOf{field.typeName}(value))", 8)
+                yield indent(&"{writer}(stream, value)", 8)
+        else:
+            yield indent(&"if has{field.name}(message):", 4)
+            yield indent(&"writeTag(stream, {field.number}, {wiretypeStr(field)})", 8)
+            if isMessage(field):
+                yield indent(&"writeVarint(stream, sizeOf{field.typeName}(message.{field.accessor}))", 8)
+            yield indent(&"{writer}(stream, message.{field.accessor})", 8)
+    yield ""
+
+iterator genReadMessageProc(msg: Message): string =
+    yield &"proc read{msg.names}*(stream: ProtobufStream): {msg.names} ="
+    yield indent(&"result = new{msg.names}()", 4)
+    yield indent("while not atEnd(stream):", 4)
+    yield indent("let", 8)
+    yield indent("tag = readTag(stream)", 12)
+    yield indent("wireType = getTagWireType(tag)", 12)
+    yield indent("case getTagFieldNumber(tag)", 8)
+    for field in msg.fields:
+        let
+            reader = &"read{field.typeName}"
+            setter =
+                if isRepeated(field):
+                    &"add{field.name}"
+                else:
+                    &"set{field.name}"
+        yield indent(&"of {field.number}:", 8)
+        if isRepeated(field):
+            if isNumeric(field):
+                yield indent("if wireType == WireType.LengthDelimited:", 12)
+                yield indent("let", 16)
+                yield indent("size = readVarint(stream)", 20)
+                yield indent("start = uint64(getPosition(stream))", 20)
+                yield indent("var consumed = 0'u64", 16)
+                yield indent("while consumed < size:", 16)
+                yield indent(&"{setter}(result, {reader}(stream))", 20)
+                yield indent("consumed = uint64(getPosition(stream)) - start", 20)
+                yield indent("if consumed != size:", 16)
+                yield indent("raise newException(Exception, \"packed field size mismatch\")", 20)
+                yield indent("else:", 12)
+                yield indent(&"{setter}(result, {reader}(stream))", 16)
+            elif isMessage(field):
+                yield indent("let", 12)
+                yield indent("size = readVarint(stream)", 16)
+                yield indent("data = readStr(stream, int(size))", 16)
+                yield indent("pbs = newProtobufStream(newStringStream(data))", 16)
+                yield indent(&"{setter}(result, {reader}(pbs))", 12)
+            else:
+                yield indent(&"{setter}(result, {reader}(stream))", 12)
+        else:
+            if isMessage(field):
+                yield indent("let", 12)
+                yield indent("size = readVarint(stream)", 16)
+                yield indent("data = readStr(stream, int(size))", 16)
+                yield indent("pbs = newProtobufStream(newStringStream(data))", 16)
+                yield indent(&"{setter}(result, {reader}(pbs))", 12)
+            else:
+                yield indent(&"{setter}(result, {reader}(stream))", 12)
+    yield indent("else: skipField(stream, wireType)", 8)
+    yield ""
+
+iterator genSizeOfMessageProc(msg: Message): string =
+    yield &"proc sizeOf{msg.names}*(message: {msg.names}): uint64 ="
+    for field in msg.fields:
+        if isRepeated(field):
+            if isNumeric(field):
+                yield indent(&"""
+if has{field.name}(message):
+    let
+        sizeOfTag = sizeOfUInt32(uint32(makeTag({field.number}, WireType.LengthDelimited)))
+        sizeOfData = packedFieldSize(message.{field.name}, {wiretypeStr(field)})
+        sizeOfSize = sizeOfUInt64(sizeOfData)
+    result = sizeOfTag + sizeOfData + sizeOfSize""", 4)
+            else:
+                yield indent(&"""
+for value in message.{field.name}:
+    let
+        sizeOfValue = sizeOf{field.typeName}(value)
+        sizeOfTag = sizeOfUInt32(uint32(makeTag({field.number}, {wiretypeStr(field)})))
+    result = result + sizeOfValue + sizeOfTag
+""", 4)
+                if isMessage(field):
+                    yield indent("result = result + sizeOfUInt64(sizeOfValue)", 8)
+        else:
+            yield indent(&"""
+if has{field.name}(message):
+    let
+        sizeOfField = sizeOf{field.typeName}(message.{field.accessor})
+        sizeOfTag = sizeOfUInt32(uint32(makeTag({field.number}, {wiretypeStr(field)})))
+    result = result + sizeOfField + sizeOfTag""", 4)
+            if isMessage(field):
+                yield indent("result = result + sizeOfUInt64(sizeOfField)", 8)
+
+    yield ""
+
+iterator genProcs(msg: Message): string =
+    for line in genNewMessageProc(msg): yield line
+
+    for field in msg.fields:
+        for line in genClearFieldProc(msg, field): yield line
+        for line in genHasFieldProc(msg, field): yield line
+        for line in genSetFieldProc(msg, field): yield line
+
+        if isRepeated(field):
+            for line in genAddToFieldProc(msg, field): yield line
+
+        for line in genFieldAccessorProcs(msg, field): yield line
+
+    for line in genSizeOfMessageProc(msg): yield line
+    for line in genWriteMessageProc(msg): yield line
+    for line in genReadMessageProc(msg): yield line
+
+    yield &"proc serialize*(message: {msg.names}): string ="
+    yield indent("let", 4)
+    yield indent("ss = newStringStream()", 8)
+    yield indent("pbs = newProtobufStream(ss)", 8)
+    yield indent(&"write{msg.names}(pbs, message)", 4)
+    yield indent("result = ss.data", 4)
+    yield ""
+
+    yield &"proc new{msg.names}*(data: string): {msg.names} ="
+    yield indent("let", 4)
+    yield indent("ss = newStringStream(data)", 8)
+    yield indent("pbs = newProtobufStream(ss)", 8)
+    yield indent(&"result = read{msg.names}(pbs)", 4)
+    yield ""
 
 proc processFile(filename: string, fdesc: FileDescriptorProto,
                  otherFiles: TableRef[string, ProtoFile]): ProcessedFile =
@@ -295,7 +656,6 @@ proc processFile(filename: string, fdesc: FileDescriptorProto,
     addLine(result.data, "")
     addLine(result.data, "import intsets")
     addLine(result.data, "")
-    addLine(result.data, "import protobuf/gen")
     addLine(result.data, "import protobuf/stream")
     addLine(result.data, "import protobuf/types")
     addLine(result.data, "")
@@ -310,21 +670,25 @@ proc processFile(filename: string, fdesc: FileDescriptorProto,
 
     let parsed = parseFile(filename, fdesc)
 
-    addLine(result.data, "const")
+    addLine(result.data, "type")
 
     for e in parsed.enums:
-        result.data &= generateDesc(e)
+        for line in genType(e): addLine(result.data, indent(line, 4))
 
-    for message in sortDependencies(parsed.messages):
-        result.data &= generateDesc(message)
+    for message in parsed.messages:
+        for line in genType(message): addLine(result.data, indent(line, 4))
+
+    addLine(result.data, "")
 
     for e in parsed.enums:
-        addLine(result.data, &"generateEnumType({e.names}Desc)")
-        addLine(result.data, &"generateEnumProcs({e.names}Desc)")
+        for line in genProcs(e):
+            addLine(result.data, line)
+        addLine(result.data, "")
 
     for message in sortDependencies(parsed.messages):
-        addLine(result.data, &"generateMessageType({message.names}Desc)")
-        addLine(result.data, &"generateMessageProcs({message.names}Desc)")
+        for line in genProcs(message):
+            addLine(result.data, line)
+        addLine(result.data, "")
 
 proc generateCode(request: CodeGeneratorRequest, response: CodeGeneratorResponse) =
     let otherFiles = newTable[string, ProtoFile]()
