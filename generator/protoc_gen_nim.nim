@@ -830,6 +830,10 @@ proc processFile(filename: string, fdesc: FileDescriptorProto,
 
     for dep in fdesc.dependency:
         var (dir, depname, _) = splitFile(dep)
+
+        if dir == "google/protobuf":
+            dir = "protobuf/wkt"
+
         var deppbname = (dir / depname) & "_pb"
         addLine(result.data, &"import {deppbname}")
 
