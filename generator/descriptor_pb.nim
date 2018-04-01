@@ -68,6 +68,15 @@ const
                 packed: false,
                 oneofIdx: -1,
             ),
+            FieldDesc(
+                name: "syntax",
+                number: 12,
+                ftype: FieldType.String,
+                label: FieldLabel.Optional,
+                typeName: "",
+                packed: false,
+                oneofIdx: -1,
+            ),
         ]
     )
 
