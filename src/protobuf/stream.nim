@@ -235,10 +235,16 @@ proc writeString*(stream: ProtobufStream, s: string) =
     writeUInt64(stream, len(s).uint64)
     write(stream, s)
 
+proc writeBytes*(stream: ProtobufStream, s: bytes) =
+    writeString(stream, string(s))
+
 proc readString*(stream: ProtobufStream): string =
     # TODO: use something else than readStr to get rid of int cast?
     let size = readUInt64(stream).int
     result = readStr(stream, size)
+
+proc readBytes*(stream: ProtobufStream): bytes =
+    bytes(readString(stream))
 
 proc readEnum*[T](stream: ProtobufStream): T =
     result = T(readUInt32(stream))
@@ -267,6 +273,9 @@ proc packedFieldSize*[T](values: seq[T], wiretype: WireType): uint64 =
 
 proc sizeOfString*(s: string): uint64 =
     result = sizeOfVarint(len(s).uint64) + len(s).uint64
+
+proc sizeOfBytes*(s: bytes): uint64 =
+    result = sizeOfString(string(s))
 
 proc sizeOfDouble*(value: float64): uint64 =
     result = 8
