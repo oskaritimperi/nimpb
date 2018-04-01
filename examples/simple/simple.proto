@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+message Test1 {
+    int32 a = 1;
+
+    enum MyEnum {
+        Foo = 0;
+        Bar = 1;
+    }
+
+    MyEnum e = 2;
+}
