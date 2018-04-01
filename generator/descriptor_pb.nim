@@ -128,6 +128,15 @@ const
                 packed: false,
                 oneofIdx: -1,
             ),
+            FieldDesc(
+                name: "options",
+                number: 7,
+                ftype: FieldType.Message,
+                label: FieldLabel.Optional,
+                typeName: "MessageOptions",
+                packed: false,
+                oneofIdx: -1,
+            ),
         ]
     )
 
@@ -281,6 +290,21 @@ const
         ]
     )
 
+    MessageOptionsDesc = MessageDesc(
+        name: "MessageOptions",
+        fields: @[
+            FieldDesc(
+                name: "map_entry",
+                number: 7,
+                ftype: FieldType.Bool,
+                label: FieldLabel.Optional,
+                typeName: "",
+                packed: false,
+                oneofIdx: -1,
+            ),
+        ]
+    )
+
     FieldOptionsDesc = MessageDesc(
         name: "FieldOptions",
         fields: @[
@@ -331,6 +355,9 @@ generateMessageProcs(FieldDescriptorProtoDesc)
 
 generateMessageType(OneofDescriptorProtoDesc)
 generateMessageProcs(OneofDescriptorProtoDesc)
+
+generateMessageType(MessageOptionsDesc)
+generateMessageProcs(MessageOptionsDesc)
 
 generateMessageType(DescriptorProtoDesc)
 generateMessageProcs(DescriptorProtoDesc)
