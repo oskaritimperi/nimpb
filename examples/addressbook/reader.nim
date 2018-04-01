@@ -4,6 +4,7 @@ import strformat
 import protobuf/stream
 
 import addressbook_pb
+import phonenumber_pb
 
 let pbsi = newProtobufStream(newFileStream("addressbook.dat"))
 
@@ -16,4 +17,4 @@ for person in addressBook.people:
     echo(&"Email: {person.email}")
     echo("Phones:")
     for phone in person.phones:
-        echo(&"  {phone.type} {phone.number}")
+        echo(&"  {phone.ftype} {phone.number}")

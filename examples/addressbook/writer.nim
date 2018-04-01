@@ -8,19 +8,19 @@ import phonenumber_pb
 let addressBook = newAddressBook()
 
 let john = newPerson()
-setName(john, "John Doe")
-setId(john, 1)
-setEmail(john, "john.doe@example.com")
+john.name = "John Doe"
+john.id = 1
+john.email = "john.doe@example.com"
 addPeople(addressBook, john)
 
 let johnPhone1 = newPhoneNumber()
-setNumber(johnPhone1, "1234")
-setType(johnPhone1, MOBILE)
+johnPhone1.number = "1234"
+johnPhone1.ftype = PhoneType.MOBILE
 addPhones(john, johnPhone1)
 
 let johnPhone2 = newPhoneNumber()
 setNumber(johnPhone2, "5566")
-setType(johnPhone2, WORK)
+setFType(johnPhone2, WORK)
 addPhones(john, johnPhone2)
 
 let jane = newPerson()
@@ -31,7 +31,7 @@ addPeople(addressBook, jane)
 
 let janePhone1 = newPhoneNumber()
 setNumber(janePhone1, "1432")
-setType(janePhone1, HOME)
+setFType(janePhone1, HOME)
 addPhones(jane, janePhone1)
 
 let pbso = newProtobufStream(newFileStream("addressbook.dat", fmWrite))

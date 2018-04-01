@@ -2,41 +2,113 @@
 
 import intsets
 
-import protobuf/gen
 import protobuf/stream
 import protobuf/types
 
-const
-    PhoneTypeDesc = EnumDesc(
-        name: "PhoneType",
-        values: @[
-            EnumValueDesc(name: "MOBILE", number: 0),
-            EnumValueDesc(name: "HOME", number: 1),
-            EnumValueDesc(name: "WORK", number: 2),
-        ]
-    )
-    PhoneNumberDesc = MessageDesc(
-        name: "PhoneNumber",
-        fields: @[
-            FieldDesc(
-                name: "number",
-                number: 1,
-                ftype: FieldType.String,
-                label: FieldLabel.Optional,
-                typeName: "",
-                packed: false,
-            ),
-            FieldDesc(
-                name: "type",
-                number: 2,
-                ftype: FieldType.Enum,
-                label: FieldLabel.Optional,
-                typeName: "PhoneType",
-                packed: false,
-            ),
-        ]
-    )
-generateEnumType(PhoneTypeDesc)
-generateEnumProcs(PhoneTypeDesc)
-generateMessageType(PhoneNumberDesc)
-generateMessageProcs(PhoneNumberDesc)
+type
+    PhoneType* {.pure.} = enum
+        MOBILE = 0
+        HOME = 1
+        WORK = 2
+    PhoneNumber* = ref PhoneNumberObj
+    PhoneNumberObj* = object of RootObj
+        hasField: IntSet
+        number: string
+        ftype: PhoneType
+
+proc readPhoneType*(stream: ProtobufStream): PhoneType =
+    PhoneType(readUInt32(stream))
+
+proc writePhoneType*(stream: ProtobufStream, value: PhoneType) =
+    writeUInt32(stream, uint32(value))
+
+proc sizeOfPhoneType*(value: PhoneType): uint64 =
+    sizeOfUInt32(uint32(value))
+
+proc newPhoneNumber*(): PhoneNumber =
+    new(result)
+    result.hasField = initIntSet()
+    result.number = ""
+    result.ftype = PhoneType(0)
+
+proc clearnumber*(message: PhoneNumber) =
+    message.number = ""
+    excl(message.hasField, 1)
+
+proc hasnumber*(message: PhoneNumber): bool =
+    result = contains(message.hasField, 1)
+
+proc setnumber*(message: PhoneNumber, value: string) =
+    message.number = value
+    incl(message.hasField, 1)
+
+proc number*(message: PhoneNumber): string {.inline.} =
+    message.number
+
+proc `number=`*(message: PhoneNumber, value: string) {.inline.} =
+    setnumber(message, value)
+
+proc clearftype*(message: PhoneNumber) =
+    message.ftype = PhoneType(0)
+    excl(message.hasField, 2)
+
+proc hasftype*(message: PhoneNumber): bool =
+    result = contains(message.hasField, 2)
+
+proc setftype*(message: PhoneNumber, value: PhoneType) =
+    message.ftype = value
+    incl(message.hasField, 2)
+
+proc ftype*(message: PhoneNumber): PhoneType {.inline.} =
+    message.ftype
+
+proc `ftype=`*(message: PhoneNumber, value: PhoneType) {.inline.} =
+    setftype(message, value)
+
+proc sizeOfPhoneNumber*(message: PhoneNumber): uint64 =
+    if hasnumber(message):
+        let
+            sizeOfField = sizeOfString(message.number)
+            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.LengthDelimited)))
+        result = result + sizeOfField + sizeOfTag
+    if hasftype(message):
+        let
+            sizeOfField = sizeOfPhoneType(message.ftype)
+            sizeOfTag = sizeOfUInt32(uint32(makeTag(2, WireType.Varint)))
+        result = result + sizeOfField + sizeOfTag
+
+proc writePhoneNumber*(stream: ProtobufStream, message: PhoneNumber) =
+    if hasnumber(message):
+        writeTag(stream, 1, WireType.LengthDelimited)
+        writeString(stream, message.number)
+    if hasftype(message):
+        writeTag(stream, 2, WireType.Varint)
+        writePhoneType(stream, message.ftype)
+
+proc readPhoneNumber*(stream: ProtobufStream): PhoneNumber =
+    result = newPhoneNumber()
+    while not atEnd(stream):
+        let
+            tag = readTag(stream)
+            wireType = getTagWireType(tag)
+        case getTagFieldNumber(tag)
+        of 1:
+            setnumber(result, readString(stream))
+        of 2:
+            setftype(result, readPhoneType(stream))
+        else: skipField(stream, wireType)
+
+proc serialize*(message: PhoneNumber): string =
+    let
+        ss = newStringStream()
+        pbs = newProtobufStream(ss)
+    writePhoneNumber(pbs, message)
+    result = ss.data
+
+proc newPhoneNumber*(data: string): PhoneNumber =
+    let
+        ss = newStringStream(data)
+        pbs = newProtobufStream(ss)
+    result = readPhoneNumber(pbs)
+
+
