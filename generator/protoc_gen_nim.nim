@@ -755,6 +755,12 @@ if has{field.name}(message):
 
     yield ""
 
+iterator genMessageProcForwards(msg: Message): string =
+    yield &"proc new{msg.names}*(): {msg.names}"
+    yield &"proc write{msg.names}*(stream: ProtobufStream, message: {msg.names})"
+    yield &"proc read{msg.names}*(stream: ProtobufStream): {msg.names}"
+    yield &"proc sizeOf{msg.names}*(message: {msg.names}): uint64"
+
 iterator genProcs(msg: Message): string =
     for line in genNewMessageProc(msg): yield line
 
@@ -842,6 +848,11 @@ proc processFile(filename: string, fdesc: FileDescriptorProto,
 
     for e in parsed.enums:
         for line in genProcs(e):
+            addLine(result.data, line)
+        addLine(result.data, "")
+
+    for message in sortDependencies(parsed.messages):
+        for line in genMessageProcForwards(message):
             addLine(result.data, line)
         addLine(result.data, "")
 
