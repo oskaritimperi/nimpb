@@ -18,6 +18,10 @@ type
 
     Tag* = distinct uint32
 
+    ParseError* = object of Exception
+
+    InvalidFieldNumberError* = object of ParseError
+
 proc pbClose(s: Stream) =
     close(ProtobufStream(s).stream)
     ProtobufStream(s).stream = nil

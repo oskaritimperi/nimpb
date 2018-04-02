@@ -661,6 +661,8 @@ iterator genReadMessageProc(msg: Message): string =
         yield indent("tag = readTag(stream)", 12)
         yield indent("wireType = getTagWireType(tag)", 12)
         yield indent("case getTagFieldNumber(tag)", 8)
+        yield indent("of 0:", 8)
+        yield indent("raise newException(InvalidFieldNumberError, \"Invalid field number: 0\")", 12)
         for field in msg.fields:
             let
                 reader = &"read{field.typeName}"
