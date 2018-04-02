@@ -638,7 +638,7 @@ iterator genReadMapKVProc(msg: Message): string =
     if isMessage(value):
         yield indent("let", 12)
         yield indent("size = readVarint(stream)", 16)
-        yield indent("data = readStr(stream, int(size))", 16)
+        yield indent("data = safeReadStr(stream, int(size))", 16)
         yield indent("pbs = newProtobufStream(newStringStream(data))", 16)
         yield indent(&"value = read{value.typeName}(pbs)", 12)
     else:
@@ -677,7 +677,7 @@ iterator genReadMessageProc(msg: Message): string =
                     yield indent(&"expectWireType(wireType, {field.wiretypeStr})", 12)
                     yield indent("let", 12)
                     yield indent("size = readVarint(stream)", 16)
-                    yield indent("data = readStr(stream, int(size))", 16)
+                    yield indent("data = safeReadStr(stream, int(size))", 16)
                     yield indent("pbs = newProtobufStream(newStringStream(data))", 16)
                     yield indent(&"read{field.typeName}KV(pbs, result.{field.name})", 12)
                 elif isNumeric(field):
@@ -698,7 +698,7 @@ iterator genReadMessageProc(msg: Message): string =
                     yield indent(&"expectWireType(wireType, {field.wiretypeStr})", 12)
                     yield indent("let", 12)
                     yield indent("size = readVarint(stream)", 16)
-                    yield indent("data = readStr(stream, int(size))", 16)
+                    yield indent("data = safeReadStr(stream, int(size))", 16)
                     yield indent("pbs = newProtobufStream(newStringStream(data))", 16)
                     yield indent(&"{setter}(result, {reader}(pbs))", 12)
                 else:
@@ -709,7 +709,7 @@ iterator genReadMessageProc(msg: Message): string =
                 if isMessage(field):
                     yield indent("let", 12)
                     yield indent("size = readVarint(stream)", 16)
-                    yield indent("data = readStr(stream, int(size))", 16)
+                    yield indent("data = safeReadStr(stream, int(size))", 16)
                     yield indent("pbs = newProtobufStream(newStringStream(data))", 16)
                     yield indent(&"{setter}(result, {reader}(pbs))", 12)
                 else:

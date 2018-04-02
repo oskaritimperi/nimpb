@@ -181,7 +181,8 @@ proc writeFixed64*(stream: ProtobufStream, value: uint64) =
 
 proc readFixed64*(stream: ProtobufStream): uint64 =
     var tmp: uint64
-    discard readData(stream, addr(tmp), sizeof(tmp))
+    if readData(stream, addr(tmp), sizeof(tmp)) != sizeof(tmp):
+        raise newException(IOError, "cannot read from stream")
     littleEndian64(addr(result), addr(tmp))
 
 proc writeSFixed64*(stream: ProtobufStream, value: int64) =
@@ -201,8 +202,9 @@ proc writeDouble*(stream: ProtobufStream, value: float64) =
 
 proc readDouble*(stream: ProtobufStream): float64 =
     var tmp: uint64
-    discard readData(stream, addr(tmp), sizeof(tmp))
-    littleEndian64(addr(tmp), addr(result))
+    if readData(stream, addr(tmp), sizeof(tmp)) != sizeof(tmp):
+        raise newException(IOError, "cannot read from stream")
+    littleEndian64(addr(result), addr(tmp))
 
 proc writeFixed32*(stream: ProtobufStream, value: uint32) =
     var
@@ -215,8 +217,9 @@ proc writeFixed32*(stream: ProtobufStream, value: uint32) =
 
 proc readFixed32*(stream: ProtobufStream): uint32 =
     var tmp: uint32
-    discard readData(stream, addr(tmp), sizeof(tmp))
-    littleEndian32(addr(tmp), addr(result))
+    if readData(stream, addr(tmp), sizeof(tmp)) != sizeof(tmp):
+        raise newException(IOError, "cannot read from stream")
+    littleEndian32(addr(result), addr(tmp))
 
 proc writeSFixed32*(stream: ProtobufStream, value: int32) =
     writeFixed32(stream, cast[uint32](value))
@@ -235,8 +238,9 @@ proc writeFloat*(stream: ProtobufStream, value: float32) =
 
 proc readFloat*(stream: ProtobufStream): float32 =
     var tmp: float32
-    discard readData(stream, addr(tmp), sizeof(tmp))
-    littleEndian32(addr(tmp), addr(result))
+    if readData(stream, addr(tmp), sizeof(tmp)) != sizeof(tmp):
+        raise newException(IOError, "cannot read from stream")
+    littleEndian32(addr(result), addr(tmp))
 
 proc writeString*(stream: ProtobufStream, s: string) =
     writeUInt64(stream, len(s).uint64)
@@ -245,10 +249,14 @@ proc writeString*(stream: ProtobufStream, s: string) =
 proc writeBytes*(stream: ProtobufStream, s: bytes) =
     writeString(stream, string(s))
 
+proc safeReadStr*(stream: Stream, size: int): string =
+    result = newString(size)
+    if readData(stream, addr(result[0]), size) != size:
+        raise newException(IOError, "cannot read from stream")
+
 proc readString*(stream: ProtobufStream): string =
-    # TODO: use something else than readStr to get rid of int cast?
-    let size = readUInt64(stream).int
-    result = readStr(stream, size)
+    let size = int(readUInt64(stream))
+    result = safeReadStr(stream, size)
 
 proc readBytes*(stream: ProtobufStream): bytes =
     bytes(readString(stream))
@@ -336,7 +344,7 @@ proc skipField*(stream: ProtobufStream, wiretype: WireType) =
         discard readFixed32(stream)
     of WireType.LengthDelimited:
         let size = readVarint(stream)
-        discard readStr(stream, int(size))
+        discard safeReadStr(stream, int(size))
     else:
         raise newException(Exception, "unsupported wiretype: " & $wiretype)
 
