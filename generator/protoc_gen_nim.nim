@@ -775,6 +775,15 @@ iterator genMessageProcForwards(msg: Message): string =
     yield &"proc read{msg.names}*(stream: ProtobufStream): {msg.names}"
     yield &"proc sizeOf{msg.names}*(message: {msg.names}): uint64"
 
+    if isMapEntry(msg):
+        let
+            key = mapKeyField(msg)
+            value = mapValueField(msg)
+
+        yield &"proc write{msg.names}KV(stream: ProtobufStream, key: {key.fullType}, value: {value.fullType})"
+        yield &"proc read{msg.names}KV(stream: ProtobufStream, tbl: TableRef[{key.fullType}, {value.fullType}])"
+        yield &"proc sizeOf{msg.names}KV(key: {key.fullType}, value: {value.fullType}): uint64"
+
 iterator genProcs(msg: Message): string =
     for line in genNewMessageProc(msg): yield line
 
