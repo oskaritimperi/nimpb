@@ -54,4 +54,4 @@ assert message2.e == Test1_MyEnum.Bar
 
 # Other libraries
 
-If you do not want to depend on the `protoc` compiler, check Peter Munch-Ellingsen's protobuf library. It handles parsing of the protobuf files in compile time which can make building simpler.
+If you do not want to depend on the `protoc` compiler, check Peter Munch-Ellingsen's [protobuf library](https://github.com/PMunch/protobuf-nim). It handles parsing of the protobuf files in compile time which can make building simpler.
