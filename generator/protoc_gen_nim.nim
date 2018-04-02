@@ -314,6 +314,12 @@ proc newEnum(names: Names, desc: EnumDescriptorProto): Enum =
     for value in desc.value:
         add(result.values, (value.name, int(value.number)))
 
+    type EnumValue = tuple[name: string, number: int]
+
+    sort(result.values, proc (x, y: EnumValue): int =
+        system.cmp(x.number, y.number)
+    )
+
 iterator messages(desc: DescriptorProto, names: Names): tuple[names: Names, desc: DescriptorProto] =
     var stack: seq[tuple[names: Names, desc: DescriptorProto]] = @[]
 
