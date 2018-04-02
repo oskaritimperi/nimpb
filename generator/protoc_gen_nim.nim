@@ -206,6 +206,9 @@ proc wiretypeStr(field: Field): string =
     of FieldDescriptorProtoType.TypeSInt32: result &= "Varint"
     of FieldDescriptorProtoType.TypeSInt64: result &= "Varint"
 
+proc fieldTypeStr(field: Field): string =
+    result = "FieldType." & $field.ftype
+
 proc isKeyword(s: string): bool =
     case s
     of "addr", "and", "as", "asm", "bind", "block", "break", "case", "cast",
@@ -593,7 +596,7 @@ iterator genWriteMessageProc(msg: Message): string =
             if field.packed:
                 yield indent(&"if has{field.name}(message):", 4)
                 yield indent(&"writeTag(stream, {field.number}, WireType.LengthDelimited)", 8)
-                yield indent(&"writeVarint(stream, packedFieldSize(message.{field.name}, {wiretypeStr(field)}))", 8)
+                yield indent(&"writeVarint(stream, packedFieldSize(message.{field.name}, {field.fieldTypeStr}))", 8)
                 yield indent(&"for value in message.{field.name}:", 8)
                 yield indent(&"{writer}(stream, value)", 12)
             else:
@@ -748,7 +751,7 @@ iterator genSizeOfMessageProc(msg: Message): string =
 if has{field.name}(message):
     let
         sizeOfTag = sizeOfUInt32(uint32(makeTag({field.number}, WireType.LengthDelimited)))
-        sizeOfData = packedFieldSize(message.{field.name}, {wiretypeStr(field)})
+        sizeOfData = packedFieldSize(message.{field.name}, {field.fieldTypeStr})
         sizeOfSize = sizeOfUInt64(sizeOfData)
     result = sizeOfTag + sizeOfData + sizeOfSize""", 4)
             else:

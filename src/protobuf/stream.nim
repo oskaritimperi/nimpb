@@ -274,17 +274,24 @@ proc sizeOfVarint[T](value: T): uint64 =
         inc(result)
     inc(result)
 
-proc packedFieldSize*[T](values: seq[T], wiretype: WireType): uint64 =
-    case wiretype
-    of WireType.Fixed32:
-        result = uint64(len(values)) * 4
-    of WireType.Fixed64:
+proc packedFieldSize*[T](values: seq[T], fieldtype: FieldType): uint64 =
+    case fieldtype
+    of FieldType.Fixed64, FieldType.SFixed64, FieldType.Double:
         result = uint64(len(values)) * 8
-    of WireType.Varint:
+    of FieldType.Fixed32, FieldType.SFixed32, FieldType.Float:
+        result = uint64(len(values)) * 4
+    of FieldType.Int64, FieldType.UInt64, FieldType.Int32, FieldType.Bool,
+       FieldType.UInt32, FieldType.Enum:
         for value in values:
             result += sizeOfVarint(value)
+    of FieldType.SInt32:
+        for value in values:
+            result += sizeOfVarint(zigzagEncode(int32(value)))
+    of FieldType.SInt64:
+        for value in values:
+            result += sizeOfVarint(zigzagEncode(int64(value)))
     else:
-        raise newException(Exception, "invalid wiretype")
+        raise newException(Exception, "invalid fieldtype")
 
 proc sizeOfString*(s: string): uint64 =
     result = sizeOfVarint(len(s).uint64) + len(s).uint64
