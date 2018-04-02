@@ -84,9 +84,13 @@ proc readgoogle_protobuf_Any*(stream: ProtobufStream): google_protobuf_Any =
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.LengthDelimited)
             settype_url(result, readString(stream))
         of 2:
+            expectWireType(wireType, WireType.LengthDelimited)
             setvalue(result, readBytes(stream))
         else: skipField(stream, wireType)
 

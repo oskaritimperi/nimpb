@@ -129,7 +129,10 @@ proc readgoogle_protobuf_Int32Value*(stream: ProtobufStream): google_protobuf_In
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.Varint)
             setvalue(result, readInt32(stream))
         else: skipField(stream, wireType)
 
@@ -188,7 +191,10 @@ proc readgoogle_protobuf_Int64Value*(stream: ProtobufStream): google_protobuf_In
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.Varint)
             setvalue(result, readInt64(stream))
         else: skipField(stream, wireType)
 
@@ -247,7 +253,10 @@ proc readgoogle_protobuf_DoubleValue*(stream: ProtobufStream): google_protobuf_D
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.Fixed64)
             setvalue(result, readDouble(stream))
         else: skipField(stream, wireType)
 
@@ -306,7 +315,10 @@ proc readgoogle_protobuf_StringValue*(stream: ProtobufStream): google_protobuf_S
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.LengthDelimited)
             setvalue(result, readString(stream))
         else: skipField(stream, wireType)
 
@@ -365,7 +377,10 @@ proc readgoogle_protobuf_BoolValue*(stream: ProtobufStream): google_protobuf_Boo
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.Varint)
             setvalue(result, readBool(stream))
         else: skipField(stream, wireType)
 
@@ -424,7 +439,10 @@ proc readgoogle_protobuf_BytesValue*(stream: ProtobufStream): google_protobuf_By
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.LengthDelimited)
             setvalue(result, readBytes(stream))
         else: skipField(stream, wireType)
 
@@ -483,7 +501,10 @@ proc readgoogle_protobuf_FloatValue*(stream: ProtobufStream): google_protobuf_Fl
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.Fixed32)
             setvalue(result, readFloat(stream))
         else: skipField(stream, wireType)
 
@@ -542,7 +563,10 @@ proc readgoogle_protobuf_UInt64Value*(stream: ProtobufStream): google_protobuf_U
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.Varint)
             setvalue(result, readUInt64(stream))
         else: skipField(stream, wireType)
 
@@ -601,7 +625,10 @@ proc readgoogle_protobuf_UInt32Value*(stream: ProtobufStream): google_protobuf_U
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.Varint)
             setvalue(result, readUInt32(stream))
         else: skipField(stream, wireType)
 

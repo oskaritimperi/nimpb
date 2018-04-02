@@ -200,12 +200,16 @@ proc readgoogle_protobuf_Option*(stream: ProtobufStream): google_protobuf_Option
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.LengthDelimited)
             setname(result, readString(stream))
         of 2:
+            expectWireType(wireType, WireType.LengthDelimited)
             let
                 size = readVarint(stream)
-                data = readStr(stream, int(size))
+                data = safeReadStr(stream, int(size))
                 pbs = newProtobufStream(newStringStream(data))
             setvalue(result, readgoogle_protobuf_Any(pbs))
         else: skipField(stream, wireType)
@@ -506,29 +510,41 @@ proc readgoogle_protobuf_Field*(stream: ProtobufStream): google_protobuf_Field =
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.Varint)
             setkind(result, readgoogle_protobuf_Field_Kind(stream))
         of 2:
+            expectWireType(wireType, WireType.Varint)
             setcardinality(result, readgoogle_protobuf_Field_Cardinality(stream))
         of 3:
+            expectWireType(wireType, WireType.Varint)
             setnumber(result, readInt32(stream))
         of 4:
+            expectWireType(wireType, WireType.LengthDelimited)
             setname(result, readString(stream))
         of 6:
+            expectWireType(wireType, WireType.LengthDelimited)
             settype_url(result, readString(stream))
         of 7:
+            expectWireType(wireType, WireType.Varint)
             setoneof_index(result, readInt32(stream))
         of 8:
+            expectWireType(wireType, WireType.Varint)
             setpacked(result, readBool(stream))
         of 9:
+            expectWireType(wireType, WireType.LengthDelimited)
             let
                 size = readVarint(stream)
-                data = readStr(stream, int(size))
+                data = safeReadStr(stream, int(size))
                 pbs = newProtobufStream(newStringStream(data))
             addoptions(result, readgoogle_protobuf_Option(pbs))
         of 10:
+            expectWireType(wireType, WireType.LengthDelimited)
             setjson_name(result, readString(stream))
         of 11:
+            expectWireType(wireType, WireType.LengthDelimited)
             setdefault_value(result, readString(stream))
         else: skipField(stream, wireType)
 
@@ -738,29 +754,37 @@ proc readgoogle_protobuf_Type*(stream: ProtobufStream): google_protobuf_Type =
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.LengthDelimited)
             setname(result, readString(stream))
         of 2:
+            expectWireType(wireType, WireType.LengthDelimited)
             let
                 size = readVarint(stream)
-                data = readStr(stream, int(size))
+                data = safeReadStr(stream, int(size))
                 pbs = newProtobufStream(newStringStream(data))
             addfields(result, readgoogle_protobuf_Field(pbs))
         of 3:
+            expectWireType(wireType, WireType.LengthDelimited)
             addoneofs(result, readString(stream))
         of 4:
+            expectWireType(wireType, WireType.LengthDelimited)
             let
                 size = readVarint(stream)
-                data = readStr(stream, int(size))
+                data = safeReadStr(stream, int(size))
                 pbs = newProtobufStream(newStringStream(data))
             addoptions(result, readgoogle_protobuf_Option(pbs))
         of 5:
+            expectWireType(wireType, WireType.LengthDelimited)
             let
                 size = readVarint(stream)
-                data = readStr(stream, int(size))
+                data = safeReadStr(stream, int(size))
                 pbs = newProtobufStream(newStringStream(data))
             setsource_context(result, readgoogle_protobuf_SourceContext(pbs))
         of 6:
+            expectWireType(wireType, WireType.Varint)
             setsyntax(result, readgoogle_protobuf_Syntax(stream))
         else: skipField(stream, wireType)
 
@@ -878,14 +902,19 @@ proc readgoogle_protobuf_EnumValue*(stream: ProtobufStream): google_protobuf_Enu
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.LengthDelimited)
             setname(result, readString(stream))
         of 2:
+            expectWireType(wireType, WireType.Varint)
             setnumber(result, readInt32(stream))
         of 3:
+            expectWireType(wireType, WireType.LengthDelimited)
             let
                 size = readVarint(stream)
-                data = readStr(stream, int(size))
+                data = safeReadStr(stream, int(size))
                 pbs = newProtobufStream(newStringStream(data))
             addoptions(result, readgoogle_protobuf_Option(pbs))
         else: skipField(stream, wireType)
@@ -1065,27 +1094,34 @@ proc readgoogle_protobuf_Enum*(stream: ProtobufStream): google_protobuf_Enum =
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.LengthDelimited)
             setname(result, readString(stream))
         of 2:
+            expectWireType(wireType, WireType.LengthDelimited)
             let
                 size = readVarint(stream)
-                data = readStr(stream, int(size))
+                data = safeReadStr(stream, int(size))
                 pbs = newProtobufStream(newStringStream(data))
             addenumvalue(result, readgoogle_protobuf_EnumValue(pbs))
         of 3:
+            expectWireType(wireType, WireType.LengthDelimited)
             let
                 size = readVarint(stream)
-                data = readStr(stream, int(size))
+                data = safeReadStr(stream, int(size))
                 pbs = newProtobufStream(newStringStream(data))
             addoptions(result, readgoogle_protobuf_Option(pbs))
         of 4:
+            expectWireType(wireType, WireType.LengthDelimited)
             let
                 size = readVarint(stream)
-                data = readStr(stream, int(size))
+                data = safeReadStr(stream, int(size))
                 pbs = newProtobufStream(newStringStream(data))
             setsource_context(result, readgoogle_protobuf_SourceContext(pbs))
         of 5:
+            expectWireType(wireType, WireType.Varint)
             setsyntax(result, readgoogle_protobuf_Syntax(stream))
         else: skipField(stream, wireType)
 

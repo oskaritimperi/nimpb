@@ -57,7 +57,10 @@ proc readgoogle_protobuf_SourceContext*(stream: ProtobufStream): google_protobuf
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.LengthDelimited)
             setfile_name(result, readString(stream))
         else: skipField(stream, wireType)
 

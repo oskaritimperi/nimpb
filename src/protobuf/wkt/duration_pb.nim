@@ -84,9 +84,13 @@ proc readgoogle_protobuf_Duration*(stream: ProtobufStream): google_protobuf_Dura
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.Varint)
             setseconds(result, readInt64(stream))
         of 2:
+            expectWireType(wireType, WireType.Varint)
             setnanos(result, readInt32(stream))
         else: skipField(stream, wireType)
 
