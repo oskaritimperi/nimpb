@@ -1,5 +1,6 @@
 import algorithm
 import os
+import pegs
 import sequtils
 import sets
 import strformat
@@ -230,6 +231,13 @@ proc newField(file: ProtoFile, message: Message, desc: FieldDescriptorProto): Fi
     result.typeName = ""
     result.packed = false
     result.mapEntry = nil
+
+    # Identifiers cannot start/end with underscore
+    removePrefix(result.name, '_')
+    removeSuffix(result.name, '_')
+
+    # Consecutive underscores are not allowed
+    result.name = replace(result.name, peg"'_' '_'+", "_")
 
     if isKeyword(result.name):
         result.name = "f" & result.name
