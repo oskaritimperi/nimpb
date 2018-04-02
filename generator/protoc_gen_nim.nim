@@ -674,12 +674,14 @@ iterator genReadMessageProc(msg: Message): string =
             yield indent(&"of {field.number}:", 8)
             if isRepeated(field):
                 if isMapEntry(field):
+                    yield indent(&"expectWireType(wireType, {field.wiretypeStr})", 12)
                     yield indent("let", 12)
                     yield indent("size = readVarint(stream)", 16)
                     yield indent("data = readStr(stream, int(size))", 16)
                     yield indent("pbs = newProtobufStream(newStringStream(data))", 16)
                     yield indent(&"read{field.typeName}KV(pbs, result.{field.name})", 12)
                 elif isNumeric(field):
+                    yield indent(&"expectWireType(wireType, {field.wiretypeStr}, WireType.LengthDelimited)", 12)
                     yield indent("if wireType == WireType.LengthDelimited:", 12)
                     yield indent("let", 16)
                     yield indent("size = readVarint(stream)", 20)
@@ -693,14 +695,17 @@ iterator genReadMessageProc(msg: Message): string =
                     yield indent("else:", 12)
                     yield indent(&"{setter}(result, {reader}(stream))", 16)
                 elif isMessage(field):
+                    yield indent(&"expectWireType(wireType, {field.wiretypeStr})", 12)
                     yield indent("let", 12)
                     yield indent("size = readVarint(stream)", 16)
                     yield indent("data = readStr(stream, int(size))", 16)
                     yield indent("pbs = newProtobufStream(newStringStream(data))", 16)
                     yield indent(&"{setter}(result, {reader}(pbs))", 12)
                 else:
+                    yield indent(&"expectWireType(wireType, {field.wiretypeStr})", 12)
                     yield indent(&"{setter}(result, {reader}(stream))", 12)
             else:
+                yield indent(&"expectWireType(wireType, {field.wiretypeStr})", 12)
                 if isMessage(field):
                     yield indent("let", 12)
                     yield indent("size = readVarint(stream)", 16)

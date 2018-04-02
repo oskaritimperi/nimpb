@@ -1,5 +1,6 @@
 import endians
 import streams
+import strutils
 
 import types
 
@@ -21,6 +22,8 @@ type
     ParseError* = object of Exception
 
     InvalidFieldNumberError* = object of ParseError
+
+    UnexpectedWireTypeError* = object of ParseError
 
 proc pbClose(s: Stream) =
     close(ProtobufStream(s).stream)
@@ -336,3 +339,11 @@ proc skipField*(stream: ProtobufStream, wiretype: WireType) =
         discard readStr(stream, int(size))
     else:
         raise newException(Exception, "unsupported wiretype: " & $wiretype)
+
+proc expectWireType*(actual: WireType, expected: varargs[WireType]) =
+    for exp in expected:
+        if actual == exp:
+            return
+    let message = "Got wiretype " & $actual & " but expected: " &
+        join(expected, ", ")
+    raise newException(UnexpectedWireTypeError, message)
