@@ -2,8 +2,7 @@
 
 import intsets
 
-import protobuf/stream
-import protobuf/types
+import protobuf/protobuf
 
 import phonenumber_pb
 
@@ -20,6 +19,16 @@ type
         hasField: IntSet
         people: seq[Person]
 
+proc newPerson*(): Person
+proc writePerson*(stream: ProtobufStream, message: Person)
+proc readPerson*(stream: ProtobufStream): Person
+proc sizeOfPerson*(message: Person): uint64
+
+proc newAddressBook*(): AddressBook
+proc writeAddressBook*(stream: ProtobufStream, message: AddressBook)
+proc readAddressBook*(stream: ProtobufStream): AddressBook
+proc sizeOfAddressBook*(message: AddressBook): uint64
+
 proc newPerson*(): Person =
     new(result)
     result.hasField = initIntSet()
@@ -30,7 +39,7 @@ proc newPerson*(): Person =
 
 proc clearname*(message: Person) =
     message.name = ""
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasname*(message: Person): bool =
     result = contains(message.hasField, 1)
@@ -47,7 +56,7 @@ proc `name=`*(message: Person, value: string) {.inline.} =
 
 proc clearid*(message: Person) =
     message.id = 0
-    excl(message.hasField, 2)
+    excl(message.hasField, [2])
 
 proc hasid*(message: Person): bool =
     result = contains(message.hasField, 2)
@@ -64,7 +73,7 @@ proc `id=`*(message: Person, value: int32) {.inline.} =
 
 proc clearemail*(message: Person) =
     message.email = ""
-    excl(message.hasField, 3)
+    excl(message.hasField, [3])
 
 proc hasemail*(message: Person): bool =
     result = contains(message.hasField, 3)
@@ -81,10 +90,10 @@ proc `email=`*(message: Person, value: string) {.inline.} =
 
 proc clearphones*(message: Person) =
     message.phones = @[]
-    excl(message.hasField, 4)
+    excl(message.hasField, [4])
 
 proc hasphones*(message: Person): bool =
-    result = contains(message.hasField, 4)
+    result = contains(message.hasField, 4) or (len(message.phones) > 0)
 
 proc setphones*(message: Person, value: seq[PhoneNumber]) =
     message.phones = value
@@ -102,42 +111,27 @@ proc `phones=`*(message: Person, value: seq[PhoneNumber]) {.inline.} =
 
 proc sizeOfPerson*(message: Person): uint64 =
     if hasname(message):
-        let
-            sizeOfField = sizeOfString(message.name)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.LengthDelimited)
+        result = result + sizeOfString(message.name)
     if hasid(message):
-        let
-            sizeOfField = sizeOfInt32(message.id)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(2, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(2, WireType.Varint)
+        result = result + sizeOfInt32(message.id)
     if hasemail(message):
-        let
-            sizeOfField = sizeOfString(message.email)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(3, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(3, WireType.LengthDelimited)
+        result = result + sizeOfString(message.email)
     for value in message.phones:
-        let
-            sizeOfValue = sizeOfPhoneNumber(value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(4, WireType.LengthDelimited)))
-        result = result + sizeOfValue + sizeOfTag
-    
-        result = result + sizeOfUInt64(sizeOfValue)
+        result = result + sizeOfTag(4, WireType.LengthDelimited)
+        result = result + sizeOfLengthDelimited(sizeOfPhoneNumber(value))
 
 proc writePerson*(stream: ProtobufStream, message: Person) =
     if hasname(message):
-        writeTag(stream, 1, WireType.LengthDelimited)
-        writeString(stream, message.name)
+        writeString(stream, message.name, 1)
     if hasid(message):
-        writeTag(stream, 2, WireType.Varint)
-        writeInt32(stream, message.id)
+        writeInt32(stream, message.id, 2)
     if hasemail(message):
-        writeTag(stream, 3, WireType.LengthDelimited)
-        writeString(stream, message.email)
+        writeString(stream, message.email, 3)
     for value in message.phones:
-        writeTag(stream, 4, WireType.LengthDelimited)
-        writeVarint(stream, sizeOfPhoneNumber(value))
-        writePhoneNumber(stream, value)
+        writeMessage(stream, value, 4)
 
 proc readPerson*(stream: ProtobufStream): Person =
     result = newPerson()
@@ -146,16 +140,22 @@ proc readPerson*(stream: ProtobufStream): Person =
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.LengthDelimited)
             setname(result, readString(stream))
         of 2:
+            expectWireType(wireType, WireType.Varint)
             setid(result, readInt32(stream))
         of 3:
+            expectWireType(wireType, WireType.LengthDelimited)
             setemail(result, readString(stream))
         of 4:
+            expectWireType(wireType, WireType.LengthDelimited)
             let
                 size = readVarint(stream)
-                data = readStr(stream, int(size))
+                data = safeReadStr(stream, int(size))
                 pbs = newProtobufStream(newStringStream(data))
             addphones(result, readPhoneNumber(pbs))
         else: skipField(stream, wireType)
@@ -181,10 +181,10 @@ proc newAddressBook*(): AddressBook =
 
 proc clearpeople*(message: AddressBook) =
     message.people = @[]
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc haspeople*(message: AddressBook): bool =
-    result = contains(message.hasField, 1)
+    result = contains(message.hasField, 1) or (len(message.people) > 0)
 
 proc setpeople*(message: AddressBook, value: seq[Person]) =
     message.people = value
@@ -202,18 +202,12 @@ proc `people=`*(message: AddressBook, value: seq[Person]) {.inline.} =
 
 proc sizeOfAddressBook*(message: AddressBook): uint64 =
     for value in message.people:
-        let
-            sizeOfValue = sizeOfPerson(value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.LengthDelimited)))
-        result = result + sizeOfValue + sizeOfTag
-    
-        result = result + sizeOfUInt64(sizeOfValue)
+        result = result + sizeOfTag(1, WireType.LengthDelimited)
+        result = result + sizeOfLengthDelimited(sizeOfPerson(value))
 
 proc writeAddressBook*(stream: ProtobufStream, message: AddressBook) =
     for value in message.people:
-        writeTag(stream, 1, WireType.LengthDelimited)
-        writeVarint(stream, sizeOfPerson(value))
-        writePerson(stream, value)
+        writeMessage(stream, value, 1)
 
 proc readAddressBook*(stream: ProtobufStream): AddressBook =
     result = newAddressBook()
@@ -222,10 +216,13 @@ proc readAddressBook*(stream: ProtobufStream): AddressBook =
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.LengthDelimited)
             let
                 size = readVarint(stream)
-                data = readStr(stream, int(size))
+                data = safeReadStr(stream, int(size))
                 pbs = newProtobufStream(newStringStream(data))
             addpeople(result, readPerson(pbs))
         else: skipField(stream, wireType)

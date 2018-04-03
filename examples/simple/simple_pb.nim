@@ -2,8 +2,7 @@
 
 import intsets
 
-import protobuf/stream
-import protobuf/types
+import protobuf/protobuf
 
 type
     Test1_MyEnum* {.pure.} = enum
@@ -21,8 +20,16 @@ proc readTest1_MyEnum*(stream: ProtobufStream): Test1_MyEnum =
 proc writeTest1_MyEnum*(stream: ProtobufStream, value: Test1_MyEnum) =
     writeUInt32(stream, uint32(value))
 
+proc writeTest1_MyEnum*(stream: ProtobufStream, value: Test1_MyEnum, fieldNumber: int) =
+    writeUInt32(stream, uint32(value), fieldNumber)
+
 proc sizeOfTest1_MyEnum*(value: Test1_MyEnum): uint64 =
     sizeOfUInt32(uint32(value))
+
+proc newTest1*(): Test1
+proc writeTest1*(stream: ProtobufStream, message: Test1)
+proc readTest1*(stream: ProtobufStream): Test1
+proc sizeOfTest1*(message: Test1): uint64
 
 proc newTest1*(): Test1 =
     new(result)
@@ -32,7 +39,7 @@ proc newTest1*(): Test1 =
 
 proc cleara*(message: Test1) =
     message.a = 0
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasa*(message: Test1): bool =
     result = contains(message.hasField, 1)
@@ -49,7 +56,7 @@ proc `a=`*(message: Test1, value: int32) {.inline.} =
 
 proc cleare*(message: Test1) =
     message.e = Test1_MyEnum(0)
-    excl(message.hasField, 2)
+    excl(message.hasField, [2])
 
 proc hase*(message: Test1): bool =
     result = contains(message.hasField, 2)
@@ -66,23 +73,17 @@ proc `e=`*(message: Test1, value: Test1_MyEnum) {.inline.} =
 
 proc sizeOfTest1*(message: Test1): uint64 =
     if hasa(message):
-        let
-            sizeOfField = sizeOfInt32(message.a)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.Varint)
+        result = result + sizeOfInt32(message.a)
     if hase(message):
-        let
-            sizeOfField = sizeOfTest1_MyEnum(message.e)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(2, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(2, WireType.Varint)
+        result = result + sizeOfTest1_MyEnum(message.e)
 
 proc writeTest1*(stream: ProtobufStream, message: Test1) =
     if hasa(message):
-        writeTag(stream, 1, WireType.Varint)
-        writeInt32(stream, message.a)
+        writeInt32(stream, message.a, 1)
     if hase(message):
-        writeTag(stream, 2, WireType.Varint)
-        writeTest1_MyEnum(stream, message.e)
+        writeTest1_MyEnum(stream, message.e, 2)
 
 proc readTest1*(stream: ProtobufStream): Test1 =
     result = newTest1()
@@ -91,9 +92,13 @@ proc readTest1*(stream: ProtobufStream): Test1 =
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.Varint)
             seta(result, readInt32(stream))
         of 2:
+            expectWireType(wireType, WireType.Varint)
             sete(result, readTest1_MyEnum(stream))
         else: skipField(stream, wireType)
 

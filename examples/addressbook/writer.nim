@@ -1,6 +1,6 @@
 import streams
 
-import protobuf/stream
+import protobuf/protobuf
 
 import addressbook_pb
 import phonenumber_pb

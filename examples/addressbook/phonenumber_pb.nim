@@ -2,8 +2,7 @@
 
 import intsets
 
-import protobuf/stream
-import protobuf/types
+import protobuf/protobuf
 
 type
     PhoneType* {.pure.} = enum
@@ -22,8 +21,16 @@ proc readPhoneType*(stream: ProtobufStream): PhoneType =
 proc writePhoneType*(stream: ProtobufStream, value: PhoneType) =
     writeUInt32(stream, uint32(value))
 
+proc writePhoneType*(stream: ProtobufStream, value: PhoneType, fieldNumber: int) =
+    writeUInt32(stream, uint32(value), fieldNumber)
+
 proc sizeOfPhoneType*(value: PhoneType): uint64 =
     sizeOfUInt32(uint32(value))
+
+proc newPhoneNumber*(): PhoneNumber
+proc writePhoneNumber*(stream: ProtobufStream, message: PhoneNumber)
+proc readPhoneNumber*(stream: ProtobufStream): PhoneNumber
+proc sizeOfPhoneNumber*(message: PhoneNumber): uint64
 
 proc newPhoneNumber*(): PhoneNumber =
     new(result)
@@ -33,7 +40,7 @@ proc newPhoneNumber*(): PhoneNumber =
 
 proc clearnumber*(message: PhoneNumber) =
     message.number = ""
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasnumber*(message: PhoneNumber): bool =
     result = contains(message.hasField, 1)
@@ -50,7 +57,7 @@ proc `number=`*(message: PhoneNumber, value: string) {.inline.} =
 
 proc clearftype*(message: PhoneNumber) =
     message.ftype = PhoneType(0)
-    excl(message.hasField, 2)
+    excl(message.hasField, [2])
 
 proc hasftype*(message: PhoneNumber): bool =
     result = contains(message.hasField, 2)
@@ -67,23 +74,17 @@ proc `ftype=`*(message: PhoneNumber, value: PhoneType) {.inline.} =
 
 proc sizeOfPhoneNumber*(message: PhoneNumber): uint64 =
     if hasnumber(message):
-        let
-            sizeOfField = sizeOfString(message.number)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.LengthDelimited)
+        result = result + sizeOfString(message.number)
     if hasftype(message):
-        let
-            sizeOfField = sizeOfPhoneType(message.ftype)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(2, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(2, WireType.Varint)
+        result = result + sizeOfPhoneType(message.ftype)
 
 proc writePhoneNumber*(stream: ProtobufStream, message: PhoneNumber) =
     if hasnumber(message):
-        writeTag(stream, 1, WireType.LengthDelimited)
-        writeString(stream, message.number)
+        writeString(stream, message.number, 1)
     if hasftype(message):
-        writeTag(stream, 2, WireType.Varint)
-        writePhoneType(stream, message.ftype)
+        writePhoneType(stream, message.ftype, 2)
 
 proc readPhoneNumber*(stream: ProtobufStream): PhoneNumber =
     result = newPhoneNumber()
@@ -92,9 +93,13 @@ proc readPhoneNumber*(stream: ProtobufStream): PhoneNumber =
             tag = readTag(stream)
             wireType = getTagWireType(tag)
         case getTagFieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
+            expectWireType(wireType, WireType.LengthDelimited)
             setnumber(result, readString(stream))
         of 2:
+            expectWireType(wireType, WireType.Varint)
             setftype(result, readPhoneType(stream))
         else: skipField(stream, wireType)
 
