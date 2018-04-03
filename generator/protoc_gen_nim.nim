@@ -11,7 +11,8 @@ import descriptor_pb
 import plugin_pb
 
 import protobuf/protobuf
-import protobuf/gen
+
+import gen
 
 type
     Names = distinct seq[string]

@@ -1,6 +1,6 @@
 import intsets
 
-import protobuf/gen
+import gen
 import protobuf/protobuf
 
 const
