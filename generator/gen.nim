@@ -428,8 +428,8 @@ proc generateReadMessageProc(desc: NimNode): NimNode =
             while not atEnd(stream):
                 let
                     `tagId` = readTag(`streamId`)
-                    `wiretypeId` = getTagWireType(`tagId`)
-                case getTagFieldNumber(`tagId`)
+                    `wiretypeId` = wireType(`tagId`)
+                case fieldNumber(`tagId`)
                 else:
                     skipField(`streamId`, `wiretypeId`)
 
