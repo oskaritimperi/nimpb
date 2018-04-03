@@ -2,8 +2,7 @@
 
 import intsets
 
-import protobuf/stream
-import protobuf/types
+import protobuf/protobuf
 
 type
     google_protobuf_Any* = ref google_protobuf_AnyObj

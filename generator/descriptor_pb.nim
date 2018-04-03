@@ -1,8 +1,7 @@
 import intsets
 
-import protobuf/types
 import protobuf/gen
-import protobuf/stream
+import protobuf/protobuf
 
 const
     FileDescriptorSetDesc = MessageDesc(

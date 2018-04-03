@@ -4,8 +4,7 @@ import intsets
 import tables
 export tables
 
-import protobuf/stream
-import protobuf/types
+import protobuf/protobuf
 
 type
     google_protobuf_NullValue* {.pure.} = enum

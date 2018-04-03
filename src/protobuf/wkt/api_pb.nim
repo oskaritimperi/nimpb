@@ -2,8 +2,7 @@
 
 import intsets
 
-import protobuf/stream
-import protobuf/types
+import protobuf/protobuf
 
 import protobuf/wkt/source_context_pb
 import protobuf/wkt/type_pb

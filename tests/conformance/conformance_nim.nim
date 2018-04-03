@@ -2,8 +2,7 @@ import endians
 import streams
 import strformat
 
-import protobuf/stream
-import protobuf/types
+import protobuf/protobuf
 
 import conformance_pb
 import test_messages_proto3_pb

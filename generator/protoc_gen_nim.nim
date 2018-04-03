@@ -10,8 +10,7 @@ import tables
 import descriptor_pb
 import plugin_pb
 
-import protobuf/stream
-import protobuf/types
+import protobuf/protobuf
 import protobuf/gen
 
 type
@@ -857,8 +856,7 @@ proc processFile(filename: string, fdesc: FileDescriptorProto,
         addLine(result.data, "import tables")
         addLine(result.data, "export tables")
     addLine(result.data, "")
-    addLine(result.data, "import protobuf/stream")
-    addLine(result.data, "import protobuf/types")
+    addLine(result.data, "import protobuf/protobuf")
     addLine(result.data, "")
 
     for dep in fdesc.dependency:
