@@ -224,6 +224,20 @@ proc isKeyword(s: string): bool =
     else:
         result = false
 
+proc writeProc(field: Field): string =
+    if isMapEntry(field):
+        result = &"write{field.typeName}KV"
+    elif isMessage(field):
+        result = "writeMessage"
+    else:
+        result = &"write{field.typeName}"
+
+proc readProc(field: Field): string =
+    if isMapEntry(field):
+        result = &"read{field.typeName}KV"
+    else:
+        result = &"read{field.typeName}"
+
 proc newField(file: ProtoFile, message: Message, desc: FieldDescriptorProto): Field =
     new(result)
 
@@ -585,44 +599,31 @@ iterator genWriteMapKVProc(msg: Message): string =
         value = mapValueField(msg)
 
     yield &"proc write{msg.names}KV(stream: ProtobufStream, key: {key.fullType}, value: {value.fullType}) ="
-
-    yield indent(&"write{key.typeName}(stream, key, {key.number})", 4)
-
-    if isMessage(value):
-        yield indent(&"writeMessage(stream, value, {value.number})", 4)
-    else:
-        yield indent(&"write{value.typeName}(stream, value, {value.number})", 4)
-
+    yield indent(&"{key.writeProc}(stream, key, {key.number})", 4)
+    yield indent(&"{value.writeProc}(stream, value, {value.number})", 4)
     yield ""
 
 iterator genWriteMessageProc(msg: Message): string =
     yield &"proc write{msg.names}*(stream: ProtobufStream, message: {msg.names}) ="
     for field in msg.fields:
-        let writer = "write" & field.typeName
         if isMapEntry(field):
             yield indent(&"for key, value in message.{field.name}:", 4)
             yield indent(&"writeTag(stream, {field.number}, {wiretypeStr(field)})", 8)
             yield indent(&"writeVarint(stream, sizeOf{field.typeName}KV(key, value))", 8)
-            yield indent(&"write{field.typeName}KV(stream, key, value)", 8)
+            yield indent(&"{field.writeProc}(stream, key, value)", 8)
         elif isRepeated(field):
             if field.packed:
                 yield indent(&"if has{field.name}(message):", 4)
                 yield indent(&"writeTag(stream, {field.number}, WireType.LengthDelimited)", 8)
                 yield indent(&"writeVarint(stream, packedFieldSize(message.{field.name}, {field.fieldTypeStr}))", 8)
                 yield indent(&"for value in message.{field.name}:", 8)
-                yield indent(&"{writer}(stream, value)", 12)
+                yield indent(&"{field.writeProc}(stream, value)", 12)
             else:
                 yield indent(&"for value in message.{field.name}:", 4)
-                if isMessage(field):
-                    yield indent(&"writeMessage(stream, value, {field.number})", 8)
-                else:
-                    yield indent(&"{writer}(stream, value, {field.number})", 8)
+                yield indent(&"{field.writeProc}(stream, value, {field.number})", 8)
         else:
             yield indent(&"if has{field.name}(message):", 4)
-            if isMessage(field):
-                yield indent(&"writeMessage(stream, message.{field.accessor}, {field.number})", 8)
-            else:
-                yield indent(&"{writer}(stream, message.{field.accessor}, {field.number})", 8)
+            yield indent(&"{field.writeProc}(stream, message.{field.accessor}, {field.number})", 8)
 
     if len(msg.fields) == 0:
         yield indent("discard", 4)
@@ -647,7 +648,7 @@ iterator genReadMapKVProc(msg: Message): string =
     yield indent("wireType = getTagWireType(tag)", 12)
     yield indent("case getTagFieldNumber(tag)", 8)
     yield indent(&"of {key.number}:", 8)
-    yield indent(&"key = read{key.typeName}(stream)", 12)
+    yield indent(&"key = {key.readProc}(stream)", 12)
     yield indent("gotKey = true", 12)
     yield indent(&"of {value.number}:", 8)
     if isMessage(value):
@@ -655,9 +656,9 @@ iterator genReadMapKVProc(msg: Message): string =
         yield indent("size = readVarint(stream)", 16)
         yield indent("data = safeReadStr(stream, int(size))", 16)
         yield indent("pbs = newProtobufStream(newStringStream(data))", 16)
-        yield indent(&"value = read{value.typeName}(pbs)", 12)
+        yield indent(&"value = {value.readProc}(pbs)", 12)
     else:
-        yield indent(&"value = read{value.typeName}(stream)", 12)
+        yield indent(&"value = {value.readProc}(stream)", 12)
     yield indent("gotValue = true", 12)
     yield indent("else: skipField(stream, wireType)", 8)
     yield indent("if not gotKey:", 4)
@@ -680,7 +681,6 @@ iterator genReadMessageProc(msg: Message): string =
         yield indent("raise newException(InvalidFieldNumberError, \"Invalid field number: 0\")", 12)
         for field in msg.fields:
             let
-                reader = &"read{field.typeName}"
                 setter =
                     if isRepeated(field):
                         &"add{field.name}"
@@ -694,7 +694,7 @@ iterator genReadMessageProc(msg: Message): string =
                     yield indent("size = readVarint(stream)", 16)
                     yield indent("data = safeReadStr(stream, int(size))", 16)
                     yield indent("pbs = newProtobufStream(newStringStream(data))", 16)
-                    yield indent(&"read{field.typeName}KV(pbs, result.{field.name})", 12)
+                    yield indent(&"{field.readProc}(pbs, result.{field.name})", 12)
                 elif isNumeric(field):
                     yield indent(&"expectWireType(wireType, {field.wiretypeStr}, WireType.LengthDelimited)", 12)
                     yield indent("if wireType == WireType.LengthDelimited:", 12)
@@ -703,22 +703,22 @@ iterator genReadMessageProc(msg: Message): string =
                     yield indent("start = uint64(getPosition(stream))", 20)
                     yield indent("var consumed = 0'u64", 16)
                     yield indent("while consumed < size:", 16)
-                    yield indent(&"{setter}(result, {reader}(stream))", 20)
+                    yield indent(&"{setter}(result, {field.readProc}(stream))", 20)
                     yield indent("consumed = uint64(getPosition(stream)) - start", 20)
                     yield indent("if consumed != size:", 16)
                     yield indent("raise newException(Exception, \"packed field size mismatch\")", 20)
                     yield indent("else:", 12)
-                    yield indent(&"{setter}(result, {reader}(stream))", 16)
+                    yield indent(&"{setter}(result, {field.readProc}(stream))", 16)
                 elif isMessage(field):
                     yield indent(&"expectWireType(wireType, {field.wiretypeStr})", 12)
                     yield indent("let", 12)
                     yield indent("size = readVarint(stream)", 16)
                     yield indent("data = safeReadStr(stream, int(size))", 16)
                     yield indent("pbs = newProtobufStream(newStringStream(data))", 16)
-                    yield indent(&"{setter}(result, {reader}(pbs))", 12)
+                    yield indent(&"{setter}(result, {field.readProc}(pbs))", 12)
                 else:
                     yield indent(&"expectWireType(wireType, {field.wiretypeStr})", 12)
-                    yield indent(&"{setter}(result, {reader}(stream))", 12)
+                    yield indent(&"{setter}(result, {field.readProc}(stream))", 12)
             else:
                 yield indent(&"expectWireType(wireType, {field.wiretypeStr})", 12)
                 if isMessage(field):
@@ -726,9 +726,9 @@ iterator genReadMessageProc(msg: Message): string =
                     yield indent("size = readVarint(stream)", 16)
                     yield indent("data = safeReadStr(stream, int(size))", 16)
                     yield indent("pbs = newProtobufStream(newStringStream(data))", 16)
-                    yield indent(&"{setter}(result, {reader}(pbs))", 12)
+                    yield indent(&"{setter}(result, {field.readProc}(pbs))", 12)
                 else:
-                    yield indent(&"{setter}(result, {reader}(stream))", 12)
+                    yield indent(&"{setter}(result, {field.readProc}(stream))", 12)
         yield indent("else: skipField(stream, wireType)", 8)
     yield ""
 
