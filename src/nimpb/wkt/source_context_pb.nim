@@ -2,7 +2,7 @@
 
 import intsets
 
-import protobuf/protobuf
+import nimpb/nimpb
 
 type
     google_protobuf_SourceContext* = ref google_protobuf_SourceContextObj
@@ -22,7 +22,7 @@ proc newgoogle_protobuf_SourceContext*(): google_protobuf_SourceContext =
 
 proc clearfile_name*(message: google_protobuf_SourceContext) =
     message.file_name = ""
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasfile_name*(message: google_protobuf_SourceContext): bool =
     result = contains(message.hasField, 1)
@@ -39,15 +39,12 @@ proc `file_name=`*(message: google_protobuf_SourceContext, value: string) {.inli
 
 proc sizeOfgoogle_protobuf_SourceContext*(message: google_protobuf_SourceContext): uint64 =
     if hasfile_name(message):
-        let
-            sizeOfField = sizeOfString(message.file_name)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.LengthDelimited)
+        result = result + sizeOfString(message.file_name)
 
 proc writegoogle_protobuf_SourceContext*(stream: ProtobufStream, message: google_protobuf_SourceContext) =
     if hasfile_name(message):
-        writeTag(stream, 1, WireType.LengthDelimited)
-        writeString(stream, message.file_name)
+        writeString(stream, message.file_name, 1)
 
 proc readgoogle_protobuf_SourceContext*(stream: ProtobufStream): google_protobuf_SourceContext =
     result = newgoogle_protobuf_SourceContext()

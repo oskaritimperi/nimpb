@@ -2,7 +2,7 @@
 
 import intsets
 
-import protobuf/protobuf
+import nimpb/nimpb
 
 type
     google_protobuf_Duration* = ref google_protobuf_DurationObj
@@ -24,7 +24,7 @@ proc newgoogle_protobuf_Duration*(): google_protobuf_Duration =
 
 proc clearseconds*(message: google_protobuf_Duration) =
     message.seconds = 0
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasseconds*(message: google_protobuf_Duration): bool =
     result = contains(message.hasField, 1)
@@ -41,7 +41,7 @@ proc `seconds=`*(message: google_protobuf_Duration, value: int64) {.inline.} =
 
 proc clearnanos*(message: google_protobuf_Duration) =
     message.nanos = 0
-    excl(message.hasField, 2)
+    excl(message.hasField, [2])
 
 proc hasnanos*(message: google_protobuf_Duration): bool =
     result = contains(message.hasField, 2)
@@ -58,23 +58,17 @@ proc `nanos=`*(message: google_protobuf_Duration, value: int32) {.inline.} =
 
 proc sizeOfgoogle_protobuf_Duration*(message: google_protobuf_Duration): uint64 =
     if hasseconds(message):
-        let
-            sizeOfField = sizeOfInt64(message.seconds)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.Varint)
+        result = result + sizeOfInt64(message.seconds)
     if hasnanos(message):
-        let
-            sizeOfField = sizeOfInt32(message.nanos)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(2, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(2, WireType.Varint)
+        result = result + sizeOfInt32(message.nanos)
 
 proc writegoogle_protobuf_Duration*(stream: ProtobufStream, message: google_protobuf_Duration) =
     if hasseconds(message):
-        writeTag(stream, 1, WireType.Varint)
-        writeInt64(stream, message.seconds)
+        writeInt64(stream, message.seconds, 1)
     if hasnanos(message):
-        writeTag(stream, 2, WireType.Varint)
-        writeInt32(stream, message.nanos)
+        writeInt32(stream, message.nanos, 2)
 
 proc readgoogle_protobuf_Duration*(stream: ProtobufStream): google_protobuf_Duration =
     result = newgoogle_protobuf_Duration()

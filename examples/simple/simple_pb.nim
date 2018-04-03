@@ -2,7 +2,7 @@
 
 import intsets
 
-import protobuf/protobuf
+import nimpb/nimpb
 
 type
     Test1_MyEnum* {.pure.} = enum

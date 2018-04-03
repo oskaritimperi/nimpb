@@ -1,7 +1,7 @@
 import macros
 import strutils
 
-import protobuf/protobuf
+import nimpb/nimpb
 
 type
     MessageDesc* = object

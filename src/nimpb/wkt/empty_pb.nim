@@ -2,7 +2,7 @@
 
 import intsets
 
-import protobuf/protobuf
+import nimpb/nimpb
 
 type
     google_protobuf_Empty* = ref google_protobuf_EmptyObj

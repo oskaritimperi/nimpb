@@ -1,7 +1,7 @@
 import intsets
 
 import gen
-import protobuf/protobuf
+import nimpb/nimpb
 
 import descriptor_pb
 

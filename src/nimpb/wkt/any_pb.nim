@@ -2,7 +2,7 @@
 
 import intsets
 
-import protobuf/protobuf
+import nimpb/nimpb
 
 type
     google_protobuf_Any* = ref google_protobuf_AnyObj
@@ -24,7 +24,7 @@ proc newgoogle_protobuf_Any*(): google_protobuf_Any =
 
 proc cleartype_url*(message: google_protobuf_Any) =
     message.type_url = ""
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hastype_url*(message: google_protobuf_Any): bool =
     result = contains(message.hasField, 1)
@@ -41,7 +41,7 @@ proc `type_url=`*(message: google_protobuf_Any, value: string) {.inline.} =
 
 proc clearvalue*(message: google_protobuf_Any) =
     message.value = bytes("")
-    excl(message.hasField, 2)
+    excl(message.hasField, [2])
 
 proc hasvalue*(message: google_protobuf_Any): bool =
     result = contains(message.hasField, 2)
@@ -58,23 +58,17 @@ proc `value=`*(message: google_protobuf_Any, value: bytes) {.inline.} =
 
 proc sizeOfgoogle_protobuf_Any*(message: google_protobuf_Any): uint64 =
     if hastype_url(message):
-        let
-            sizeOfField = sizeOfString(message.type_url)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.LengthDelimited)
+        result = result + sizeOfString(message.type_url)
     if hasvalue(message):
-        let
-            sizeOfField = sizeOfBytes(message.value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(2, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(2, WireType.LengthDelimited)
+        result = result + sizeOfBytes(message.value)
 
 proc writegoogle_protobuf_Any*(stream: ProtobufStream, message: google_protobuf_Any) =
     if hastype_url(message):
-        writeTag(stream, 1, WireType.LengthDelimited)
-        writeString(stream, message.type_url)
+        writeString(stream, message.type_url, 1)
     if hasvalue(message):
-        writeTag(stream, 2, WireType.LengthDelimited)
-        writeBytes(stream, message.value)
+        writeBytes(stream, message.value, 2)
 
 proc readgoogle_protobuf_Any*(stream: ProtobufStream): google_protobuf_Any =
     result = newgoogle_protobuf_Any()

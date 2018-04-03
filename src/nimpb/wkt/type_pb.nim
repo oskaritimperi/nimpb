@@ -2,10 +2,10 @@
 
 import intsets
 
-import protobuf/protobuf
+import nimpb/nimpb
 
-import protobuf/wkt/any_pb
-import protobuf/wkt/source_context_pb
+import nimpb/wkt/any_pb
+import nimpb/wkt/source_context_pb
 
 type
     google_protobuf_Syntax* {.pure.} = enum
@@ -84,6 +84,9 @@ proc readgoogle_protobuf_Syntax*(stream: ProtobufStream): google_protobuf_Syntax
 proc writegoogle_protobuf_Syntax*(stream: ProtobufStream, value: google_protobuf_Syntax) =
     writeUInt32(stream, uint32(value))
 
+proc writegoogle_protobuf_Syntax*(stream: ProtobufStream, value: google_protobuf_Syntax, fieldNumber: int) =
+    writeUInt32(stream, uint32(value), fieldNumber)
+
 proc sizeOfgoogle_protobuf_Syntax*(value: google_protobuf_Syntax): uint64 =
     sizeOfUInt32(uint32(value))
 
@@ -93,6 +96,9 @@ proc readgoogle_protobuf_Field_Kind*(stream: ProtobufStream): google_protobuf_Fi
 proc writegoogle_protobuf_Field_Kind*(stream: ProtobufStream, value: google_protobuf_Field_Kind) =
     writeUInt32(stream, uint32(value))
 
+proc writegoogle_protobuf_Field_Kind*(stream: ProtobufStream, value: google_protobuf_Field_Kind, fieldNumber: int) =
+    writeUInt32(stream, uint32(value), fieldNumber)
+
 proc sizeOfgoogle_protobuf_Field_Kind*(value: google_protobuf_Field_Kind): uint64 =
     sizeOfUInt32(uint32(value))
 
@@ -101,6 +107,9 @@ proc readgoogle_protobuf_Field_Cardinality*(stream: ProtobufStream): google_prot
 
 proc writegoogle_protobuf_Field_Cardinality*(stream: ProtobufStream, value: google_protobuf_Field_Cardinality) =
     writeUInt32(stream, uint32(value))
+
+proc writegoogle_protobuf_Field_Cardinality*(stream: ProtobufStream, value: google_protobuf_Field_Cardinality, fieldNumber: int) =
+    writeUInt32(stream, uint32(value), fieldNumber)
 
 proc sizeOfgoogle_protobuf_Field_Cardinality*(value: google_protobuf_Field_Cardinality): uint64 =
     sizeOfUInt32(uint32(value))
@@ -138,7 +147,7 @@ proc newgoogle_protobuf_Option*(): google_protobuf_Option =
 
 proc clearname*(message: google_protobuf_Option) =
     message.name = ""
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasname*(message: google_protobuf_Option): bool =
     result = contains(message.hasField, 1)
@@ -155,7 +164,7 @@ proc `name=`*(message: google_protobuf_Option, value: string) {.inline.} =
 
 proc clearvalue*(message: google_protobuf_Option) =
     message.value = nil
-    excl(message.hasField, 2)
+    excl(message.hasField, [2])
 
 proc hasvalue*(message: google_protobuf_Option): bool =
     result = contains(message.hasField, 2)
@@ -172,25 +181,17 @@ proc `value=`*(message: google_protobuf_Option, value: google_protobuf_Any) {.in
 
 proc sizeOfgoogle_protobuf_Option*(message: google_protobuf_Option): uint64 =
     if hasname(message):
-        let
-            sizeOfField = sizeOfString(message.name)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.LengthDelimited)
+        result = result + sizeOfString(message.name)
     if hasvalue(message):
-        let
-            sizeOfField = sizeOfgoogle_protobuf_Any(message.value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(2, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
-        result = result + sizeOfUInt64(sizeOfField)
+        result = result + sizeOfTag(2, WireType.LengthDelimited)
+        result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_Any(message.value))
 
 proc writegoogle_protobuf_Option*(stream: ProtobufStream, message: google_protobuf_Option) =
     if hasname(message):
-        writeTag(stream, 1, WireType.LengthDelimited)
-        writeString(stream, message.name)
+        writeString(stream, message.name, 1)
     if hasvalue(message):
-        writeTag(stream, 2, WireType.LengthDelimited)
-        writeVarint(stream, sizeOfgoogle_protobuf_Any(message.value))
-        writegoogle_protobuf_Any(stream, message.value)
+        writeMessage(stream, message.value, 2)
 
 proc readgoogle_protobuf_Option*(stream: ProtobufStream): google_protobuf_Option =
     result = newgoogle_protobuf_Option()
@@ -243,7 +244,7 @@ proc newgoogle_protobuf_Field*(): google_protobuf_Field =
 
 proc clearkind*(message: google_protobuf_Field) =
     message.kind = google_protobuf_Field_Kind(0)
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc haskind*(message: google_protobuf_Field): bool =
     result = contains(message.hasField, 1)
@@ -260,7 +261,7 @@ proc `kind=`*(message: google_protobuf_Field, value: google_protobuf_Field_Kind)
 
 proc clearcardinality*(message: google_protobuf_Field) =
     message.cardinality = google_protobuf_Field_Cardinality(0)
-    excl(message.hasField, 2)
+    excl(message.hasField, [2])
 
 proc hascardinality*(message: google_protobuf_Field): bool =
     result = contains(message.hasField, 2)
@@ -277,7 +278,7 @@ proc `cardinality=`*(message: google_protobuf_Field, value: google_protobuf_Fiel
 
 proc clearnumber*(message: google_protobuf_Field) =
     message.number = 0
-    excl(message.hasField, 3)
+    excl(message.hasField, [3])
 
 proc hasnumber*(message: google_protobuf_Field): bool =
     result = contains(message.hasField, 3)
@@ -294,7 +295,7 @@ proc `number=`*(message: google_protobuf_Field, value: int32) {.inline.} =
 
 proc clearname*(message: google_protobuf_Field) =
     message.name = ""
-    excl(message.hasField, 4)
+    excl(message.hasField, [4])
 
 proc hasname*(message: google_protobuf_Field): bool =
     result = contains(message.hasField, 4)
@@ -311,7 +312,7 @@ proc `name=`*(message: google_protobuf_Field, value: string) {.inline.} =
 
 proc cleartype_url*(message: google_protobuf_Field) =
     message.type_url = ""
-    excl(message.hasField, 6)
+    excl(message.hasField, [6])
 
 proc hastype_url*(message: google_protobuf_Field): bool =
     result = contains(message.hasField, 6)
@@ -328,7 +329,7 @@ proc `type_url=`*(message: google_protobuf_Field, value: string) {.inline.} =
 
 proc clearoneof_index*(message: google_protobuf_Field) =
     message.oneof_index = 0
-    excl(message.hasField, 7)
+    excl(message.hasField, [7])
 
 proc hasoneof_index*(message: google_protobuf_Field): bool =
     result = contains(message.hasField, 7)
@@ -345,7 +346,7 @@ proc `oneof_index=`*(message: google_protobuf_Field, value: int32) {.inline.} =
 
 proc clearpacked*(message: google_protobuf_Field) =
     message.packed = false
-    excl(message.hasField, 8)
+    excl(message.hasField, [8])
 
 proc haspacked*(message: google_protobuf_Field): bool =
     result = contains(message.hasField, 8)
@@ -362,10 +363,10 @@ proc `packed=`*(message: google_protobuf_Field, value: bool) {.inline.} =
 
 proc clearoptions*(message: google_protobuf_Field) =
     message.options = @[]
-    excl(message.hasField, 9)
+    excl(message.hasField, [9])
 
 proc hasoptions*(message: google_protobuf_Field): bool =
-    result = contains(message.hasField, 9)
+    result = contains(message.hasField, 9) or (len(message.options) > 0)
 
 proc setoptions*(message: google_protobuf_Field, value: seq[google_protobuf_Option]) =
     message.options = value
@@ -383,7 +384,7 @@ proc `options=`*(message: google_protobuf_Field, value: seq[google_protobuf_Opti
 
 proc clearjson_name*(message: google_protobuf_Field) =
     message.json_name = ""
-    excl(message.hasField, 10)
+    excl(message.hasField, [10])
 
 proc hasjson_name*(message: google_protobuf_Field): bool =
     result = contains(message.hasField, 10)
@@ -400,7 +401,7 @@ proc `json_name=`*(message: google_protobuf_Field, value: string) {.inline.} =
 
 proc cleardefault_value*(message: google_protobuf_Field) =
     message.default_value = ""
-    excl(message.hasField, 11)
+    excl(message.hasField, [11])
 
 proc hasdefault_value*(message: google_protobuf_Field): bool =
     result = contains(message.hasField, 11)
@@ -417,90 +418,57 @@ proc `default_value=`*(message: google_protobuf_Field, value: string) {.inline.}
 
 proc sizeOfgoogle_protobuf_Field*(message: google_protobuf_Field): uint64 =
     if haskind(message):
-        let
-            sizeOfField = sizeOfgoogle_protobuf_Field_Kind(message.kind)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.Varint)
+        result = result + sizeOfgoogle_protobuf_Field_Kind(message.kind)
     if hascardinality(message):
-        let
-            sizeOfField = sizeOfgoogle_protobuf_Field_Cardinality(message.cardinality)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(2, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(2, WireType.Varint)
+        result = result + sizeOfgoogle_protobuf_Field_Cardinality(message.cardinality)
     if hasnumber(message):
-        let
-            sizeOfField = sizeOfInt32(message.number)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(3, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(3, WireType.Varint)
+        result = result + sizeOfInt32(message.number)
     if hasname(message):
-        let
-            sizeOfField = sizeOfString(message.name)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(4, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(4, WireType.LengthDelimited)
+        result = result + sizeOfString(message.name)
     if hastype_url(message):
-        let
-            sizeOfField = sizeOfString(message.type_url)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(6, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(6, WireType.LengthDelimited)
+        result = result + sizeOfString(message.type_url)
     if hasoneof_index(message):
-        let
-            sizeOfField = sizeOfInt32(message.oneof_index)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(7, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(7, WireType.Varint)
+        result = result + sizeOfInt32(message.oneof_index)
     if haspacked(message):
-        let
-            sizeOfField = sizeOfBool(message.packed)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(8, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(8, WireType.Varint)
+        result = result + sizeOfBool(message.packed)
     for value in message.options:
-        let
-            sizeOfValue = sizeOfgoogle_protobuf_Option(value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(9, WireType.LengthDelimited)))
-        result = result + sizeOfValue + sizeOfTag
-    
-        result = result + sizeOfUInt64(sizeOfValue)
+        result = result + sizeOfTag(9, WireType.LengthDelimited)
+        result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_Option(value))
     if hasjson_name(message):
-        let
-            sizeOfField = sizeOfString(message.json_name)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(10, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(10, WireType.LengthDelimited)
+        result = result + sizeOfString(message.json_name)
     if hasdefault_value(message):
-        let
-            sizeOfField = sizeOfString(message.default_value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(11, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(11, WireType.LengthDelimited)
+        result = result + sizeOfString(message.default_value)
 
 proc writegoogle_protobuf_Field*(stream: ProtobufStream, message: google_protobuf_Field) =
     if haskind(message):
-        writeTag(stream, 1, WireType.Varint)
-        writegoogle_protobuf_Field_Kind(stream, message.kind)
+        writegoogle_protobuf_Field_Kind(stream, message.kind, 1)
     if hascardinality(message):
-        writeTag(stream, 2, WireType.Varint)
-        writegoogle_protobuf_Field_Cardinality(stream, message.cardinality)
+        writegoogle_protobuf_Field_Cardinality(stream, message.cardinality, 2)
     if hasnumber(message):
-        writeTag(stream, 3, WireType.Varint)
-        writeInt32(stream, message.number)
+        writeInt32(stream, message.number, 3)
     if hasname(message):
-        writeTag(stream, 4, WireType.LengthDelimited)
-        writeString(stream, message.name)
+        writeString(stream, message.name, 4)
     if hastype_url(message):
-        writeTag(stream, 6, WireType.LengthDelimited)
-        writeString(stream, message.type_url)
+        writeString(stream, message.type_url, 6)
     if hasoneof_index(message):
-        writeTag(stream, 7, WireType.Varint)
-        writeInt32(stream, message.oneof_index)
+        writeInt32(stream, message.oneof_index, 7)
     if haspacked(message):
-        writeTag(stream, 8, WireType.Varint)
-        writeBool(stream, message.packed)
+        writeBool(stream, message.packed, 8)
     for value in message.options:
-        writeTag(stream, 9, WireType.LengthDelimited)
-        writeVarint(stream, sizeOfgoogle_protobuf_Option(value))
-        writegoogle_protobuf_Option(stream, value)
+        writeMessage(stream, value, 9)
     if hasjson_name(message):
-        writeTag(stream, 10, WireType.LengthDelimited)
-        writeString(stream, message.json_name)
+        writeString(stream, message.json_name, 10)
     if hasdefault_value(message):
-        writeTag(stream, 11, WireType.LengthDelimited)
-        writeString(stream, message.default_value)
+        writeString(stream, message.default_value, 11)
 
 proc readgoogle_protobuf_Field*(stream: ProtobufStream): google_protobuf_Field =
     result = newgoogle_protobuf_Field()
@@ -573,7 +541,7 @@ proc newgoogle_protobuf_Type*(): google_protobuf_Type =
 
 proc clearname*(message: google_protobuf_Type) =
     message.name = ""
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasname*(message: google_protobuf_Type): bool =
     result = contains(message.hasField, 1)
@@ -590,10 +558,10 @@ proc `name=`*(message: google_protobuf_Type, value: string) {.inline.} =
 
 proc clearfields*(message: google_protobuf_Type) =
     message.fields = @[]
-    excl(message.hasField, 2)
+    excl(message.hasField, [2])
 
 proc hasfields*(message: google_protobuf_Type): bool =
-    result = contains(message.hasField, 2)
+    result = contains(message.hasField, 2) or (len(message.fields) > 0)
 
 proc setfields*(message: google_protobuf_Type, value: seq[google_protobuf_Field]) =
     message.fields = value
@@ -611,10 +579,10 @@ proc `fields=`*(message: google_protobuf_Type, value: seq[google_protobuf_Field]
 
 proc clearoneofs*(message: google_protobuf_Type) =
     message.oneofs = @[]
-    excl(message.hasField, 3)
+    excl(message.hasField, [3])
 
 proc hasoneofs*(message: google_protobuf_Type): bool =
-    result = contains(message.hasField, 3)
+    result = contains(message.hasField, 3) or (len(message.oneofs) > 0)
 
 proc setoneofs*(message: google_protobuf_Type, value: seq[string]) =
     message.oneofs = value
@@ -632,10 +600,10 @@ proc `oneofs=`*(message: google_protobuf_Type, value: seq[string]) {.inline.} =
 
 proc clearoptions*(message: google_protobuf_Type) =
     message.options = @[]
-    excl(message.hasField, 4)
+    excl(message.hasField, [4])
 
 proc hasoptions*(message: google_protobuf_Type): bool =
-    result = contains(message.hasField, 4)
+    result = contains(message.hasField, 4) or (len(message.options) > 0)
 
 proc setoptions*(message: google_protobuf_Type, value: seq[google_protobuf_Option]) =
     message.options = value
@@ -653,7 +621,7 @@ proc `options=`*(message: google_protobuf_Type, value: seq[google_protobuf_Optio
 
 proc clearsource_context*(message: google_protobuf_Type) =
     message.source_context = nil
-    excl(message.hasField, 5)
+    excl(message.hasField, [5])
 
 proc hassource_context*(message: google_protobuf_Type): bool =
     result = contains(message.hasField, 5)
@@ -670,7 +638,7 @@ proc `source_context=`*(message: google_protobuf_Type, value: google_protobuf_So
 
 proc clearsyntax*(message: google_protobuf_Type) =
     message.syntax = google_protobuf_Syntax(0)
-    excl(message.hasField, 6)
+    excl(message.hasField, [6])
 
 proc hassyntax*(message: google_protobuf_Type): bool =
     result = contains(message.hasField, 6)
@@ -687,64 +655,37 @@ proc `syntax=`*(message: google_protobuf_Type, value: google_protobuf_Syntax) {.
 
 proc sizeOfgoogle_protobuf_Type*(message: google_protobuf_Type): uint64 =
     if hasname(message):
-        let
-            sizeOfField = sizeOfString(message.name)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.LengthDelimited)
+        result = result + sizeOfString(message.name)
     for value in message.fields:
-        let
-            sizeOfValue = sizeOfgoogle_protobuf_Field(value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(2, WireType.LengthDelimited)))
-        result = result + sizeOfValue + sizeOfTag
-    
-        result = result + sizeOfUInt64(sizeOfValue)
+        result = result + sizeOfTag(2, WireType.LengthDelimited)
+        result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_Field(value))
     for value in message.oneofs:
-        let
-            sizeOfValue = sizeOfString(value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(3, WireType.LengthDelimited)))
-        result = result + sizeOfValue + sizeOfTag
-    
+        result = result + sizeOfTag(3, WireType.LengthDelimited)
+        result = result + sizeOfString(value)
     for value in message.options:
-        let
-            sizeOfValue = sizeOfgoogle_protobuf_Option(value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(4, WireType.LengthDelimited)))
-        result = result + sizeOfValue + sizeOfTag
-    
-        result = result + sizeOfUInt64(sizeOfValue)
+        result = result + sizeOfTag(4, WireType.LengthDelimited)
+        result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_Option(value))
     if hassource_context(message):
-        let
-            sizeOfField = sizeOfgoogle_protobuf_SourceContext(message.source_context)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(5, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
-        result = result + sizeOfUInt64(sizeOfField)
+        result = result + sizeOfTag(5, WireType.LengthDelimited)
+        result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_SourceContext(message.source_context))
     if hassyntax(message):
-        let
-            sizeOfField = sizeOfgoogle_protobuf_Syntax(message.syntax)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(6, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(6, WireType.Varint)
+        result = result + sizeOfgoogle_protobuf_Syntax(message.syntax)
 
 proc writegoogle_protobuf_Type*(stream: ProtobufStream, message: google_protobuf_Type) =
     if hasname(message):
-        writeTag(stream, 1, WireType.LengthDelimited)
-        writeString(stream, message.name)
+        writeString(stream, message.name, 1)
     for value in message.fields:
-        writeTag(stream, 2, WireType.LengthDelimited)
-        writeVarint(stream, sizeOfgoogle_protobuf_Field(value))
-        writegoogle_protobuf_Field(stream, value)
+        writeMessage(stream, value, 2)
     for value in message.oneofs:
-        writeTag(stream, 3, WireType.LengthDelimited)
-        writeString(stream, value)
+        writeString(stream, value, 3)
     for value in message.options:
-        writeTag(stream, 4, WireType.LengthDelimited)
-        writeVarint(stream, sizeOfgoogle_protobuf_Option(value))
-        writegoogle_protobuf_Option(stream, value)
+        writeMessage(stream, value, 4)
     if hassource_context(message):
-        writeTag(stream, 5, WireType.LengthDelimited)
-        writeVarint(stream, sizeOfgoogle_protobuf_SourceContext(message.source_context))
-        writegoogle_protobuf_SourceContext(stream, message.source_context)
+        writeMessage(stream, message.source_context, 5)
     if hassyntax(message):
-        writeTag(stream, 6, WireType.Varint)
-        writegoogle_protobuf_Syntax(stream, message.syntax)
+        writegoogle_protobuf_Syntax(stream, message.syntax, 6)
 
 proc readgoogle_protobuf_Type*(stream: ProtobufStream): google_protobuf_Type =
     result = newgoogle_protobuf_Type()
@@ -810,7 +751,7 @@ proc newgoogle_protobuf_EnumValue*(): google_protobuf_EnumValue =
 
 proc clearname*(message: google_protobuf_EnumValue) =
     message.name = ""
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasname*(message: google_protobuf_EnumValue): bool =
     result = contains(message.hasField, 1)
@@ -827,7 +768,7 @@ proc `name=`*(message: google_protobuf_EnumValue, value: string) {.inline.} =
 
 proc clearnumber*(message: google_protobuf_EnumValue) =
     message.number = 0
-    excl(message.hasField, 2)
+    excl(message.hasField, [2])
 
 proc hasnumber*(message: google_protobuf_EnumValue): bool =
     result = contains(message.hasField, 2)
@@ -844,10 +785,10 @@ proc `number=`*(message: google_protobuf_EnumValue, value: int32) {.inline.} =
 
 proc clearoptions*(message: google_protobuf_EnumValue) =
     message.options = @[]
-    excl(message.hasField, 3)
+    excl(message.hasField, [3])
 
 proc hasoptions*(message: google_protobuf_EnumValue): bool =
-    result = contains(message.hasField, 3)
+    result = contains(message.hasField, 3) or (len(message.options) > 0)
 
 proc setoptions*(message: google_protobuf_EnumValue, value: seq[google_protobuf_Option]) =
     message.options = value
@@ -865,34 +806,22 @@ proc `options=`*(message: google_protobuf_EnumValue, value: seq[google_protobuf_
 
 proc sizeOfgoogle_protobuf_EnumValue*(message: google_protobuf_EnumValue): uint64 =
     if hasname(message):
-        let
-            sizeOfField = sizeOfString(message.name)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.LengthDelimited)
+        result = result + sizeOfString(message.name)
     if hasnumber(message):
-        let
-            sizeOfField = sizeOfInt32(message.number)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(2, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(2, WireType.Varint)
+        result = result + sizeOfInt32(message.number)
     for value in message.options:
-        let
-            sizeOfValue = sizeOfgoogle_protobuf_Option(value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(3, WireType.LengthDelimited)))
-        result = result + sizeOfValue + sizeOfTag
-    
-        result = result + sizeOfUInt64(sizeOfValue)
+        result = result + sizeOfTag(3, WireType.LengthDelimited)
+        result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_Option(value))
 
 proc writegoogle_protobuf_EnumValue*(stream: ProtobufStream, message: google_protobuf_EnumValue) =
     if hasname(message):
-        writeTag(stream, 1, WireType.LengthDelimited)
-        writeString(stream, message.name)
+        writeString(stream, message.name, 1)
     if hasnumber(message):
-        writeTag(stream, 2, WireType.Varint)
-        writeInt32(stream, message.number)
+        writeInt32(stream, message.number, 2)
     for value in message.options:
-        writeTag(stream, 3, WireType.LengthDelimited)
-        writeVarint(stream, sizeOfgoogle_protobuf_Option(value))
-        writegoogle_protobuf_Option(stream, value)
+        writeMessage(stream, value, 3)
 
 proc readgoogle_protobuf_EnumValue*(stream: ProtobufStream): google_protobuf_EnumValue =
     result = newgoogle_protobuf_EnumValue()
@@ -943,7 +872,7 @@ proc newgoogle_protobuf_Enum*(): google_protobuf_Enum =
 
 proc clearname*(message: google_protobuf_Enum) =
     message.name = ""
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasname*(message: google_protobuf_Enum): bool =
     result = contains(message.hasField, 1)
@@ -960,10 +889,10 @@ proc `name=`*(message: google_protobuf_Enum, value: string) {.inline.} =
 
 proc clearenumvalue*(message: google_protobuf_Enum) =
     message.enumvalue = @[]
-    excl(message.hasField, 2)
+    excl(message.hasField, [2])
 
 proc hasenumvalue*(message: google_protobuf_Enum): bool =
-    result = contains(message.hasField, 2)
+    result = contains(message.hasField, 2) or (len(message.enumvalue) > 0)
 
 proc setenumvalue*(message: google_protobuf_Enum, value: seq[google_protobuf_EnumValue]) =
     message.enumvalue = value
@@ -981,10 +910,10 @@ proc `enumvalue=`*(message: google_protobuf_Enum, value: seq[google_protobuf_Enu
 
 proc clearoptions*(message: google_protobuf_Enum) =
     message.options = @[]
-    excl(message.hasField, 3)
+    excl(message.hasField, [3])
 
 proc hasoptions*(message: google_protobuf_Enum): bool =
-    result = contains(message.hasField, 3)
+    result = contains(message.hasField, 3) or (len(message.options) > 0)
 
 proc setoptions*(message: google_protobuf_Enum, value: seq[google_protobuf_Option]) =
     message.options = value
@@ -1002,7 +931,7 @@ proc `options=`*(message: google_protobuf_Enum, value: seq[google_protobuf_Optio
 
 proc clearsource_context*(message: google_protobuf_Enum) =
     message.source_context = nil
-    excl(message.hasField, 4)
+    excl(message.hasField, [4])
 
 proc hassource_context*(message: google_protobuf_Enum): bool =
     result = contains(message.hasField, 4)
@@ -1019,7 +948,7 @@ proc `source_context=`*(message: google_protobuf_Enum, value: google_protobuf_So
 
 proc clearsyntax*(message: google_protobuf_Enum) =
     message.syntax = google_protobuf_Syntax(0)
-    excl(message.hasField, 5)
+    excl(message.hasField, [5])
 
 proc hassyntax*(message: google_protobuf_Enum): bool =
     result = contains(message.hasField, 5)
@@ -1036,55 +965,32 @@ proc `syntax=`*(message: google_protobuf_Enum, value: google_protobuf_Syntax) {.
 
 proc sizeOfgoogle_protobuf_Enum*(message: google_protobuf_Enum): uint64 =
     if hasname(message):
-        let
-            sizeOfField = sizeOfString(message.name)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.LengthDelimited)
+        result = result + sizeOfString(message.name)
     for value in message.enumvalue:
-        let
-            sizeOfValue = sizeOfgoogle_protobuf_EnumValue(value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(2, WireType.LengthDelimited)))
-        result = result + sizeOfValue + sizeOfTag
-    
-        result = result + sizeOfUInt64(sizeOfValue)
+        result = result + sizeOfTag(2, WireType.LengthDelimited)
+        result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_EnumValue(value))
     for value in message.options:
-        let
-            sizeOfValue = sizeOfgoogle_protobuf_Option(value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(3, WireType.LengthDelimited)))
-        result = result + sizeOfValue + sizeOfTag
-    
-        result = result + sizeOfUInt64(sizeOfValue)
+        result = result + sizeOfTag(3, WireType.LengthDelimited)
+        result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_Option(value))
     if hassource_context(message):
-        let
-            sizeOfField = sizeOfgoogle_protobuf_SourceContext(message.source_context)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(4, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
-        result = result + sizeOfUInt64(sizeOfField)
+        result = result + sizeOfTag(4, WireType.LengthDelimited)
+        result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_SourceContext(message.source_context))
     if hassyntax(message):
-        let
-            sizeOfField = sizeOfgoogle_protobuf_Syntax(message.syntax)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(5, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(5, WireType.Varint)
+        result = result + sizeOfgoogle_protobuf_Syntax(message.syntax)
 
 proc writegoogle_protobuf_Enum*(stream: ProtobufStream, message: google_protobuf_Enum) =
     if hasname(message):
-        writeTag(stream, 1, WireType.LengthDelimited)
-        writeString(stream, message.name)
+        writeString(stream, message.name, 1)
     for value in message.enumvalue:
-        writeTag(stream, 2, WireType.LengthDelimited)
-        writeVarint(stream, sizeOfgoogle_protobuf_EnumValue(value))
-        writegoogle_protobuf_EnumValue(stream, value)
+        writeMessage(stream, value, 2)
     for value in message.options:
-        writeTag(stream, 3, WireType.LengthDelimited)
-        writeVarint(stream, sizeOfgoogle_protobuf_Option(value))
-        writegoogle_protobuf_Option(stream, value)
+        writeMessage(stream, value, 3)
     if hassource_context(message):
-        writeTag(stream, 4, WireType.LengthDelimited)
-        writeVarint(stream, sizeOfgoogle_protobuf_SourceContext(message.source_context))
-        writegoogle_protobuf_SourceContext(stream, message.source_context)
+        writeMessage(stream, message.source_context, 4)
     if hassyntax(message):
-        writeTag(stream, 5, WireType.Varint)
-        writegoogle_protobuf_Syntax(stream, message.syntax)
+        writegoogle_protobuf_Syntax(stream, message.syntax, 5)
 
 proc readgoogle_protobuf_Enum*(stream: ProtobufStream): google_protobuf_Enum =
     result = newgoogle_protobuf_Enum()

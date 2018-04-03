@@ -10,7 +10,7 @@ import tables
 import descriptor_pb
 import plugin_pb
 
-import protobuf/protobuf
+import nimpb/nimpb
 
 import gen
 
@@ -866,14 +866,14 @@ proc processFile(filename: string, fdesc: FileDescriptorProto,
         addLine(result.data, "import tables")
         addLine(result.data, "export tables")
     addLine(result.data, "")
-    addLine(result.data, "import protobuf/protobuf")
+    addLine(result.data, "import nimpb/nimpb")
     addLine(result.data, "")
 
     for dep in fdesc.dependency:
         var (dir, depname, _) = splitFile(dep)
 
         if dir == "google/protobuf":
-            dir = "protobuf/wkt"
+            dir = "nimpb/wkt"
 
         var deppbname = (dir / depname) & "_pb"
         addLine(result.data, &"import {deppbname}")

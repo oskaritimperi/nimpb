@@ -2,7 +2,7 @@
 
 import intsets
 
-import protobuf/protobuf
+import nimpb/nimpb
 
 type
     google_protobuf_DoubleValue* = ref google_protobuf_DoubleValueObj
@@ -94,7 +94,7 @@ proc newgoogle_protobuf_Int32Value*(): google_protobuf_Int32Value =
 
 proc clearvalue*(message: google_protobuf_Int32Value) =
     message.value = 0
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasvalue*(message: google_protobuf_Int32Value): bool =
     result = contains(message.hasField, 1)
@@ -111,15 +111,12 @@ proc `value=`*(message: google_protobuf_Int32Value, value: int32) {.inline.} =
 
 proc sizeOfgoogle_protobuf_Int32Value*(message: google_protobuf_Int32Value): uint64 =
     if hasvalue(message):
-        let
-            sizeOfField = sizeOfInt32(message.value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.Varint)
+        result = result + sizeOfInt32(message.value)
 
 proc writegoogle_protobuf_Int32Value*(stream: ProtobufStream, message: google_protobuf_Int32Value) =
     if hasvalue(message):
-        writeTag(stream, 1, WireType.Varint)
-        writeInt32(stream, message.value)
+        writeInt32(stream, message.value, 1)
 
 proc readgoogle_protobuf_Int32Value*(stream: ProtobufStream): google_protobuf_Int32Value =
     result = newgoogle_protobuf_Int32Value()
@@ -156,7 +153,7 @@ proc newgoogle_protobuf_Int64Value*(): google_protobuf_Int64Value =
 
 proc clearvalue*(message: google_protobuf_Int64Value) =
     message.value = 0
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasvalue*(message: google_protobuf_Int64Value): bool =
     result = contains(message.hasField, 1)
@@ -173,15 +170,12 @@ proc `value=`*(message: google_protobuf_Int64Value, value: int64) {.inline.} =
 
 proc sizeOfgoogle_protobuf_Int64Value*(message: google_protobuf_Int64Value): uint64 =
     if hasvalue(message):
-        let
-            sizeOfField = sizeOfInt64(message.value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.Varint)
+        result = result + sizeOfInt64(message.value)
 
 proc writegoogle_protobuf_Int64Value*(stream: ProtobufStream, message: google_protobuf_Int64Value) =
     if hasvalue(message):
-        writeTag(stream, 1, WireType.Varint)
-        writeInt64(stream, message.value)
+        writeInt64(stream, message.value, 1)
 
 proc readgoogle_protobuf_Int64Value*(stream: ProtobufStream): google_protobuf_Int64Value =
     result = newgoogle_protobuf_Int64Value()
@@ -218,7 +212,7 @@ proc newgoogle_protobuf_DoubleValue*(): google_protobuf_DoubleValue =
 
 proc clearvalue*(message: google_protobuf_DoubleValue) =
     message.value = 0
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasvalue*(message: google_protobuf_DoubleValue): bool =
     result = contains(message.hasField, 1)
@@ -235,15 +229,12 @@ proc `value=`*(message: google_protobuf_DoubleValue, value: float64) {.inline.} 
 
 proc sizeOfgoogle_protobuf_DoubleValue*(message: google_protobuf_DoubleValue): uint64 =
     if hasvalue(message):
-        let
-            sizeOfField = sizeOfDouble(message.value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.Fixed64)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.Fixed64)
+        result = result + sizeOfDouble(message.value)
 
 proc writegoogle_protobuf_DoubleValue*(stream: ProtobufStream, message: google_protobuf_DoubleValue) =
     if hasvalue(message):
-        writeTag(stream, 1, WireType.Fixed64)
-        writeDouble(stream, message.value)
+        writeDouble(stream, message.value, 1)
 
 proc readgoogle_protobuf_DoubleValue*(stream: ProtobufStream): google_protobuf_DoubleValue =
     result = newgoogle_protobuf_DoubleValue()
@@ -280,7 +271,7 @@ proc newgoogle_protobuf_StringValue*(): google_protobuf_StringValue =
 
 proc clearvalue*(message: google_protobuf_StringValue) =
     message.value = ""
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasvalue*(message: google_protobuf_StringValue): bool =
     result = contains(message.hasField, 1)
@@ -297,15 +288,12 @@ proc `value=`*(message: google_protobuf_StringValue, value: string) {.inline.} =
 
 proc sizeOfgoogle_protobuf_StringValue*(message: google_protobuf_StringValue): uint64 =
     if hasvalue(message):
-        let
-            sizeOfField = sizeOfString(message.value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.LengthDelimited)
+        result = result + sizeOfString(message.value)
 
 proc writegoogle_protobuf_StringValue*(stream: ProtobufStream, message: google_protobuf_StringValue) =
     if hasvalue(message):
-        writeTag(stream, 1, WireType.LengthDelimited)
-        writeString(stream, message.value)
+        writeString(stream, message.value, 1)
 
 proc readgoogle_protobuf_StringValue*(stream: ProtobufStream): google_protobuf_StringValue =
     result = newgoogle_protobuf_StringValue()
@@ -342,7 +330,7 @@ proc newgoogle_protobuf_BoolValue*(): google_protobuf_BoolValue =
 
 proc clearvalue*(message: google_protobuf_BoolValue) =
     message.value = false
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasvalue*(message: google_protobuf_BoolValue): bool =
     result = contains(message.hasField, 1)
@@ -359,15 +347,12 @@ proc `value=`*(message: google_protobuf_BoolValue, value: bool) {.inline.} =
 
 proc sizeOfgoogle_protobuf_BoolValue*(message: google_protobuf_BoolValue): uint64 =
     if hasvalue(message):
-        let
-            sizeOfField = sizeOfBool(message.value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.Varint)
+        result = result + sizeOfBool(message.value)
 
 proc writegoogle_protobuf_BoolValue*(stream: ProtobufStream, message: google_protobuf_BoolValue) =
     if hasvalue(message):
-        writeTag(stream, 1, WireType.Varint)
-        writeBool(stream, message.value)
+        writeBool(stream, message.value, 1)
 
 proc readgoogle_protobuf_BoolValue*(stream: ProtobufStream): google_protobuf_BoolValue =
     result = newgoogle_protobuf_BoolValue()
@@ -404,7 +389,7 @@ proc newgoogle_protobuf_BytesValue*(): google_protobuf_BytesValue =
 
 proc clearvalue*(message: google_protobuf_BytesValue) =
     message.value = bytes("")
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasvalue*(message: google_protobuf_BytesValue): bool =
     result = contains(message.hasField, 1)
@@ -421,15 +406,12 @@ proc `value=`*(message: google_protobuf_BytesValue, value: bytes) {.inline.} =
 
 proc sizeOfgoogle_protobuf_BytesValue*(message: google_protobuf_BytesValue): uint64 =
     if hasvalue(message):
-        let
-            sizeOfField = sizeOfBytes(message.value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.LengthDelimited)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.LengthDelimited)
+        result = result + sizeOfBytes(message.value)
 
 proc writegoogle_protobuf_BytesValue*(stream: ProtobufStream, message: google_protobuf_BytesValue) =
     if hasvalue(message):
-        writeTag(stream, 1, WireType.LengthDelimited)
-        writeBytes(stream, message.value)
+        writeBytes(stream, message.value, 1)
 
 proc readgoogle_protobuf_BytesValue*(stream: ProtobufStream): google_protobuf_BytesValue =
     result = newgoogle_protobuf_BytesValue()
@@ -466,7 +448,7 @@ proc newgoogle_protobuf_FloatValue*(): google_protobuf_FloatValue =
 
 proc clearvalue*(message: google_protobuf_FloatValue) =
     message.value = 0
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasvalue*(message: google_protobuf_FloatValue): bool =
     result = contains(message.hasField, 1)
@@ -483,15 +465,12 @@ proc `value=`*(message: google_protobuf_FloatValue, value: float32) {.inline.} =
 
 proc sizeOfgoogle_protobuf_FloatValue*(message: google_protobuf_FloatValue): uint64 =
     if hasvalue(message):
-        let
-            sizeOfField = sizeOfFloat(message.value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.Fixed32)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.Fixed32)
+        result = result + sizeOfFloat(message.value)
 
 proc writegoogle_protobuf_FloatValue*(stream: ProtobufStream, message: google_protobuf_FloatValue) =
     if hasvalue(message):
-        writeTag(stream, 1, WireType.Fixed32)
-        writeFloat(stream, message.value)
+        writeFloat(stream, message.value, 1)
 
 proc readgoogle_protobuf_FloatValue*(stream: ProtobufStream): google_protobuf_FloatValue =
     result = newgoogle_protobuf_FloatValue()
@@ -528,7 +507,7 @@ proc newgoogle_protobuf_UInt64Value*(): google_protobuf_UInt64Value =
 
 proc clearvalue*(message: google_protobuf_UInt64Value) =
     message.value = 0
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasvalue*(message: google_protobuf_UInt64Value): bool =
     result = contains(message.hasField, 1)
@@ -545,15 +524,12 @@ proc `value=`*(message: google_protobuf_UInt64Value, value: uint64) {.inline.} =
 
 proc sizeOfgoogle_protobuf_UInt64Value*(message: google_protobuf_UInt64Value): uint64 =
     if hasvalue(message):
-        let
-            sizeOfField = sizeOfUInt64(message.value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.Varint)
+        result = result + sizeOfUInt64(message.value)
 
 proc writegoogle_protobuf_UInt64Value*(stream: ProtobufStream, message: google_protobuf_UInt64Value) =
     if hasvalue(message):
-        writeTag(stream, 1, WireType.Varint)
-        writeUInt64(stream, message.value)
+        writeUInt64(stream, message.value, 1)
 
 proc readgoogle_protobuf_UInt64Value*(stream: ProtobufStream): google_protobuf_UInt64Value =
     result = newgoogle_protobuf_UInt64Value()
@@ -590,7 +566,7 @@ proc newgoogle_protobuf_UInt32Value*(): google_protobuf_UInt32Value =
 
 proc clearvalue*(message: google_protobuf_UInt32Value) =
     message.value = 0
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc hasvalue*(message: google_protobuf_UInt32Value): bool =
     result = contains(message.hasField, 1)
@@ -607,15 +583,12 @@ proc `value=`*(message: google_protobuf_UInt32Value, value: uint32) {.inline.} =
 
 proc sizeOfgoogle_protobuf_UInt32Value*(message: google_protobuf_UInt32Value): uint64 =
     if hasvalue(message):
-        let
-            sizeOfField = sizeOfUInt32(message.value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.Varint)))
-        result = result + sizeOfField + sizeOfTag
+        result = result + sizeOfTag(1, WireType.Varint)
+        result = result + sizeOfUInt32(message.value)
 
 proc writegoogle_protobuf_UInt32Value*(stream: ProtobufStream, message: google_protobuf_UInt32Value) =
     if hasvalue(message):
-        writeTag(stream, 1, WireType.Varint)
-        writeUInt32(stream, message.value)
+        writeUInt32(stream, message.value, 1)
 
 proc readgoogle_protobuf_UInt32Value*(stream: ProtobufStream): google_protobuf_UInt32Value =
     result = newgoogle_protobuf_UInt32Value()

@@ -2,7 +2,7 @@
 
 import intsets
 
-import protobuf/protobuf
+import nimpb/nimpb
 
 type
     google_protobuf_FieldMask* = ref google_protobuf_FieldMaskObj
@@ -22,10 +22,10 @@ proc newgoogle_protobuf_FieldMask*(): google_protobuf_FieldMask =
 
 proc clearpaths*(message: google_protobuf_FieldMask) =
     message.paths = @[]
-    excl(message.hasField, 1)
+    excl(message.hasField, [1])
 
 proc haspaths*(message: google_protobuf_FieldMask): bool =
-    result = contains(message.hasField, 1)
+    result = contains(message.hasField, 1) or (len(message.paths) > 0)
 
 proc setpaths*(message: google_protobuf_FieldMask, value: seq[string]) =
     message.paths = value
@@ -43,16 +43,12 @@ proc `paths=`*(message: google_protobuf_FieldMask, value: seq[string]) {.inline.
 
 proc sizeOfgoogle_protobuf_FieldMask*(message: google_protobuf_FieldMask): uint64 =
     for value in message.paths:
-        let
-            sizeOfValue = sizeOfString(value)
-            sizeOfTag = sizeOfUInt32(uint32(makeTag(1, WireType.LengthDelimited)))
-        result = result + sizeOfValue + sizeOfTag
-    
+        result = result + sizeOfTag(1, WireType.LengthDelimited)
+        result = result + sizeOfString(value)
 
 proc writegoogle_protobuf_FieldMask*(stream: ProtobufStream, message: google_protobuf_FieldMask) =
     for value in message.paths:
-        writeTag(stream, 1, WireType.LengthDelimited)
-        writeString(stream, value)
+        writeString(stream, value, 1)
 
 proc readgoogle_protobuf_FieldMask*(stream: ProtobufStream): google_protobuf_FieldMask =
     result = newgoogle_protobuf_FieldMask()
