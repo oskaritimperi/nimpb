@@ -510,6 +510,9 @@ iterator genProcs(e: Enum): string =
     yield &"proc write{e.names}*(stream: ProtobufStream, value: {e.names}) ="
     yield indent(&"writeUInt32(stream, uint32(value))", 4)
     yield ""
+    yield &"proc write{e.names}*(stream: ProtobufStream, value: {e.names}, fieldNumber: int) ="
+    yield indent(&"writeUInt32(stream, uint32(value), fieldNumber)", 4)
+    yield ""
     yield &"proc sizeOf{e.names}*(value: {e.names}): uint64 ="
     yield indent(&"sizeOfUInt32(uint32(value))", 4)
 
@@ -531,23 +534,33 @@ iterator oneofSiblings(field: Field): Field =
 iterator genClearFieldProc(msg: Message, field: Field): string =
     yield &"proc clear{field.name}*(message: {msg.names}) ="
     yield indent(&"message.{field.accessor} = {defaultValue(field)}", 4)
-    yield indent(&"excl(message.hasField, {field.number})", 4)
+    var numbers: seq[int] = @[field.number]
     for sibling in oneofSiblings(field):
-        yield indent(&"excl(message.hasField, {sibling.number})", 4)
+        add(numbers, sibling.number)
+    yield indent(&"excl(message.hasField, [{join(numbers, \", \")}])", 4)
     yield ""
 
 iterator genHasFieldProc(msg: Message, field: Field): string =
     # TODO: if map/seq, check also if there are values!
     yield &"proc has{field.name}*(message: {msg.names}): bool ="
-    yield indent(&"result = contains(message.hasField, {field.number})", 4)
+    var check = indent(&"result = contains(message.hasField, {field.number})", 4)
+    if isRepeated(field) or isMapEntry(field):
+        check = &"{check} or (len(message.{field.accessor}) > 0)"
+    yield check
+    # elif isMapEntry(field):
+    #     base = &"{base} or (len(message.{}"
+    # yield indent(&"result = contains(message.hasField, {field.number})", 4)
     yield ""
 
 iterator genSetFieldProc(msg: Message, field: Field): string =
     yield &"proc set{field.name}*(message: {msg.names}, value: {field.fullType}) ="
     yield indent(&"message.{field.accessor} = value", 4)
     yield indent(&"incl(message.hasField, {field.number})", 4)
+    var numbers: seq[int] = @[]
     for sibling in oneofSiblings(field):
-        yield indent(&"excl(message.hasField, {sibling.number})", 4)
+        add(numbers, sibling.number)
+    if len(numbers) > 0:
+        yield indent(&"excl(message.hasField, [{join(numbers, \", \")}])", 4)
     yield ""
 
 iterator genAddToFieldProc(msg: Message, field: Field): string =
@@ -572,13 +585,12 @@ iterator genWriteMapKVProc(msg: Message): string =
 
     yield &"proc write{msg.names}KV(stream: ProtobufStream, key: {key.fullType}, value: {value.fullType}) ="
 
-    yield indent(&"writeTag(stream, {key.number}, {wiretypeStr(key)})", 4)
-    yield indent(&"write{key.typeName}(stream, key)", 4)
+    yield indent(&"write{key.typeName}(stream, key, {key.number})", 4)
 
-    yield indent(&"writeTag(stream, {value.number}, {wiretypeStr(value)})", 4)
     if isMessage(value):
-        yield indent(&"writeVarint(stream, sizeOf{value.typeName}(value))", 4)
-    yield indent(&"write{value.typeName}(stream, value)", 4)
+        yield indent(&"writeMessage(stream, value, {value.number})", 4)
+    else:
+        yield indent(&"write{value.typeName}(stream, value, {value.number})", 4)
 
     yield ""
 
@@ -600,16 +612,16 @@ iterator genWriteMessageProc(msg: Message): string =
                 yield indent(&"{writer}(stream, value)", 12)
             else:
                 yield indent(&"for value in message.{field.name}:", 4)
-                yield indent(&"writeTag(stream, {field.number}, {wiretypeStr(field)})", 8)
                 if isMessage(field):
-                    yield indent(&"writeVarint(stream, sizeOf{field.typeName}(value))", 8)
-                yield indent(&"{writer}(stream, value)", 8)
+                    yield indent(&"writeMessage(stream, value, {field.number})", 8)
+                else:
+                    yield indent(&"{writer}(stream, value, {field.number})", 8)
         else:
             yield indent(&"if has{field.name}(message):", 4)
-            yield indent(&"writeTag(stream, {field.number}, {wiretypeStr(field)})", 8)
             if isMessage(field):
-                yield indent(&"writeVarint(stream, sizeOf{field.typeName}(message.{field.accessor}))", 8)
-            yield indent(&"{writer}(stream, message.{field.accessor})", 8)
+                yield indent(&"writeMessage(stream, message.{field.accessor}, {field.number})", 8)
+            else:
+                yield indent(&"{writer}(stream, message.{field.accessor}, {field.number})", 8)
 
     if len(msg.fields) == 0:
         yield indent("discard", 4)
@@ -725,13 +737,18 @@ iterator genSizeOfMapKVProc(message: Message): string =
         value = mapValueField(message)
 
     yield &"proc sizeOf{message.names}KV(key: {key.fullType}, value: {value.fullType}): uint64 ="
+
+    # Key (cannot be message or other complex field)
+    yield indent(&"result = result + sizeOfTag({key.number}, {key.wiretypeStr})", 4)
     yield indent(&"result = result + sizeOf{key.typeName}(key)", 4)
-    yield indent(&"result = result + sizeOfUInt32(uint32(makeTag({key.number}, {key.wiretypeStr})))", 4)
-    yield indent(&"let valueSize = sizeOf{value.typeName}(value)", 4)
-    yield indent(&"result = result + valueSize", 4)
-    yield indent(&"result = result + sizeOfUInt32(uint32(makeTag({value.number}, {value.wiretypeStr})))", 4)
+
+    # Value
+    yield indent(&"result = result + sizeOfTag({value.number}, {value.wiretypeStr})", 4)
     if isMessage(value):
-        yield indent(&"result = result + sizeOfUInt64(valueSize)", 4)
+        yield indent(&"result = result + sizeOfLengthDelimited(sizeOf{value.typeName}(value))", 4)
+    else:
+        yield indent(&"result = result + sizeOf{value.typeName}(value)", 4)
+
     yield ""
 
 iterator genSizeOfMessageProc(msg: Message): string =
@@ -742,36 +759,27 @@ iterator genSizeOfMessageProc(msg: Message): string =
             yield indent(&"var sizeOfKV = 0'u64", 8)
             yield indent(&"for key, value in message.{field.name}:", 8)
             yield indent(&"sizeOfKV = sizeOfKV + sizeOf{field.typeName}KV(key, value)", 12)
-            yield indent(&"let sizeOfTag = sizeOfUInt32(uint32(makeTag({field.number}, {wiretypeStr(field)})))", 8)
-            yield indent("result = result + sizeOfKV + sizeOfTag + sizeOfUInt64(sizeOfKV)", 8)
+            yield indent(&"result = result + sizeOfTag({field.number}, {field.wiretypeStr})", 8)
+            yield indent(&"result = result + sizeOfLengthDelimited(sizeOfKV)", 8)
         elif isRepeated(field):
             if isNumeric(field):
-                yield indent(&"""
-if has{field.name}(message):
-    let
-        sizeOfTag = sizeOfUInt32(uint32(makeTag({field.number}, WireType.LengthDelimited)))
-        sizeOfData = packedFieldSize(message.{field.name}, {field.fieldTypeStr})
-        sizeOfSize = sizeOfUInt64(sizeOfData)
-    result = sizeOfTag + sizeOfData + sizeOfSize""", 4)
+                yield indent(&"if has{field.name}(message):", 4)
+                yield indent(&"result = result + sizeOfTag({field.number}, WireType.LengthDelimited)", 8)
+                yield indent(&"result = result + sizeOfLengthDelimited(packedFieldSize(message.{field.name}, {field.fieldTypeStr}))", 8)
             else:
-                yield indent(&"""
-for value in message.{field.name}:
-    let
-        sizeOfValue = sizeOf{field.typeName}(value)
-        sizeOfTag = sizeOfUInt32(uint32(makeTag({field.number}, {wiretypeStr(field)})))
-    result = result + sizeOfValue + sizeOfTag
-""", 4)
+                yield indent(&"for value in message.{field.name}:", 4)
+                yield indent(&"result = result + sizeOfTag({field.number}, {field.wiretypeStr})", 8)
                 if isMessage(field):
-                    yield indent("result = result + sizeOfUInt64(sizeOfValue)", 8)
+                    yield indent(&"result = result + sizeOfLengthDelimited(sizeOf{field.typeName}(value))", 8)
+                else:
+                    yield indent(&"result = result + sizeOf{field.typeName}(value)", 8)
         else:
-            yield indent(&"""
-if has{field.name}(message):
-    let
-        sizeOfField = sizeOf{field.typeName}(message.{field.accessor})
-        sizeOfTag = sizeOfUInt32(uint32(makeTag({field.number}, {wiretypeStr(field)})))
-    result = result + sizeOfField + sizeOfTag""", 4)
+            yield indent(&"if has{field.name}(message):", 4)
+            yield indent(&"result = result + sizeOfTag({field.number}, {field.wiretypeStr})", 8)
             if isMessage(field):
-                yield indent("result = result + sizeOfUInt64(sizeOfField)", 8)
+                yield indent(&"result = result + sizeOfLengthDelimited(sizeOf{field.typeName}(message.{field.accessor}))", 8)
+            else:
+                yield indent(&"result = result + sizeOf{field.typeName}(message.{field.accessor})", 8)
 
     if len(msg.fields) == 0:
         yield indent("result = 0", 4)
@@ -779,10 +787,11 @@ if has{field.name}(message):
     yield ""
 
 iterator genMessageProcForwards(msg: Message): string =
-    yield &"proc new{msg.names}*(): {msg.names}"
-    yield &"proc write{msg.names}*(stream: ProtobufStream, message: {msg.names})"
-    yield &"proc read{msg.names}*(stream: ProtobufStream): {msg.names}"
-    yield &"proc sizeOf{msg.names}*(message: {msg.names}): uint64"
+    if not isMapEntry(msg):
+        yield &"proc new{msg.names}*(): {msg.names}"
+        yield &"proc write{msg.names}*(stream: ProtobufStream, message: {msg.names})"
+        yield &"proc read{msg.names}*(stream: ProtobufStream): {msg.names}"
+        yield &"proc sizeOf{msg.names}*(message: {msg.names}): uint64"
 
     if isMapEntry(msg):
         let
@@ -794,41 +803,41 @@ iterator genMessageProcForwards(msg: Message): string =
         yield &"proc sizeOf{msg.names}KV(key: {key.fullType}, value: {value.fullType}): uint64"
 
 iterator genProcs(msg: Message): string =
-    for line in genNewMessageProc(msg): yield line
-
-    for field in msg.fields:
-        for line in genClearFieldProc(msg, field): yield line
-        for line in genHasFieldProc(msg, field): yield line
-        for line in genSetFieldProc(msg, field): yield line
-
-        if isRepeated(field) and not isMapEntry(field):
-            for line in genAddToFieldProc(msg, field): yield line
-
-        for line in genFieldAccessorProcs(msg, field): yield line
-
     if isMapEntry(msg):
         for line in genSizeOfMapKVProc(msg): yield line
         for line in genWriteMapKVProc(msg): yield line
         for line in genReadMapKVProc(msg): yield line
+    else:
+        for line in genNewMessageProc(msg): yield line
 
-    for line in genSizeOfMessageProc(msg): yield line
-    for line in genWriteMessageProc(msg): yield line
-    for line in genReadMessageProc(msg): yield line
+        for field in msg.fields:
+            for line in genClearFieldProc(msg, field): yield line
+            for line in genHasFieldProc(msg, field): yield line
+            for line in genSetFieldProc(msg, field): yield line
 
-    yield &"proc serialize*(message: {msg.names}): string ="
-    yield indent("let", 4)
-    yield indent("ss = newStringStream()", 8)
-    yield indent("pbs = newProtobufStream(ss)", 8)
-    yield indent(&"write{msg.names}(pbs, message)", 4)
-    yield indent("result = ss.data", 4)
-    yield ""
+            if isRepeated(field) and not isMapEntry(field):
+                for line in genAddToFieldProc(msg, field): yield line
 
-    yield &"proc new{msg.names}*(data: string): {msg.names} ="
-    yield indent("let", 4)
-    yield indent("ss = newStringStream(data)", 8)
-    yield indent("pbs = newProtobufStream(ss)", 8)
-    yield indent(&"result = read{msg.names}(pbs)", 4)
-    yield ""
+            for line in genFieldAccessorProcs(msg, field): yield line
+
+        for line in genSizeOfMessageProc(msg): yield line
+        for line in genWriteMessageProc(msg): yield line
+        for line in genReadMessageProc(msg): yield line
+
+        yield &"proc serialize*(message: {msg.names}): string ="
+        yield indent("let", 4)
+        yield indent("ss = newStringStream()", 8)
+        yield indent("pbs = newProtobufStream(ss)", 8)
+        yield indent(&"write{msg.names}(pbs, message)", 4)
+        yield indent("result = ss.data", 4)
+        yield ""
+
+        yield &"proc new{msg.names}*(data: string): {msg.names} ="
+        yield indent("let", 4)
+        yield indent("ss = newStringStream(data)", 8)
+        yield indent("pbs = newProtobufStream(ss)", 8)
+        yield indent(&"result = read{msg.names}(pbs)", 4)
+        yield ""
 
 proc processFile(filename: string, fdesc: FileDescriptorProto,
                  otherFiles: TableRef[string, ProtoFile]): ProcessedFile =
