@@ -658,9 +658,9 @@ iterator genReadMapKVProc(msg: Message): string =
     yield indent("gotValue = true", 12)
     yield indent("else: skipField(stream, wireType)", 8)
     yield indent("if not gotKey:", 4)
-    yield indent(&"raise newException(Exception, \"missing key ({msg.names})\")", 8)
+    yield indent(&"raise newException(Exception, \"missing key\")", 8)
     yield indent("if not gotValue:", 4)
-    yield indent(&"raise newException(Exception, \"missing value ({msg.names})\")", 8)
+    yield indent(&"raise newException(Exception, \"missing value\")", 8)
     yield indent("tbl[key] = value", 4)
     yield ""
 
