@@ -13,11 +13,6 @@ type
     google_protobuf_StructObj* = object of RootObj
         hasField: IntSet
         fields: TableRef[string, google_protobuf_Value]
-    google_protobuf_Struct_FieldsEntry* = ref google_protobuf_Struct_FieldsEntryObj
-    google_protobuf_Struct_FieldsEntryObj* = object of RootObj
-        hasField: IntSet
-        key: string
-        value: google_protobuf_Value
     google_protobuf_Value* = ref google_protobuf_ValueObj
     google_protobuf_ValueObj* = object of RootObj
         hasField: IntSet

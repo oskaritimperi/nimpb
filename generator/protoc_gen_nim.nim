@@ -511,24 +511,25 @@ proc mapValueField(message: Message): Field =
             return field
 
 iterator genType(message: Message): string =
-    yield &"{message.names}* = ref {message.names}Obj"
-    yield &"{message.names}Obj* = object of RootObj"
-    yield indent(&"hasField: IntSet", 4)
+    if not isMapEntry(message):
+        yield &"{message.names}* = ref {message.names}Obj"
+        yield &"{message.names}Obj* = object of RootObj"
+        yield indent(&"hasField: IntSet", 4)
 
-    for field in message.fields:
-        if isMapEntry(field):
-            yield indent(&"{field.name}: TableRef[{mapKeyType(field)}, {mapValueType(field)}]", 4)
-        elif field.oneof == nil:
-            yield indent(&"{quoteReserved(field.name)}: {field.fullType}", 4)
+        for field in message.fields:
+            if isMapEntry(field):
+                yield indent(&"{field.name}: TableRef[{mapKeyType(field)}, {mapValueType(field)}]", 4)
+            elif field.oneof == nil:
+                yield indent(&"{quoteReserved(field.name)}: {field.fullType}", 4)
 
-    for oneof in message.oneofs:
-        yield indent(&"{oneof.name}: {message.names}_{oneof.name}_OneOf", 4)
+        for oneof in message.oneofs:
+            yield indent(&"{oneof.name}: {message.names}_{oneof.name}_OneOf", 4)
 
-    for oneof in message.oneofs:
-        yield ""
-        yield &"{message.names}_{oneof.name}_OneOf* {{.union.}} = object"
-        for field in oneof.fields:
-            yield indent(&"{quoteReserved(field.name)}: {field.fullType}", 4)
+        for oneof in message.oneofs:
+            yield ""
+            yield &"{message.names}_{oneof.name}_OneOf* {{.union.}} = object"
+            for field in oneof.fields:
+                yield indent(&"{quoteReserved(field.name)}: {field.fullType}", 4)
 
 iterator genNewMessageProc(msg: Message): string =
     yield &"proc new{msg.names}*(): {msg.names} ="
