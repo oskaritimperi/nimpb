@@ -160,16 +160,26 @@ proc writeVarint*(stream: ProtobufStream, n: uint64) =
     writeByte(stream, value.byte)
 
 proc zigzagEncode*(n: int32): uint32 =
-    {.emit:["result = ((NU32)n << 1) ^ (NU32)(n >> 31);"].}
+    let x = cast[uint32](n)
+    let a = cast[int32](x shl 1)
+    let b = -cast[int32](x shr 31)
+    result = uint32(a xor b)
 
 proc zigzagDecode*(n: uint32): int32 =
-    {.emit:["result = (NI32) ((n >> 1) ^ (~(n & 1) + 1));"].}
+    let a = int32(n shr 1)
+    let b = -int32(n and 1)
+    result = a xor b
 
 proc zigzagEncode*(n: int64): uint64 =
-    {.emit:["result = ((NU64)n << 1) ^ (NU64)(n >> 63);"].}
+    let x = cast[uint64](n)
+    let a = cast[int64](x shl 1)
+    let b = -cast[int64](x shr 63)
+    result = uint64(a xor b)
 
 proc zigzagDecode*(n: uint64): int64 =
-    {.emit:["result = (NI64) ((n >> 1) ^ (~(n & 1) + 1));"].}
+    let a = int64(n shr 1)
+    let b = -int64(n and 1)
+    result = a xor b
 
 template makeTag*(fieldNumber: int, wireType: WireType): Tag =
     ((fieldNumber shl 3).uint32 or wireType.uint32).Tag
