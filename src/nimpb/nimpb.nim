@@ -174,10 +174,10 @@ proc zigzagDecode*(n: uint64): int64 =
 template makeTag*(fieldNumber: int, wireType: WireType): Tag =
     ((fieldNumber shl 3).uint32 or wireType.uint32).Tag
 
-template getTagWireType*(tag: Tag): WireType =
+template wireType*(tag: Tag): WireType =
     (tag.uint32 and WireTypeMask).WireType
 
-template getTagFieldNumber*(tag: Tag): int =
+template fieldNumber*(tag: Tag): int =
     (tag.uint32 shr 3).int
 
 proc writeTag*(stream: ProtobufStream, tag: Tag) =
