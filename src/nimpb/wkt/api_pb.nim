@@ -204,7 +204,7 @@ proc sizeOfgoogle_protobuf_Method*(message: google_protobuf_Method): uint64 =
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_Option(value))
     if hassyntax(message):
         result = result + sizeOfTag(7, WireType.Varint)
-        result = result + sizeOfgoogle_protobuf_Syntax(message.syntax)
+        result = result + sizeOfEnum[google_protobuf_Syntax](message.syntax)
 
 proc writegoogle_protobuf_Method*(stream: ProtobufStream, message: google_protobuf_Method) =
     if hasname(message):
@@ -220,7 +220,7 @@ proc writegoogle_protobuf_Method*(stream: ProtobufStream, message: google_protob
     for value in message.options:
         writeMessage(stream, value, 6)
     if hassyntax(message):
-        writegoogle_protobuf_Syntax(stream, message.syntax, 7)
+        writeEnum(stream, message.syntax, 7)
 
 proc readgoogle_protobuf_Method*(stream: ProtobufStream): google_protobuf_Method =
     result = newgoogle_protobuf_Method()
@@ -255,7 +255,7 @@ proc readgoogle_protobuf_Method*(stream: ProtobufStream): google_protobuf_Method
             addoptions(result, readgoogle_protobuf_Option(pbs))
         of 7:
             expectWireType(wireType, WireType.Varint)
-            setsyntax(result, readgoogle_protobuf_Syntax(stream))
+            setsyntax(result, readEnum[google_protobuf_Syntax](stream))
         else: skipField(stream, wireType)
 
 proc serialize*(message: google_protobuf_Method): string =
@@ -520,7 +520,7 @@ proc sizeOfgoogle_protobuf_Api*(message: google_protobuf_Api): uint64 =
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_Mixin(value))
     if hassyntax(message):
         result = result + sizeOfTag(7, WireType.Varint)
-        result = result + sizeOfgoogle_protobuf_Syntax(message.syntax)
+        result = result + sizeOfEnum[google_protobuf_Syntax](message.syntax)
 
 proc writegoogle_protobuf_Api*(stream: ProtobufStream, message: google_protobuf_Api) =
     if hasname(message):
@@ -536,7 +536,7 @@ proc writegoogle_protobuf_Api*(stream: ProtobufStream, message: google_protobuf_
     for value in message.mixins:
         writeMessage(stream, value, 6)
     if hassyntax(message):
-        writegoogle_protobuf_Syntax(stream, message.syntax, 7)
+        writeEnum(stream, message.syntax, 7)
 
 proc readgoogle_protobuf_Api*(stream: ProtobufStream): google_protobuf_Api =
     result = newgoogle_protobuf_Api()
@@ -583,7 +583,7 @@ proc readgoogle_protobuf_Api*(stream: ProtobufStream): google_protobuf_Api =
             addmixins(result, readgoogle_protobuf_Mixin(pbs))
         of 7:
             expectWireType(wireType, WireType.Varint)
-            setsyntax(result, readgoogle_protobuf_Syntax(stream))
+            setsyntax(result, readEnum[google_protobuf_Syntax](stream))
         else: skipField(stream, wireType)
 
 proc serialize*(message: google_protobuf_Api): string =

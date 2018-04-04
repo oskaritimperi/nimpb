@@ -14,18 +14,6 @@ type
         a: int32
         e: Test1_MyEnum
 
-proc readTest1_MyEnum*(stream: ProtobufStream): Test1_MyEnum =
-    Test1_MyEnum(readUInt32(stream))
-
-proc writeTest1_MyEnum*(stream: ProtobufStream, value: Test1_MyEnum) =
-    writeUInt32(stream, uint32(value))
-
-proc writeTest1_MyEnum*(stream: ProtobufStream, value: Test1_MyEnum, fieldNumber: int) =
-    writeUInt32(stream, uint32(value), fieldNumber)
-
-proc sizeOfTest1_MyEnum*(value: Test1_MyEnum): uint64 =
-    sizeOfUInt32(uint32(value))
-
 proc newTest1*(): Test1
 proc writeTest1*(stream: ProtobufStream, message: Test1)
 proc readTest1*(stream: ProtobufStream): Test1
@@ -77,13 +65,13 @@ proc sizeOfTest1*(message: Test1): uint64 =
         result = result + sizeOfInt32(message.a)
     if hase(message):
         result = result + sizeOfTag(2, WireType.Varint)
-        result = result + sizeOfTest1_MyEnum(message.e)
+        result = result + sizeOfEnum[Test1_MyEnum](message.e)
 
 proc writeTest1*(stream: ProtobufStream, message: Test1) =
     if hasa(message):
         writeInt32(stream, message.a, 1)
     if hase(message):
-        writeTest1_MyEnum(stream, message.e, 2)
+        writeEnum(stream, message.e, 2)
 
 proc readTest1*(stream: ProtobufStream): Test1 =
     result = newTest1()
@@ -99,7 +87,7 @@ proc readTest1*(stream: ProtobufStream): Test1 =
             seta(result, readInt32(stream))
         of 2:
             expectWireType(wireType, WireType.Varint)
-            sete(result, readTest1_MyEnum(stream))
+            sete(result, readEnum[Test1_MyEnum](stream))
         else: skipField(stream, wireType)
 
 proc serialize*(message: Test1): string =

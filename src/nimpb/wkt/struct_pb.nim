@@ -35,18 +35,6 @@ type
         hasField: IntSet
         values: seq[google_protobuf_Value]
 
-proc readgoogle_protobuf_NullValue*(stream: ProtobufStream): google_protobuf_NullValue =
-    google_protobuf_NullValue(readUInt32(stream))
-
-proc writegoogle_protobuf_NullValue*(stream: ProtobufStream, value: google_protobuf_NullValue) =
-    writeUInt32(stream, uint32(value))
-
-proc writegoogle_protobuf_NullValue*(stream: ProtobufStream, value: google_protobuf_NullValue, fieldNumber: int) =
-    writeUInt32(stream, uint32(value), fieldNumber)
-
-proc sizeOfgoogle_protobuf_NullValue*(value: google_protobuf_NullValue): uint64 =
-    sizeOfUInt32(uint32(value))
-
 proc writegoogle_protobuf_Struct_FieldsEntryKV(stream: ProtobufStream, key: string, value: google_protobuf_Value)
 proc readgoogle_protobuf_Struct_FieldsEntryKV(stream: ProtobufStream, tbl: TableRef[string, google_protobuf_Value])
 proc sizeOfgoogle_protobuf_Struct_FieldsEntryKV(key: string, value: google_protobuf_Value): uint64
@@ -361,7 +349,7 @@ proc `list_value=`*(message: google_protobuf_Value, value: google_protobuf_ListV
 proc sizeOfgoogle_protobuf_Value*(message: google_protobuf_Value): uint64 =
     if hasnull_value(message):
         result = result + sizeOfTag(1, WireType.Varint)
-        result = result + sizeOfgoogle_protobuf_NullValue(message.kind.null_value)
+        result = result + sizeOfEnum[google_protobuf_NullValue](message.kind.null_value)
     if hasnumber_value(message):
         result = result + sizeOfTag(2, WireType.Fixed64)
         result = result + sizeOfDouble(message.kind.number_value)
@@ -380,7 +368,7 @@ proc sizeOfgoogle_protobuf_Value*(message: google_protobuf_Value): uint64 =
 
 proc writegoogle_protobuf_Value*(stream: ProtobufStream, message: google_protobuf_Value) =
     if hasnull_value(message):
-        writegoogle_protobuf_NullValue(stream, message.kind.null_value, 1)
+        writeEnum(stream, message.kind.null_value, 1)
     if hasnumber_value(message):
         writeDouble(stream, message.kind.number_value, 2)
     if hasstring_value(message):
@@ -403,7 +391,7 @@ proc readgoogle_protobuf_Value*(stream: ProtobufStream): google_protobuf_Value =
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
             expectWireType(wireType, WireType.Varint)
-            setnull_value(result, readgoogle_protobuf_NullValue(stream))
+            setnull_value(result, readEnum[google_protobuf_NullValue](stream))
         of 2:
             expectWireType(wireType, WireType.Fixed64)
             setnumber_value(result, readDouble(stream))

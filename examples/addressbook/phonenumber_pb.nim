@@ -15,18 +15,6 @@ type
         number: string
         ftype: PhoneType
 
-proc readPhoneType*(stream: ProtobufStream): PhoneType =
-    PhoneType(readUInt32(stream))
-
-proc writePhoneType*(stream: ProtobufStream, value: PhoneType) =
-    writeUInt32(stream, uint32(value))
-
-proc writePhoneType*(stream: ProtobufStream, value: PhoneType, fieldNumber: int) =
-    writeUInt32(stream, uint32(value), fieldNumber)
-
-proc sizeOfPhoneType*(value: PhoneType): uint64 =
-    sizeOfUInt32(uint32(value))
-
 proc newPhoneNumber*(): PhoneNumber
 proc writePhoneNumber*(stream: ProtobufStream, message: PhoneNumber)
 proc readPhoneNumber*(stream: ProtobufStream): PhoneNumber
@@ -78,13 +66,13 @@ proc sizeOfPhoneNumber*(message: PhoneNumber): uint64 =
         result = result + sizeOfString(message.number)
     if hasftype(message):
         result = result + sizeOfTag(2, WireType.Varint)
-        result = result + sizeOfPhoneType(message.ftype)
+        result = result + sizeOfEnum[PhoneType](message.ftype)
 
 proc writePhoneNumber*(stream: ProtobufStream, message: PhoneNumber) =
     if hasnumber(message):
         writeString(stream, message.number, 1)
     if hasftype(message):
-        writePhoneType(stream, message.ftype, 2)
+        writeEnum(stream, message.ftype, 2)
 
 proc readPhoneNumber*(stream: ProtobufStream): PhoneNumber =
     result = newPhoneNumber()
@@ -100,7 +88,7 @@ proc readPhoneNumber*(stream: ProtobufStream): PhoneNumber =
             setnumber(result, readString(stream))
         of 2:
             expectWireType(wireType, WireType.Varint)
-            setftype(result, readPhoneType(stream))
+            setftype(result, readEnum[PhoneType](stream))
         else: skipField(stream, wireType)
 
 proc serialize*(message: PhoneNumber): string =

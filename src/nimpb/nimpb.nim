@@ -397,6 +397,10 @@ proc readEnum*[T](stream: ProtobufStream): T =
 proc writeEnum*[T](stream: ProtobufStream, value: T) =
     writeUInt32(stream, uint32(value))
 
+proc writeEnum*[T](stream: ProtobufStream, value: T, fieldNumber: int) =
+    writeTag(stream, fieldNumber, WireType.Varint)
+    writeUInt32(stream, uint32(value))
+
 proc sizeOfVarint[T](value: T): uint64 =
     var tmp = uint64(value)
     while tmp >= 0x80'u64:
