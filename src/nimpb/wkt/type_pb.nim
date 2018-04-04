@@ -198,8 +198,8 @@ proc readgoogle_protobuf_Option*(stream: ProtobufStream): google_protobuf_Option
     while not atEnd(stream):
         let
             tag = readTag(stream)
-            wireType = getTagWireType(tag)
-        case getTagFieldNumber(tag)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
         of 0:
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
@@ -475,8 +475,8 @@ proc readgoogle_protobuf_Field*(stream: ProtobufStream): google_protobuf_Field =
     while not atEnd(stream):
         let
             tag = readTag(stream)
-            wireType = getTagWireType(tag)
-        case getTagFieldNumber(tag)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
         of 0:
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
@@ -692,8 +692,8 @@ proc readgoogle_protobuf_Type*(stream: ProtobufStream): google_protobuf_Type =
     while not atEnd(stream):
         let
             tag = readTag(stream)
-            wireType = getTagWireType(tag)
-        case getTagFieldNumber(tag)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
         of 0:
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
@@ -828,8 +828,8 @@ proc readgoogle_protobuf_EnumValue*(stream: ProtobufStream): google_protobuf_Enu
     while not atEnd(stream):
         let
             tag = readTag(stream)
-            wireType = getTagWireType(tag)
-        case getTagFieldNumber(tag)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
         of 0:
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
@@ -997,8 +997,8 @@ proc readgoogle_protobuf_Enum*(stream: ProtobufStream): google_protobuf_Enum =
     while not atEnd(stream):
         let
             tag = readTag(stream)
-            wireType = getTagWireType(tag)
-        case getTagFieldNumber(tag)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
         of 0:
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:

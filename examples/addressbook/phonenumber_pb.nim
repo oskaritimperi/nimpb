@@ -91,8 +91,8 @@ proc readPhoneNumber*(stream: ProtobufStream): PhoneNumber =
     while not atEnd(stream):
         let
             tag = readTag(stream)
-            wireType = getTagWireType(tag)
-        case getTagFieldNumber(tag)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
         of 0:
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:

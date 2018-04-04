@@ -85,8 +85,8 @@ proc readgoogle_protobuf_Struct_FieldsEntryKV(stream: ProtobufStream, tbl: Table
     while not atEnd(stream):
         let
             tag = readTag(stream)
-            wireType = getTagWireType(tag)
-        case getTagFieldNumber(tag)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
         of 1:
             key = readString(stream)
             gotKey = true
@@ -146,8 +146,8 @@ proc readgoogle_protobuf_Struct*(stream: ProtobufStream): google_protobuf_Struct
     while not atEnd(stream):
         let
             tag = readTag(stream)
-            wireType = getTagWireType(tag)
-        case getTagFieldNumber(tag)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
         of 0:
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
@@ -213,8 +213,8 @@ proc readgoogle_protobuf_ListValue*(stream: ProtobufStream): google_protobuf_Lis
     while not atEnd(stream):
         let
             tag = readTag(stream)
-            wireType = getTagWireType(tag)
-        case getTagFieldNumber(tag)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
         of 0:
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
@@ -397,8 +397,8 @@ proc readgoogle_protobuf_Value*(stream: ProtobufStream): google_protobuf_Value =
     while not atEnd(stream):
         let
             tag = readTag(stream)
-            wireType = getTagWireType(tag)
-        case getTagFieldNumber(tag)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
         of 0:
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
