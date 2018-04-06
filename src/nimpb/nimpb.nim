@@ -55,6 +55,21 @@ type
         SInt32
         SInt64
 
+    UnknownField* = ref UnknownFieldObj
+    UnknownFieldObj* = object
+        fieldNumber: int
+        case wiretype: WireType
+        of WireType.Varint:
+            vint: uint64
+        of WireType.Fixed64:
+            fixed64: uint64
+        of WireType.LengthDelimited:
+            data: string
+        of WireType.Fixed32:
+            fixed32: uint32
+        else:
+            discard
+
 proc wiretype*(ft: FieldType): WireType =
     case ft
     of FieldType.Double: result = WireType.Fixed64
@@ -533,3 +548,44 @@ proc excl*(s: var IntSet, values: openArray[int]) =
 proc readLengthDelimited*(stream: ProtobufStream): string =
     let size = int(readVarint(stream))
     result = safeReadStr(stream, size)
+
+proc readUnknownField*(stream: ProtobufStream, tag: Tag,
+                       fields: var seq[UnknownField]) =
+    var field: UnknownField
+
+    new(field)
+    field.fieldNumber = fieldNumber(tag)
+    field.wireType = wiretype(tag)
+
+    case field.wiretype
+    of WireType.Varint:
+        field.vint = readVarint(stream)
+    of WireType.Fixed64:
+        field.fixed64 = readFixed64(stream)
+    of WireType.Fixed32:
+        field.fixed32 = readFixed32(stream)
+    of WireType.LengthDelimited:
+        let size = readVarint(stream)
+        field.data = safeReadStr(stream, int(size))
+    else:
+        raise newException(Exception, "unsupported wiretype: " & $field.wiretype)
+
+    add(fields, field)
+
+proc writeUnknownFields*(stream: ProtobufStream, fields: seq[UnknownField]) =
+    for field in fields:
+        case field.wiretype
+        of WireType.Varint:
+            writeTag(stream, field.fieldNumber, field.wireType)
+            writeVarint(stream, field.vint)
+        of WireType.Fixed64:
+            writeFixed64(stream, field.fixed64, field.fieldNumber)
+        of WireType.Fixed32:
+            writeFixed32(stream, field.fixed32, field.fieldNumber)
+        of WireType.LengthDelimited:
+            writeString(stream, field.data, field.fieldNumber)
+        else:
+            raise newException(Exception, "unsupported wiretype: " & $field.wiretype)
+
+proc discardUnknownFields*[T](message: T) =
+    message.unknownFields = @[]
