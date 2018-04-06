@@ -1,8 +1,10 @@
 # Protocol Buffers for Nim
 
-A Nim library to serialize/deserialize Protocol Buffers and a `protoc` plugin for generating Nim code from `.proto` files.
+A Nim library to serialize/deserialize Protocol Buffers.
 
-At the moment this is at a very rough state. Do not use for any kind of production use. Anything can change at any time. You've been warned.
+For generating Nim code usable with nimpb, you should use [nimpb_build](https://github.com/oswjk/nimpb-build).
+
+**NOTE** At the moment this is at a very rough state. Do not use for any kind of production use. Anything can change at any time. You've been warned.
 
 # Example
 
@@ -23,7 +25,7 @@ message Test1 {
 }
 ```
 
-The `protoc` plugin will generate the following types (and procs for interacting with them):
+You can use [nimpb_build](https://github.com/oswjk/nimpb-build) to generate code like this (procs not included in the example):
 
 ```nim
 type
