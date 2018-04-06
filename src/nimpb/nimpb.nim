@@ -529,3 +529,7 @@ proc excl*(s: var IntSet, values: openArray[int]) =
     ## Exclude multiple values from an IntSet.
     for value in values:
         excl(s, value)
+
+proc readLengthDelimited*(stream: ProtobufStream): string =
+    let size = int(readVarint(stream))
+    result = safeReadStr(stream, size)
