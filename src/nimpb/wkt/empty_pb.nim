@@ -8,8 +8,10 @@ type
     google_protobuf_Empty* = ref google_protobuf_EmptyObj
     google_protobuf_EmptyObj* = object of RootObj
         hasField: IntSet
+        unknownFields: seq[UnknownField]
 
 proc newgoogle_protobuf_Empty*(): google_protobuf_Empty
+proc newgoogle_protobuf_Empty*(data: string): google_protobuf_Empty
 proc writegoogle_protobuf_Empty*(stream: ProtobufStream, message: google_protobuf_Empty)
 proc readgoogle_protobuf_Empty*(stream: ProtobufStream): google_protobuf_Empty
 proc sizeOfgoogle_protobuf_Empty*(message: google_protobuf_Empty): uint64
@@ -17,15 +19,25 @@ proc sizeOfgoogle_protobuf_Empty*(message: google_protobuf_Empty): uint64
 proc newgoogle_protobuf_Empty*(): google_protobuf_Empty =
     new(result)
     result.hasField = initIntSet()
+    result.unknownFields = @[]
 
 proc sizeOfgoogle_protobuf_Empty*(message: google_protobuf_Empty): uint64 =
-    result = 0
+    for field in message.unknownFields:
+        result = result + sizeOfUnknownField(field)
 
 proc writegoogle_protobuf_Empty*(stream: ProtobufStream, message: google_protobuf_Empty) =
-    discard
+    writeUnknownFields(stream, message.unknownFields)
 
 proc readgoogle_protobuf_Empty*(stream: ProtobufStream): google_protobuf_Empty =
     result = newgoogle_protobuf_Empty()
+    while not atEnd(stream):
+        let
+            tag = readTag(stream)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
+        else: readUnknownField(stream, tag, result.unknownFields)
 
 proc serialize*(message: google_protobuf_Empty): string =
     let

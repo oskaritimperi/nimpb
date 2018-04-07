@@ -8,10 +8,12 @@ type
     google_protobuf_Any* = ref google_protobuf_AnyObj
     google_protobuf_AnyObj* = object of RootObj
         hasField: IntSet
+        unknownFields: seq[UnknownField]
         type_url: string
         value: bytes
 
 proc newgoogle_protobuf_Any*(): google_protobuf_Any
+proc newgoogle_protobuf_Any*(data: string): google_protobuf_Any
 proc writegoogle_protobuf_Any*(stream: ProtobufStream, message: google_protobuf_Any)
 proc readgoogle_protobuf_Any*(stream: ProtobufStream): google_protobuf_Any
 proc sizeOfgoogle_protobuf_Any*(message: google_protobuf_Any): uint64
@@ -19,6 +21,7 @@ proc sizeOfgoogle_protobuf_Any*(message: google_protobuf_Any): uint64
 proc newgoogle_protobuf_Any*(): google_protobuf_Any =
     new(result)
     result.hasField = initIntSet()
+    result.unknownFields = @[]
     result.type_url = ""
     result.value = bytes("")
 
@@ -63,12 +66,15 @@ proc sizeOfgoogle_protobuf_Any*(message: google_protobuf_Any): uint64 =
     if hasvalue(message):
         result = result + sizeOfTag(2, WireType.LengthDelimited)
         result = result + sizeOfBytes(message.value)
+    for field in message.unknownFields:
+        result = result + sizeOfUnknownField(field)
 
 proc writegoogle_protobuf_Any*(stream: ProtobufStream, message: google_protobuf_Any) =
     if hastype_url(message):
         writeString(stream, message.type_url, 1)
     if hasvalue(message):
         writeBytes(stream, message.value, 2)
+    writeUnknownFields(stream, message.unknownFields)
 
 proc readgoogle_protobuf_Any*(stream: ProtobufStream): google_protobuf_Any =
     result = newgoogle_protobuf_Any()
@@ -85,7 +91,7 @@ proc readgoogle_protobuf_Any*(stream: ProtobufStream): google_protobuf_Any =
         of 2:
             expectWireType(wireType, WireType.LengthDelimited)
             setvalue(result, readBytes(stream))
-        else: skipField(stream, wireType)
+        else: readUnknownField(stream, tag, result.unknownFields)
 
 proc serialize*(message: google_protobuf_Any): string =
     let

@@ -11,6 +11,7 @@ type
     google_protobuf_Api* = ref google_protobuf_ApiObj
     google_protobuf_ApiObj* = object of RootObj
         hasField: IntSet
+        unknownFields: seq[UnknownField]
         name: string
         methods: seq[google_protobuf_Method]
         options: seq[google_protobuf_Option]
@@ -21,6 +22,7 @@ type
     google_protobuf_Method* = ref google_protobuf_MethodObj
     google_protobuf_MethodObj* = object of RootObj
         hasField: IntSet
+        unknownFields: seq[UnknownField]
         name: string
         request_type_url: string
         request_streaming: bool
@@ -31,20 +33,24 @@ type
     google_protobuf_Mixin* = ref google_protobuf_MixinObj
     google_protobuf_MixinObj* = object of RootObj
         hasField: IntSet
+        unknownFields: seq[UnknownField]
         name: string
         root: string
 
 proc newgoogle_protobuf_Method*(): google_protobuf_Method
+proc newgoogle_protobuf_Method*(data: string): google_protobuf_Method
 proc writegoogle_protobuf_Method*(stream: ProtobufStream, message: google_protobuf_Method)
 proc readgoogle_protobuf_Method*(stream: ProtobufStream): google_protobuf_Method
 proc sizeOfgoogle_protobuf_Method*(message: google_protobuf_Method): uint64
 
 proc newgoogle_protobuf_Mixin*(): google_protobuf_Mixin
+proc newgoogle_protobuf_Mixin*(data: string): google_protobuf_Mixin
 proc writegoogle_protobuf_Mixin*(stream: ProtobufStream, message: google_protobuf_Mixin)
 proc readgoogle_protobuf_Mixin*(stream: ProtobufStream): google_protobuf_Mixin
 proc sizeOfgoogle_protobuf_Mixin*(message: google_protobuf_Mixin): uint64
 
 proc newgoogle_protobuf_Api*(): google_protobuf_Api
+proc newgoogle_protobuf_Api*(data: string): google_protobuf_Api
 proc writegoogle_protobuf_Api*(stream: ProtobufStream, message: google_protobuf_Api)
 proc readgoogle_protobuf_Api*(stream: ProtobufStream): google_protobuf_Api
 proc sizeOfgoogle_protobuf_Api*(message: google_protobuf_Api): uint64
@@ -52,13 +58,14 @@ proc sizeOfgoogle_protobuf_Api*(message: google_protobuf_Api): uint64
 proc newgoogle_protobuf_Method*(): google_protobuf_Method =
     new(result)
     result.hasField = initIntSet()
+    result.unknownFields = @[]
     result.name = ""
     result.request_type_url = ""
     result.request_streaming = false
     result.response_type_url = ""
     result.response_streaming = false
     result.options = @[]
-    result.syntax = google_protobuf_Syntax(0)
+    result.syntax = google_protobuf_Syntax.SYNTAX_PROTO2
 
 proc clearname*(message: google_protobuf_Method) =
     message.name = ""
@@ -167,7 +174,7 @@ proc `options=`*(message: google_protobuf_Method, value: seq[google_protobuf_Opt
     setoptions(message, value)
 
 proc clearsyntax*(message: google_protobuf_Method) =
-    message.syntax = google_protobuf_Syntax(0)
+    message.syntax = google_protobuf_Syntax.SYNTAX_PROTO2
     excl(message.hasField, [7])
 
 proc hassyntax*(message: google_protobuf_Method): bool =
@@ -205,6 +212,8 @@ proc sizeOfgoogle_protobuf_Method*(message: google_protobuf_Method): uint64 =
     if hassyntax(message):
         result = result + sizeOfTag(7, WireType.Varint)
         result = result + sizeOfEnum[google_protobuf_Syntax](message.syntax)
+    for field in message.unknownFields:
+        result = result + sizeOfUnknownField(field)
 
 proc writegoogle_protobuf_Method*(stream: ProtobufStream, message: google_protobuf_Method) =
     if hasname(message):
@@ -221,6 +230,7 @@ proc writegoogle_protobuf_Method*(stream: ProtobufStream, message: google_protob
         writeMessage(stream, value, 6)
     if hassyntax(message):
         writeEnum(stream, message.syntax, 7)
+    writeUnknownFields(stream, message.unknownFields)
 
 proc readgoogle_protobuf_Method*(stream: ProtobufStream): google_protobuf_Method =
     result = newgoogle_protobuf_Method()
@@ -248,15 +258,12 @@ proc readgoogle_protobuf_Method*(stream: ProtobufStream): google_protobuf_Method
             setresponse_streaming(result, readBool(stream))
         of 6:
             expectWireType(wireType, WireType.LengthDelimited)
-            let
-                size = readVarint(stream)
-                data = safeReadStr(stream, int(size))
-                pbs = newProtobufStream(newStringStream(data))
-            addoptions(result, readgoogle_protobuf_Option(pbs))
+            let data = readLengthDelimited(stream)
+            addoptions(result, newgoogle_protobuf_Option(data))
         of 7:
             expectWireType(wireType, WireType.Varint)
             setsyntax(result, readEnum[google_protobuf_Syntax](stream))
-        else: skipField(stream, wireType)
+        else: readUnknownField(stream, tag, result.unknownFields)
 
 proc serialize*(message: google_protobuf_Method): string =
     let
@@ -275,6 +282,7 @@ proc newgoogle_protobuf_Method*(data: string): google_protobuf_Method =
 proc newgoogle_protobuf_Mixin*(): google_protobuf_Mixin =
     new(result)
     result.hasField = initIntSet()
+    result.unknownFields = @[]
     result.name = ""
     result.root = ""
 
@@ -319,12 +327,15 @@ proc sizeOfgoogle_protobuf_Mixin*(message: google_protobuf_Mixin): uint64 =
     if hasroot(message):
         result = result + sizeOfTag(2, WireType.LengthDelimited)
         result = result + sizeOfString(message.root)
+    for field in message.unknownFields:
+        result = result + sizeOfUnknownField(field)
 
 proc writegoogle_protobuf_Mixin*(stream: ProtobufStream, message: google_protobuf_Mixin) =
     if hasname(message):
         writeString(stream, message.name, 1)
     if hasroot(message):
         writeString(stream, message.root, 2)
+    writeUnknownFields(stream, message.unknownFields)
 
 proc readgoogle_protobuf_Mixin*(stream: ProtobufStream): google_protobuf_Mixin =
     result = newgoogle_protobuf_Mixin()
@@ -341,7 +352,7 @@ proc readgoogle_protobuf_Mixin*(stream: ProtobufStream): google_protobuf_Mixin =
         of 2:
             expectWireType(wireType, WireType.LengthDelimited)
             setroot(result, readString(stream))
-        else: skipField(stream, wireType)
+        else: readUnknownField(stream, tag, result.unknownFields)
 
 proc serialize*(message: google_protobuf_Mixin): string =
     let
@@ -360,13 +371,14 @@ proc newgoogle_protobuf_Mixin*(data: string): google_protobuf_Mixin =
 proc newgoogle_protobuf_Api*(): google_protobuf_Api =
     new(result)
     result.hasField = initIntSet()
+    result.unknownFields = @[]
     result.name = ""
     result.methods = @[]
     result.options = @[]
     result.version = ""
     result.source_context = nil
     result.mixins = @[]
-    result.syntax = google_protobuf_Syntax(0)
+    result.syntax = google_protobuf_Syntax.SYNTAX_PROTO2
 
 proc clearname*(message: google_protobuf_Api) =
     message.name = ""
@@ -483,7 +495,7 @@ proc `mixins=`*(message: google_protobuf_Api, value: seq[google_protobuf_Mixin])
     setmixins(message, value)
 
 proc clearsyntax*(message: google_protobuf_Api) =
-    message.syntax = google_protobuf_Syntax(0)
+    message.syntax = google_protobuf_Syntax.SYNTAX_PROTO2
     excl(message.hasField, [7])
 
 proc hassyntax*(message: google_protobuf_Api): bool =
@@ -521,6 +533,8 @@ proc sizeOfgoogle_protobuf_Api*(message: google_protobuf_Api): uint64 =
     if hassyntax(message):
         result = result + sizeOfTag(7, WireType.Varint)
         result = result + sizeOfEnum[google_protobuf_Syntax](message.syntax)
+    for field in message.unknownFields:
+        result = result + sizeOfUnknownField(field)
 
 proc writegoogle_protobuf_Api*(stream: ProtobufStream, message: google_protobuf_Api) =
     if hasname(message):
@@ -537,6 +551,7 @@ proc writegoogle_protobuf_Api*(stream: ProtobufStream, message: google_protobuf_
         writeMessage(stream, value, 6)
     if hassyntax(message):
         writeEnum(stream, message.syntax, 7)
+    writeUnknownFields(stream, message.unknownFields)
 
 proc readgoogle_protobuf_Api*(stream: ProtobufStream): google_protobuf_Api =
     result = newgoogle_protobuf_Api()
@@ -552,39 +567,27 @@ proc readgoogle_protobuf_Api*(stream: ProtobufStream): google_protobuf_Api =
             setname(result, readString(stream))
         of 2:
             expectWireType(wireType, WireType.LengthDelimited)
-            let
-                size = readVarint(stream)
-                data = safeReadStr(stream, int(size))
-                pbs = newProtobufStream(newStringStream(data))
-            addmethods(result, readgoogle_protobuf_Method(pbs))
+            let data = readLengthDelimited(stream)
+            addmethods(result, newgoogle_protobuf_Method(data))
         of 3:
             expectWireType(wireType, WireType.LengthDelimited)
-            let
-                size = readVarint(stream)
-                data = safeReadStr(stream, int(size))
-                pbs = newProtobufStream(newStringStream(data))
-            addoptions(result, readgoogle_protobuf_Option(pbs))
+            let data = readLengthDelimited(stream)
+            addoptions(result, newgoogle_protobuf_Option(data))
         of 4:
             expectWireType(wireType, WireType.LengthDelimited)
             setversion(result, readString(stream))
         of 5:
             expectWireType(wireType, WireType.LengthDelimited)
-            let
-                size = readVarint(stream)
-                data = safeReadStr(stream, int(size))
-                pbs = newProtobufStream(newStringStream(data))
-            setsource_context(result, readgoogle_protobuf_SourceContext(pbs))
+            let data = readLengthDelimited(stream)
+            setsource_context(result, newgoogle_protobuf_SourceContext(data))
         of 6:
             expectWireType(wireType, WireType.LengthDelimited)
-            let
-                size = readVarint(stream)
-                data = safeReadStr(stream, int(size))
-                pbs = newProtobufStream(newStringStream(data))
-            addmixins(result, readgoogle_protobuf_Mixin(pbs))
+            let data = readLengthDelimited(stream)
+            addmixins(result, newgoogle_protobuf_Mixin(data))
         of 7:
             expectWireType(wireType, WireType.Varint)
             setsyntax(result, readEnum[google_protobuf_Syntax](stream))
-        else: skipField(stream, wireType)
+        else: readUnknownField(stream, tag, result.unknownFields)
 
 proc serialize*(message: google_protobuf_Api): string =
     let

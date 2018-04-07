@@ -8,10 +8,12 @@ type
     google_protobuf_Timestamp* = ref google_protobuf_TimestampObj
     google_protobuf_TimestampObj* = object of RootObj
         hasField: IntSet
+        unknownFields: seq[UnknownField]
         seconds: int64
         nanos: int32
 
 proc newgoogle_protobuf_Timestamp*(): google_protobuf_Timestamp
+proc newgoogle_protobuf_Timestamp*(data: string): google_protobuf_Timestamp
 proc writegoogle_protobuf_Timestamp*(stream: ProtobufStream, message: google_protobuf_Timestamp)
 proc readgoogle_protobuf_Timestamp*(stream: ProtobufStream): google_protobuf_Timestamp
 proc sizeOfgoogle_protobuf_Timestamp*(message: google_protobuf_Timestamp): uint64
@@ -19,6 +21,7 @@ proc sizeOfgoogle_protobuf_Timestamp*(message: google_protobuf_Timestamp): uint6
 proc newgoogle_protobuf_Timestamp*(): google_protobuf_Timestamp =
     new(result)
     result.hasField = initIntSet()
+    result.unknownFields = @[]
     result.seconds = 0
     result.nanos = 0
 
@@ -63,12 +66,15 @@ proc sizeOfgoogle_protobuf_Timestamp*(message: google_protobuf_Timestamp): uint6
     if hasnanos(message):
         result = result + sizeOfTag(2, WireType.Varint)
         result = result + sizeOfInt32(message.nanos)
+    for field in message.unknownFields:
+        result = result + sizeOfUnknownField(field)
 
 proc writegoogle_protobuf_Timestamp*(stream: ProtobufStream, message: google_protobuf_Timestamp) =
     if hasseconds(message):
         writeInt64(stream, message.seconds, 1)
     if hasnanos(message):
         writeInt32(stream, message.nanos, 2)
+    writeUnknownFields(stream, message.unknownFields)
 
 proc readgoogle_protobuf_Timestamp*(stream: ProtobufStream): google_protobuf_Timestamp =
     result = newgoogle_protobuf_Timestamp()
@@ -85,7 +91,7 @@ proc readgoogle_protobuf_Timestamp*(stream: ProtobufStream): google_protobuf_Tim
         of 2:
             expectWireType(wireType, WireType.Varint)
             setnanos(result, readInt32(stream))
-        else: skipField(stream, wireType)
+        else: readUnknownField(stream, tag, result.unknownFields)
 
 proc serialize*(message: google_protobuf_Timestamp): string =
     let

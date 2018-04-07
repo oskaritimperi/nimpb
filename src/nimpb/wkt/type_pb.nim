@@ -39,6 +39,7 @@ type
     google_protobuf_Type* = ref google_protobuf_TypeObj
     google_protobuf_TypeObj* = object of RootObj
         hasField: IntSet
+        unknownFields: seq[UnknownField]
         name: string
         fields: seq[google_protobuf_Field]
         oneofs: seq[string]
@@ -48,6 +49,7 @@ type
     google_protobuf_Field* = ref google_protobuf_FieldObj
     google_protobuf_FieldObj* = object of RootObj
         hasField: IntSet
+        unknownFields: seq[UnknownField]
         kind: google_protobuf_Field_Kind
         cardinality: google_protobuf_Field_Cardinality
         number: int32
@@ -61,6 +63,7 @@ type
     google_protobuf_Enum* = ref google_protobuf_EnumObj
     google_protobuf_EnumObj* = object of RootObj
         hasField: IntSet
+        unknownFields: seq[UnknownField]
         name: string
         enumvalue: seq[google_protobuf_EnumValue]
         options: seq[google_protobuf_Option]
@@ -69,36 +72,43 @@ type
     google_protobuf_EnumValue* = ref google_protobuf_EnumValueObj
     google_protobuf_EnumValueObj* = object of RootObj
         hasField: IntSet
+        unknownFields: seq[UnknownField]
         name: string
         number: int32
         options: seq[google_protobuf_Option]
     google_protobuf_Option* = ref google_protobuf_OptionObj
     google_protobuf_OptionObj* = object of RootObj
         hasField: IntSet
+        unknownFields: seq[UnknownField]
         name: string
         value: google_protobuf_Any
 
 proc newgoogle_protobuf_Option*(): google_protobuf_Option
+proc newgoogle_protobuf_Option*(data: string): google_protobuf_Option
 proc writegoogle_protobuf_Option*(stream: ProtobufStream, message: google_protobuf_Option)
 proc readgoogle_protobuf_Option*(stream: ProtobufStream): google_protobuf_Option
 proc sizeOfgoogle_protobuf_Option*(message: google_protobuf_Option): uint64
 
 proc newgoogle_protobuf_Field*(): google_protobuf_Field
+proc newgoogle_protobuf_Field*(data: string): google_protobuf_Field
 proc writegoogle_protobuf_Field*(stream: ProtobufStream, message: google_protobuf_Field)
 proc readgoogle_protobuf_Field*(stream: ProtobufStream): google_protobuf_Field
 proc sizeOfgoogle_protobuf_Field*(message: google_protobuf_Field): uint64
 
 proc newgoogle_protobuf_Type*(): google_protobuf_Type
+proc newgoogle_protobuf_Type*(data: string): google_protobuf_Type
 proc writegoogle_protobuf_Type*(stream: ProtobufStream, message: google_protobuf_Type)
 proc readgoogle_protobuf_Type*(stream: ProtobufStream): google_protobuf_Type
 proc sizeOfgoogle_protobuf_Type*(message: google_protobuf_Type): uint64
 
 proc newgoogle_protobuf_EnumValue*(): google_protobuf_EnumValue
+proc newgoogle_protobuf_EnumValue*(data: string): google_protobuf_EnumValue
 proc writegoogle_protobuf_EnumValue*(stream: ProtobufStream, message: google_protobuf_EnumValue)
 proc readgoogle_protobuf_EnumValue*(stream: ProtobufStream): google_protobuf_EnumValue
 proc sizeOfgoogle_protobuf_EnumValue*(message: google_protobuf_EnumValue): uint64
 
 proc newgoogle_protobuf_Enum*(): google_protobuf_Enum
+proc newgoogle_protobuf_Enum*(data: string): google_protobuf_Enum
 proc writegoogle_protobuf_Enum*(stream: ProtobufStream, message: google_protobuf_Enum)
 proc readgoogle_protobuf_Enum*(stream: ProtobufStream): google_protobuf_Enum
 proc sizeOfgoogle_protobuf_Enum*(message: google_protobuf_Enum): uint64
@@ -106,6 +116,7 @@ proc sizeOfgoogle_protobuf_Enum*(message: google_protobuf_Enum): uint64
 proc newgoogle_protobuf_Option*(): google_protobuf_Option =
     new(result)
     result.hasField = initIntSet()
+    result.unknownFields = @[]
     result.name = ""
     result.value = nil
 
@@ -150,12 +161,15 @@ proc sizeOfgoogle_protobuf_Option*(message: google_protobuf_Option): uint64 =
     if hasvalue(message):
         result = result + sizeOfTag(2, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_Any(message.value))
+    for field in message.unknownFields:
+        result = result + sizeOfUnknownField(field)
 
 proc writegoogle_protobuf_Option*(stream: ProtobufStream, message: google_protobuf_Option) =
     if hasname(message):
         writeString(stream, message.name, 1)
     if hasvalue(message):
         writeMessage(stream, message.value, 2)
+    writeUnknownFields(stream, message.unknownFields)
 
 proc readgoogle_protobuf_Option*(stream: ProtobufStream): google_protobuf_Option =
     result = newgoogle_protobuf_Option()
@@ -171,12 +185,9 @@ proc readgoogle_protobuf_Option*(stream: ProtobufStream): google_protobuf_Option
             setname(result, readString(stream))
         of 2:
             expectWireType(wireType, WireType.LengthDelimited)
-            let
-                size = readVarint(stream)
-                data = safeReadStr(stream, int(size))
-                pbs = newProtobufStream(newStringStream(data))
-            setvalue(result, readgoogle_protobuf_Any(pbs))
-        else: skipField(stream, wireType)
+            let data = readLengthDelimited(stream)
+            setvalue(result, newgoogle_protobuf_Any(data))
+        else: readUnknownField(stream, tag, result.unknownFields)
 
 proc serialize*(message: google_protobuf_Option): string =
     let
@@ -195,8 +206,9 @@ proc newgoogle_protobuf_Option*(data: string): google_protobuf_Option =
 proc newgoogle_protobuf_Field*(): google_protobuf_Field =
     new(result)
     result.hasField = initIntSet()
-    result.kind = google_protobuf_Field_Kind(0)
-    result.cardinality = google_protobuf_Field_Cardinality(0)
+    result.unknownFields = @[]
+    result.kind = google_protobuf_Field_Kind.TYPE_UNKNOWN
+    result.cardinality = google_protobuf_Field_Cardinality.CARDINALITY_UNKNOWN
     result.number = 0
     result.name = ""
     result.type_url = ""
@@ -207,7 +219,7 @@ proc newgoogle_protobuf_Field*(): google_protobuf_Field =
     result.default_value = ""
 
 proc clearkind*(message: google_protobuf_Field) =
-    message.kind = google_protobuf_Field_Kind(0)
+    message.kind = google_protobuf_Field_Kind.TYPE_UNKNOWN
     excl(message.hasField, [1])
 
 proc haskind*(message: google_protobuf_Field): bool =
@@ -224,7 +236,7 @@ proc `kind=`*(message: google_protobuf_Field, value: google_protobuf_Field_Kind)
     setkind(message, value)
 
 proc clearcardinality*(message: google_protobuf_Field) =
-    message.cardinality = google_protobuf_Field_Cardinality(0)
+    message.cardinality = google_protobuf_Field_Cardinality.CARDINALITY_UNKNOWN
     excl(message.hasField, [2])
 
 proc hascardinality*(message: google_protobuf_Field): bool =
@@ -411,6 +423,8 @@ proc sizeOfgoogle_protobuf_Field*(message: google_protobuf_Field): uint64 =
     if hasdefault_value(message):
         result = result + sizeOfTag(11, WireType.LengthDelimited)
         result = result + sizeOfString(message.default_value)
+    for field in message.unknownFields:
+        result = result + sizeOfUnknownField(field)
 
 proc writegoogle_protobuf_Field*(stream: ProtobufStream, message: google_protobuf_Field) =
     if haskind(message):
@@ -433,6 +447,7 @@ proc writegoogle_protobuf_Field*(stream: ProtobufStream, message: google_protobu
         writeString(stream, message.json_name, 10)
     if hasdefault_value(message):
         writeString(stream, message.default_value, 11)
+    writeUnknownFields(stream, message.unknownFields)
 
 proc readgoogle_protobuf_Field*(stream: ProtobufStream): google_protobuf_Field =
     result = newgoogle_protobuf_Field()
@@ -466,18 +481,15 @@ proc readgoogle_protobuf_Field*(stream: ProtobufStream): google_protobuf_Field =
             setpacked(result, readBool(stream))
         of 9:
             expectWireType(wireType, WireType.LengthDelimited)
-            let
-                size = readVarint(stream)
-                data = safeReadStr(stream, int(size))
-                pbs = newProtobufStream(newStringStream(data))
-            addoptions(result, readgoogle_protobuf_Option(pbs))
+            let data = readLengthDelimited(stream)
+            addoptions(result, newgoogle_protobuf_Option(data))
         of 10:
             expectWireType(wireType, WireType.LengthDelimited)
             setjson_name(result, readString(stream))
         of 11:
             expectWireType(wireType, WireType.LengthDelimited)
             setdefault_value(result, readString(stream))
-        else: skipField(stream, wireType)
+        else: readUnknownField(stream, tag, result.unknownFields)
 
 proc serialize*(message: google_protobuf_Field): string =
     let
@@ -496,12 +508,13 @@ proc newgoogle_protobuf_Field*(data: string): google_protobuf_Field =
 proc newgoogle_protobuf_Type*(): google_protobuf_Type =
     new(result)
     result.hasField = initIntSet()
+    result.unknownFields = @[]
     result.name = ""
     result.fields = @[]
     result.oneofs = @[]
     result.options = @[]
     result.source_context = nil
-    result.syntax = google_protobuf_Syntax(0)
+    result.syntax = google_protobuf_Syntax.SYNTAX_PROTO2
 
 proc clearname*(message: google_protobuf_Type) =
     message.name = ""
@@ -601,7 +614,7 @@ proc `source_context=`*(message: google_protobuf_Type, value: google_protobuf_So
     setsource_context(message, value)
 
 proc clearsyntax*(message: google_protobuf_Type) =
-    message.syntax = google_protobuf_Syntax(0)
+    message.syntax = google_protobuf_Syntax.SYNTAX_PROTO2
     excl(message.hasField, [6])
 
 proc hassyntax*(message: google_protobuf_Type): bool =
@@ -636,6 +649,8 @@ proc sizeOfgoogle_protobuf_Type*(message: google_protobuf_Type): uint64 =
     if hassyntax(message):
         result = result + sizeOfTag(6, WireType.Varint)
         result = result + sizeOfEnum[google_protobuf_Syntax](message.syntax)
+    for field in message.unknownFields:
+        result = result + sizeOfUnknownField(field)
 
 proc writegoogle_protobuf_Type*(stream: ProtobufStream, message: google_protobuf_Type) =
     if hasname(message):
@@ -650,6 +665,7 @@ proc writegoogle_protobuf_Type*(stream: ProtobufStream, message: google_protobuf
         writeMessage(stream, message.source_context, 5)
     if hassyntax(message):
         writeEnum(stream, message.syntax, 6)
+    writeUnknownFields(stream, message.unknownFields)
 
 proc readgoogle_protobuf_Type*(stream: ProtobufStream): google_protobuf_Type =
     result = newgoogle_protobuf_Type()
@@ -665,32 +681,23 @@ proc readgoogle_protobuf_Type*(stream: ProtobufStream): google_protobuf_Type =
             setname(result, readString(stream))
         of 2:
             expectWireType(wireType, WireType.LengthDelimited)
-            let
-                size = readVarint(stream)
-                data = safeReadStr(stream, int(size))
-                pbs = newProtobufStream(newStringStream(data))
-            addfields(result, readgoogle_protobuf_Field(pbs))
+            let data = readLengthDelimited(stream)
+            addfields(result, newgoogle_protobuf_Field(data))
         of 3:
             expectWireType(wireType, WireType.LengthDelimited)
             addoneofs(result, readString(stream))
         of 4:
             expectWireType(wireType, WireType.LengthDelimited)
-            let
-                size = readVarint(stream)
-                data = safeReadStr(stream, int(size))
-                pbs = newProtobufStream(newStringStream(data))
-            addoptions(result, readgoogle_protobuf_Option(pbs))
+            let data = readLengthDelimited(stream)
+            addoptions(result, newgoogle_protobuf_Option(data))
         of 5:
             expectWireType(wireType, WireType.LengthDelimited)
-            let
-                size = readVarint(stream)
-                data = safeReadStr(stream, int(size))
-                pbs = newProtobufStream(newStringStream(data))
-            setsource_context(result, readgoogle_protobuf_SourceContext(pbs))
+            let data = readLengthDelimited(stream)
+            setsource_context(result, newgoogle_protobuf_SourceContext(data))
         of 6:
             expectWireType(wireType, WireType.Varint)
             setsyntax(result, readEnum[google_protobuf_Syntax](stream))
-        else: skipField(stream, wireType)
+        else: readUnknownField(stream, tag, result.unknownFields)
 
 proc serialize*(message: google_protobuf_Type): string =
     let
@@ -709,6 +716,7 @@ proc newgoogle_protobuf_Type*(data: string): google_protobuf_Type =
 proc newgoogle_protobuf_EnumValue*(): google_protobuf_EnumValue =
     new(result)
     result.hasField = initIntSet()
+    result.unknownFields = @[]
     result.name = ""
     result.number = 0
     result.options = @[]
@@ -778,6 +786,8 @@ proc sizeOfgoogle_protobuf_EnumValue*(message: google_protobuf_EnumValue): uint6
     for value in message.options:
         result = result + sizeOfTag(3, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_Option(value))
+    for field in message.unknownFields:
+        result = result + sizeOfUnknownField(field)
 
 proc writegoogle_protobuf_EnumValue*(stream: ProtobufStream, message: google_protobuf_EnumValue) =
     if hasname(message):
@@ -786,6 +796,7 @@ proc writegoogle_protobuf_EnumValue*(stream: ProtobufStream, message: google_pro
         writeInt32(stream, message.number, 2)
     for value in message.options:
         writeMessage(stream, value, 3)
+    writeUnknownFields(stream, message.unknownFields)
 
 proc readgoogle_protobuf_EnumValue*(stream: ProtobufStream): google_protobuf_EnumValue =
     result = newgoogle_protobuf_EnumValue()
@@ -804,12 +815,9 @@ proc readgoogle_protobuf_EnumValue*(stream: ProtobufStream): google_protobuf_Enu
             setnumber(result, readInt32(stream))
         of 3:
             expectWireType(wireType, WireType.LengthDelimited)
-            let
-                size = readVarint(stream)
-                data = safeReadStr(stream, int(size))
-                pbs = newProtobufStream(newStringStream(data))
-            addoptions(result, readgoogle_protobuf_Option(pbs))
-        else: skipField(stream, wireType)
+            let data = readLengthDelimited(stream)
+            addoptions(result, newgoogle_protobuf_Option(data))
+        else: readUnknownField(stream, tag, result.unknownFields)
 
 proc serialize*(message: google_protobuf_EnumValue): string =
     let
@@ -828,11 +836,12 @@ proc newgoogle_protobuf_EnumValue*(data: string): google_protobuf_EnumValue =
 proc newgoogle_protobuf_Enum*(): google_protobuf_Enum =
     new(result)
     result.hasField = initIntSet()
+    result.unknownFields = @[]
     result.name = ""
     result.enumvalue = @[]
     result.options = @[]
     result.source_context = nil
-    result.syntax = google_protobuf_Syntax(0)
+    result.syntax = google_protobuf_Syntax.SYNTAX_PROTO2
 
 proc clearname*(message: google_protobuf_Enum) =
     message.name = ""
@@ -911,7 +920,7 @@ proc `source_context=`*(message: google_protobuf_Enum, value: google_protobuf_So
     setsource_context(message, value)
 
 proc clearsyntax*(message: google_protobuf_Enum) =
-    message.syntax = google_protobuf_Syntax(0)
+    message.syntax = google_protobuf_Syntax.SYNTAX_PROTO2
     excl(message.hasField, [5])
 
 proc hassyntax*(message: google_protobuf_Enum): bool =
@@ -943,6 +952,8 @@ proc sizeOfgoogle_protobuf_Enum*(message: google_protobuf_Enum): uint64 =
     if hassyntax(message):
         result = result + sizeOfTag(5, WireType.Varint)
         result = result + sizeOfEnum[google_protobuf_Syntax](message.syntax)
+    for field in message.unknownFields:
+        result = result + sizeOfUnknownField(field)
 
 proc writegoogle_protobuf_Enum*(stream: ProtobufStream, message: google_protobuf_Enum) =
     if hasname(message):
@@ -955,6 +966,7 @@ proc writegoogle_protobuf_Enum*(stream: ProtobufStream, message: google_protobuf
         writeMessage(stream, message.source_context, 4)
     if hassyntax(message):
         writeEnum(stream, message.syntax, 5)
+    writeUnknownFields(stream, message.unknownFields)
 
 proc readgoogle_protobuf_Enum*(stream: ProtobufStream): google_protobuf_Enum =
     result = newgoogle_protobuf_Enum()
@@ -970,29 +982,20 @@ proc readgoogle_protobuf_Enum*(stream: ProtobufStream): google_protobuf_Enum =
             setname(result, readString(stream))
         of 2:
             expectWireType(wireType, WireType.LengthDelimited)
-            let
-                size = readVarint(stream)
-                data = safeReadStr(stream, int(size))
-                pbs = newProtobufStream(newStringStream(data))
-            addenumvalue(result, readgoogle_protobuf_EnumValue(pbs))
+            let data = readLengthDelimited(stream)
+            addenumvalue(result, newgoogle_protobuf_EnumValue(data))
         of 3:
             expectWireType(wireType, WireType.LengthDelimited)
-            let
-                size = readVarint(stream)
-                data = safeReadStr(stream, int(size))
-                pbs = newProtobufStream(newStringStream(data))
-            addoptions(result, readgoogle_protobuf_Option(pbs))
+            let data = readLengthDelimited(stream)
+            addoptions(result, newgoogle_protobuf_Option(data))
         of 4:
             expectWireType(wireType, WireType.LengthDelimited)
-            let
-                size = readVarint(stream)
-                data = safeReadStr(stream, int(size))
-                pbs = newProtobufStream(newStringStream(data))
-            setsource_context(result, readgoogle_protobuf_SourceContext(pbs))
+            let data = readLengthDelimited(stream)
+            setsource_context(result, newgoogle_protobuf_SourceContext(data))
         of 5:
             expectWireType(wireType, WireType.Varint)
             setsyntax(result, readEnum[google_protobuf_Syntax](stream))
-        else: skipField(stream, wireType)
+        else: readUnknownField(stream, tag, result.unknownFields)
 
 proc serialize*(message: google_protobuf_Enum): string =
     let

@@ -8,9 +8,11 @@ type
     google_protobuf_SourceContext* = ref google_protobuf_SourceContextObj
     google_protobuf_SourceContextObj* = object of RootObj
         hasField: IntSet
+        unknownFields: seq[UnknownField]
         file_name: string
 
 proc newgoogle_protobuf_SourceContext*(): google_protobuf_SourceContext
+proc newgoogle_protobuf_SourceContext*(data: string): google_protobuf_SourceContext
 proc writegoogle_protobuf_SourceContext*(stream: ProtobufStream, message: google_protobuf_SourceContext)
 proc readgoogle_protobuf_SourceContext*(stream: ProtobufStream): google_protobuf_SourceContext
 proc sizeOfgoogle_protobuf_SourceContext*(message: google_protobuf_SourceContext): uint64
@@ -18,6 +20,7 @@ proc sizeOfgoogle_protobuf_SourceContext*(message: google_protobuf_SourceContext
 proc newgoogle_protobuf_SourceContext*(): google_protobuf_SourceContext =
     new(result)
     result.hasField = initIntSet()
+    result.unknownFields = @[]
     result.file_name = ""
 
 proc clearfile_name*(message: google_protobuf_SourceContext) =
@@ -41,10 +44,13 @@ proc sizeOfgoogle_protobuf_SourceContext*(message: google_protobuf_SourceContext
     if hasfile_name(message):
         result = result + sizeOfTag(1, WireType.LengthDelimited)
         result = result + sizeOfString(message.file_name)
+    for field in message.unknownFields:
+        result = result + sizeOfUnknownField(field)
 
 proc writegoogle_protobuf_SourceContext*(stream: ProtobufStream, message: google_protobuf_SourceContext) =
     if hasfile_name(message):
         writeString(stream, message.file_name, 1)
+    writeUnknownFields(stream, message.unknownFields)
 
 proc readgoogle_protobuf_SourceContext*(stream: ProtobufStream): google_protobuf_SourceContext =
     result = newgoogle_protobuf_SourceContext()
@@ -58,7 +64,7 @@ proc readgoogle_protobuf_SourceContext*(stream: ProtobufStream): google_protobuf
         of 1:
             expectWireType(wireType, WireType.LengthDelimited)
             setfile_name(result, readString(stream))
-        else: skipField(stream, wireType)
+        else: readUnknownField(stream, tag, result.unknownFields)
 
 proc serialize*(message: google_protobuf_SourceContext): string =
     let

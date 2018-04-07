@@ -8,9 +8,11 @@ type
     google_protobuf_FieldMask* = ref google_protobuf_FieldMaskObj
     google_protobuf_FieldMaskObj* = object of RootObj
         hasField: IntSet
+        unknownFields: seq[UnknownField]
         paths: seq[string]
 
 proc newgoogle_protobuf_FieldMask*(): google_protobuf_FieldMask
+proc newgoogle_protobuf_FieldMask*(data: string): google_protobuf_FieldMask
 proc writegoogle_protobuf_FieldMask*(stream: ProtobufStream, message: google_protobuf_FieldMask)
 proc readgoogle_protobuf_FieldMask*(stream: ProtobufStream): google_protobuf_FieldMask
 proc sizeOfgoogle_protobuf_FieldMask*(message: google_protobuf_FieldMask): uint64
@@ -18,6 +20,7 @@ proc sizeOfgoogle_protobuf_FieldMask*(message: google_protobuf_FieldMask): uint6
 proc newgoogle_protobuf_FieldMask*(): google_protobuf_FieldMask =
     new(result)
     result.hasField = initIntSet()
+    result.unknownFields = @[]
     result.paths = @[]
 
 proc clearpaths*(message: google_protobuf_FieldMask) =
@@ -45,10 +48,13 @@ proc sizeOfgoogle_protobuf_FieldMask*(message: google_protobuf_FieldMask): uint6
     for value in message.paths:
         result = result + sizeOfTag(1, WireType.LengthDelimited)
         result = result + sizeOfString(value)
+    for field in message.unknownFields:
+        result = result + sizeOfUnknownField(field)
 
 proc writegoogle_protobuf_FieldMask*(stream: ProtobufStream, message: google_protobuf_FieldMask) =
     for value in message.paths:
         writeString(stream, value, 1)
+    writeUnknownFields(stream, message.unknownFields)
 
 proc readgoogle_protobuf_FieldMask*(stream: ProtobufStream): google_protobuf_FieldMask =
     result = newgoogle_protobuf_FieldMask()
@@ -62,7 +68,7 @@ proc readgoogle_protobuf_FieldMask*(stream: ProtobufStream): google_protobuf_Fie
         of 1:
             expectWireType(wireType, WireType.LengthDelimited)
             addpaths(result, readString(stream))
-        else: skipField(stream, wireType)
+        else: readUnknownField(stream, tag, result.unknownFields)
 
 proc serialize*(message: google_protobuf_FieldMask): string =
     let

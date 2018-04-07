@@ -8,10 +8,12 @@ type
     google_protobuf_Duration* = ref google_protobuf_DurationObj
     google_protobuf_DurationObj* = object of RootObj
         hasField: IntSet
+        unknownFields: seq[UnknownField]
         seconds: int64
         nanos: int32
 
 proc newgoogle_protobuf_Duration*(): google_protobuf_Duration
+proc newgoogle_protobuf_Duration*(data: string): google_protobuf_Duration
 proc writegoogle_protobuf_Duration*(stream: ProtobufStream, message: google_protobuf_Duration)
 proc readgoogle_protobuf_Duration*(stream: ProtobufStream): google_protobuf_Duration
 proc sizeOfgoogle_protobuf_Duration*(message: google_protobuf_Duration): uint64
@@ -19,6 +21,7 @@ proc sizeOfgoogle_protobuf_Duration*(message: google_protobuf_Duration): uint64
 proc newgoogle_protobuf_Duration*(): google_protobuf_Duration =
     new(result)
     result.hasField = initIntSet()
+    result.unknownFields = @[]
     result.seconds = 0
     result.nanos = 0
 
@@ -63,12 +66,15 @@ proc sizeOfgoogle_protobuf_Duration*(message: google_protobuf_Duration): uint64 
     if hasnanos(message):
         result = result + sizeOfTag(2, WireType.Varint)
         result = result + sizeOfInt32(message.nanos)
+    for field in message.unknownFields:
+        result = result + sizeOfUnknownField(field)
 
 proc writegoogle_protobuf_Duration*(stream: ProtobufStream, message: google_protobuf_Duration) =
     if hasseconds(message):
         writeInt64(stream, message.seconds, 1)
     if hasnanos(message):
         writeInt32(stream, message.nanos, 2)
+    writeUnknownFields(stream, message.unknownFields)
 
 proc readgoogle_protobuf_Duration*(stream: ProtobufStream): google_protobuf_Duration =
     result = newgoogle_protobuf_Duration()
@@ -85,7 +91,7 @@ proc readgoogle_protobuf_Duration*(stream: ProtobufStream): google_protobuf_Dura
         of 2:
             expectWireType(wireType, WireType.Varint)
             setnanos(result, readInt32(stream))
-        else: skipField(stream, wireType)
+        else: readUnknownField(stream, tag, result.unknownFields)
 
 proc serialize*(message: google_protobuf_Duration): string =
     let
