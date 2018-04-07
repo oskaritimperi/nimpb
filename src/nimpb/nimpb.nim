@@ -589,3 +589,17 @@ proc writeUnknownFields*(stream: ProtobufStream, fields: seq[UnknownField]) =
 
 proc discardUnknownFields*[T](message: T) =
     message.unknownFields = @[]
+
+proc sizeOfUnknownField*(field: UnknownField): uint64 =
+    result = sizeOfTag(field.fieldNumber, field.wiretype)
+    case field.wiretype
+    of WireType.Varint:
+        result = result + sizeOfVarint(field.vint)
+    of WireType.Fixed64:
+        result = result + 8
+    of WireType.Fixed32:
+        result = result + 4
+    of WireType.LengthDelimited:
+        result = result + sizeOfLengthDelimited(uint64(len(field.data)))
+    else:
+        raise newException(Exception, "unsupported wiretype: " & $field.wiretype)
