@@ -1,18 +1,1110 @@
+[libprotobuf ERROR google/protobuf/wire_format_lite.cc:629] String field 'conformance.ConformanceResponse.json_payload' contains invalid UTF-8 data when parsing a protocol buffer. Use the 'bytes' type if you intend to send raw bytes. 
+Traceback (most recent call last)
+conformance_nim.nim(54)  conformance_nim
+test_messages_proto3_pb.nim(5406) parseprotobuf_test_messages_proto3_TestAllTypesProto3FromJson
+test_messages_proto3_pb.nim(2283) setoneof_string
+gc.nim(252)              nimGCunrefNoCycle
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.OneofFieldDuplicate: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31504
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3958) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+duration_pb.nim(66)      sizeOfgoogle_protobuf_Duration
+duration_pb.nim(36)      hasseconds
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.DurationMinValue.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31505
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4992) toJson
+json.nim(97)             toJson
+duration_pb.nim(43)      seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.DurationMinValue.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31506
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3958) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+duration_pb.nim(66)      sizeOfgoogle_protobuf_Duration
+duration_pb.nim(36)      hasseconds
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.DurationMaxValue.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31507
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4992) toJson
+json.nim(97)             toJson
+duration_pb.nim(43)      seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.DurationMaxValue.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31508
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3970) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+duration_pb.nim(66)      sizeOfgoogle_protobuf_Duration
+duration_pb.nim(36)      hasseconds
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.DurationRepeatedValue.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31509
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5006) toJson
+json.nim(97)             toJson
+duration_pb.nim(43)      seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.DurationRepeatedValue.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31510
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3958) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+duration_pb.nim(66)      sizeOfgoogle_protobuf_Duration
+duration_pb.nim(36)      hasseconds
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.DurationNull.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31511
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4992) toJson
+json.nim(97)             toJson
+duration_pb.nim(43)      seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.DurationNull.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31512
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4992) toJson
+json.nim(97)             toJson
+duration_pb.nim(43)      seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.DurationMissingS: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31513
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4992) toJson
+json.nim(97)             toJson
+duration_pb.nim(43)      seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.DurationJsonInputTooSmall: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31514
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4992) toJson
+json.nim(97)             toJson
+duration_pb.nim(43)      seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.DurationJsonInputTooLarge: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31515
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4992) toJson
+json.nim(97)             toJson
+duration_pb.nim(43)      seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Recommended.Proto3.JsonInput.DurationHasZeroFractionalDigit.Validator: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31516
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4992) toJson
+json.nim(97)             toJson
+duration_pb.nim(43)      seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Recommended.Proto3.JsonInput.DurationHas3FractionalDigits.Validator: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31517
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4992) toJson
+json.nim(97)             toJson
+duration_pb.nim(43)      seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Recommended.Proto3.JsonInput.DurationHas6FractionalDigits.Validator: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31518
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4992) toJson
+json.nim(97)             toJson
+duration_pb.nim(43)      seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Recommended.Proto3.JsonInput.DurationHas9FractionalDigits.Validator: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31519
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3960) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+timestamp_pb.nim(66)     sizeOfgoogle_protobuf_Timestamp
+timestamp_pb.nim(36)     hasseconds
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampMinValue.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31521
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4994) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampMinValue.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31522
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3960) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+timestamp_pb.nim(66)     sizeOfgoogle_protobuf_Timestamp
+timestamp_pb.nim(36)     hasseconds
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampMaxValue.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31523
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4994) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampMaxValue.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31524
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3972) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+timestamp_pb.nim(66)     sizeOfgoogle_protobuf_Timestamp
+timestamp_pb.nim(36)     hasseconds
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampRepeatedValue.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31525
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5011) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampRepeatedValue.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31526
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3960) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+timestamp_pb.nim(66)     sizeOfgoogle_protobuf_Timestamp
+timestamp_pb.nim(36)     hasseconds
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampWithPositiveOffset.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31527
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4994) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampWithPositiveOffset.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31528
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3960) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+timestamp_pb.nim(66)     sizeOfgoogle_protobuf_Timestamp
+timestamp_pb.nim(36)     hasseconds
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampWithNegativeOffset.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31529
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4994) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampWithNegativeOffset.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31530
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3960) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+timestamp_pb.nim(66)     sizeOfgoogle_protobuf_Timestamp
+timestamp_pb.nim(36)     hasseconds
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampNull.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31531
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4994) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampNull.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31532
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4994) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampJsonInputTooSmall: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31533
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4994) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampJsonInputTooLarge: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31534
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4994) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampJsonInputMissingZ: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31535
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4994) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampJsonInputMissingT: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31536
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4994) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampJsonInputLowercaseZ: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31537
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4994) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.TimestampJsonInputLowercaseT: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31538
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4994) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Recommended.Proto3.JsonInput.TimestampZeroNormalized.Validator: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31539
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4994) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Recommended.Proto3.JsonInput.TimestampHasZeroFractionalDigit.Validator: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31540
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4994) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Recommended.Proto3.JsonInput.TimestampHas3FractionalDigits.Validator: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31541
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4994) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Recommended.Proto3.JsonInput.TimestampHas6FractionalDigits.Validator: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31542
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4994) toJson
+json.nim(121)            toJson
+timestamp_pb.nim(43)     seconds
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Recommended.Proto3.JsonInput.TimestampHas9FractionalDigits.Validator: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31543
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3962) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+field_mask_pb.nim(51)    sizeOfgoogle_protobuf_FieldMask
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.FieldMask.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31544
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4996) toJson
+json.nim(135)            toJson
+field_mask_pb.nim(45)    paths
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.FieldMask.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31545
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4996) toJson
+json.nim(135)            toJson
+field_mask_pb.nim(45)    paths
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Recommended.Proto3.JsonInput.FieldMaskInvalidCharacter: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31546
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3964) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+struct_pb.nim(124)       sizeOfgoogle_protobuf_Struct
+struct_pb.nim(111)       hasfields
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.Struct.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31547
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(4998) toJson
+json.nim(141)            toJson
+struct_pb.nim(118)       fields
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.Struct.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31548
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3968) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+struct_pb.nim(360)       sizeOfgoogle_protobuf_Value
+struct_pb.nim(256)       hasnull_value
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.ValueAcceptInteger.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31549
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5002) toJson
+json.nim(147)            toJson
+struct_pb.nim(256)       hasnull_value
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.ValueAcceptInteger.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31550
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3968) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+struct_pb.nim(360)       sizeOfgoogle_protobuf_Value
+struct_pb.nim(256)       hasnull_value
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.ValueAcceptFloat.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31551
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5002) toJson
+json.nim(147)            toJson
+struct_pb.nim(256)       hasnull_value
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.ValueAcceptFloat.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31552
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3968) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+struct_pb.nim(360)       sizeOfgoogle_protobuf_Value
+struct_pb.nim(256)       hasnull_value
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.ValueAcceptBool.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31553
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5002) toJson
+json.nim(147)            toJson
+struct_pb.nim(256)       hasnull_value
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.ValueAcceptBool.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31554
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3968) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+struct_pb.nim(360)       sizeOfgoogle_protobuf_Value
+struct_pb.nim(256)       hasnull_value
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.ValueAcceptNull.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31555
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5002) toJson
+json.nim(147)            toJson
+struct_pb.nim(256)       hasnull_value
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.ValueAcceptNull.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31556
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3968) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+struct_pb.nim(360)       sizeOfgoogle_protobuf_Value
+struct_pb.nim(256)       hasnull_value
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.ValueAcceptString.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31557
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5002) toJson
+json.nim(147)            toJson
+struct_pb.nim(256)       hasnull_value
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.ValueAcceptString.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31558
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3968) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+struct_pb.nim(360)       sizeOfgoogle_protobuf_Value
+struct_pb.nim(256)       hasnull_value
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.ValueAcceptList.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31559
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5002) toJson
+json.nim(147)            toJson
+struct_pb.nim(256)       hasnull_value
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.ValueAcceptList.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31560
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3968) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+struct_pb.nim(360)       sizeOfgoogle_protobuf_Value
+struct_pb.nim(256)       hasnull_value
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.ValueAcceptObject.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31561
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5002) toJson
+json.nim(147)            toJson
+struct_pb.nim(256)       hasnull_value
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.ValueAcceptObject.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31562
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3966) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+any_pb.nim(66)           sizeOfgoogle_protobuf_Any
+any_pb.nim(36)           hastype_url
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.Any.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31563
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5000) toJson
+json.nim(171)            toJson
+any_pb.nim(43)           type_url
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.Any.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31564
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3966) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+any_pb.nim(66)           sizeOfgoogle_protobuf_Any
+any_pb.nim(36)           hastype_url
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyNested.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31565
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5000) toJson
+json.nim(171)            toJson
+any_pb.nim(43)           type_url
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyNested.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31566
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3966) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+any_pb.nim(66)           sizeOfgoogle_protobuf_Any
+any_pb.nim(36)           hastype_url
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyUnorderedTypeTag.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31567
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5000) toJson
+json.nim(171)            toJson
+any_pb.nim(43)           type_url
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyUnorderedTypeTag.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31568
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3966) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+any_pb.nim(66)           sizeOfgoogle_protobuf_Any
+any_pb.nim(36)           hastype_url
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyWithInt32ValueWrapper.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31569
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5000) toJson
+json.nim(171)            toJson
+any_pb.nim(43)           type_url
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyWithInt32ValueWrapper.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31570
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3966) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+any_pb.nim(66)           sizeOfgoogle_protobuf_Any
+any_pb.nim(36)           hastype_url
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyWithDuration.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31571
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5000) toJson
+json.nim(171)            toJson
+any_pb.nim(43)           type_url
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyWithDuration.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31572
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3966) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+any_pb.nim(66)           sizeOfgoogle_protobuf_Any
+any_pb.nim(36)           hastype_url
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyWithTimestamp.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31573
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5000) toJson
+json.nim(171)            toJson
+any_pb.nim(43)           type_url
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyWithTimestamp.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31574
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3966) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+any_pb.nim(66)           sizeOfgoogle_protobuf_Any
+any_pb.nim(36)           hastype_url
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyWithFieldMask.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31575
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5000) toJson
+json.nim(171)            toJson
+any_pb.nim(43)           type_url
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyWithFieldMask.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31576
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3966) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+any_pb.nim(66)           sizeOfgoogle_protobuf_Any
+any_pb.nim(36)           hastype_url
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyWithStruct.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31577
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5000) toJson
+json.nim(171)            toJson
+any_pb.nim(43)           type_url
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyWithStruct.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31578
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3966) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+any_pb.nim(66)           sizeOfgoogle_protobuf_Any
+any_pb.nim(36)           hastype_url
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyWithValueForJsonObject.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31579
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5000) toJson
+json.nim(171)            toJson
+any_pb.nim(43)           type_url
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyWithValueForJsonObject.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31580
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(57)  conformance_nim
+test_messages_proto3_pb.nim(5619) serialize
+test_messages_proto3_pb.nim(3966) writeprotobuf_test_messages_proto3_TestAllTypesProto3
+any_pb.nim(66)           sizeOfgoogle_protobuf_Any
+any_pb.nim(36)           hastype_url
+intsets.nim(100)         contains
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyWithValueForInteger.ProtobufOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31581
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
+Traceback (most recent call last)
+conformance_nim.nim(60)  conformance_nim
+test_messages_proto3_pb.nim(5000) toJson
+json.nim(171)            toJson
+any_pb.nim(43)           type_url
+SIGSEGV: Illegal storage access. (Attempt to read from nil?)
+[libprotobuf ERROR conformance_test_runner.cc:209] Required.Proto3.JsonInput.AnyWithValueForInteger.JsonOutput: unexpected EOF from test program
+[libprotobuf INFO conformance_test_runner.cc:108] Trying to reap child, pid=31582
+[libprotobuf INFO conformance_test_runner.cc:121] child killed by signal 79
 
 CONFORMANCE TEST BEGIN ====================================
 
 ERROR, test=Required.Proto3.ProtobufInput.RepeatedScalarSelectsLast.DOUBLE.JsonOutput: Output was not equivalent to reference message: modified: optional_double: 2.2250738585072014e-308 -> 2.2250738585072009e-308
 . request=protobuf_payload: "a\232\231\231\231\231\231\271?a\377\377\377\377\377\377\357\177a\000\000\000\000\000\000\020\000" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"optionalDouble\":2.225073858507201e-308}"
 ERROR, test=Required.Proto3.ProtobufInput.ValidDataRepeated.DOUBLE.JsonOutput: JSON output we received from test was unparseable. request=protobuf_payload: "\321\002\232\231\231\231\231\231\271?\321\002\377\377\377\377\377\377\357\177\321\002\000\000\000\000\000\000\020\000" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"repeatedDouble\":[0.1,1.797693134862316e+308,2.225073858507201e-308]}"
+WARNING, test=Recommended.Proto3.JsonInput.StringEndsWithEscapeChar: Should have failed to parse, but didn't. request=json_payload: "{\"optionalString\": \"abc\\" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 24) Error: { expected"
+WARNING, test=Recommended.Proto3.JsonInput.FieldNameNotQuoted: Should have failed to parse, but didn't. request=json_payload: "{fieldname1: 1}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 11) Error: string literal as key expected"
+WARNING, test=Recommended.Proto3.JsonInput.TrailingCommaInAnObject: Should have failed to parse, but didn't. request=json_payload: "{\"fieldname1\":1,}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"fieldname1\":1}"
+WARNING, test=Recommended.Proto3.JsonInput.TrailingCommaInAnObjectWithSpace: Should have failed to parse, but didn't. request=json_payload: "{\"fieldname1\":1 ,}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"fieldname1\":1}"
+WARNING, test=Recommended.Proto3.JsonInput.TrailingCommaInAnObjectWithSpaceCommaSpace: Should have failed to parse, but didn't. request=json_payload: "{\"fieldname1\":1 , }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"fieldname1\":1}"
+WARNING, test=Recommended.Proto3.JsonInput.TrailingCommaInAnObjectWithNewlines: Should have failed to parse, but didn't. request=json_payload: "{\n        \"fieldname1\":1,\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"fieldname1\":1}"
+WARNING, test=Recommended.Proto3.JsonInput.JsonWithComments: Should have failed to parse, but didn't. request=json_payload: "{\n        // This is a comment.\n        \"fieldname1\": 1\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"fieldname1\":1}"
+WARNING, test=Recommended.Proto3.JsonInput.MissingCommaOneLine: Should have failed to parse, but didn't. request=json_payload: "{ \"optionalInt32\": 1 \"optionalInt64\": 2 }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 36) Error: } expected"
+WARNING, test=Recommended.Proto3.JsonInput.MissingCommaMultiline: Should have failed to parse, but didn't. request=json_payload: "{\n  \"optionalInt32\": 1\n  \"optionalInt64\": 2\n}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(3, 17) Error: } expected"
+WARNING, test=Recommended.Proto3.JsonInput.FieldNameDuplicate: Should have failed to parse, but didn't. request=json_payload: "{\n        \"optionalNestedMessage\": {a: 1},\n        \"optionalNestedMessage\": {}\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(2, 35) Error: string literal as key expected"
+WARNING, test=Recommended.Proto3.JsonInput.FieldNameDuplicateDifferentCasing1: Should have failed to parse, but didn't. request=json_payload: "{\n        \"optional_nested_message\": {a: 1},\n        \"optionalNestedMessage\": {}\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(2, 37) Error: string literal as key expected"
+WARNING, test=Recommended.Proto3.JsonInput.FieldNameDuplicateDifferentCasing2: Should have failed to parse, but didn't. request=json_payload: "{\n        \"optionalNestedMessage\": {a: 1},\n        \"optional_nested_message\": {}\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(2, 35) Error: string literal as key expected"
+ERROR, test=Required.Proto3.JsonInput.Uint64FieldMaxValueNotQuoted.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalUint64\": 18446744073709549568}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "over- or underflow"
+ERROR, test=Required.Proto3.JsonInput.Uint64FieldMaxValueNotQuoted.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalUint64\": 18446744073709549568}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "over- or underflow"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldTooLarge: Should have failed to parse, but didn't. request=json_payload: "{\"optionalInt32\": 2147483648}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "value out of range: 2147483648"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldTooSmall: Should have failed to parse, but didn't. request=json_payload: "{\"optionalInt32\": -2147483649}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "value out of range: -2147483649"
+ERROR, test=Required.Proto3.JsonInput.Uint32FieldTooLarge: Should have failed to parse, but didn't. request=json_payload: "{\"optionalUint32\": 4294967296}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"optionalUint32\":0.0}"
+ERROR, test=Required.Proto3.JsonInput.Int64FieldTooLarge: Should have failed to parse, but didn't. request=json_payload: "{\"optionalInt64\": \"9223372036854775808\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "over- or underflow"
+ERROR, test=Required.Proto3.JsonInput.Int64FieldTooSmall: Should have failed to parse, but didn't. request=json_payload: "{\"optionalInt64\": \"-9223372036854775809\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "over- or underflow"
+ERROR, test=Required.Proto3.JsonInput.Uint64FieldTooLarge: Should have failed to parse, but didn't. request=json_payload: "{\"optionalUint64\": \"18446744073709551616\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "invalid unsigned integer: 18446744073709551616"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldNotInteger: Should have failed to parse, but didn't. request=json_payload: "{\"optionalInt32\": 0.5}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+ERROR, test=Required.Proto3.JsonInput.Uint32FieldNotInteger: Should have failed to parse, but didn't. request=json_payload: "{\"optionalUint32\": 0.5}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+ERROR, test=Required.Proto3.JsonInput.Int64FieldNotInteger: Should have failed to parse, but didn't. request=json_payload: "{\"optionalInt64\": \"0.5\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "invalid integer: 0.5"
+ERROR, test=Required.Proto3.JsonInput.Uint64FieldNotInteger: Should have failed to parse, but didn't. request=json_payload: "{\"optionalUint64\": \"0.5\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "invalid unsigned integer: 0.5"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldFloatTrailingZero.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalInt32\": 100000.000}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldFloatTrailingZero.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalInt32\": 100000.000}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldExponentialFormat.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalInt32\": 1e5}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldExponentialFormat.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalInt32\": 1e5}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldMaxFloatValue.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalInt32\": 2.147483647e9}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldMaxFloatValue.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalInt32\": 2.147483647e9}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldMinFloatValue.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalInt32\": -2.147483648e9}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldMinFloatValue.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalInt32\": -2.147483648e9}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+ERROR, test=Required.Proto3.JsonInput.Uint32FieldMaxFloatValue.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalUint32\": 4.294967295e9}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+ERROR, test=Required.Proto3.JsonInput.Uint32FieldMaxFloatValue.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalUint32\": 4.294967295e9}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldNotNumber: Should have failed to parse, but didn't. request=json_payload: "{\"optionalInt32\": \"3x3\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "invalid integer: 3x3"
+ERROR, test=Required.Proto3.JsonInput.Uint32FieldNotNumber: Should have failed to parse, but didn't. request=json_payload: "{\"optionalUint32\": \"3x3\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "invalid unsigned integer: 3x3"
+ERROR, test=Required.Proto3.JsonInput.Int64FieldNotNumber: Should have failed to parse, but didn't. request=json_payload: "{\"optionalInt64\": \"3x3\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "invalid integer: 3x3"
+ERROR, test=Required.Proto3.JsonInput.Uint64FieldNotNumber: Should have failed to parse, but didn't. request=json_payload: "{\"optionalUint64\": \"3x3\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "invalid unsigned integer: 3x3"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldPlusSign: Should have failed to parse, but didn't. request=json_payload: "{\"optionalInt32\": +1}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 19) Error: { expected"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldLeadingZero: Should have failed to parse, but didn't. request=json_payload: "{\"optionalInt32\": 01}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"optionalInt32\":1}"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldNegativeWithLeadingZero: Should have failed to parse, but didn't. request=json_payload: "{\"optionalInt32\": -01}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"optionalInt32\":-1}"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldLeadingSpace: Should have failed to parse, but didn't. request=json_payload: "{\"optionalInt32\": \" 1\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "invalid integer:  1"
+ERROR, test=Required.Proto3.JsonInput.Int32FieldTrailingSpace: Should have failed to parse, but didn't. request=json_payload: "{\"optionalInt32\": \"1 \"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "invalid integer: 1 "
+WARNING, test=Recommended.Proto3.JsonInput.BoolFieldIntegerZero: Should have failed to parse, but didn't. request=json_payload: "{\"optionalBool\":0}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a boolean"
+WARNING, test=Recommended.Proto3.JsonInput.BoolFieldIntegerOne: Should have failed to parse, but didn't. request=json_payload: "{\"optionalBool\":1}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a boolean"
+WARNING, test=Recommended.Proto3.JsonInput.BoolFieldCamelCaseTrue: Should have failed to parse, but didn't. request=json_payload: "{\"optionalBool\":True}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 20) Error: { expected"
+WARNING, test=Recommended.Proto3.JsonInput.BoolFieldCamelCaseFalse: Should have failed to parse, but didn't. request=json_payload: "{\"optionalBool\":False}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 21) Error: { expected"
+WARNING, test=Recommended.Proto3.JsonInput.BoolFieldAllCapitalTrue: Should have failed to parse, but didn't. request=json_payload: "{\"optionalBool\":TRUE}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 20) Error: { expected"
+WARNING, test=Recommended.Proto3.JsonInput.BoolFieldAllCapitalFalse: Should have failed to parse, but didn't. request=json_payload: "{\"optionalBool\":FALSE}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 21) Error: { expected"
+WARNING, test=Recommended.Proto3.JsonInput.BoolFieldDoubleQuotedTrue: Should have failed to parse, but didn't. request=json_payload: "{\"optionalBool\":\"true\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a boolean"
+WARNING, test=Recommended.Proto3.JsonInput.BoolFieldDoubleQuotedFalse: Should have failed to parse, but didn't. request=json_payload: "{\"optionalBool\":\"false\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a boolean"
+WARNING, test=Recommended.Proto3.JsonInput.FloatFieldNanNotQuoted: Should have failed to parse, but didn't. request=json_payload: "{\"optionalFloat\": NaN}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 21) Error: { expected"
+WARNING, test=Recommended.Proto3.JsonInput.FloatFieldInfinityNotQuoted: Should have failed to parse, but didn't. request=json_payload: "{\"optionalFloat\": Infinity}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 26) Error: { expected"
+WARNING, test=Recommended.Proto3.JsonInput.FloatFieldNegativeInfinityNotQuoted: Should have failed to parse, but didn't. request=json_payload: "{\"optionalFloat\": -Infinity}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "invalid integer: -"
+ERROR, test=Required.Proto3.JsonInput.FloatFieldTooSmall: Should have failed to parse, but didn't. request=json_payload: "{\"optionalFloat\": -3.502823e+38}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"optionalFloat\":\"-Infinity\"}"
+ERROR, test=Required.Proto3.JsonInput.FloatFieldTooLarge: Should have failed to parse, but didn't. request=json_payload: "{\"optionalFloat\": 3.502823e+38}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"optionalFloat\":\"Infinity\"}"
+WARNING, test=Recommended.Proto3.JsonInput.DoubleFieldNanNotQuoted: Should have failed to parse, but didn't. request=json_payload: "{\"optionalDouble\": NaN}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 22) Error: { expected"
+WARNING, test=Recommended.Proto3.JsonInput.DoubleFieldInfinityNotQuoted: Should have failed to parse, but didn't. request=json_payload: "{\"optionalDouble\": Infinity}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 27) Error: { expected"
+WARNING, test=Recommended.Proto3.JsonInput.DoubleFieldNegativeInfinityNotQuoted: Should have failed to parse, but didn't. request=json_payload: "{\"optionalDouble\": -Infinity}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "invalid integer: -"
+ERROR, test=Required.Proto3.JsonInput.DoubleFieldTooSmall: Should have failed to parse, but didn't. request=json_payload: "{\"optionalDouble\": -1.89769e+308}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"optionalDouble\":\"-Infinity\"}"
+ERROR, test=Required.Proto3.JsonInput.DoubleFieldTooLarge: Should have failed to parse, but didn't. request=json_payload: "{\"optionalDouble\": +1.89769e+308}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 20) Error: { expected"
+ERROR, test=Required.Proto3.JsonInput.EnumFieldNotQuoted: Should have failed to parse, but didn't. request=json_payload: "{\"optionalNestedEnum\": FOO}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 26) Error: { expected"
+ERROR, test=Required.Proto3.JsonInput.EnumFieldUnknownValue.Validator: Expected JSON payload but got type 2. request=json_payload: "{\"optionalNestedEnum\": 123}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "value out of range: 123"
+WARNING, test=Recommended.Proto3.JsonInput.StringFieldUppercaseEscapeLetter: Should have failed to parse, but didn't. request=json_payload: "{\"optionalString\": \"\\U8C37\\U6b4C\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"optionalString\":\"\\\\U8C37\\\\U6b4C\"}"
+WARNING, test=Recommended.Proto3.JsonInput.StringFieldInvalidEscape: Should have failed to parse, but didn't. request=json_payload: "{\"optionalString\": \"\\uXXXX\\u6B4C\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 26) Error: } expected"
+WARNING, test=Recommended.Proto3.JsonInput.StringFieldUnterminatedEscape: Should have failed to parse, but didn't. request=json_payload: "{\"optionalString\": \"\\u8C3\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 27) Error: } expected"
+WARNING, test=Recommended.Proto3.JsonInput.StringFieldUnpairedHighSurrogate: Should have failed to parse, but didn't. request=json_payload: "{\"optionalString\": \"\\uD800\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 28) Error: } expected"
+WARNING, test=Recommended.Proto3.JsonInput.StringFieldUnpairedLowSurrogate: Should have failed to parse, but didn't. request=json_payload: "{\"optionalString\": \"\\uDC00\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "response proto could not be parsed."
+WARNING, test=Recommended.Proto3.JsonInput.StringFieldSurrogateInWrongOrder: Should have failed to parse, but didn't. request=json_payload: "{\"optionalString\": \"\\uDE01\\uD83D\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 34) Error: } expected"
+ERROR, test=Required.Proto3.JsonInput.StringFieldNotAString: Should have failed to parse, but didn't. request=json_payload: "{\"optionalString\": 12345}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a string"
+WARNING, test=Recommended.Proto3.JsonInput.BytesFieldBase64Url.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalBytes\": \"-_\"}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "i == len(s) "
+WARNING, test=Recommended.Proto3.JsonInput.BytesFieldBase64Url.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalBytes\": \"-_\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "i == len(s) "
+ERROR, test=Required.Proto3.JsonInput.OneofFieldDuplicate: Should have failed to parse, but didn't. request=json_payload: "{\"oneofUint32\": 1, \"oneofString\": \"test\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingIntegersGotBool: Should have failed to parse, but didn't. request=json_payload: "{\"repeatedInt32\": [1, false, 3, 4]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+ERROR, test=Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingIntegersGotString: Should have failed to parse, but didn't. request=json_payload: "{\"repeatedInt32\": [1, 2, \"name\", 4]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "invalid integer: name"
+ERROR, test=Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingIntegersGotMessage: Should have failed to parse, but didn't. request=json_payload: "{\"repeatedInt32\": [1, 2, 3, {\"a\": 4}]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+ERROR, test=Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotInt: Should have failed to parse, but didn't. request=json_payload: "{\"repeatedString\": [\"1\", 2, \"3\", \"4\"]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a string"
+ERROR, test=Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotBool: Should have failed to parse, but didn't. request=json_payload: "{\"repeatedString\": [\"1\", \"2\", false, \"4\"]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a string"
+ERROR, test=Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotMessage: Should have failed to parse, but didn't. request=json_payload: "{\"repeatedString\": [\"1\", 2, \"3\", {\"a\": 4}]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a string"
+ERROR, test=Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingMessagesGotInt: Should have failed to parse, but didn't. request=json_payload: "{\"repeatedNestedMessage\": [{\"a\": 1}, 2]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "node.kind == JObject "
+ERROR, test=Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingMessagesGotBool: Should have failed to parse, but didn't. request=json_payload: "{\"repeatedNestedMessage\": [{\"a\": 1}, false]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "node.kind == JObject "
+ERROR, test=Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingMessagesGotString: Should have failed to parse, but didn't. request=json_payload: "{\"repeatedNestedMessage\": [{\"a\": 1}, \"2\"]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "node.kind == JObject "
+WARNING, test=Recommended.Proto3.JsonInput.RepeatedFieldTrailingComma: Should have failed to parse, but didn't. request=json_payload: "{\"repeatedInt32\": [1, 2, 3, 4,]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"repeatedInt32\":[1,2,3,4]}"
+WARNING, test=Recommended.Proto3.JsonInput.RepeatedFieldTrailingCommaWithSpace: Should have failed to parse, but didn't. request=json_payload: "{\"repeatedInt32\": [1, 2, 3, 4 ,]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"repeatedInt32\":[1,2,3,4]}"
+WARNING, test=Recommended.Proto3.JsonInput.RepeatedFieldTrailingCommaWithSpaceCommaSpace: Should have failed to parse, but didn't. request=json_payload: "{\"repeatedInt32\": [1, 2, 3, 4 , ]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"repeatedInt32\":[1,2,3,4]}"
+WARNING, test=Recommended.Proto3.JsonInput.RepeatedFieldTrailingCommaWithNewlines: Should have failed to parse, but didn't. request=json_payload: "{\"repeatedInt32\": [\n  1,\n  2,\n  3,\n  4,\n]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"repeatedInt32\":[1,2,3,4]}"
+WARNING, test=Recommended.Proto3.JsonInput.Int32MapFieldKeyNotQuoted: Should have failed to parse, but didn't. request=json_payload: "{\"mapInt32Int32\": {1: 2, 3: 4}}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 20) Error: string literal as key expected"
+WARNING, test=Recommended.Proto3.JsonInput.Uint32MapFieldKeyNotQuoted: Should have failed to parse, but didn't. request=json_payload: "{\"mapUint32Uint32\": {1: 2, 3: 4}}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 22) Error: string literal as key expected"
+WARNING, test=Recommended.Proto3.JsonInput.Int64MapFieldKeyNotQuoted: Should have failed to parse, but didn't. request=json_payload: "{\"mapInt64Int64\": {1: 2, 3: 4}}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 20) Error: string literal as key expected"
+WARNING, test=Recommended.Proto3.JsonInput.Uint64MapFieldKeyNotQuoted: Should have failed to parse, but didn't. request=json_payload: "{\"mapUint64Uint64\": {1: 2, 3: 4}}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 22) Error: string literal as key expected"
+ERROR, test=Required.Proto3.JsonInput.BoolMapField.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"mapBoolBool\": {\"true\": true, \"false\": false}}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "invalid integer: true"
+ERROR, test=Required.Proto3.JsonInput.BoolMapField.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"mapBoolBool\": {\"true\": true, \"false\": false}}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "invalid integer: true"
+WARNING, test=Recommended.Proto3.JsonInput.BoolMapFieldKeyNotQuoted: Should have failed to parse, but didn't. request=json_payload: "{\"mapBoolBool\": {true: true, false: false}}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 21) Error: string literal as key expected"
+ERROR, test=Required.Proto3.JsonInput.BoolMapEscapedKey.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"mapBoolBool\": {\"tr\\u0075e\": true}}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "invalid integer: true"
+ERROR, test=Required.Proto3.JsonInput.BoolMapEscapedKey.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"mapBoolBool\": {\"tr\\u0075e\": true}}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "invalid integer: true"
+ERROR, test=Required.Proto3.JsonInput.AllFieldAcceptNull.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalInt32\": null,\n        \"optionalInt64\": null,\n        \"optionalUint32\": null,\n        \"optionalUint64\": null,\n        \"optionalSint32\": null,\n        \"optionalSint64\": null,\n        \"optionalFixed32\": null,\n        \"optionalFixed64\": null,\n        \"optionalSfixed32\": null,\n        \"optionalSfixed64\": null,\n        \"optionalFloat\": null,\n        \"optionalDouble\": null,\n        \"optionalBool\": null,\n        \"optionalString\": null,\n        \"optionalBytes\": null,\n        \"optionalNestedEnum\": null,\n        \"optionalNestedMessage\": null,\n        \"repeatedInt32\": null,\n        \"repeatedInt64\": null,\n        \"repeatedUint32\": null,\n        \"repeatedUint64\": null,\n        \"repeatedSint32\": null,\n        \"repeatedSint64\": null,\n        \"repeatedFixed32\": null,\n        \"repeatedFixed64\": null,\n        \"repeatedSfixed32\": null,\n        \"repeatedSfixed64\": null,\n        \"repeatedFloat\": null,\n        \"repeatedDouble\": null,\n        \"repeatedBool\": null,\n        \"repeatedString\": null,\n        \"repeatedBytes\": null,\n        \"repeatedNestedEnum\": null,\n        \"repeatedNestedMessage\": null,\n        \"mapInt32Int32\": null,\n        \"mapBoolBool\": null,\n        \"mapStringNestedMessage\": null\n      }" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+ERROR, test=Required.Proto3.JsonInput.AllFieldAcceptNull.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalInt32\": null,\n        \"optionalInt64\": null,\n        \"optionalUint32\": null,\n        \"optionalUint64\": null,\n        \"optionalSint32\": null,\n        \"optionalSint64\": null,\n        \"optionalFixed32\": null,\n        \"optionalFixed64\": null,\n        \"optionalSfixed32\": null,\n        \"optionalSfixed64\": null,\n        \"optionalFloat\": null,\n        \"optionalDouble\": null,\n        \"optionalBool\": null,\n        \"optionalString\": null,\n        \"optionalBytes\": null,\n        \"optionalNestedEnum\": null,\n        \"optionalNestedMessage\": null,\n        \"repeatedInt32\": null,\n        \"repeatedInt64\": null,\n        \"repeatedUint32\": null,\n        \"repeatedUint64\": null,\n        \"repeatedSint32\": null,\n        \"repeatedSint64\": null,\n        \"repeatedFixed32\": null,\n        \"repeatedFixed64\": null,\n        \"repeatedSfixed32\": null,\n        \"repeatedSfixed64\": null,\n        \"repeatedFloat\": null,\n        \"repeatedDouble\": null,\n        \"repeatedBool\": null,\n        \"repeatedString\": null,\n        \"repeatedBytes\": null,\n        \"repeatedNestedEnum\": null,\n        \"repeatedNestedMessage\": null,\n        \"mapInt32Int32\": null,\n        \"mapBoolBool\": null,\n        \"mapStringNestedMessage\": null\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+WARNING, test=Recommended.Proto3.JsonInput.RepeatedFieldPrimitiveElementIsNull: Should have failed to parse, but didn't. request=json_payload: "{\"repeatedInt32\": [1, null, 2]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+WARNING, test=Recommended.Proto3.JsonInput.RepeatedFieldMessageElementIsNull: Should have failed to parse, but didn't. request=json_payload: "{\"repeatedNestedMessage\": [{\"a\":1}, null, {\"a\":2}]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "node.kind == JObject "
+WARNING, test=Recommended.Proto3.JsonInput.MapFieldKeyIsNull: Should have failed to parse, but didn't. request=json_payload: "{\"mapInt32Int32\": {null: 1}}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 23) Error: string literal as key expected"
+WARNING, test=Recommended.Proto3.JsonInput.MapFieldValueIsNull: Should have failed to parse, but didn't. request=json_payload: "{\"mapInt32Int32\": {\"0\": null}}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not an integer"
+WARNING, test=Recommended.Proto3.JsonInput.StringFieldSingleQuoteKey: Should have failed to parse, but didn't. request=json_payload: "{\'optionalString\': \"Hello world!\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 2) Error: string literal as key expected"
+WARNING, test=Recommended.Proto3.JsonInput.StringFieldSingleQuoteValue: Should have failed to parse, but didn't. request=json_payload: "{\"optionalString\": \'Hello world!\'}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 20) Error: { expected"
+WARNING, test=Recommended.Proto3.JsonInput.StringFieldSingleQuoteBoth: Should have failed to parse, but didn't. request=json_payload: "{\'optionalString\': \'Hello world!\'}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "input(1, 2) Error: string literal as key expected"
+ERROR, test=Required.Proto3.JsonInput.OptionalFloatWrapper.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalFloatWrapper\": 0}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a float"
+ERROR, test=Required.Proto3.JsonInput.OptionalFloatWrapper.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalFloatWrapper\": 0}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a float"
+ERROR, test=Required.Proto3.JsonInput.OptionalDoubleWrapper.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalDoubleWrapper\": 0}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a float"
+ERROR, test=Required.Proto3.JsonInput.OptionalDoubleWrapper.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalDoubleWrapper\": 0}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a float"
+ERROR, test=Required.Proto3.JsonInput.OptionalWrapperTypesWithNonDefaultValue.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalBoolWrapper\": true,\n        \"optionalInt32Wrapper\": 1,\n        \"optionalUint32Wrapper\": 1,\n        \"optionalInt64Wrapper\": \"1\",\n        \"optionalUint64Wrapper\": \"1\",\n        \"optionalFloatWrapper\": 1,\n        \"optionalDoubleWrapper\": 1,\n        \"optionalStringWrapper\": \"1\",\n        \"optionalBytesWrapper\": \"AQI=\"\n      }" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a float"
+ERROR, test=Required.Proto3.JsonInput.OptionalWrapperTypesWithNonDefaultValue.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalBoolWrapper\": true,\n        \"optionalInt32Wrapper\": 1,\n        \"optionalUint32Wrapper\": 1,\n        \"optionalInt64Wrapper\": \"1\",\n        \"optionalUint64Wrapper\": \"1\",\n        \"optionalFloatWrapper\": 1,\n        \"optionalDoubleWrapper\": 1,\n        \"optionalStringWrapper\": \"1\",\n        \"optionalBytesWrapper\": \"AQI=\"\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a float"
+ERROR, test=Required.Proto3.JsonInput.RepeatedFloatWrapper.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"repeatedFloatWrapper\": [0, 1]}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a float"
+ERROR, test=Required.Proto3.JsonInput.RepeatedFloatWrapper.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"repeatedFloatWrapper\": [0, 1]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a float"
+ERROR, test=Required.Proto3.JsonInput.RepeatedDoubleWrapper.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"repeatedDoubleWrapper\": [0, 1]}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a float"
+ERROR, test=Required.Proto3.JsonInput.RepeatedDoubleWrapper.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"repeatedDoubleWrapper\": [0, 1]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a float"
+ERROR, test=Required.Proto3.JsonInput.WrapperTypesWithNullValue.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalBoolWrapper\": null,\n        \"optionalInt32Wrapper\": null,\n        \"optionalUint32Wrapper\": null,\n        \"optionalInt64Wrapper\": null,\n        \"optionalUint64Wrapper\": null,\n        \"optionalFloatWrapper\": null,\n        \"optionalDoubleWrapper\": null,\n        \"optionalStringWrapper\": null,\n        \"optionalBytesWrapper\": null,\n        \"repeatedBoolWrapper\": null,\n        \"repeatedInt32Wrapper\": null,\n        \"repeatedUint32Wrapper\": null,\n        \"repeatedInt64Wrapper\": null,\n        \"repeatedUint64Wrapper\": null,\n        \"repeatedFloatWrapper\": null,\n        \"repeatedDoubleWrapper\": null,\n        \"repeatedStringWrapper\": null,\n        \"repeatedBytesWrapper\": null\n      }" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a boolean"
+ERROR, test=Required.Proto3.JsonInput.WrapperTypesWithNullValue.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalBoolWrapper\": null,\n        \"optionalInt32Wrapper\": null,\n        \"optionalUint32Wrapper\": null,\n        \"optionalInt64Wrapper\": null,\n        \"optionalUint64Wrapper\": null,\n        \"optionalFloatWrapper\": null,\n        \"optionalDoubleWrapper\": null,\n        \"optionalStringWrapper\": null,\n        \"optionalBytesWrapper\": null,\n        \"repeatedBoolWrapper\": null,\n        \"repeatedInt32Wrapper\": null,\n        \"repeatedUint32Wrapper\": null,\n        \"repeatedInt64Wrapper\": null,\n        \"repeatedUint64Wrapper\": null,\n        \"repeatedFloatWrapper\": null,\n        \"repeatedDoubleWrapper\": null,\n        \"repeatedStringWrapper\": null,\n        \"repeatedBytesWrapper\": null\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=serialize_error: "not a boolean"
+ERROR, test=Required.Proto3.JsonInput.DurationMinValue.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalDuration\": \"-315576000000.999999999s\"}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.DurationMinValue.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalDuration\": \"-315576000000.999999999s\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.DurationMaxValue.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalDuration\": \"315576000000.999999999s\"}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.DurationMaxValue.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalDuration\": \"315576000000.999999999s\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.DurationRepeatedValue.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"repeatedDuration\": [\"1.5s\", \"-1.5s\"]}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.DurationRepeatedValue.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"repeatedDuration\": [\"1.5s\", \"-1.5s\"]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.DurationNull.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalDuration\": null}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.DurationNull.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalDuration\": null}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.DurationMissingS: Should have failed to parse, but didn't. request=json_payload: "{\"optionalDuration\": \"1\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.DurationJsonInputTooSmall: Should have failed to parse, but didn't. request=json_payload: "{\"optionalDuration\": \"-315576000001.000000000s\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.DurationJsonInputTooLarge: Should have failed to parse, but didn't. request=json_payload: "{\"optionalDuration\": \"315576000001.000000000s\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+WARNING, test=Recommended.Proto3.JsonInput.DurationHasZeroFractionalDigit.Validator: Expected JSON payload but got type 2. request=json_payload: "{\"optionalDuration\": \"1.000000000s\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+WARNING, test=Recommended.Proto3.JsonInput.DurationHas3FractionalDigits.Validator: Expected JSON payload but got type 2. request=json_payload: "{\"optionalDuration\": \"1.010000000s\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+WARNING, test=Recommended.Proto3.JsonInput.DurationHas6FractionalDigits.Validator: Expected JSON payload but got type 2. request=json_payload: "{\"optionalDuration\": \"1.000010000s\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+WARNING, test=Recommended.Proto3.JsonInput.DurationHas9FractionalDigits.Validator: Expected JSON payload but got type 2. request=json_payload: "{\"optionalDuration\": \"1.000000010s\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampMinValue.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalTimestamp\": \"0001-01-01T00:00:00Z\"}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampMinValue.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalTimestamp\": \"0001-01-01T00:00:00Z\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampMaxValue.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalTimestamp\": \"9999-12-31T23:59:59.999999999Z\"}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampMaxValue.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalTimestamp\": \"9999-12-31T23:59:59.999999999Z\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampRepeatedValue.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"repeatedTimestamp\": [\n          \"0001-01-01T00:00:00Z\",\n          \"9999-12-31T23:59:59.999999999Z\"\n        ]\n      }" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampRepeatedValue.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"repeatedTimestamp\": [\n          \"0001-01-01T00:00:00Z\",\n          \"9999-12-31T23:59:59.999999999Z\"\n        ]\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampWithPositiveOffset.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalTimestamp\": \"1970-01-01T08:00:00+08:00\"}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampWithPositiveOffset.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalTimestamp\": \"1970-01-01T08:00:00+08:00\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampWithNegativeOffset.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalTimestamp\": \"1969-12-31T16:00:00-08:00\"}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampWithNegativeOffset.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalTimestamp\": \"1969-12-31T16:00:00-08:00\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampNull.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalTimestamp\": null}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampNull.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalTimestamp\": null}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampJsonInputTooSmall: Should have failed to parse, but didn't. request=json_payload: "{\"optionalTimestamp\": \"0000-01-01T00:00:00Z\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampJsonInputTooLarge: Should have failed to parse, but didn't. request=json_payload: "{\"optionalTimestamp\": \"10000-01-01T00:00:00Z\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampJsonInputMissingZ: Should have failed to parse, but didn't. request=json_payload: "{\"optionalTimestamp\": \"0001-01-01T00:00:00\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampJsonInputMissingT: Should have failed to parse, but didn't. request=json_payload: "{\"optionalTimestamp\": \"0001-01-01 00:00:00Z\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampJsonInputLowercaseZ: Should have failed to parse, but didn't. request=json_payload: "{\"optionalTimestamp\": \"0001-01-01T00:00:00z\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.TimestampJsonInputLowercaseT: Should have failed to parse, but didn't. request=json_payload: "{\"optionalTimestamp\": \"0001-01-01t00:00:00Z\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+WARNING, test=Recommended.Proto3.JsonInput.TimestampZeroNormalized.Validator: Expected JSON payload but got type 2. request=json_payload: "{\"optionalTimestamp\": \"1969-12-31T16:00:00-08:00\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+WARNING, test=Recommended.Proto3.JsonInput.TimestampHasZeroFractionalDigit.Validator: Expected JSON payload but got type 2. request=json_payload: "{\"optionalTimestamp\": \"1970-01-01T00:00:00.000000000Z\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+WARNING, test=Recommended.Proto3.JsonInput.TimestampHas3FractionalDigits.Validator: Expected JSON payload but got type 2. request=json_payload: "{\"optionalTimestamp\": \"1970-01-01T00:00:00.010000000Z\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+WARNING, test=Recommended.Proto3.JsonInput.TimestampHas6FractionalDigits.Validator: Expected JSON payload but got type 2. request=json_payload: "{\"optionalTimestamp\": \"1970-01-01T00:00:00.000010000Z\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+WARNING, test=Recommended.Proto3.JsonInput.TimestampHas9FractionalDigits.Validator: Expected JSON payload but got type 2. request=json_payload: "{\"optionalTimestamp\": \"1970-01-01T00:00:00.000000010Z\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.FieldMask.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalFieldMask\": \"foo,barBaz\"}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.FieldMask.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalFieldMask\": \"foo,barBaz\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+WARNING, test=Recommended.Proto3.JsonInput.FieldMaskInvalidCharacter: Should have failed to parse, but didn't. request=json_payload: "{\"optionalFieldMask\": \"foo,bar_bar\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
 WARNING, test=Recommended.FieldMaskPathsDontRoundTrip.JsonOutput: Should have failed to serialize, but didn't. request=protobuf_payload: "\372\022\010\n\006fooBar" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"optionalFieldMask\":\"fooBar\"}"
 WARNING, test=Recommended.FieldMaskNumbersDontRoundTrip.JsonOutput: Should have failed to serialize, but didn't. request=protobuf_payload: "\372\022\013\n\tfoo_3_bar" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"optionalFieldMask\":\"foo_3_bar\"}"
 WARNING, test=Recommended.FieldMaskTooManyUnderscore.JsonOutput: Should have failed to serialize, but didn't. request=protobuf_payload: "\372\022\n\n\010foo__bar" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"optionalFieldMask\":\"foo__bar\"}"
+ERROR, test=Required.Proto3.JsonInput.Struct.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalStruct\": {\n          \"nullValue\": null,\n          \"intValue\": 1234,\n          \"boolValue\": true,\n          \"doubleValue\": 1234.5678,\n          \"stringValue\": \"Hello world!\",\n          \"listValue\": [1234, \"5678\"],\n          \"objectValue\": {\n            \"value\": 0\n          }\n        }\n      }" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.Struct.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalStruct\": {\n          \"nullValue\": null,\n          \"intValue\": 1234,\n          \"boolValue\": true,\n          \"doubleValue\": 1234.5678,\n          \"stringValue\": \"Hello world!\",\n          \"listValue\": [1234, \"5678\"],\n          \"objectValue\": {\n            \"value\": 0\n          }\n        }\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.ValueAcceptInteger.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalValue\": 1}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.ValueAcceptInteger.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalValue\": 1}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.ValueAcceptFloat.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalValue\": 1.5}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.ValueAcceptFloat.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalValue\": 1.5}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.ValueAcceptBool.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalValue\": false}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.ValueAcceptBool.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalValue\": false}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.ValueAcceptNull.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalValue\": null}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.ValueAcceptNull.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalValue\": null}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.ValueAcceptString.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalValue\": \"hello\"}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.ValueAcceptString.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalValue\": \"hello\"}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.ValueAcceptList.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalValue\": [0, \"hello\"]}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.ValueAcceptList.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalValue\": [0, \"hello\"]}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.ValueAcceptObject.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalValue\": {\"value\": 1}}" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.ValueAcceptObject.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\"optionalValue\": {\"value\": 1}}" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.Any.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/protobuf_test_messages.proto3.TestAllTypesProto3\",\n          \"optionalInt32\": 12345\n        }\n      }" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.Any.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/protobuf_test_messages.proto3.TestAllTypesProto3\",\n          \"optionalInt32\": 12345\n        }\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyNested.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/google.protobuf.Any\",\n          \"value\": {\n            \"@type\": \"type.googleapis.com/protobuf_test_messages.proto3.TestAllTypesProto3\",\n            \"optionalInt32\": 12345\n          }\n        }\n      }" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyNested.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/google.protobuf.Any\",\n          \"value\": {\n            \"@type\": \"type.googleapis.com/protobuf_test_messages.proto3.TestAllTypesProto3\",\n            \"optionalInt32\": 12345\n          }\n        }\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyUnorderedTypeTag.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"optionalInt32\": 12345,\n          \"@type\": \"type.googleapis.com/protobuf_test_messages.proto3.TestAllTypesProto3\"\n        }\n      }" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyUnorderedTypeTag.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"optionalInt32\": 12345,\n          \"@type\": \"type.googleapis.com/protobuf_test_messages.proto3.TestAllTypesProto3\"\n        }\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyWithInt32ValueWrapper.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/google.protobuf.Int32Value\",\n          \"value\": 12345\n        }\n      }" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyWithInt32ValueWrapper.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/google.protobuf.Int32Value\",\n          \"value\": 12345\n        }\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyWithDuration.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n          \"value\": \"1.5s\"\n        }\n      }" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyWithDuration.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/google.protobuf.Duration\",\n          \"value\": \"1.5s\"\n        }\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyWithTimestamp.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/google.protobuf.Timestamp\",\n          \"value\": \"1970-01-01T00:00:00Z\"\n        }\n      }" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyWithTimestamp.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/google.protobuf.Timestamp\",\n          \"value\": \"1970-01-01T00:00:00Z\"\n        }\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyWithFieldMask.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/google.protobuf.FieldMask\",\n          \"value\": \"foo,barBaz\"\n        }\n      }" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyWithFieldMask.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/google.protobuf.FieldMask\",\n          \"value\": \"foo,barBaz\"\n        }\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyWithStruct.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/google.protobuf.Struct\",\n          \"value\": {\n            \"foo\": 1\n          }\n        }\n      }" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyWithStruct.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/google.protobuf.Struct\",\n          \"value\": {\n            \"foo\": 1\n          }\n        }\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyWithValueForJsonObject.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/google.protobuf.Value\",\n          \"value\": {\n            \"foo\": 1\n          }\n        }\n      }" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyWithValueForJsonObject.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/google.protobuf.Value\",\n          \"value\": {\n            \"foo\": 1\n          }\n        }\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyWithValueForInteger.ProtobufOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/google.protobuf.Value\",\n          \"value\": 1\n        }\n      }" requested_output_format: PROTOBUF message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
+ERROR, test=Required.Proto3.JsonInput.AnyWithValueForInteger.JsonOutput: Failed to parse input or produce output. request=json_payload: "{\n        \"optionalAny\": {\n          \"@type\": \"type.googleapis.com/google.protobuf.Value\",\n          \"value\": 1\n        }\n      }" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=runtime_error: "child killed by signal 79"
 
 These tests failed.  If they can't be fixed right now, you can add them to the failure list so the overall suite can succeed.  Add them to the failure list by running:
   ./update_failure_list.py  --add failing_tests.txt
 
+  Required.Proto3.JsonInput.AllFieldAcceptNull.JsonOutput
+  Required.Proto3.JsonInput.AllFieldAcceptNull.ProtobufOutput
+  Required.Proto3.JsonInput.Any.JsonOutput
+  Required.Proto3.JsonInput.Any.ProtobufOutput
+  Required.Proto3.JsonInput.AnyNested.JsonOutput
+  Required.Proto3.JsonInput.AnyNested.ProtobufOutput
+  Required.Proto3.JsonInput.AnyUnorderedTypeTag.JsonOutput
+  Required.Proto3.JsonInput.AnyUnorderedTypeTag.ProtobufOutput
+  Required.Proto3.JsonInput.AnyWithDuration.JsonOutput
+  Required.Proto3.JsonInput.AnyWithDuration.ProtobufOutput
+  Required.Proto3.JsonInput.AnyWithFieldMask.JsonOutput
+  Required.Proto3.JsonInput.AnyWithFieldMask.ProtobufOutput
+  Required.Proto3.JsonInput.AnyWithInt32ValueWrapper.JsonOutput
+  Required.Proto3.JsonInput.AnyWithInt32ValueWrapper.ProtobufOutput
+  Required.Proto3.JsonInput.AnyWithStruct.JsonOutput
+  Required.Proto3.JsonInput.AnyWithStruct.ProtobufOutput
+  Required.Proto3.JsonInput.AnyWithTimestamp.JsonOutput
+  Required.Proto3.JsonInput.AnyWithTimestamp.ProtobufOutput
+  Required.Proto3.JsonInput.AnyWithValueForInteger.JsonOutput
+  Required.Proto3.JsonInput.AnyWithValueForInteger.ProtobufOutput
+  Required.Proto3.JsonInput.AnyWithValueForJsonObject.JsonOutput
+  Required.Proto3.JsonInput.AnyWithValueForJsonObject.ProtobufOutput
+  Required.Proto3.JsonInput.BoolMapEscapedKey.JsonOutput
+  Required.Proto3.JsonInput.BoolMapEscapedKey.ProtobufOutput
+  Required.Proto3.JsonInput.BoolMapField.JsonOutput
+  Required.Proto3.JsonInput.BoolMapField.ProtobufOutput
+  Required.Proto3.JsonInput.DoubleFieldTooLarge
+  Required.Proto3.JsonInput.DoubleFieldTooSmall
+  Required.Proto3.JsonInput.DurationJsonInputTooLarge
+  Required.Proto3.JsonInput.DurationJsonInputTooSmall
+  Required.Proto3.JsonInput.DurationMaxValue.JsonOutput
+  Required.Proto3.JsonInput.DurationMaxValue.ProtobufOutput
+  Required.Proto3.JsonInput.DurationMinValue.JsonOutput
+  Required.Proto3.JsonInput.DurationMinValue.ProtobufOutput
+  Required.Proto3.JsonInput.DurationMissingS
+  Required.Proto3.JsonInput.DurationNull.JsonOutput
+  Required.Proto3.JsonInput.DurationNull.ProtobufOutput
+  Required.Proto3.JsonInput.DurationRepeatedValue.JsonOutput
+  Required.Proto3.JsonInput.DurationRepeatedValue.ProtobufOutput
+  Required.Proto3.JsonInput.EnumFieldNotQuoted
+  Required.Proto3.JsonInput.EnumFieldUnknownValue.Validator
+  Required.Proto3.JsonInput.FieldMask.JsonOutput
+  Required.Proto3.JsonInput.FieldMask.ProtobufOutput
+  Required.Proto3.JsonInput.FloatFieldTooLarge
+  Required.Proto3.JsonInput.FloatFieldTooSmall
+  Required.Proto3.JsonInput.Int32FieldExponentialFormat.JsonOutput
+  Required.Proto3.JsonInput.Int32FieldExponentialFormat.ProtobufOutput
+  Required.Proto3.JsonInput.Int32FieldFloatTrailingZero.JsonOutput
+  Required.Proto3.JsonInput.Int32FieldFloatTrailingZero.ProtobufOutput
+  Required.Proto3.JsonInput.Int32FieldLeadingSpace
+  Required.Proto3.JsonInput.Int32FieldLeadingZero
+  Required.Proto3.JsonInput.Int32FieldMaxFloatValue.JsonOutput
+  Required.Proto3.JsonInput.Int32FieldMaxFloatValue.ProtobufOutput
+  Required.Proto3.JsonInput.Int32FieldMinFloatValue.JsonOutput
+  Required.Proto3.JsonInput.Int32FieldMinFloatValue.ProtobufOutput
+  Required.Proto3.JsonInput.Int32FieldNegativeWithLeadingZero
+  Required.Proto3.JsonInput.Int32FieldNotInteger
+  Required.Proto3.JsonInput.Int32FieldNotNumber
+  Required.Proto3.JsonInput.Int32FieldPlusSign
+  Required.Proto3.JsonInput.Int32FieldTooLarge
+  Required.Proto3.JsonInput.Int32FieldTooSmall
+  Required.Proto3.JsonInput.Int32FieldTrailingSpace
+  Required.Proto3.JsonInput.Int64FieldNotInteger
+  Required.Proto3.JsonInput.Int64FieldNotNumber
+  Required.Proto3.JsonInput.Int64FieldTooLarge
+  Required.Proto3.JsonInput.Int64FieldTooSmall
+  Required.Proto3.JsonInput.OneofFieldDuplicate
+  Required.Proto3.JsonInput.OptionalDoubleWrapper.JsonOutput
+  Required.Proto3.JsonInput.OptionalDoubleWrapper.ProtobufOutput
+  Required.Proto3.JsonInput.OptionalFloatWrapper.JsonOutput
+  Required.Proto3.JsonInput.OptionalFloatWrapper.ProtobufOutput
+  Required.Proto3.JsonInput.OptionalWrapperTypesWithNonDefaultValue.JsonOutput
+  Required.Proto3.JsonInput.OptionalWrapperTypesWithNonDefaultValue.ProtobufOutput
+  Required.Proto3.JsonInput.RepeatedDoubleWrapper.JsonOutput
+  Required.Proto3.JsonInput.RepeatedDoubleWrapper.ProtobufOutput
+  Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingIntegersGotBool
+  Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingIntegersGotMessage
+  Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingIntegersGotString
+  Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingMessagesGotBool
+  Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingMessagesGotInt
+  Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingMessagesGotString
+  Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotBool
+  Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotInt
+  Required.Proto3.JsonInput.RepeatedFieldWrongElementTypeExpectingStringsGotMessage
+  Required.Proto3.JsonInput.RepeatedFloatWrapper.JsonOutput
+  Required.Proto3.JsonInput.RepeatedFloatWrapper.ProtobufOutput
+  Required.Proto3.JsonInput.StringFieldNotAString
+  Required.Proto3.JsonInput.Struct.JsonOutput
+  Required.Proto3.JsonInput.Struct.ProtobufOutput
+  Required.Proto3.JsonInput.TimestampJsonInputLowercaseT
+  Required.Proto3.JsonInput.TimestampJsonInputLowercaseZ
+  Required.Proto3.JsonInput.TimestampJsonInputMissingT
+  Required.Proto3.JsonInput.TimestampJsonInputMissingZ
+  Required.Proto3.JsonInput.TimestampJsonInputTooLarge
+  Required.Proto3.JsonInput.TimestampJsonInputTooSmall
+  Required.Proto3.JsonInput.TimestampMaxValue.JsonOutput
+  Required.Proto3.JsonInput.TimestampMaxValue.ProtobufOutput
+  Required.Proto3.JsonInput.TimestampMinValue.JsonOutput
+  Required.Proto3.JsonInput.TimestampMinValue.ProtobufOutput
+  Required.Proto3.JsonInput.TimestampNull.JsonOutput
+  Required.Proto3.JsonInput.TimestampNull.ProtobufOutput
+  Required.Proto3.JsonInput.TimestampRepeatedValue.JsonOutput
+  Required.Proto3.JsonInput.TimestampRepeatedValue.ProtobufOutput
+  Required.Proto3.JsonInput.TimestampWithNegativeOffset.JsonOutput
+  Required.Proto3.JsonInput.TimestampWithNegativeOffset.ProtobufOutput
+  Required.Proto3.JsonInput.TimestampWithPositiveOffset.JsonOutput
+  Required.Proto3.JsonInput.TimestampWithPositiveOffset.ProtobufOutput
+  Required.Proto3.JsonInput.Uint32FieldMaxFloatValue.JsonOutput
+  Required.Proto3.JsonInput.Uint32FieldMaxFloatValue.ProtobufOutput
+  Required.Proto3.JsonInput.Uint32FieldNotInteger
+  Required.Proto3.JsonInput.Uint32FieldNotNumber
+  Required.Proto3.JsonInput.Uint32FieldTooLarge
+  Required.Proto3.JsonInput.Uint64FieldMaxValueNotQuoted.JsonOutput
+  Required.Proto3.JsonInput.Uint64FieldMaxValueNotQuoted.ProtobufOutput
+  Required.Proto3.JsonInput.Uint64FieldNotInteger
+  Required.Proto3.JsonInput.Uint64FieldNotNumber
+  Required.Proto3.JsonInput.Uint64FieldTooLarge
+  Required.Proto3.JsonInput.ValueAcceptBool.JsonOutput
+  Required.Proto3.JsonInput.ValueAcceptBool.ProtobufOutput
+  Required.Proto3.JsonInput.ValueAcceptFloat.JsonOutput
+  Required.Proto3.JsonInput.ValueAcceptFloat.ProtobufOutput
+  Required.Proto3.JsonInput.ValueAcceptInteger.JsonOutput
+  Required.Proto3.JsonInput.ValueAcceptInteger.ProtobufOutput
+  Required.Proto3.JsonInput.ValueAcceptList.JsonOutput
+  Required.Proto3.JsonInput.ValueAcceptList.ProtobufOutput
+  Required.Proto3.JsonInput.ValueAcceptNull.JsonOutput
+  Required.Proto3.JsonInput.ValueAcceptNull.ProtobufOutput
+  Required.Proto3.JsonInput.ValueAcceptObject.JsonOutput
+  Required.Proto3.JsonInput.ValueAcceptObject.ProtobufOutput
+  Required.Proto3.JsonInput.ValueAcceptString.JsonOutput
+  Required.Proto3.JsonInput.ValueAcceptString.ProtobufOutput
+  Required.Proto3.JsonInput.WrapperTypesWithNullValue.JsonOutput
+  Required.Proto3.JsonInput.WrapperTypesWithNullValue.ProtobufOutput
   Required.Proto3.ProtobufInput.RepeatedScalarSelectsLast.DOUBLE.JsonOutput
   Required.Proto3.ProtobufInput.ValidDataRepeated.DOUBLE.JsonOutput
 
-CONFORMANCE SUITE FAILED: 249 successes, 563 skipped, 0 expected failures, 2 unexpected failures.
+CONFORMANCE SUITE FAILED: 425 successes, 194 skipped, 0 expected failures, 135 unexpected failures.
 

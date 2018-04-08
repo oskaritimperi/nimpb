@@ -207,3 +207,155 @@ proc toJson*(message: google_protobuf_Any): JsonNode =
         result = newJObject()
         result["typeUrl"] = %message.typeUrl
         result["value"] = %message.value
+
+proc getJsonField*(obj: JsonNode, name, jsonName: string): JsonNode =
+    if jsonName in obj:
+        result = obj[jsonName]
+    elif name in obj:
+        result = obj[name]
+
+proc parseEnum*[T](node: JsonNode): T =
+    if node.kind == JString:
+        result = parseEnum[T](node.str)
+    elif node.kind == JInt:
+        result = T(node.num)
+    else:
+        raise newException(ValueError, "invalid enum value")
+
+proc parseFloat*(node: JsonNode): float =
+    if node.kind == JString:
+        if node.str == "NaN":
+            result = NaN
+        elif node.str == "Infinity":
+            result = Inf
+        elif node.str == "-Infinity":
+            result = NegInf
+        else:
+            result = parseFloat(node.str)
+    else:
+        result = getFloat(node)
+
+proc parseInt*[T: int32|int64](node: JsonNode): T =
+    if node.kind == JString:
+        result = T(parseBiggestInt(node.str))
+    elif node.kind == JInt:
+        result = T(getBiggestInt(node))
+    else:
+        raise newException(ValueError, "not an integer")
+
+proc parseInt*[T: uint32|uint64](node: JsonNode): T =
+    if node.kind == JString:
+        result = T(parseBiggestUInt(node.str))
+    elif node.kind == JInt:
+        result = T(getBiggestInt(node))
+    else:
+        raise newException(ValueError, "not an integer")
+
+proc parseString*(node: JsonNode): string =
+    if node.kind != JString:
+        raise newException(ValueError, "not a string")
+    result = node.str
+
+proc parseBytes*(node: JsonNode): bytes =
+    if node.kind != JString:
+        raise newException(ValueError, "not a string")
+    result = bytes(base64.decode(node.str))
+
+proc parseBool*(node: JsonNode): bool =
+    if node.kind != JBool:
+        raise newException(ValueError, "not a boolean")
+    result = getBool(node)
+
+proc parsegoogle_protobuf_DoubleValueFromJson*(node: JsonNode): google_protobuf_DoubleValue =
+    if node.kind != JFloat:
+        raise newException(ValueError, "not a float")
+    result = newgoogle_protobuf_DoubleValue()
+    result.value = getFloat(node)
+
+proc parsegoogle_protobuf_FloatValueFromJson*(node: JsonNode): google_protobuf_FloatValue =
+    if node.kind != JFloat:
+        raise newException(ValueError, "not a float")
+    result = newgoogle_protobuf_FloatValue()
+    result.value = getFloat(node)
+
+proc parsegoogle_protobuf_Int64ValueFromJson*(node: JsonNode): google_protobuf_Int64Value =
+    result = newgoogle_protobuf_Int64Value()
+    if node.kind == JInt:
+        result.value = getBiggestInt(node)
+    elif node.kind == JString:
+        result.value = parseBiggestInt(node.str)
+    else:
+        raise newException(ValueError, "invalid value")
+
+proc parsegoogle_protobuf_UInt64ValueFromJson*(node: JsonNode): google_protobuf_UInt64Value =
+    result = newgoogle_protobuf_UInt64Value()
+    if node.kind == JInt:
+        result.value = uint64(getBiggestInt(node))
+    elif node.kind == JString:
+        result.value = uint64(parseBiggestUInt(node.str))
+    else:
+        raise newException(ValueError, "invalid value")
+
+proc parsegoogle_protobuf_Int32ValueFromJson*(node: JsonNode): google_protobuf_Int32Value =
+    result = newgoogle_protobuf_Int32Value()
+    if node.kind == JInt:
+        result.value = int32(getInt(node))
+    elif node.kind == JString:
+        result.value = int32(parseInt(node.str))
+    else:
+        raise newException(ValueError, "invalid value")
+
+proc parsegoogle_protobuf_UInt32ValueFromJson*(node: JsonNode): google_protobuf_UInt32Value =
+    result = newgoogle_protobuf_UInt32Value()
+    if node.kind == JInt:
+        result.value = uint32(getInt(node))
+    elif node.kind == JString:
+        result.value = uint32(parseUInt(node.str))
+    else:
+        raise newException(ValueError, "invalid value")
+
+proc parsegoogle_protobuf_BoolValueFromJson*(node: JsonNode): google_protobuf_BoolValue =
+    if node.kind != JBool:
+        raise newException(ValueError, "not a boolean")
+    result = newgoogle_protobuf_BoolValue()
+    result.value = getBool(node)
+
+proc parsegoogle_protobuf_StringValueFromJson*(node: JsonNode): google_protobuf_StringValue =
+    if node.kind != JString:
+        raise newException(ValueError, "not a string")
+    result = newgoogle_protobuf_StringValue()
+    result.value = node.str
+
+proc parsegoogle_protobuf_BytesValueFromJson*(node: JsonNode): google_protobuf_BytesValue =
+    if node.kind != JString:
+        raise newException(ValueError, "not a string")
+    result = newgoogle_protobuf_BytesValue()
+    result.value = bytes(base64.decode(node.str))
+
+proc parsegoogle_protobuf_DurationFromJson*(node: JsonNode): google_protobuf_Duration =
+    discard
+
+proc parsegoogle_protobuf_TimestampFromJson*(node: JsonNode): google_protobuf_Timestamp =
+    discard
+
+proc parsegoogle_protobuf_FieldMaskFromJson*(node: JsonNode): google_protobuf_FieldMask =
+    discard
+
+proc parsegoogle_protobuf_ValueFromJson*(node: JsonNode): google_protobuf_Value
+
+proc parsegoogle_protobuf_StructFromJson*(node: JsonNode): google_protobuf_Struct =
+    discard
+
+proc parsegoogle_protobuf_ListValueFromJson*(node: JsonNode): google_protobuf_ListValue
+
+proc parsegoogle_protobuf_ValueFromJson*(node: JsonNode): google_protobuf_Value =
+    discard
+
+proc parsegoogle_protobuf_NullValueFromJson*(node: JsonNode): google_protobuf_NullValue =
+    discard
+
+proc parsegoogle_protobuf_ListValueFromJson*(node: JsonNode): google_protobuf_ListValue =
+    discard
+
+proc parsegoogle_protobuf_AnyFromJson*(node: JsonNode): google_protobuf_Any =
+    discard

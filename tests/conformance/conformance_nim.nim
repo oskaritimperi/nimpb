@@ -43,11 +43,16 @@ while true:
 
     if request.messageType == "protobuf_test_messages.proto2.TestAllTypesProto2":
         response.skipped = "skipping proto2 tests"
-    elif hasJsonPayload(request):
-        response.skipped = "dont know how to parse json"
     else:
         try:
-            let parsed = newprotobuf_test_messages_proto3_TestAllTypesProto3(string(request.protobufPayload))
+            var parsed: protobuf_test_messages_proto3_TestAllTypesProto3
+
+            if hasProtobufPayload(request):
+                parsed = newprotobuf_test_messages_proto3_TestAllTypesProto3(string(request.protobufPayload))
+            elif hasJsonPayload(request):
+                let node = parseJson(request.jsonPayload)
+                parsed = parseprotobuf_test_messages_proto3_TestAllTypesProto3FromJson(node)
+
             if request.requestedOutputFormat == conformance_WireFormat.PROTOBUF:
                 let ser = serialize(parsed)
                 response.protobufPayload = bytes(ser)
