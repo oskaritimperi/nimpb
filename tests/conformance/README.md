@@ -1,7 +1,7 @@
 # Building
 
-    $ protoc -I. --nim_out=. test_messages_proto3.proto
-    $ protoc -I. --nim_out=. conformance.proto
+    $ nimpb_build -I. --out=. test_messages_proto3.proto
+    $ nimpb_build -I. --out=. conformance.proto
     $ nim c conformance_nim.nim
 
 # Running conformance tests
