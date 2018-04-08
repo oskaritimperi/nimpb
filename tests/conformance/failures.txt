@@ -1,0 +1,18 @@
+
+CONFORMANCE TEST BEGIN ====================================
+
+ERROR, test=Required.Proto3.ProtobufInput.RepeatedScalarSelectsLast.DOUBLE.JsonOutput: Output was not equivalent to reference message: modified: optional_double: 2.2250738585072014e-308 -> 2.2250738585072009e-308
+. request=protobuf_payload: "a\232\231\231\231\231\231\271?a\377\377\377\377\377\377\357\177a\000\000\000\000\000\000\020\000" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"optionalDouble\":2.225073858507201e-308}"
+ERROR, test=Required.Proto3.ProtobufInput.ValidDataRepeated.DOUBLE.JsonOutput: JSON output we received from test was unparseable. request=protobuf_payload: "\321\002\232\231\231\231\231\231\271?\321\002\377\377\377\377\377\377\357\177\321\002\000\000\000\000\000\000\020\000" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"repeatedDouble\":[0.1,1.797693134862316e+308,2.225073858507201e-308]}"
+WARNING, test=Recommended.FieldMaskPathsDontRoundTrip.JsonOutput: Should have failed to serialize, but didn't. request=protobuf_payload: "\372\022\010\n\006fooBar" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"optionalFieldMask\":\"fooBar\"}"
+WARNING, test=Recommended.FieldMaskNumbersDontRoundTrip.JsonOutput: Should have failed to serialize, but didn't. request=protobuf_payload: "\372\022\013\n\tfoo_3_bar" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"optionalFieldMask\":\"foo_3_bar\"}"
+WARNING, test=Recommended.FieldMaskTooManyUnderscore.JsonOutput: Should have failed to serialize, but didn't. request=protobuf_payload: "\372\022\n\n\010foo__bar" requested_output_format: JSON message_type: "protobuf_test_messages.proto3.TestAllTypesProto3", response=json_payload: "{\"optionalFieldMask\":\"foo__bar\"}"
+
+These tests failed.  If they can't be fixed right now, you can add them to the failure list so the overall suite can succeed.  Add them to the failure list by running:
+  ./update_failure_list.py  --add failing_tests.txt
+
+  Required.Proto3.ProtobufInput.RepeatedScalarSelectsLast.DOUBLE.JsonOutput
+  Required.Proto3.ProtobufInput.ValidDataRepeated.DOUBLE.JsonOutput
+
+CONFORMANCE SUITE FAILED: 249 successes, 563 skipped, 0 expected failures, 2 unexpected failures.
+

@@ -1,4 +1,5 @@
 import endians
+import json
 import streams
 import strformat
 
@@ -27,7 +28,13 @@ proc myReadString(s: Stream, size: int): string =
         raise newException(Exception, "failed to read data")
 
 while true:
-    var requestSize = readInt32Le(inputStream)
+    var requestSize = 0'i32
+
+    try:
+        requestSize = readInt32Le(inputStream)
+    except:
+        break
+
     var requestData = myReadString(inputStream, requestSize)
 
     let request = newConformance_ConformanceRequest(requestData)
@@ -36,19 +43,22 @@ while true:
 
     if request.messageType == "protobuf_test_messages.proto2.TestAllTypesProto2":
         response.skipped = "skipping proto2 tests"
-    elif request.requestedOutputFormat == conformance_WireFormat.JSON:
-        response.skipped = "dont know how to output json"
     elif hasJsonPayload(request):
         response.skipped = "dont know how to parse json"
     else:
         try:
             let parsed = newprotobuf_test_messages_proto3_TestAllTypesProto3(string(request.protobufPayload))
-            let ser = serialize(parsed)
-            response.protobufPayload = bytes(ser)
+            if request.requestedOutputFormat == conformance_WireFormat.PROTOBUF:
+                let ser = serialize(parsed)
+                response.protobufPayload = bytes(ser)
+            elif request.requestedOutputFormat == conformance_WireFormat.JSON:
+                response.jsonPayload = $toJson(parsed)
         except IOError as exc:
             response.parse_error = exc.msg
         except ParseError as exc:
             response.parse_error = exc.msg
+        except ValueError as exc:
+            response.serializeError = exc.msg
         except Exception as exc:
             response.runtimeError = exc.msg
 
