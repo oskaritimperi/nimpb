@@ -253,6 +253,11 @@ proc parseInt*[T: int32|int64](node: JsonNode): T =
         result = T(parseBiggestInt(node.str))
     elif node.kind == JInt:
         result = T(getBiggestInt(node))
+    elif node.kind == JFloat:
+        let f = getFloat(node)
+        if trunc(f) != f:
+            raise newException(JsonParseError, "not an integer")
+        result = T(f)
     else:
         raise newException(JsonParseError, "not an integer")
 
@@ -261,6 +266,11 @@ proc parseInt*[T: uint32|uint64](node: JsonNode): T =
         result = T(parseBiggestUInt(node.str))
     elif node.kind == JInt:
         result = T(getBiggestInt(node))
+    elif node.kind == JFloat:
+        let f = getFloat(node)
+        if trunc(f) != f:
+            raise newException(JsonParseError, "not an integer")
+        result = T(f)
     else:
         raise newException(JsonParseError, "not an integer")
 
