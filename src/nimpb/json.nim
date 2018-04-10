@@ -16,7 +16,7 @@ import wkt/struct_pb
 import wkt/any_pb
 
 type
-    JsonParseError = object of nimpb.ParseError
+    JsonParseError* = object of nimpb.ParseError
 
 proc `%`*(u: uint32): JsonNode =
     newJFloat(float(u))
@@ -235,44 +235,72 @@ proc parseEnum*[T](node: JsonNode): T =
     else:
         raise newException(ValueError, "invalid enum value")
 
-proc parseFloat*(node: JsonNode): float =
+proc parseFloat*[T: float32|float64](node: JsonNode): T =
     if node.kind == JString:
         if node.str == "NaN":
-            result = NaN
+            return NaN
         elif node.str == "Infinity":
-            result = Inf
+            return Inf
         elif node.str == "-Infinity":
-            result = NegInf
+            return NegInf
         else:
-            result = parseFloat(node.str)
+            result = T(parseFloat(node.str))
     else:
-        result = getFloat(node)
+        result = T(getFloat(node))
+
+    case classify(result)
+    of fcInf: raise newException(JsonParseError, "invalid floating point number")
+    of fcNegInf: raise newException(JsonParseError, "invalid floating point number")
+    of fcNan: raise newException(JsonParseError, "invalid floating point number")
+    else: discard
 
 proc parseInt*[T: int32|int64](node: JsonNode): T =
+    var big: BiggestInt
+
     if node.kind == JString:
-        result = T(parseBiggestInt(node.str))
+        try:
+            big = parseBiggestInt(node.str)
+        except Exception as exc:
+            raise newException(JsonParseError, exc.msg)
     elif node.kind == JInt:
-        result = T(getBiggestInt(node))
+        big = getBiggestInt(node)
     elif node.kind == JFloat:
         let f = getFloat(node)
         if trunc(f) != f:
             raise newException(JsonParseError, "not an integer")
-        result = T(f)
+        big = BiggestInt(f)
     else:
         raise newException(JsonParseError, "not an integer")
 
+    if big < BiggestInt(low(T)) or big > BiggestInt(high(T)):
+        raise newException(JsonParseError, "integer out of bounds")
+
+    result = T(big)
+
+proc high(t: typedesc[uint64]): uint64 = 18446744073709551615'u64
+
 proc parseInt*[T: uint32|uint64](node: JsonNode): T =
+    var big: BiggestUInt
+
     if node.kind == JString:
-        result = T(parseBiggestUInt(node.str))
+        try:
+            big = parseBiggestUInt(node.str)
+        except Exception as exc:
+            raise newException(JsonParseError, exc.msg)
     elif node.kind == JInt:
-        result = T(getBiggestInt(node))
+        big = BiggestUInt(getBiggestInt(node))
     elif node.kind == JFloat:
         let f = getFloat(node)
         if trunc(f) != f:
             raise newException(JsonParseError, "not an integer")
-        result = T(f)
+        big = BiggestUInt(f)
     else:
         raise newException(JsonParseError, "not an integer")
+
+    if big > BiggestUInt(high(T)):
+        raise newException(JsonParseError, "integer out of bounds")
+
+    result = T(big)
 
 proc parseString*(node: JsonNode): string =
     if node.kind != JString:

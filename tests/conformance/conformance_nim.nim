@@ -4,6 +4,7 @@ import streams
 import strformat
 
 import nimpb/nimpb
+import nimpb/json as nimpb_json
 
 import conformance_pb
 import test_messages_proto3_pb
@@ -50,7 +51,11 @@ while true:
             if hasProtobufPayload(request):
                 parsed = newprotobuf_test_messages_proto3_TestAllTypesProto3(string(request.protobufPayload))
             elif hasJsonPayload(request):
-                let node = parseJson(request.jsonPayload)
+                var node: JsonNode
+                try:
+                    node = parseJson(request.jsonPayload)
+                except Exception as exc:
+                    raise newException(JsonParseError, exc.msg)
                 parsed = parseprotobuf_test_messages_proto3_TestAllTypesProto3FromJson(node)
 
             if request.requestedOutputFormat == conformance_WireFormat.PROTOBUF:
