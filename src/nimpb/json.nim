@@ -44,6 +44,13 @@ proc toJson*(value: int64): JsonNode =
 proc toJson*(value: uint64): JsonNode =
     newJString($value)
 
+proc toJson*[Enum: enum](value: Enum): JsonNode =
+    for v in Enum:
+        if value == v:
+            return %($v)
+    # The enum has a value that is not defined in the enum type
+    result = %(cast[int](value))
+
 proc toJson*(message: google_protobuf_DoubleValue): JsonNode =
     if hasValue(message):
         result = toJson(message.value)
@@ -231,7 +238,7 @@ proc parseEnum*[T](node: JsonNode): T =
     if node.kind == JString:
         result = parseEnum[T](node.str)
     elif node.kind == JInt:
-        result = T(node.num)
+        result = cast[T](node.num)
     else:
         raise newException(ValueError, "invalid enum value")
 
@@ -318,16 +325,18 @@ proc parseBool*(node: JsonNode): bool =
     result = getBool(node)
 
 proc parsegoogle_protobuf_DoubleValueFromJson*(node: JsonNode): google_protobuf_DoubleValue =
-    if node.kind != JFloat:
-        raise newException(JsonParseError, "not a float")
     result = newgoogle_protobuf_DoubleValue()
-    result.value = getFloat(node)
+    if node.kind == JInt or node.kind == JFloat:
+        result.value = getFloat(node)
+    else:
+        raise newException(JsonParseError, "not a float")
 
 proc parsegoogle_protobuf_FloatValueFromJson*(node: JsonNode): google_protobuf_FloatValue =
-    if node.kind != JFloat:
-        raise newException(JsonParseError, "not a float")
     result = newgoogle_protobuf_FloatValue()
-    result.value = getFloat(node)
+    if node.kind == JInt or node.kind == JFloat:
+        result.value = getFloat(node)
+    else:
+        raise newException(JsonParseError, "not a float")
 
 proc parsegoogle_protobuf_Int64ValueFromJson*(node: JsonNode): google_protobuf_Int64Value =
     result = newgoogle_protobuf_Int64Value()
