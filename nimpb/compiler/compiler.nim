@@ -1,64 +1,58 @@
+import macros
 import os
 import osproc
-import streams
 import strformat
-import strtabs
 import strutils
 
-from plugin import processFileDescriptorSet, ServiceGenerator, Service, ServiceMethod
-
+from generator import processFileDescriptorSet, ServiceGenerator, Service, ServiceMethod
 export Service, ServiceMethod
 
-when defined(windows):
-    const compilerId = "win32"
-elif defined(linux):
-    when defined(i386):
-        const arch = "x86_32"
-    elif defined(amd64):
-        const arch = "x86_64"
-    elif defined(arm64):
-        const arch = "aarch_64"
-    else:
-        {.fatal:"unsupported architecture".}
-    const compilerId = "linux-" & arch
-elif defined(macosx):
-    when defined(amd64):
-        const arch = "x86_64"
-    else:
-        {.fatal:"unsupported architecture".}
-    const compilerId = "osx-" & arch
-else:
-    {.fatal:"unsupported platform".}
+const
+    nimpbBuildInfo = gorgeEx("nimble dump nimpb_protoc")
+    isNimpbBuildAvailable = nimpbBuildInfo[1] == 0
 
-when defined(windows):
-    const exeSuffix = ".exe"
-else:
-    const exeSuffix = ""
+when isNimpbBuildAvailable:
+    import nimpb_protoc/nimpb_protoc
 
-proc findCompiler(): string =
-    let
-        compilerName = &"protoc-{compilerId}{exeSuffix}"
-        paths = @[
-            getAppDir() / "src" / "nimpb_buildpkg" / "protobuf",
-            getAppDir() / "nimpb_buildpkg" / "protobuf",
-            parentDir(currentSourcePath()) / "nimpb_buildpkg" / "protobuf",
-        ]
+proc findCompiler*(): string =
+    result = ""
 
-    for path in paths:
-        if fileExists(path / compilerName):
-            return path / compilerName
+    if existsEnv("NIMPB_PROTOC"):
+        result = getEnv("NIMPB_PROTOC")
+        if not fileExists(result):
+            result = ""
 
-    raise newException(Exception, &"{compilerName} not found!")
+    if result == "":
+        result = findExe("protoc")
+
+    when isNimpbBuildAvailable:
+        if result == "":
+            result = nimpb_protoc.getCompilerPath()
+
+    if result == "":
+        let msg = """
+error: protoc compiler not found
+
+Now you have three options to make this work:
+
+1. Tell me the full path to the protoc executable by using NIMPB_PROTOC
+   environment variable
+
+2. You can also make sure that protoc is in PATH, which will make me find it
+
+3. Install nimpb_protoc with nimble, which includes the protoc compiler for the
+   most common platforms (Windows, Linux, macOS) and I should be able to pick
+   it up after a recompile
+
+"""
+
+        raise newException(Exception, msg)
 
 proc builtinIncludeDir(compilerPath: string): string =
     parentDir(compilerPath) / "include"
 
-template verboseEcho(x: untyped): untyped =
-    if verbose:
-        echo(x)
-
 proc myTempDir(): string =
-    result = getTempDir() / "nimpb_build_tmp"
+    result = getTempDir() / "nimpb_protoc_tmp"
 
 proc compileProtos*(protos: openArray[string],
                     includes: openArray[string],
