@@ -5,7 +5,6 @@ import intsets
 import json
 
 import nimpb/nimpb
-import nimpb/json as nimpb_json
 
 type
     google_protobuf_Any* = ref google_protobuf_AnyObj
