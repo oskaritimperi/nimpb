@@ -8,11 +8,11 @@ from generator import processFileDescriptorSet, ServiceGenerator, Service, Servi
 export Service, ServiceMethod
 
 const
-    nimpbBuildInfo = gorgeEx("nimble dump nimpb_protoc")
-    isNimpbBuildAvailable = nimpbBuildInfo[1] == 0
+    nimpbProtocInfo = gorgeEx("nimble dump nimpb_protoc")
+    isNimpbProtocAvailable = nimpbProtocInfo[1] == 0
 
-when isNimpbBuildAvailable:
-    import nimpb_protoc/nimpb_protoc
+when isNimpbProtocAvailable:
+    import nimpb_protoc
 
 proc findCompiler*(): string =
     result = ""
@@ -25,7 +25,7 @@ proc findCompiler*(): string =
     if result == "":
         result = findExe("protoc")
 
-    when isNimpbBuildAvailable:
+    when isNimpbProtocAvailable:
         if result == "":
             result = nimpb_protoc.getCompilerPath()
 
@@ -48,9 +48,6 @@ Now you have three options to make this work:
 
         raise newException(Exception, msg)
 
-proc builtinIncludeDir(compilerPath: string): string =
-    parentDir(compilerPath) / "include"
-
 proc myTempDir(): string =
     result = getTempDir() / "nimpb_protoc_tmp"
 
@@ -71,7 +68,8 @@ proc compileProtos*(protos: openArray[string],
     for incdir in includes:
         add(args, &"-I{incdir}")
 
-    add(args, &"-I{builtinIncludeDir(command)}")
+    when isNimpbProtocAvailable:
+        add(args, &"-I{getProtoIncludeDir()}")
 
     for proto in protos:
         add(args, proto)
@@ -86,43 +84,3 @@ proc compileProtos*(protos: openArray[string],
         raise newException(Exception, outp)
 
     processFileDescriptorSet(outputFilename, outdir, protos, serviceGenerator)
-
-
-when isMainModule:
-    proc usage() {.noreturn.} =
-        echo(&"""
-    {getAppFilename()} --out=OUTDIR [-IPATH [-IPATH]...] PROTOFILE...
-
-        --out       The output directory for the generated files
-        -I          Add a path to the set of include paths
-    """)
-        quit(QuitFailure)
-
-    var includes: seq[string] = @[]
-    var protos: seq[string] = @[]
-    var outdir: string
-
-    if paramCount() == 0:
-        usage()
-
-    for idx in 1..paramCount():
-        let param = paramStr(idx)
-
-        if param.startsWith("-I"):
-            add(includes, param[2..^1])
-        elif param.startsWith("--out="):
-            outdir = param[6..^1]
-        elif param == "--help":
-            usage()
-        else:
-            add(protos, param)
-
-    if outdir == nil:
-        echo("error: --out is required")
-        quit(QuitFailure)
-
-    if len(protos) == 0:
-        echo("error: no input files")
-        quit(QuitFailure)
-
-    compileProtos(protos, includes, outdir)
