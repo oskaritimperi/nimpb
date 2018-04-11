@@ -2,7 +2,10 @@
 
 A Nim library to serialize/deserialize Protocol Buffers.
 
-For generating Nim code usable with nimpb, you should use [nimpb_build](https://github.com/oswjk/nimpb-build).
+To actually generate Nim code from protobuf definitions, you need the protoc
+tool. To make things simple, nimpb depends on
+[nimpb_protoc](https://github.com/oswjk/nimpb_protoc), which bundles protoc
+binaries for the most common platforms (Windows, Linux, macOS).
 
 **NOTE** At the moment this is at a very rough state. Do not use for any kind of production use. Anything can change at any time. You've been warned.
 
@@ -25,7 +28,7 @@ message Test1 {
 }
 ```
 
-You can use [nimpb_build](https://github.com/oswjk/nimpb-build) to generate code like this (procs not included in the example):
+You can use nimpb_build (a tool that comes with nimpb) to generate code like this (procs not included in the example):
 
 ```nim
 type
