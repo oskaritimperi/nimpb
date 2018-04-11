@@ -9,7 +9,7 @@ import tables
 
 import descriptor_pb
 
-import nimpb/nimpb
+import ../nimpb
 
 type
     Names = distinct seq[string]

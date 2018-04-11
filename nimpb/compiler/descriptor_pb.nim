@@ -2,7 +2,7 @@
 
 import intsets
 
-import nimpb/nimpb
+import ../nimpb
 
 type
     google_protobuf_FieldDescriptorProto_Type* {.pure.} = enum
