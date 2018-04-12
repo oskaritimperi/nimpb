@@ -8,6 +8,7 @@ import strutils
 import tables
 
 import nimpb/wkt/descriptor_pb
+import nimpb/utils
 
 import ../nimpb
 
@@ -303,7 +304,7 @@ proc sizeOfProc(field: Field): string =
 proc newField(file: ProtoFile, message: Message, desc: google_protobuf_FieldDescriptorProto): Field =
     new(result)
 
-    result.name = desc.name
+    result.name = toCamelCase(desc.name)
     result.number = desc.number
     result.label = desc.label
     result.ftype = desc.ftype
@@ -359,7 +360,7 @@ proc newField(file: ProtoFile, message: Message, desc: google_protobuf_FieldDesc
 proc newOneof(name: string): Oneof =
     new(result)
     result.fields = @[]
-    result.name = name
+    result.name = toCamelCase(name)
 
 proc newMessage(file: ProtoFile, names: Names, desc: google_protobuf_DescriptorProto): Message =
     new(result)
