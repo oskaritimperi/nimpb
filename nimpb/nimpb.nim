@@ -70,6 +70,11 @@ type
         else:
             discard
 
+    Message* = ref MessageObj
+    MessageObj* = object of RootObj
+        hasField: IntSet
+        unknownFields: seq[UnknownField]
+
 proc wiretype*(ft: FieldType): WireType =
     case ft
     of FieldType.Double: result = WireType.Fixed64
@@ -572,6 +577,9 @@ proc readUnknownField*(stream: ProtobufStream, tag: Tag,
 
     add(fields, field)
 
+proc readUnknownField*(stream: ProtobufStream, message: Message, tag: Tag) =
+    readUnknownField(stream, tag, message.unknownFields)
+
 proc writeUnknownFields*(stream: ProtobufStream, fields: seq[UnknownField]) =
     for field in fields:
         case field.wiretype
@@ -586,6 +594,9 @@ proc writeUnknownFields*(stream: ProtobufStream, fields: seq[UnknownField]) =
             writeString(stream, field.data, field.fieldNumber)
         else:
             raise newException(Exception, "unsupported wiretype: " & $field.wiretype)
+
+proc writeUnknownFields*(stream: ProtobufStream, message: Message) =
+    writeUnknownFields(stream, message.unknownFields)
 
 proc discardUnknownFields*[T](message: T) =
     message.unknownFields = @[]
@@ -603,3 +614,25 @@ proc sizeOfUnknownField*(field: UnknownField): uint64 =
         result = result + sizeOfLengthDelimited(uint64(len(field.data)))
     else:
         raise newException(Exception, "unsupported wiretype: " & $field.wiretype)
+
+proc sizeOfUnknownFields*(message: Message): uint64 =
+    for field in message.unknownFields:
+        result = result + sizeOfUnknownField(field)
+
+proc initMessage*(message: var MessageObj) =
+    message.hasField = initIntSet()
+    message.unknownFields = @[]
+
+proc hasField*(message: Message, fieldNumber: int): bool =
+    contains(message.hasField, fieldNumber)
+
+proc hasFields*(message: Message, fieldNumbers: openArray[int]): bool =
+    for fieldNumber in fieldNumbers:
+        if contains(message.hasField, fieldNumber):
+            return true
+
+proc clearFields*(message: Message, fieldNumbers: openArray[int]) =
+    excl(message.hasField, fieldNumbers)
+
+proc setField*(message: Message, fieldNumber: int) =
+    incl(message.hasField, fieldNumber)

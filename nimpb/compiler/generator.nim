@@ -591,9 +591,7 @@ proc mapValueField(message: Message): Field =
 iterator genType(message: Message): string =
     if not isMapEntry(message):
         yield &"{message.names}* = ref {message.names}Obj"
-        yield &"{message.names}Obj* = object of RootObj"
-        yield indent(&"hasField: IntSet", 4)
-        yield indent(&"unknownFields: seq[UnknownField]", 4)
+        yield &"{message.names}Obj* = object of Message"
 
         for field in message.fields:
             if isMapEntry(field):
@@ -613,8 +611,7 @@ iterator genType(message: Message): string =
 iterator genNewMessageProc(msg: Message): string =
     yield &"proc new{msg.names}*(): {msg.names} ="
     yield indent("new(result)", 4)
-    yield indent("result.hasField = initIntSet()", 4)
-    yield indent("result.unknownFields = @[]", 4)
+    yield indent("initMessage(result[])", 4)
     for field in msg.fields:
         yield indent(&"result.{field.accessor} = {defaultValue(field)}", 4)
     yield ""
@@ -632,12 +629,12 @@ iterator genClearFieldProc(msg: Message, field: Field): string =
     var numbers: seq[int] = @[field.number]
     for sibling in oneofSiblings(field):
         add(numbers, sibling.number)
-    yield indent(&"excl(message.hasField, [{join(numbers, \", \")}])", 4)
+    yield indent(&"clearFields(message, [{join(numbers, \", \")}])", 4)
     yield ""
 
 iterator genHasFieldProc(msg: Message, field: Field): string =
     yield &"proc has{field.name}*(message: {msg.names}): bool ="
-    var check = indent(&"result = contains(message.hasField, {field.number})", 4)
+    var check = indent(&"result = hasField(message, {field.number})", 4)
     if isRepeated(field) or isMapEntry(field):
         check = &"{check} or (len(message.{field.accessor}) > 0)"
     yield check
@@ -646,18 +643,18 @@ iterator genHasFieldProc(msg: Message, field: Field): string =
 iterator genSetFieldProc(msg: Message, field: Field): string =
     yield &"proc set{field.name}*(message: {msg.names}, value: {field.fullType}) ="
     yield indent(&"message.{field.accessor} = value", 4)
-    yield indent(&"incl(message.hasField, {field.number})", 4)
+    yield indent(&"setField(message, {field.number})", 4)
     var numbers: seq[int] = @[]
     for sibling in oneofSiblings(field):
         add(numbers, sibling.number)
     if len(numbers) > 0:
-        yield indent(&"excl(message.hasField, [{join(numbers, \", \")}])", 4)
+        yield indent(&"clearFields(message, [{join(numbers, \", \")}])", 4)
     yield ""
 
 iterator genAddToFieldProc(msg: Message, field: Field): string =
     yield &"proc add{field.name}*(message: {msg.names}, value: {field.nimTypeName}) ="
     yield indent(&"add(message.{field.name}, value)", 4)
-    yield indent(&"incl(message.hasField, {field.number})", 4)
+    yield indent(&"setField(message, {field.number})", 4)
     yield ""
 
 iterator genFieldAccessorProcs(msg: Message, field: Field): string =
@@ -702,7 +699,7 @@ iterator genWriteMessageProc(msg: Message): string =
             yield indent(&"if has{field.name}(message):", 4)
             yield indent(&"{field.writeProc}(stream, message.{field.accessor}, {field.number})", 8)
 
-    yield indent("writeUnknownFields(stream, message.unknownFields)", 4)
+    yield indent("writeUnknownFields(stream, message)", 4)
 
     yield ""
 
@@ -798,7 +795,7 @@ iterator genReadMessageProc(msg: Message): string =
                 yield indent(&"{setter}(result, new{field.typeName}(data))", 12)
             else:
                 yield indent(&"{setter}(result, {field.readProc}(stream))", 12)
-    yield indent("else: readUnknownField(stream, tag, result.unknownFields)", 8)
+    yield indent("else: readUnknownField(stream, result, tag)", 8)
     yield ""
 
 iterator genSizeOfMapKVProc(message: Message): string =
@@ -851,8 +848,7 @@ iterator genSizeOfMessageProc(msg: Message): string =
             else:
                 yield indent(&"result = result + {field.sizeOfProc}(message.{field.accessor})", 8)
 
-    yield indent("for field in message.unknownFields:", 4)
-    yield indent("result = result + sizeOfUnknownField(field)", 8)
+    yield indent("result = result + sizeOfUnknownFields(message)", 4)
 
     yield ""
 
