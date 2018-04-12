@@ -14,3 +14,19 @@ requires "nim >= 0.18.0"
 # if a user already has the protoc compiler somewhere, in which case
 # nimpb_protoc might be unnecessary.
 requires "nimpb_protoc"
+
+import ospaths, strformat
+
+task run_conformance_tests, "Run the conformance test suite":
+    var testDir = "tests/conformance"
+    var proto = testDir / "test_messages_proto3.proto"
+    var testRunner = "../protobuf-3.5.1/conformance/conformance-test-runner"
+    exec &"./nimpb/compiler/nimpb_build -I{testDir} --out={testDir} {proto}"
+    exec &"nimble c {testDir}/conformance_nim.nim"
+    exec &"{testRunner} {testDir}/conformance_nim"
+
+task gen_descriptor, "Re-generate nimpb/compiler/descriptor_pb.nim":
+    var incdir = "../nimpb_protoc/src/nimpb_protocpkg/protobuf/include/google/protobuf"
+    var descriptor = incdir / "descriptor.proto"
+    var outdir = "nimpb/compiler"
+    exec &"./nimpb/compiler/nimpb_build -I{incdir} --out={outdir} {descriptor}"
