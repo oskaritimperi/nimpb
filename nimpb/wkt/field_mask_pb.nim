@@ -9,37 +9,34 @@ import nimpb/json as nimpb_json
 
 type
     google_protobuf_FieldMask* = ref google_protobuf_FieldMaskObj
-    google_protobuf_FieldMaskObj* = object of RootObj
-        hasField: IntSet
-        unknownFields: seq[UnknownField]
+    google_protobuf_FieldMaskObj* = object of Message
         paths: seq[string]
 
 proc newgoogle_protobuf_FieldMask*(): google_protobuf_FieldMask
 proc newgoogle_protobuf_FieldMask*(data: string): google_protobuf_FieldMask
-proc writegoogle_protobuf_FieldMask*(stream: ProtobufStream, message: google_protobuf_FieldMask)
-proc readgoogle_protobuf_FieldMask*(stream: ProtobufStream): google_protobuf_FieldMask
+proc writegoogle_protobuf_FieldMask*(stream: Stream, message: google_protobuf_FieldMask)
+proc readgoogle_protobuf_FieldMask*(stream: Stream): google_protobuf_FieldMask
 proc sizeOfgoogle_protobuf_FieldMask*(message: google_protobuf_FieldMask): uint64
 
 proc newgoogle_protobuf_FieldMask*(): google_protobuf_FieldMask =
     new(result)
-    result.hasField = initIntSet()
-    result.unknownFields = @[]
+    initMessage(result[])
     result.paths = @[]
 
 proc clearpaths*(message: google_protobuf_FieldMask) =
     message.paths = @[]
-    excl(message.hasField, [1])
+    clearFields(message, [1])
 
 proc haspaths*(message: google_protobuf_FieldMask): bool =
-    result = contains(message.hasField, 1) or (len(message.paths) > 0)
+    result = hasField(message, 1) or (len(message.paths) > 0)
 
 proc setpaths*(message: google_protobuf_FieldMask, value: seq[string]) =
     message.paths = value
-    incl(message.hasField, 1)
+    setField(message, 1)
 
 proc addpaths*(message: google_protobuf_FieldMask, value: string) =
     add(message.paths, value)
-    incl(message.hasField, 1)
+    setField(message, 1)
 
 proc paths*(message: google_protobuf_FieldMask): seq[string] {.inline.} =
     message.paths
@@ -51,15 +48,14 @@ proc sizeOfgoogle_protobuf_FieldMask*(message: google_protobuf_FieldMask): uint6
     for value in message.paths:
         result = result + sizeOfTag(1, WireType.LengthDelimited)
         result = result + sizeOfString(value)
-    for field in message.unknownFields:
-        result = result + sizeOfUnknownField(field)
+    result = result + sizeOfUnknownFields(message)
 
-proc writegoogle_protobuf_FieldMask*(stream: ProtobufStream, message: google_protobuf_FieldMask) =
+proc writegoogle_protobuf_FieldMask*(stream: Stream, message: google_protobuf_FieldMask) =
     for value in message.paths:
-        writeString(stream, value, 1)
-    writeUnknownFields(stream, message.unknownFields)
+        protoWriteString(stream, value, 1)
+    writeUnknownFields(stream, message)
 
-proc readgoogle_protobuf_FieldMask*(stream: ProtobufStream): google_protobuf_FieldMask =
+proc readgoogle_protobuf_FieldMask*(stream: Stream): google_protobuf_FieldMask =
     result = newgoogle_protobuf_FieldMask()
     while not atEnd(stream):
         let
@@ -70,20 +66,18 @@ proc readgoogle_protobuf_FieldMask*(stream: ProtobufStream): google_protobuf_Fie
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
             expectWireType(wireType, WireType.LengthDelimited)
-            addpaths(result, readString(stream))
-        else: readUnknownField(stream, tag, result.unknownFields)
+            addpaths(result, protoReadString(stream))
+        else: readUnknownField(stream, result, tag)
 
 proc serialize*(message: google_protobuf_FieldMask): string =
     let
         ss = newStringStream()
-        pbs = newProtobufStream(ss)
-    writegoogle_protobuf_FieldMask(pbs, message)
+    writegoogle_protobuf_FieldMask(ss, message)
     result = ss.data
 
 proc newgoogle_protobuf_FieldMask*(data: string): google_protobuf_FieldMask =
     let
         ss = newStringStream(data)
-        pbs = newProtobufStream(ss)
-    result = readgoogle_protobuf_FieldMask(pbs)
+    result = readgoogle_protobuf_FieldMask(ss)
 
 

@@ -9,30 +9,26 @@ import nimpb/json as nimpb_json
 
 type
     google_protobuf_Empty* = ref google_protobuf_EmptyObj
-    google_protobuf_EmptyObj* = object of RootObj
-        hasField: IntSet
-        unknownFields: seq[UnknownField]
+    google_protobuf_EmptyObj* = object of Message
 
 proc newgoogle_protobuf_Empty*(): google_protobuf_Empty
 proc newgoogle_protobuf_Empty*(data: string): google_protobuf_Empty
-proc writegoogle_protobuf_Empty*(stream: ProtobufStream, message: google_protobuf_Empty)
-proc readgoogle_protobuf_Empty*(stream: ProtobufStream): google_protobuf_Empty
+proc writegoogle_protobuf_Empty*(stream: Stream, message: google_protobuf_Empty)
+proc readgoogle_protobuf_Empty*(stream: Stream): google_protobuf_Empty
 proc sizeOfgoogle_protobuf_Empty*(message: google_protobuf_Empty): uint64
 proc toJson*(message: google_protobuf_Empty): JsonNode
 
 proc newgoogle_protobuf_Empty*(): google_protobuf_Empty =
     new(result)
-    result.hasField = initIntSet()
-    result.unknownFields = @[]
+    initMessage(result[])
 
 proc sizeOfgoogle_protobuf_Empty*(message: google_protobuf_Empty): uint64 =
-    for field in message.unknownFields:
-        result = result + sizeOfUnknownField(field)
+    result = result + sizeOfUnknownFields(message)
 
-proc writegoogle_protobuf_Empty*(stream: ProtobufStream, message: google_protobuf_Empty) =
-    writeUnknownFields(stream, message.unknownFields)
+proc writegoogle_protobuf_Empty*(stream: Stream, message: google_protobuf_Empty) =
+    writeUnknownFields(stream, message)
 
-proc readgoogle_protobuf_Empty*(stream: ProtobufStream): google_protobuf_Empty =
+proc readgoogle_protobuf_Empty*(stream: Stream): google_protobuf_Empty =
     result = newgoogle_protobuf_Empty()
     while not atEnd(stream):
         let
@@ -41,7 +37,7 @@ proc readgoogle_protobuf_Empty*(stream: ProtobufStream): google_protobuf_Empty =
         case fieldNumber(tag)
         of 0:
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
-        else: readUnknownField(stream, tag, result.unknownFields)
+        else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_Empty): JsonNode =
     result = newJObject()
@@ -49,14 +45,12 @@ proc toJson*(message: google_protobuf_Empty): JsonNode =
 proc serialize*(message: google_protobuf_Empty): string =
     let
         ss = newStringStream()
-        pbs = newProtobufStream(ss)
-    writegoogle_protobuf_Empty(pbs, message)
+    writegoogle_protobuf_Empty(ss, message)
     result = ss.data
 
 proc newgoogle_protobuf_Empty*(data: string): google_protobuf_Empty =
     let
         ss = newStringStream(data)
-        pbs = newProtobufStream(ss)
-    result = readgoogle_protobuf_Empty(pbs)
+    result = readgoogle_protobuf_Empty(ss)
 
 

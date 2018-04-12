@@ -12,11 +12,6 @@ const
     WireTypeMask = (1 shl WireTypeBits) - 1
 
 type
-    ProtobufStreamObj* = object of StreamObj
-        stream: Stream
-
-    ProtobufStream* = ref ProtobufStreamObj
-
     Tag* = distinct uint32
 
     ParseError* = object of Exception
@@ -106,79 +101,6 @@ proc isNumeric*(wiretype: WireType): bool =
 proc isNumeric*(ft: FieldType): bool =
     result = isNumeric(wiretype(ft))
 
-proc pbClose(s: Stream) =
-    close(ProtobufStream(s).stream)
-    ProtobufStream(s).stream = nil
-
-proc pbAtEnd(s: Stream): bool =
-    result = atEnd(ProtobufStream(s).stream)
-
-proc pbSetPosition(s: Stream, pos: int) =
-    setPosition(ProtobufStream(s).stream, pos)
-
-proc pbGetPosition(s: Stream): int =
-    result = getPosition(ProtobufStream(s).stream)
-
-proc pbReadData(s: Stream, buffer: pointer, bufLen: int): int =
-    result = readData(ProtobufStream(s).stream, buffer, bufLen)
-
-proc pbPeekData(s: Stream, buffer: pointer, bufLen: int): int =
-    result = peekData(ProtobufStream(s).stream, buffer, bufLen)
-
-proc pbWriteData(s: Stream, buffer: pointer, bufLen: int) =
-    writeData(ProtobufStream(s).stream, buffer, bufLen)
-
-proc pbFlush(s: Stream) =
-    flush(ProtobufStream(s).stream)
-
-proc newProtobufStream*(stream: Stream): ProtobufStream =
-    new(result)
-
-    result.closeImpl = pbClose
-    result.atEndImpl = pbAtEnd
-    result.setPositionImpl = pbSetPosition
-    result.getPositionImpl = pbGetPosition
-    result.readDataImpl = pbReadData
-    result.peekDataImpl = pbPeekData
-    result.writeDataImpl = pbWriteData
-    result.flushImpl = pbFlush
-
-    result.stream = stream
-
-proc readByte(stream: ProtobufStream): byte =
-    result = readInt8(stream).byte
-
-proc writeByte(stream: ProtobufStream, b: byte) =
-    var x: byte
-    shallowCopy(x, b)
-    writeData(stream, addr(x), sizeof(x))
-
-proc readVarint*(stream: ProtobufStream): uint64 =
-    var
-        count = 0
-
-    result = 0
-
-    while true:
-        if count == MaximumVarintBytes:
-            raise newException(Exception, "invalid varint (<= 10 bytes)")
-
-        let b = readByte(stream)
-
-        result = result or ((b.uint64 and 0x7f) shl (7 * count))
-
-        inc(count)
-
-        if (b and 0x80) == 0:
-            break
-
-proc writeVarint*(stream: ProtobufStream, n: uint64) =
-    var value = n
-    while value >= 0x80'u64:
-        writeByte(stream, (value or 0x80).byte)
-        value = value shr 7
-    writeByte(stream, value.byte)
-
 proc zigzagEncode*(n: int32): uint32 =
     let x = cast[uint32](n)
     let a = cast[int32](x shl 1)
@@ -210,86 +132,120 @@ template wireType*(tag: Tag): WireType =
 template fieldNumber*(tag: Tag): int =
     (tag.uint32 shr 3).int
 
-proc writeTag*(stream: ProtobufStream, tag: Tag) =
+proc protoReadByte(stream: Stream): byte =
+    result = readInt8(stream).byte
+
+proc protoWriteByte(stream: Stream, b: byte) =
+    var x: byte
+    shallowCopy(x, b)
+    writeData(stream, addr(x), sizeof(x))
+
+proc readVarint*(stream: Stream): uint64 =
+    var
+        count = 0
+
+    result = 0
+
+    while true:
+        if count == MaximumVarintBytes:
+            raise newException(Exception, "invalid varint (<= 10 bytes)")
+
+        let b = protoReadByte(stream)
+
+        result = result or ((b.uint64 and 0x7f) shl (7 * count))
+
+        inc(count)
+
+        if (b and 0x80) == 0:
+            break
+
+proc writeVarint*(stream: Stream, n: uint64) =
+    var value = n
+    while value >= 0x80'u64:
+        protoWriteByte(stream, (value or 0x80).byte)
+        value = value shr 7
+    protoWriteByte(stream, value.byte)
+
+proc writeTag*(stream: Stream, tag: Tag) =
     writeVarint(stream, tag.uint32)
 
-proc writeTag*(stream: ProtobufStream, fieldNumber: int, wireType: WireType) =
+proc writeTag*(stream: Stream, fieldNumber: int, wireType: WireType) =
     writeTag(stream, makeTag(fieldNumber, wireType))
 
-proc readTag*(stream: ProtobufStream): Tag =
+proc readTag*(stream: Stream): Tag =
     result = readVarint(stream).Tag
 
-proc writeInt32*(stream: ProtobufStream, n: int32) =
+proc protoWriteInt32*(stream: Stream, n: int32) =
     writeVarint(stream, n.uint64)
 
-proc writeInt32*(stream: ProtobufStream, n: int32, fieldNumber: int) =
+proc protoWriteInt32*(stream: Stream, n: int32, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.Varint)
-    writeInt32(stream, n)
+    protoWriteInt32(stream, n)
 
-proc readInt32*(stream: ProtobufStream): int32 =
+proc protoReadInt32*(stream: Stream): int32 =
     result = readVarint(stream).int32
 
-proc writeSInt32*(stream: ProtobufStream, n: int32) =
+proc protoWriteSInt32*(stream: Stream, n: int32) =
     writeVarint(stream, zigzagEncode(n))
 
-proc writeSInt32*(stream: ProtobufStream, n: int32, fieldNumber: int) =
+proc protoWriteSInt32*(stream: Stream, n: int32, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.Varint)
     writeVarint(stream, zigzagEncode(n))
 
-proc readSInt32*(stream: ProtobufStream): int32 =
+proc protoReadSInt32*(stream: Stream): int32 =
     result = zigzagDecode(readVarint(stream).uint32)
 
-proc writeUInt32*(stream: ProtobufStream, n: uint32) =
+proc protoWriteUInt32*(stream: Stream, n: uint32) =
     writeVarint(stream, n)
 
-proc writeUInt32*(stream: ProtobufStream, n: uint32, fieldNumber: int) =
+proc protoWriteUInt32*(stream: Stream, n: uint32, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.Varint)
     writeVarint(stream, n)
 
-proc readUInt32*(stream: ProtobufStream): uint32 =
+proc protoReadUInt32*(stream: Stream): uint32 =
     result = readVarint(stream).uint32
 
-proc writeInt64*(stream: ProtobufStream, n: int64) =
+proc protoWriteInt64*(stream: Stream, n: int64) =
     writeVarint(stream, n.uint64)
 
-proc writeInt64*(stream: ProtobufStream, n: int64, fieldNumber: int) =
+proc protoWriteInt64*(stream: Stream, n: int64, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.Varint)
     writeVarint(stream, n.uint64)
 
-proc readInt64*(stream: ProtobufStream): int64 =
+proc protoReadInt64*(stream: Stream): int64 =
     result = readVarint(stream).int64
 
-proc writeSInt64*(stream: ProtobufStream, n: int64) =
+proc protoWriteSInt64*(stream: Stream, n: int64) =
     writeVarint(stream, zigzagEncode(n))
 
-proc writeSInt64*(stream: ProtobufStream, n: int64, fieldNumber: int) =
+proc protoWriteSInt64*(stream: Stream, n: int64, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.Varint)
     writeVarint(stream, zigzagEncode(n))
 
-proc readSInt64*(stream: ProtobufStream): int64 =
+proc protoReadSInt64*(stream: Stream): int64 =
     result = zigzagDecode(readVarint(stream))
 
-proc writeUInt64*(stream: ProtobufStream, n: uint64) =
+proc protoWriteUInt64*(stream: Stream, n: uint64) =
     writeVarint(stream, n)
 
-proc writeUInt64*(stream: ProtobufStream, n: uint64, fieldNumber: int) =
+proc protoWriteUInt64*(stream: Stream, n: uint64, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.Varint)
     writeVarint(stream, n)
 
-proc readUInt64*(stream: ProtobufStream): uint64 =
+proc protoReadUInt64*(stream: Stream): uint64 =
     result = readVarint(stream)
 
-proc writeBool*(stream: ProtobufStream, value: bool) =
+proc protoWriteBool*(stream: Stream, value: bool) =
     writeVarint(stream, value.uint32)
 
-proc writeBool*(stream: ProtobufStream, n: bool, fieldNumber: int) =
+proc protoWriteBool*(stream: Stream, n: bool, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.Varint)
     writeVarint(stream, n.uint32)
 
-proc readBool*(stream: ProtobufStream): bool =
+proc protoReadBool*(stream: Stream): bool =
     result = readVarint(stream).bool
 
-proc writeFixed64*(stream: ProtobufStream, value: uint64) =
+proc protoWriteFixed64*(stream: Stream, value: uint64) =
     var
         input = value
         output: uint64
@@ -298,27 +254,27 @@ proc writeFixed64*(stream: ProtobufStream, value: uint64) =
 
     write(stream, output)
 
-proc writeFixed64*(stream: ProtobufStream, n: uint64, fieldNumber: int) =
+proc protoWriteFixed64*(stream: Stream, n: uint64, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.Fixed64)
-    writeFixed64(stream, n)
+    protoWriteFixed64(stream, n)
 
-proc readFixed64*(stream: ProtobufStream): uint64 =
+proc protoReadFixed64*(stream: Stream): uint64 =
     var tmp: uint64
     if readData(stream, addr(tmp), sizeof(tmp)) != sizeof(tmp):
         raise newException(IOError, "cannot read from stream")
     littleEndian64(addr(result), addr(tmp))
 
-proc writeSFixed64*(stream: ProtobufStream, value: int64) =
-    writeFixed64(stream, cast[uint64](value))
+proc protoWriteSFixed64*(stream: Stream, value: int64) =
+    protoWriteFixed64(stream, cast[uint64](value))
 
-proc writeSFixed64*(stream: ProtobufStream, value: int64, fieldNumber: int) =
+proc protoWriteSFixed64*(stream: Stream, value: int64, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.Fixed64)
-    writeSFixed64(stream, value)
+    protoWriteSFixed64(stream, value)
 
-proc readSFixed64*(stream: ProtobufStream): int64 =
-    result = cast[int64](readFixed64(stream))
+proc protoReadSFixed64*(stream: Stream): int64 =
+    result = cast[int64](protoReadFixed64(stream))
 
-proc writeDouble*(stream: ProtobufStream, value: float64) =
+proc protoWriteDouble*(stream: Stream, value: float64) =
     var
         input = value
         output: float64
@@ -327,17 +283,17 @@ proc writeDouble*(stream: ProtobufStream, value: float64) =
 
     write(stream, output)
 
-proc writeDouble*(stream: ProtobufStream, value: float64, fieldNumber: int) =
+proc protoWriteDouble*(stream: Stream, value: float64, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.Fixed64)
-    writeDouble(stream, value)
+    protoWriteDouble(stream, value)
 
-proc readDouble*(stream: ProtobufStream): float64 =
+proc protoReadDouble*(stream: Stream): float64 =
     var tmp: uint64
     if readData(stream, addr(tmp), sizeof(tmp)) != sizeof(tmp):
         raise newException(IOError, "cannot read from stream")
     littleEndian64(addr(result), addr(tmp))
 
-proc writeFixed32*(stream: ProtobufStream, value: uint32) =
+proc protoWriteFixed32*(stream: Stream, value: uint32) =
     var
         input = value
         output: uint32
@@ -346,27 +302,27 @@ proc writeFixed32*(stream: ProtobufStream, value: uint32) =
 
     write(stream, output)
 
-proc writeFixed32*(stream: ProtobufStream, value: uint32, fieldNumber: int) =
+proc protoWriteFixed32*(stream: Stream, value: uint32, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.Fixed32)
-    writeFixed32(stream, value)
+    protoWriteFixed32(stream, value)
 
-proc readFixed32*(stream: ProtobufStream): uint32 =
+proc protoReadFixed32*(stream: Stream): uint32 =
     var tmp: uint32
     if readData(stream, addr(tmp), sizeof(tmp)) != sizeof(tmp):
         raise newException(IOError, "cannot read from stream")
     littleEndian32(addr(result), addr(tmp))
 
-proc writeSFixed32*(stream: ProtobufStream, value: int32) =
-    writeFixed32(stream, cast[uint32](value))
+proc protoWriteSFixed32*(stream: Stream, value: int32) =
+    protoWriteFixed32(stream, cast[uint32](value))
 
-proc writeSFixed32*(stream: ProtobufStream, value: int32, fieldNumber: int) =
+proc protoWriteSFixed32*(stream: Stream, value: int32, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.Fixed32)
-    writeSFixed32(stream, value)
+    protoWriteSFixed32(stream, value)
 
-proc readSFixed32*(stream: ProtobufStream): int32 =
-    result = cast[int32](readFixed32(stream))
+proc protoReadSFixed32*(stream: Stream): int32 =
+    result = cast[int32](protoReadFixed32(stream))
 
-proc writeFloat*(stream: ProtobufStream, value: float32) =
+proc protoWriteFloat*(stream: Stream, value: float32) =
     var
         input = value
         output: float32
@@ -375,51 +331,51 @@ proc writeFloat*(stream: ProtobufStream, value: float32) =
 
     write(stream, output)
 
-proc writeFloat*(stream: ProtobufStream, value: float32, fieldNumber: int) =
+proc protoWriteFloat*(stream: Stream, value: float32, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.Fixed32)
-    writeFloat(stream, value)
+    protoWriteFloat(stream, value)
 
-proc readFloat*(stream: ProtobufStream): float32 =
+proc protoReadFloat*(stream: Stream): float32 =
     var tmp: float32
     if readData(stream, addr(tmp), sizeof(tmp)) != sizeof(tmp):
         raise newException(IOError, "cannot read from stream")
     littleEndian32(addr(result), addr(tmp))
 
-proc writeString*(stream: ProtobufStream, s: string) =
-    writeUInt64(stream, len(s).uint64)
+proc protoWriteString*(stream: Stream, s: string) =
+    protoWriteUInt64(stream, len(s).uint64)
     write(stream, s)
 
-proc writeString*(stream: ProtobufStream, s: string, fieldNumber: int) =
+proc protoWriteString*(stream: Stream, s: string, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.LengthDelimited)
-    writeString(stream, s)
+    protoWriteString(stream, s)
 
-proc writeBytes*(stream: ProtobufStream, s: bytes) =
-    writeString(stream, string(s))
+proc protoWriteBytes*(stream: Stream, s: bytes) =
+    protoWriteString(stream, string(s))
 
-proc writeBytes*(stream: ProtobufStream, s: bytes, fieldNumber: int) =
-    writeString(stream, string(s), fieldNumber)
+proc protoWriteBytes*(stream: Stream, s: bytes, fieldNumber: int) =
+    protoWriteString(stream, string(s), fieldNumber)
 
 proc safeReadStr*(stream: Stream, size: int): string =
     result = newString(size)
     if readData(stream, addr(result[0]), size) != size:
         raise newException(IOError, "cannot read from stream")
 
-proc readString*(stream: ProtobufStream): string =
-    let size = int(readUInt64(stream))
+proc protoReadString*(stream: Stream): string =
+    let size = int(protoReadUInt64(stream))
     result = safeReadStr(stream, size)
 
-proc readBytes*(stream: ProtobufStream): bytes =
-    bytes(readString(stream))
+proc protoReadBytes*(stream: Stream): bytes =
+    bytes(protoReadString(stream))
 
-proc readEnum*[T](stream: ProtobufStream): T =
-    result = T(readUInt32(stream))
+proc protoReadEnum*[T](stream: Stream): T =
+    result = T(protoReadUInt32(stream))
 
-proc writeEnum*[T](stream: ProtobufStream, value: T) =
-    writeUInt32(stream, uint32(value))
+proc protoWriteEnum*[T](stream: Stream, value: T) =
+    protoWriteUInt32(stream, uint32(value))
 
-proc writeEnum*[T](stream: ProtobufStream, value: T, fieldNumber: int) =
+proc protoWriteEnum*[T](stream: Stream, value: T, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.Varint)
-    writeUInt32(stream, uint32(value))
+    protoWriteUInt32(stream, uint32(value))
 
 proc sizeOfVarint[T](value: T): uint64 =
     var tmp = uint64(value)
@@ -501,14 +457,14 @@ proc sizeOfLengthDelimited*(size: uint64): uint64 =
 proc sizeOfTag*(fieldNumber: int, wiretype: WireType): uint64 =
     result = sizeOfUInt32(uint32(makeTag(fieldNumber, wiretype)))
 
-proc skipField*(stream: ProtobufStream, wiretype: WireType) =
+proc skipField*(stream: Stream, wiretype: WireType) =
     case wiretype
     of WireType.Varint:
         discard readVarint(stream)
     of WireType.Fixed64:
-        discard readFixed64(stream)
+        discard protoReadFixed64(stream)
     of WireType.Fixed32:
-        discard readFixed32(stream)
+        discard protoReadFixed32(stream)
     of WireType.LengthDelimited:
         let size = readVarint(stream)
         discard safeReadStr(stream, int(size))
@@ -523,7 +479,7 @@ proc expectWireType*(actual: WireType, expected: varargs[WireType]) =
         join(expected, ", ")
     raise newException(UnexpectedWireTypeError, message)
 
-macro writeMessage*(stream: ProtobufStream, message: typed, fieldNumber: int): typed =
+macro writeMessage*(stream: Stream, message: typed, fieldNumber: int): typed =
     ## Write a message to a stream with tag and length.
     let t = getTypeInst(message)
     result = newStmtList(
@@ -550,11 +506,11 @@ proc excl*(s: var IntSet, values: openArray[int]) =
     for value in values:
         excl(s, value)
 
-proc readLengthDelimited*(stream: ProtobufStream): string =
+proc readLengthDelimited*(stream: Stream): string =
     let size = int(readVarint(stream))
     result = safeReadStr(stream, size)
 
-proc readUnknownField*(stream: ProtobufStream, tag: Tag,
+proc readUnknownField*(stream: Stream, tag: Tag,
                        fields: var seq[UnknownField]) =
     var field: UnknownField
 
@@ -566,9 +522,9 @@ proc readUnknownField*(stream: ProtobufStream, tag: Tag,
     of WireType.Varint:
         field.vint = readVarint(stream)
     of WireType.Fixed64:
-        field.fixed64 = readFixed64(stream)
+        field.fixed64 = protoReadFixed64(stream)
     of WireType.Fixed32:
-        field.fixed32 = readFixed32(stream)
+        field.fixed32 = protoReadFixed32(stream)
     of WireType.LengthDelimited:
         let size = readVarint(stream)
         field.data = safeReadStr(stream, int(size))
@@ -577,25 +533,25 @@ proc readUnknownField*(stream: ProtobufStream, tag: Tag,
 
     add(fields, field)
 
-proc readUnknownField*(stream: ProtobufStream, message: Message, tag: Tag) =
+proc readUnknownField*(stream: Stream, message: Message, tag: Tag) =
     readUnknownField(stream, tag, message.unknownFields)
 
-proc writeUnknownFields*(stream: ProtobufStream, fields: seq[UnknownField]) =
+proc writeUnknownFields*(stream: Stream, fields: seq[UnknownField]) =
     for field in fields:
         case field.wiretype
         of WireType.Varint:
             writeTag(stream, field.fieldNumber, field.wireType)
             writeVarint(stream, field.vint)
         of WireType.Fixed64:
-            writeFixed64(stream, field.fixed64, field.fieldNumber)
+            protoWriteFixed64(stream, field.fixed64, field.fieldNumber)
         of WireType.Fixed32:
-            writeFixed32(stream, field.fixed32, field.fieldNumber)
+            protoWriteFixed32(stream, field.fixed32, field.fieldNumber)
         of WireType.LengthDelimited:
-            writeString(stream, field.data, field.fieldNumber)
+            protoWriteString(stream, field.data, field.fieldNumber)
         else:
             raise newException(Exception, "unsupported wiretype: " & $field.wiretype)
 
-proc writeUnknownFields*(stream: ProtobufStream, message: Message) =
+proc writeUnknownFields*(stream: Stream, message: Message) =
     writeUnknownFields(stream, message.unknownFields)
 
 proc discardUnknownFields*[T](message: T) =

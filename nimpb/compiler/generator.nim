@@ -278,17 +278,19 @@ proc writeProc(field: Field): string =
     elif isMessage(field):
         result = "writeMessage"
     elif isEnum(field):
-        result = "writeEnum"
+        result = "protoWriteEnum"
     else:
-        result = &"write{field.typeName}"
+        result = &"protoWrite{field.typeName}"
 
 proc readProc(field: Field): string =
     if isMapEntry(field):
         result = &"read{field.typeName}KV"
     elif isEnum(field):
-        result = &"readEnum[{field.typeName}]"
-    else:
+        result = &"protoReadEnum[{field.typeName}]"
+    elif isMessage(field):
         result = &"read{field.typeName}"
+    else:
+        result = &"protoRead{field.typeName}"
 
 proc sizeOfProc(field: Field): string =
     if isMapEntry(field):
@@ -671,13 +673,13 @@ iterator genWriteMapKVProc(msg: Message): string =
         key = mapKeyField(msg)
         value = mapValueField(msg)
 
-    yield &"proc write{msg.names}KV(stream: ProtobufStream, key: {key.fullType}, value: {value.fullType}) ="
+    yield &"proc write{msg.names}KV(stream: Stream, key: {key.fullType}, value: {value.fullType}) ="
     yield indent(&"{key.writeProc}(stream, key, {key.number})", 4)
     yield indent(&"{value.writeProc}(stream, value, {value.number})", 4)
     yield ""
 
 iterator genWriteMessageProc(msg: Message): string =
-    yield &"proc write{msg.names}*(stream: ProtobufStream, message: {msg.names}) ="
+    yield &"proc write{msg.names}*(stream: Stream, message: {msg.names}) ="
 
     for field in msg.fields:
         if isMapEntry(field):
@@ -708,7 +710,7 @@ iterator genReadMapKVProc(msg: Message): string =
         key = mapKeyField(msg)
         value = mapValueField(msg)
 
-    yield &"proc read{msg.names}KV(stream: ProtobufStream, tbl: TableRef[{key.fullType}, {value.fullType}]) ="
+    yield &"proc read{msg.names}KV(stream: Stream, tbl: TableRef[{key.fullType}, {value.fullType}]) ="
 
     yield indent(&"var", 4)
     yield indent(&"key: {key.fullType}", 8)
@@ -728,7 +730,7 @@ iterator genReadMapKVProc(msg: Message): string =
         yield indent("let", 12)
         yield indent("size = readVarint(stream)", 16)
         yield indent("data = safeReadStr(stream, int(size))", 16)
-        yield indent("pbs = newProtobufStream(newStringStream(data))", 16)
+        yield indent("pbs = newStringStream(data)", 16)
         yield indent(&"value = {value.readProc}(pbs)", 12)
     else:
         yield indent(&"value = {value.readProc}(stream)", 12)
@@ -742,7 +744,7 @@ iterator genReadMapKVProc(msg: Message): string =
     yield ""
 
 iterator genReadMessageProc(msg: Message): string =
-    yield &"proc read{msg.names}*(stream: ProtobufStream): {msg.names} ="
+    yield &"proc read{msg.names}*(stream: Stream): {msg.names} ="
     yield indent(&"result = new{msg.names}()", 4)
     yield indent("while not atEnd(stream):", 4)
     yield indent("let", 8)
@@ -765,7 +767,7 @@ iterator genReadMessageProc(msg: Message): string =
                 yield indent("let", 12)
                 yield indent("size = readVarint(stream)", 16)
                 yield indent("data = safeReadStr(stream, int(size))", 16)
-                yield indent("pbs = newProtobufStream(newStringStream(data))", 16)
+                yield indent("pbs = newStringStream(data)", 16)
                 yield indent(&"{field.readProc}(pbs, result.{field.name})", 12)
             elif isNumeric(field):
                 yield indent(&"expectWireType(wireType, {field.wiretypeStr}, WireType.LengthDelimited)", 12)
@@ -921,8 +923,8 @@ iterator genMessageProcForwards(msg: Message): string =
     if not isMapEntry(msg):
         yield &"proc new{msg.names}*(): {msg.names}"
         yield &"proc new{msg.names}*(data: string): {msg.names}"
-        yield &"proc write{msg.names}*(stream: ProtobufStream, message: {msg.names})"
-        yield &"proc read{msg.names}*(stream: ProtobufStream): {msg.names}"
+        yield &"proc write{msg.names}*(stream: Stream, message: {msg.names})"
+        yield &"proc read{msg.names}*(stream: Stream): {msg.names}"
         yield &"proc sizeOf{msg.names}*(message: {msg.names}): uint64"
         if shouldGenerateJsonProcs($msg.names):
             yield &"proc toJson*(message: {msg.names}): JsonNode"
@@ -931,8 +933,8 @@ iterator genMessageProcForwards(msg: Message): string =
             key = mapKeyField(msg)
             value = mapValueField(msg)
 
-        yield &"proc write{msg.names}KV(stream: ProtobufStream, key: {key.fullType}, value: {value.fullType})"
-        yield &"proc read{msg.names}KV(stream: ProtobufStream, tbl: TableRef[{key.fullType}, {value.fullType}])"
+        yield &"proc write{msg.names}KV(stream: Stream, key: {key.fullType}, value: {value.fullType})"
+        yield &"proc read{msg.names}KV(stream: Stream, tbl: TableRef[{key.fullType}, {value.fullType}])"
         yield &"proc sizeOf{msg.names}KV(key: {key.fullType}, value: {value.fullType}): uint64"
 
 iterator genProcs(msg: Message): string =
@@ -963,16 +965,14 @@ iterator genProcs(msg: Message): string =
         yield &"proc serialize*(message: {msg.names}): string ="
         yield indent("let", 4)
         yield indent("ss = newStringStream()", 8)
-        yield indent("pbs = newProtobufStream(ss)", 8)
-        yield indent(&"write{msg.names}(pbs, message)", 4)
+        yield indent(&"write{msg.names}(ss, message)", 4)
         yield indent("result = ss.data", 4)
         yield ""
 
         yield &"proc new{msg.names}*(data: string): {msg.names} ="
         yield indent("let", 4)
         yield indent("ss = newStringStream(data)", 8)
-        yield indent("pbs = newProtobufStream(ss)", 8)
-        yield indent(&"result = read{msg.names}(pbs)", 4)
+        yield indent(&"result = read{msg.names}(ss)", 4)
         yield ""
 
 proc processFile(fdesc: google_protobuf_FileDescriptorProto,
@@ -1054,7 +1054,7 @@ proc processFileDescriptorSet*(filename: string,
                                outdir: string,
                                protos: openArray[string],
                                serviceGenerator: ServiceGenerator) =
-    let s = newProtobufStream(newFileStream(filename, fmRead))
+    let s = newFileStream(filename, fmRead)
 
     let fileSet = readgoogle_protobuf_FileDescriptorSet(s)
 

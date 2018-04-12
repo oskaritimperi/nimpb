@@ -9,35 +9,32 @@ import nimpb/json as nimpb_json
 
 type
     google_protobuf_Duration* = ref google_protobuf_DurationObj
-    google_protobuf_DurationObj* = object of RootObj
-        hasField: IntSet
-        unknownFields: seq[UnknownField]
+    google_protobuf_DurationObj* = object of Message
         seconds: int64
         nanos: int32
 
 proc newgoogle_protobuf_Duration*(): google_protobuf_Duration
 proc newgoogle_protobuf_Duration*(data: string): google_protobuf_Duration
-proc writegoogle_protobuf_Duration*(stream: ProtobufStream, message: google_protobuf_Duration)
-proc readgoogle_protobuf_Duration*(stream: ProtobufStream): google_protobuf_Duration
+proc writegoogle_protobuf_Duration*(stream: Stream, message: google_protobuf_Duration)
+proc readgoogle_protobuf_Duration*(stream: Stream): google_protobuf_Duration
 proc sizeOfgoogle_protobuf_Duration*(message: google_protobuf_Duration): uint64
 
 proc newgoogle_protobuf_Duration*(): google_protobuf_Duration =
     new(result)
-    result.hasField = initIntSet()
-    result.unknownFields = @[]
+    initMessage(result[])
     result.seconds = 0
     result.nanos = 0
 
 proc clearseconds*(message: google_protobuf_Duration) =
     message.seconds = 0
-    excl(message.hasField, [1])
+    clearFields(message, [1])
 
 proc hasseconds*(message: google_protobuf_Duration): bool =
-    result = contains(message.hasField, 1)
+    result = hasField(message, 1)
 
 proc setseconds*(message: google_protobuf_Duration, value: int64) =
     message.seconds = value
-    incl(message.hasField, 1)
+    setField(message, 1)
 
 proc seconds*(message: google_protobuf_Duration): int64 {.inline.} =
     message.seconds
@@ -47,14 +44,14 @@ proc `seconds=`*(message: google_protobuf_Duration, value: int64) {.inline.} =
 
 proc clearnanos*(message: google_protobuf_Duration) =
     message.nanos = 0
-    excl(message.hasField, [2])
+    clearFields(message, [2])
 
 proc hasnanos*(message: google_protobuf_Duration): bool =
-    result = contains(message.hasField, 2)
+    result = hasField(message, 2)
 
 proc setnanos*(message: google_protobuf_Duration, value: int32) =
     message.nanos = value
-    incl(message.hasField, 2)
+    setField(message, 2)
 
 proc nanos*(message: google_protobuf_Duration): int32 {.inline.} =
     message.nanos
@@ -69,17 +66,16 @@ proc sizeOfgoogle_protobuf_Duration*(message: google_protobuf_Duration): uint64 
     if hasnanos(message):
         result = result + sizeOfTag(2, WireType.Varint)
         result = result + sizeOfInt32(message.nanos)
-    for field in message.unknownFields:
-        result = result + sizeOfUnknownField(field)
+    result = result + sizeOfUnknownFields(message)
 
-proc writegoogle_protobuf_Duration*(stream: ProtobufStream, message: google_protobuf_Duration) =
+proc writegoogle_protobuf_Duration*(stream: Stream, message: google_protobuf_Duration) =
     if hasseconds(message):
-        writeInt64(stream, message.seconds, 1)
+        protoWriteInt64(stream, message.seconds, 1)
     if hasnanos(message):
-        writeInt32(stream, message.nanos, 2)
-    writeUnknownFields(stream, message.unknownFields)
+        protoWriteInt32(stream, message.nanos, 2)
+    writeUnknownFields(stream, message)
 
-proc readgoogle_protobuf_Duration*(stream: ProtobufStream): google_protobuf_Duration =
+proc readgoogle_protobuf_Duration*(stream: Stream): google_protobuf_Duration =
     result = newgoogle_protobuf_Duration()
     while not atEnd(stream):
         let
@@ -90,23 +86,21 @@ proc readgoogle_protobuf_Duration*(stream: ProtobufStream): google_protobuf_Dura
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
             expectWireType(wireType, WireType.Varint)
-            setseconds(result, readInt64(stream))
+            setseconds(result, protoReadInt64(stream))
         of 2:
             expectWireType(wireType, WireType.Varint)
-            setnanos(result, readInt32(stream))
-        else: readUnknownField(stream, tag, result.unknownFields)
+            setnanos(result, protoReadInt32(stream))
+        else: readUnknownField(stream, result, tag)
 
 proc serialize*(message: google_protobuf_Duration): string =
     let
         ss = newStringStream()
-        pbs = newProtobufStream(ss)
-    writegoogle_protobuf_Duration(pbs, message)
+    writegoogle_protobuf_Duration(ss, message)
     result = ss.data
 
 proc newgoogle_protobuf_Duration*(data: string): google_protobuf_Duration =
     let
         ss = newStringStream(data)
-        pbs = newProtobufStream(ss)
-    result = readgoogle_protobuf_Duration(pbs)
+    result = readgoogle_protobuf_Duration(ss)
 
 
