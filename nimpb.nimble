@@ -26,12 +26,6 @@ task run_conformance_tests, "Run the conformance test suite":
     exec &"nimble c {testDir}/conformance_nim.nim"
     exec &"{testRunner} {testDir}/conformance_nim"
 
-task gen_descriptor, "Re-generate nimpb/compiler/descriptor_pb.nim":
-    var incdir = "../nimpb_protoc/src/nimpb_protocpkg/protobuf/include/google/protobuf"
-    var descriptor = incdir / "descriptor.proto"
-    var outdir = "nimpb/compiler"
-    exec &"./nimpb/compiler/nimpb_build -I{incdir} --out={outdir} {descriptor}"
-
 task gen_wkt, "Re-generate WKT's":
     var incdir = "../nimpb_protoc/src/nimpb_protocpkg/protobuf/include/google/protobuf"
     var outdir = "nimpb/wkt"

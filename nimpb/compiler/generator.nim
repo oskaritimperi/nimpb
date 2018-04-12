@@ -7,7 +7,7 @@ import strformat
 import strutils
 import tables
 
-import descriptor_pb
+import nimpb/wkt/descriptor_pb
 
 import ../nimpb
 
