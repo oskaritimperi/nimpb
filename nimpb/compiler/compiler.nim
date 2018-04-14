@@ -5,7 +5,7 @@ import strformat
 import strutils
 
 from generator import processFileDescriptorSet, ServiceGenerator, Service, ServiceMethod
-export Service, ServiceMethod
+export ServiceGenerator, Service, ServiceMethod
 
 const
     nimpbProtocInfo = gorgeEx("nimble dump nimpb_protoc")

@@ -60,7 +60,9 @@ type
         Proto2
         Proto3
 
-    ServiceGenerator* = proc (service: Service): string
+    ServiceGenerator* = ref object of RootObj
+        genImports*: proc (): string
+        genService*: proc (service: Service): string
 
     Service* = ref object
         name*: string
@@ -1013,6 +1015,10 @@ proc processFile(fdesc: google_protobuf_FileDescriptorProto,
     addLine(result.data, "import nimpb/json as nimpb_json")
     addLine(result.data, "")
 
+    if serviceGenerator != nil:
+        if serviceGenerator.genImports != nil:
+            add(result.data, serviceGenerator.genImports())
+
     for dep in fdesc.dependency:
         var (dir, depname, _) = splitFile(dep)
 
@@ -1046,10 +1052,11 @@ proc processFile(fdesc: google_protobuf_FileDescriptorProto,
         addLine(result.data, "")
 
     if serviceGenerator != nil:
-        for serviceDesc in fdesc.service:
-            let service = newService(serviceDesc, parsed)
-            addLine(result.data, "")
-            add(result.data, serviceGenerator(service))
+        if serviceGenerator.genService != nil:
+            for serviceDesc in fdesc.service:
+                let service = newService(serviceDesc, parsed)
+                addLine(result.data, "")
+                add(result.data, serviceGenerator.genService(service))
 
 proc processFileDescriptorSet*(filename: string,
                                outdir: string,
