@@ -6,7 +6,7 @@ import nimpb/nimpb
 import addressbook_pb
 import phonenumber_pb
 
-let pbsi = newProtobufStream(newFileStream("addressbook.dat"))
+let pbsi = newFileStream("addressbook.dat")
 
 let addressBook = readAddressBook(pbsi)
 

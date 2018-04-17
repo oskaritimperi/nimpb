@@ -34,5 +34,5 @@ setNumber(janePhone1, "1432")
 setFType(janePhone1, HOME)
 addPhones(jane, janePhone1)
 
-let pbso = newProtobufStream(newFileStream("addressbook.dat", fmWrite))
+let pbso = newFileStream("addressbook.dat", fmWrite)
 writeAddressBook(pbso, addressBook)

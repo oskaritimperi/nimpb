@@ -1,9 +1,7 @@
-PLUGIN = ../../generator/protoc_gen_nim
-
 all: simple
 
 simple: simple.nim simple_pb.nim
-	nim c simple.nim
+	nim c $<
 
-simple_pb.nim: simple.proto
-	protoc --plugin=protoc-gen-nim=$(PLUGIN) --nim_out=. -I. simple.proto
+%_pb.nim: %.proto
+	nimpb_build -I. --out=. $<
