@@ -21,8 +21,8 @@ task run_conformance_tests, "Run the conformance test suite":
     var testDir = "tests/conformance"
     var proto = testDir / "test_messages_proto3.proto"
     var testRunner = "../protobuf-3.5.1/conformance/conformance-test-runner"
-    exec &"./nimpb/compiler/nimpb_build -I{testDir} --out={testDir} {proto}"
-    exec &"./nimpb/compiler/nimpb_build -I{testDir} --out={testDir} {testDir}/conformance.proto"
+    exec &"./nimpb/compiler/nimpb_build -I={testDir} --out={testDir} {proto}"
+    exec &"./nimpb/compiler/nimpb_build -I={testDir} --out={testDir} {testDir}/conformance.proto"
     exec &"nimble c {testDir}/conformance_nim.nim"
     exec &"{testRunner} {testDir}/conformance_nim"
 
@@ -31,4 +31,4 @@ task gen_wkt, "Re-generate WKT's":
     var outdir = "nimpb/wkt"
     for proto in listFiles(incdir):
         echo(&"COMPILING {proto}")
-        exec &"./nimpb/compiler/nimpb_build -I{incdir} --out={outdir} {proto}"
+        exec &"./nimpb/compiler/nimpb_build -I={incdir} --out={outdir} {proto}"

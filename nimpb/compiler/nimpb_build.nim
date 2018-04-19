@@ -1,5 +1,6 @@
 import os
 import osproc
+import parseopt2
 import strformat
 import strutils
 
@@ -7,7 +8,7 @@ import compiler
 
 proc usage() {.noreturn.} =
     echo(&"""
-{getAppFilename()} --out=OUTDIR [-IPATH [-IPATH]...] PROTOFILE...
+{getAppFilename()} --out=OUTDIR [-I=PATH [-I=PATH]...] PROTOFILE...
 
     --out       The output directory for the generated files
     -I          Add a path to the set of include paths
@@ -18,20 +19,19 @@ var includes: seq[string] = @[]
 var protos: seq[string] = @[]
 var outdir: string
 
-if paramCount() == 0:
-    usage()
-
-for idx in 1..paramCount():
-    let param = paramStr(idx)
-
-    if param.startsWith("-I"):
-        add(includes, param[2..^1])
-    elif param.startsWith("--out="):
-        outdir = param[6..^1]
-    elif param == "--help":
-        usage()
-    else:
-        add(protos, param)
+for kind, key, val in getopt():
+    case kind
+    of cmdArgument:
+        add(protos, key)
+    of cmdLongOption, cmdShortOption:
+        case key
+        of "help", "h": usage()
+        of "out": outdir = val
+        of "I": add(includes, val)
+        else:
+            echo("error: unknown option: " & key)
+            usage()
+    of cmdEnd: assert(false)
 
 if outdir == nil:
     echo("error: --out is required")
