@@ -15,6 +15,7 @@ type
 
 proc newgoogle_protobuf_Timestamp*(): google_protobuf_Timestamp
 proc newgoogle_protobuf_Timestamp*(data: string): google_protobuf_Timestamp
+proc newgoogle_protobuf_Timestamp*(data: seq[byte]): google_protobuf_Timestamp
 proc writegoogle_protobuf_Timestamp*(stream: Stream, message: google_protobuf_Timestamp)
 proc readgoogle_protobuf_Timestamp*(stream: Stream): google_protobuf_Timestamp
 proc sizeOfgoogle_protobuf_Timestamp*(message: google_protobuf_Timestamp): uint64
@@ -101,6 +102,11 @@ proc serialize*(message: google_protobuf_Timestamp): string =
 proc newgoogle_protobuf_Timestamp*(data: string): google_protobuf_Timestamp =
     let
         ss = newStringStream(data)
+    result = readgoogle_protobuf_Timestamp(ss)
+
+proc newgoogle_protobuf_Timestamp*(data: seq[byte]): google_protobuf_Timestamp =
+    let
+        ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_Timestamp(ss)
 
 

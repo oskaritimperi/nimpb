@@ -10,10 +10,11 @@ import nimpb/json as nimpb_json
 type
     google_protobuf_SourceContext* = ref google_protobuf_SourceContextObj
     google_protobuf_SourceContextObj* = object of Message
-        file_name: string
+        fileName: string
 
 proc newgoogle_protobuf_SourceContext*(): google_protobuf_SourceContext
 proc newgoogle_protobuf_SourceContext*(data: string): google_protobuf_SourceContext
+proc newgoogle_protobuf_SourceContext*(data: seq[byte]): google_protobuf_SourceContext
 proc writegoogle_protobuf_SourceContext*(stream: Stream, message: google_protobuf_SourceContext)
 proc readgoogle_protobuf_SourceContext*(stream: Stream): google_protobuf_SourceContext
 proc sizeOfgoogle_protobuf_SourceContext*(message: google_protobuf_SourceContext): uint64
@@ -22,34 +23,34 @@ proc toJson*(message: google_protobuf_SourceContext): JsonNode
 proc newgoogle_protobuf_SourceContext*(): google_protobuf_SourceContext =
     new(result)
     initMessage(result[])
-    result.file_name = ""
+    result.fileName = ""
 
-proc clearfile_name*(message: google_protobuf_SourceContext) =
-    message.file_name = ""
+proc clearfileName*(message: google_protobuf_SourceContext) =
+    message.fileName = ""
     clearFields(message, [1])
 
-proc hasfile_name*(message: google_protobuf_SourceContext): bool =
+proc hasfileName*(message: google_protobuf_SourceContext): bool =
     result = hasField(message, 1)
 
-proc setfile_name*(message: google_protobuf_SourceContext, value: string) =
-    message.file_name = value
+proc setfileName*(message: google_protobuf_SourceContext, value: string) =
+    message.fileName = value
     setField(message, 1)
 
-proc file_name*(message: google_protobuf_SourceContext): string {.inline.} =
-    message.file_name
+proc fileName*(message: google_protobuf_SourceContext): string {.inline.} =
+    message.fileName
 
-proc `file_name=`*(message: google_protobuf_SourceContext, value: string) {.inline.} =
-    setfile_name(message, value)
+proc `fileName=`*(message: google_protobuf_SourceContext, value: string) {.inline.} =
+    setfileName(message, value)
 
 proc sizeOfgoogle_protobuf_SourceContext*(message: google_protobuf_SourceContext): uint64 =
-    if hasfile_name(message):
+    if hasfileName(message):
         result = result + sizeOfTag(1, WireType.LengthDelimited)
-        result = result + sizeOfString(message.file_name)
+        result = result + sizeOfString(message.fileName)
     result = result + sizeOfUnknownFields(message)
 
 proc writegoogle_protobuf_SourceContext*(stream: Stream, message: google_protobuf_SourceContext) =
-    if hasfile_name(message):
-        protoWriteString(stream, message.file_name, 1)
+    if hasfileName(message):
+        protoWriteString(stream, message.fileName, 1)
     writeUnknownFields(stream, message)
 
 proc readgoogle_protobuf_SourceContext*(stream: Stream): google_protobuf_SourceContext =
@@ -63,13 +64,13 @@ proc readgoogle_protobuf_SourceContext*(stream: Stream): google_protobuf_SourceC
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
             expectWireType(wireType, WireType.LengthDelimited)
-            setfile_name(result, protoReadString(stream))
+            setfileName(result, protoReadString(stream))
         else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_SourceContext): JsonNode =
     result = newJObject()
-    if hasfile_name(message):
-        result["fileName"] = %message.file_name
+    if hasfileName(message):
+        result["fileName"] = %message.fileName
 
 proc serialize*(message: google_protobuf_SourceContext): string =
     let
@@ -80,6 +81,11 @@ proc serialize*(message: google_protobuf_SourceContext): string =
 proc newgoogle_protobuf_SourceContext*(data: string): google_protobuf_SourceContext =
     let
         ss = newStringStream(data)
+    result = readgoogle_protobuf_SourceContext(ss)
+
+proc newgoogle_protobuf_SourceContext*(data: seq[byte]): google_protobuf_SourceContext =
+    let
+        ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_SourceContext(ss)
 
 

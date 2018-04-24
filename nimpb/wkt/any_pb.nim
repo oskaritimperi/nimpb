@@ -10,11 +10,12 @@ import nimpb/json as nimpb_json
 type
     google_protobuf_Any* = ref google_protobuf_AnyObj
     google_protobuf_AnyObj* = object of Message
-        type_url: string
-        value: bytes
+        typeUrl: string
+        value: seq[byte]
 
 proc newgoogle_protobuf_Any*(): google_protobuf_Any
 proc newgoogle_protobuf_Any*(data: string): google_protobuf_Any
+proc newgoogle_protobuf_Any*(data: seq[byte]): google_protobuf_Any
 proc writegoogle_protobuf_Any*(stream: Stream, message: google_protobuf_Any)
 proc readgoogle_protobuf_Any*(stream: Stream): google_protobuf_Any
 proc sizeOfgoogle_protobuf_Any*(message: google_protobuf_Any): uint64
@@ -22,55 +23,55 @@ proc sizeOfgoogle_protobuf_Any*(message: google_protobuf_Any): uint64
 proc newgoogle_protobuf_Any*(): google_protobuf_Any =
     new(result)
     initMessage(result[])
-    result.type_url = ""
-    result.value = bytes("")
+    result.typeUrl = ""
+    result.value = @[]
 
-proc cleartype_url*(message: google_protobuf_Any) =
-    message.type_url = ""
+proc cleartypeUrl*(message: google_protobuf_Any) =
+    message.typeUrl = ""
     clearFields(message, [1])
 
-proc hastype_url*(message: google_protobuf_Any): bool =
+proc hastypeUrl*(message: google_protobuf_Any): bool =
     result = hasField(message, 1)
 
-proc settype_url*(message: google_protobuf_Any, value: string) =
-    message.type_url = value
+proc settypeUrl*(message: google_protobuf_Any, value: string) =
+    message.typeUrl = value
     setField(message, 1)
 
-proc type_url*(message: google_protobuf_Any): string {.inline.} =
-    message.type_url
+proc typeUrl*(message: google_protobuf_Any): string {.inline.} =
+    message.typeUrl
 
-proc `type_url=`*(message: google_protobuf_Any, value: string) {.inline.} =
-    settype_url(message, value)
+proc `typeUrl=`*(message: google_protobuf_Any, value: string) {.inline.} =
+    settypeUrl(message, value)
 
 proc clearvalue*(message: google_protobuf_Any) =
-    message.value = bytes("")
+    message.value = @[]
     clearFields(message, [2])
 
 proc hasvalue*(message: google_protobuf_Any): bool =
     result = hasField(message, 2)
 
-proc setvalue*(message: google_protobuf_Any, value: bytes) =
+proc setvalue*(message: google_protobuf_Any, value: seq[byte]) =
     message.value = value
     setField(message, 2)
 
-proc value*(message: google_protobuf_Any): bytes {.inline.} =
+proc value*(message: google_protobuf_Any): seq[byte] {.inline.} =
     message.value
 
-proc `value=`*(message: google_protobuf_Any, value: bytes) {.inline.} =
+proc `value=`*(message: google_protobuf_Any, value: seq[byte]) {.inline.} =
     setvalue(message, value)
 
 proc sizeOfgoogle_protobuf_Any*(message: google_protobuf_Any): uint64 =
-    if hastype_url(message):
+    if hastypeUrl(message):
         result = result + sizeOfTag(1, WireType.LengthDelimited)
-        result = result + sizeOfString(message.type_url)
+        result = result + sizeOfString(message.typeUrl)
     if hasvalue(message):
         result = result + sizeOfTag(2, WireType.LengthDelimited)
         result = result + sizeOfBytes(message.value)
     result = result + sizeOfUnknownFields(message)
 
 proc writegoogle_protobuf_Any*(stream: Stream, message: google_protobuf_Any) =
-    if hastype_url(message):
-        protoWriteString(stream, message.type_url, 1)
+    if hastypeUrl(message):
+        protoWriteString(stream, message.typeUrl, 1)
     if hasvalue(message):
         protoWriteBytes(stream, message.value, 2)
     writeUnknownFields(stream, message)
@@ -86,7 +87,7 @@ proc readgoogle_protobuf_Any*(stream: Stream): google_protobuf_Any =
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
             expectWireType(wireType, WireType.LengthDelimited)
-            settype_url(result, protoReadString(stream))
+            settypeUrl(result, protoReadString(stream))
         of 2:
             expectWireType(wireType, WireType.LengthDelimited)
             setvalue(result, protoReadBytes(stream))
@@ -101,6 +102,11 @@ proc serialize*(message: google_protobuf_Any): string =
 proc newgoogle_protobuf_Any*(data: string): google_protobuf_Any =
     let
         ss = newStringStream(data)
+    result = readgoogle_protobuf_Any(ss)
+
+proc newgoogle_protobuf_Any*(data: seq[byte]): google_protobuf_Any =
+    let
+        ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_Any(ss)
 
 

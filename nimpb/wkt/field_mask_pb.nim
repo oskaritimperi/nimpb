@@ -14,6 +14,7 @@ type
 
 proc newgoogle_protobuf_FieldMask*(): google_protobuf_FieldMask
 proc newgoogle_protobuf_FieldMask*(data: string): google_protobuf_FieldMask
+proc newgoogle_protobuf_FieldMask*(data: seq[byte]): google_protobuf_FieldMask
 proc writegoogle_protobuf_FieldMask*(stream: Stream, message: google_protobuf_FieldMask)
 proc readgoogle_protobuf_FieldMask*(stream: Stream): google_protobuf_FieldMask
 proc sizeOfgoogle_protobuf_FieldMask*(message: google_protobuf_FieldMask): uint64
@@ -78,6 +79,11 @@ proc serialize*(message: google_protobuf_FieldMask): string =
 proc newgoogle_protobuf_FieldMask*(data: string): google_protobuf_FieldMask =
     let
         ss = newStringStream(data)
+    result = readgoogle_protobuf_FieldMask(ss)
+
+proc newgoogle_protobuf_FieldMask*(data: seq[byte]): google_protobuf_FieldMask =
+    let
+        ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_FieldMask(ss)
 
 

@@ -155,7 +155,7 @@ proc nimTypeName(field: Field): string =
     of google_protobuf_FieldDescriptorProtoType.TypeString: result = "string"
     of google_protobuf_FieldDescriptorProtoType.TypeGroup: result = ""
     of google_protobuf_FieldDescriptorProtoType.TypeMessage: result = field.typeName
-    of google_protobuf_FieldDescriptorProtoType.TypeBytes: result = "bytes"
+    of google_protobuf_FieldDescriptorProtoType.TypeBytes: result = "seq[byte]"
     of google_protobuf_FieldDescriptorProtoType.TypeUInt32: result = "uint32"
     of google_protobuf_FieldDescriptorProtoType.TypeEnum: result = field.typeName
     of google_protobuf_FieldDescriptorProtoType.TypeSFixed32: result = "int32"
@@ -212,7 +212,7 @@ proc defaultValue(ftype: google_protobuf_FieldDescriptorProto_Type): string =
     of google_protobuf_FieldDescriptorProtoType.TypeString: result = "\"\""
     of google_protobuf_FieldDescriptorProtoType.TypeGroup: result = ""
     of google_protobuf_FieldDescriptorProtoType.TypeMessage: result = "nil"
-    of google_protobuf_FieldDescriptorProtoType.TypeBytes: result = "bytes(\"\")"
+    of google_protobuf_FieldDescriptorProtoType.TypeBytes: result = "@[]"
     of google_protobuf_FieldDescriptorProtoType.TypeUInt32: result = "0"
     of google_protobuf_FieldDescriptorProtoType.TypeEnum: result = "0"
     of google_protobuf_FieldDescriptorProtoType.TypeSFixed32: result = "0"
@@ -941,6 +941,7 @@ iterator genMessageProcForwards(msg: Message): string =
     if not isMapEntry(msg):
         yield &"proc new{msg.names}*(): {msg.names}"
         yield &"proc new{msg.names}*(data: string): {msg.names}"
+        yield &"proc new{msg.names}*(data: seq[byte]): {msg.names}"
         yield &"proc write{msg.names}*(stream: Stream, message: {msg.names})"
         yield &"proc read{msg.names}*(stream: Stream): {msg.names}"
         yield &"proc sizeOf{msg.names}*(message: {msg.names}): uint64"
@@ -990,6 +991,12 @@ iterator genProcs(msg: Message): string =
         yield &"proc new{msg.names}*(data: string): {msg.names} ="
         yield indent("let", 4)
         yield indent("ss = newStringStream(data)", 8)
+        yield indent(&"result = read{msg.names}(ss)", 4)
+        yield ""
+
+        yield &"proc new{msg.names}*(data: seq[byte]): {msg.names} ="
+        yield indent("let", 4)
+        yield indent("ss = newStringStream(cast[string](data))", 8)
         yield indent(&"result = read{msg.names}(ss)", 4)
         yield ""
 

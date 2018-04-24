@@ -17,16 +17,16 @@ type
         methods: seq[google_protobuf_Method]
         options: seq[google_protobuf_Option]
         version: string
-        source_context: google_protobuf_SourceContext
+        sourceContext: google_protobuf_SourceContext
         mixins: seq[google_protobuf_Mixin]
         syntax: google_protobuf_Syntax
     google_protobuf_Method* = ref google_protobuf_MethodObj
     google_protobuf_MethodObj* = object of Message
         name: string
-        request_type_url: string
-        request_streaming: bool
-        response_type_url: string
-        response_streaming: bool
+        requestTypeUrl: string
+        requestStreaming: bool
+        responseTypeUrl: string
+        responseStreaming: bool
         options: seq[google_protobuf_Option]
         syntax: google_protobuf_Syntax
     google_protobuf_Mixin* = ref google_protobuf_MixinObj
@@ -36,6 +36,7 @@ type
 
 proc newgoogle_protobuf_Method*(): google_protobuf_Method
 proc newgoogle_protobuf_Method*(data: string): google_protobuf_Method
+proc newgoogle_protobuf_Method*(data: seq[byte]): google_protobuf_Method
 proc writegoogle_protobuf_Method*(stream: Stream, message: google_protobuf_Method)
 proc readgoogle_protobuf_Method*(stream: Stream): google_protobuf_Method
 proc sizeOfgoogle_protobuf_Method*(message: google_protobuf_Method): uint64
@@ -43,6 +44,7 @@ proc toJson*(message: google_protobuf_Method): JsonNode
 
 proc newgoogle_protobuf_Mixin*(): google_protobuf_Mixin
 proc newgoogle_protobuf_Mixin*(data: string): google_protobuf_Mixin
+proc newgoogle_protobuf_Mixin*(data: seq[byte]): google_protobuf_Mixin
 proc writegoogle_protobuf_Mixin*(stream: Stream, message: google_protobuf_Mixin)
 proc readgoogle_protobuf_Mixin*(stream: Stream): google_protobuf_Mixin
 proc sizeOfgoogle_protobuf_Mixin*(message: google_protobuf_Mixin): uint64
@@ -50,6 +52,7 @@ proc toJson*(message: google_protobuf_Mixin): JsonNode
 
 proc newgoogle_protobuf_Api*(): google_protobuf_Api
 proc newgoogle_protobuf_Api*(data: string): google_protobuf_Api
+proc newgoogle_protobuf_Api*(data: seq[byte]): google_protobuf_Api
 proc writegoogle_protobuf_Api*(stream: Stream, message: google_protobuf_Api)
 proc readgoogle_protobuf_Api*(stream: Stream): google_protobuf_Api
 proc sizeOfgoogle_protobuf_Api*(message: google_protobuf_Api): uint64
@@ -59,10 +62,10 @@ proc newgoogle_protobuf_Method*(): google_protobuf_Method =
     new(result)
     initMessage(result[])
     result.name = ""
-    result.request_type_url = ""
-    result.request_streaming = false
-    result.response_type_url = ""
-    result.response_streaming = false
+    result.requestTypeUrl = ""
+    result.requestStreaming = false
+    result.responseTypeUrl = ""
+    result.responseStreaming = false
     result.options = @[]
     result.syntax = google_protobuf_Syntax.SYNTAX_PROTO2
 
@@ -83,73 +86,73 @@ proc name*(message: google_protobuf_Method): string {.inline.} =
 proc `name=`*(message: google_protobuf_Method, value: string) {.inline.} =
     setname(message, value)
 
-proc clearrequest_type_url*(message: google_protobuf_Method) =
-    message.request_type_url = ""
+proc clearrequestTypeUrl*(message: google_protobuf_Method) =
+    message.requestTypeUrl = ""
     clearFields(message, [2])
 
-proc hasrequest_type_url*(message: google_protobuf_Method): bool =
+proc hasrequestTypeUrl*(message: google_protobuf_Method): bool =
     result = hasField(message, 2)
 
-proc setrequest_type_url*(message: google_protobuf_Method, value: string) =
-    message.request_type_url = value
+proc setrequestTypeUrl*(message: google_protobuf_Method, value: string) =
+    message.requestTypeUrl = value
     setField(message, 2)
 
-proc request_type_url*(message: google_protobuf_Method): string {.inline.} =
-    message.request_type_url
+proc requestTypeUrl*(message: google_protobuf_Method): string {.inline.} =
+    message.requestTypeUrl
 
-proc `request_type_url=`*(message: google_protobuf_Method, value: string) {.inline.} =
-    setrequest_type_url(message, value)
+proc `requestTypeUrl=`*(message: google_protobuf_Method, value: string) {.inline.} =
+    setrequestTypeUrl(message, value)
 
-proc clearrequest_streaming*(message: google_protobuf_Method) =
-    message.request_streaming = false
+proc clearrequestStreaming*(message: google_protobuf_Method) =
+    message.requestStreaming = false
     clearFields(message, [3])
 
-proc hasrequest_streaming*(message: google_protobuf_Method): bool =
+proc hasrequestStreaming*(message: google_protobuf_Method): bool =
     result = hasField(message, 3)
 
-proc setrequest_streaming*(message: google_protobuf_Method, value: bool) =
-    message.request_streaming = value
+proc setrequestStreaming*(message: google_protobuf_Method, value: bool) =
+    message.requestStreaming = value
     setField(message, 3)
 
-proc request_streaming*(message: google_protobuf_Method): bool {.inline.} =
-    message.request_streaming
+proc requestStreaming*(message: google_protobuf_Method): bool {.inline.} =
+    message.requestStreaming
 
-proc `request_streaming=`*(message: google_protobuf_Method, value: bool) {.inline.} =
-    setrequest_streaming(message, value)
+proc `requestStreaming=`*(message: google_protobuf_Method, value: bool) {.inline.} =
+    setrequestStreaming(message, value)
 
-proc clearresponse_type_url*(message: google_protobuf_Method) =
-    message.response_type_url = ""
+proc clearresponseTypeUrl*(message: google_protobuf_Method) =
+    message.responseTypeUrl = ""
     clearFields(message, [4])
 
-proc hasresponse_type_url*(message: google_protobuf_Method): bool =
+proc hasresponseTypeUrl*(message: google_protobuf_Method): bool =
     result = hasField(message, 4)
 
-proc setresponse_type_url*(message: google_protobuf_Method, value: string) =
-    message.response_type_url = value
+proc setresponseTypeUrl*(message: google_protobuf_Method, value: string) =
+    message.responseTypeUrl = value
     setField(message, 4)
 
-proc response_type_url*(message: google_protobuf_Method): string {.inline.} =
-    message.response_type_url
+proc responseTypeUrl*(message: google_protobuf_Method): string {.inline.} =
+    message.responseTypeUrl
 
-proc `response_type_url=`*(message: google_protobuf_Method, value: string) {.inline.} =
-    setresponse_type_url(message, value)
+proc `responseTypeUrl=`*(message: google_protobuf_Method, value: string) {.inline.} =
+    setresponseTypeUrl(message, value)
 
-proc clearresponse_streaming*(message: google_protobuf_Method) =
-    message.response_streaming = false
+proc clearresponseStreaming*(message: google_protobuf_Method) =
+    message.responseStreaming = false
     clearFields(message, [5])
 
-proc hasresponse_streaming*(message: google_protobuf_Method): bool =
+proc hasresponseStreaming*(message: google_protobuf_Method): bool =
     result = hasField(message, 5)
 
-proc setresponse_streaming*(message: google_protobuf_Method, value: bool) =
-    message.response_streaming = value
+proc setresponseStreaming*(message: google_protobuf_Method, value: bool) =
+    message.responseStreaming = value
     setField(message, 5)
 
-proc response_streaming*(message: google_protobuf_Method): bool {.inline.} =
-    message.response_streaming
+proc responseStreaming*(message: google_protobuf_Method): bool {.inline.} =
+    message.responseStreaming
 
-proc `response_streaming=`*(message: google_protobuf_Method, value: bool) {.inline.} =
-    setresponse_streaming(message, value)
+proc `responseStreaming=`*(message: google_protobuf_Method, value: bool) {.inline.} =
+    setresponseStreaming(message, value)
 
 proc clearoptions*(message: google_protobuf_Method) =
     message.options = @[]
@@ -193,18 +196,18 @@ proc sizeOfgoogle_protobuf_Method*(message: google_protobuf_Method): uint64 =
     if hasname(message):
         result = result + sizeOfTag(1, WireType.LengthDelimited)
         result = result + sizeOfString(message.name)
-    if hasrequest_type_url(message):
+    if hasrequestTypeUrl(message):
         result = result + sizeOfTag(2, WireType.LengthDelimited)
-        result = result + sizeOfString(message.request_type_url)
-    if hasrequest_streaming(message):
+        result = result + sizeOfString(message.requestTypeUrl)
+    if hasrequestStreaming(message):
         result = result + sizeOfTag(3, WireType.Varint)
-        result = result + sizeOfBool(message.request_streaming)
-    if hasresponse_type_url(message):
+        result = result + sizeOfBool(message.requestStreaming)
+    if hasresponseTypeUrl(message):
         result = result + sizeOfTag(4, WireType.LengthDelimited)
-        result = result + sizeOfString(message.response_type_url)
-    if hasresponse_streaming(message):
+        result = result + sizeOfString(message.responseTypeUrl)
+    if hasresponseStreaming(message):
         result = result + sizeOfTag(5, WireType.Varint)
-        result = result + sizeOfBool(message.response_streaming)
+        result = result + sizeOfBool(message.responseStreaming)
     for value in message.options:
         result = result + sizeOfTag(6, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_Option(value))
@@ -216,14 +219,14 @@ proc sizeOfgoogle_protobuf_Method*(message: google_protobuf_Method): uint64 =
 proc writegoogle_protobuf_Method*(stream: Stream, message: google_protobuf_Method) =
     if hasname(message):
         protoWriteString(stream, message.name, 1)
-    if hasrequest_type_url(message):
-        protoWriteString(stream, message.request_type_url, 2)
-    if hasrequest_streaming(message):
-        protoWriteBool(stream, message.request_streaming, 3)
-    if hasresponse_type_url(message):
-        protoWriteString(stream, message.response_type_url, 4)
-    if hasresponse_streaming(message):
-        protoWriteBool(stream, message.response_streaming, 5)
+    if hasrequestTypeUrl(message):
+        protoWriteString(stream, message.requestTypeUrl, 2)
+    if hasrequestStreaming(message):
+        protoWriteBool(stream, message.requestStreaming, 3)
+    if hasresponseTypeUrl(message):
+        protoWriteString(stream, message.responseTypeUrl, 4)
+    if hasresponseStreaming(message):
+        protoWriteBool(stream, message.responseStreaming, 5)
     for value in message.options:
         writeMessage(stream, value, 6)
     if hassyntax(message):
@@ -244,16 +247,16 @@ proc readgoogle_protobuf_Method*(stream: Stream): google_protobuf_Method =
             setname(result, protoReadString(stream))
         of 2:
             expectWireType(wireType, WireType.LengthDelimited)
-            setrequest_type_url(result, protoReadString(stream))
+            setrequestTypeUrl(result, protoReadString(stream))
         of 3:
             expectWireType(wireType, WireType.Varint)
-            setrequest_streaming(result, protoReadBool(stream))
+            setrequestStreaming(result, protoReadBool(stream))
         of 4:
             expectWireType(wireType, WireType.LengthDelimited)
-            setresponse_type_url(result, protoReadString(stream))
+            setresponseTypeUrl(result, protoReadString(stream))
         of 5:
             expectWireType(wireType, WireType.Varint)
-            setresponse_streaming(result, protoReadBool(stream))
+            setresponseStreaming(result, protoReadBool(stream))
         of 6:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
@@ -267,14 +270,14 @@ proc toJson*(message: google_protobuf_Method): JsonNode =
     result = newJObject()
     if hasname(message):
         result["name"] = %message.name
-    if hasrequest_type_url(message):
-        result["requestTypeUrl"] = %message.request_type_url
-    if hasrequest_streaming(message):
-        result["requestStreaming"] = %message.request_streaming
-    if hasresponse_type_url(message):
-        result["responseTypeUrl"] = %message.response_type_url
-    if hasresponse_streaming(message):
-        result["responseStreaming"] = %message.response_streaming
+    if hasrequestTypeUrl(message):
+        result["requestTypeUrl"] = %message.requestTypeUrl
+    if hasrequestStreaming(message):
+        result["requestStreaming"] = %message.requestStreaming
+    if hasresponseTypeUrl(message):
+        result["responseTypeUrl"] = %message.responseTypeUrl
+    if hasresponseStreaming(message):
+        result["responseStreaming"] = %message.responseStreaming
     if hasoptions(message):
         let arr = newJArray()
         for value in message.options:
@@ -292,6 +295,11 @@ proc serialize*(message: google_protobuf_Method): string =
 proc newgoogle_protobuf_Method*(data: string): google_protobuf_Method =
     let
         ss = newStringStream(data)
+    result = readgoogle_protobuf_Method(ss)
+
+proc newgoogle_protobuf_Method*(data: seq[byte]): google_protobuf_Method =
+    let
+        ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_Method(ss)
 
 
@@ -386,6 +394,11 @@ proc newgoogle_protobuf_Mixin*(data: string): google_protobuf_Mixin =
         ss = newStringStream(data)
     result = readgoogle_protobuf_Mixin(ss)
 
+proc newgoogle_protobuf_Mixin*(data: seq[byte]): google_protobuf_Mixin =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_Mixin(ss)
+
 
 proc newgoogle_protobuf_Api*(): google_protobuf_Api =
     new(result)
@@ -394,7 +407,7 @@ proc newgoogle_protobuf_Api*(): google_protobuf_Api =
     result.methods = @[]
     result.options = @[]
     result.version = ""
-    result.source_context = nil
+    result.sourceContext = nil
     result.mixins = @[]
     result.syntax = google_protobuf_Syntax.SYNTAX_PROTO2
 
@@ -474,22 +487,22 @@ proc version*(message: google_protobuf_Api): string {.inline.} =
 proc `version=`*(message: google_protobuf_Api, value: string) {.inline.} =
     setversion(message, value)
 
-proc clearsource_context*(message: google_protobuf_Api) =
-    message.source_context = nil
+proc clearsourceContext*(message: google_protobuf_Api) =
+    message.sourceContext = nil
     clearFields(message, [5])
 
-proc hassource_context*(message: google_protobuf_Api): bool =
+proc hassourceContext*(message: google_protobuf_Api): bool =
     result = hasField(message, 5)
 
-proc setsource_context*(message: google_protobuf_Api, value: google_protobuf_SourceContext) =
-    message.source_context = value
+proc setsourceContext*(message: google_protobuf_Api, value: google_protobuf_SourceContext) =
+    message.sourceContext = value
     setField(message, 5)
 
-proc source_context*(message: google_protobuf_Api): google_protobuf_SourceContext {.inline.} =
-    message.source_context
+proc sourceContext*(message: google_protobuf_Api): google_protobuf_SourceContext {.inline.} =
+    message.sourceContext
 
-proc `source_context=`*(message: google_protobuf_Api, value: google_protobuf_SourceContext) {.inline.} =
-    setsource_context(message, value)
+proc `sourceContext=`*(message: google_protobuf_Api, value: google_protobuf_SourceContext) {.inline.} =
+    setsourceContext(message, value)
 
 proc clearmixins*(message: google_protobuf_Api) =
     message.mixins = @[]
@@ -542,9 +555,9 @@ proc sizeOfgoogle_protobuf_Api*(message: google_protobuf_Api): uint64 =
     if hasversion(message):
         result = result + sizeOfTag(4, WireType.LengthDelimited)
         result = result + sizeOfString(message.version)
-    if hassource_context(message):
+    if hassourceContext(message):
         result = result + sizeOfTag(5, WireType.LengthDelimited)
-        result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_SourceContext(message.source_context))
+        result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_SourceContext(message.sourceContext))
     for value in message.mixins:
         result = result + sizeOfTag(6, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_Mixin(value))
@@ -562,8 +575,8 @@ proc writegoogle_protobuf_Api*(stream: Stream, message: google_protobuf_Api) =
         writeMessage(stream, value, 3)
     if hasversion(message):
         protoWriteString(stream, message.version, 4)
-    if hassource_context(message):
-        writeMessage(stream, message.source_context, 5)
+    if hassourceContext(message):
+        writeMessage(stream, message.sourceContext, 5)
     for value in message.mixins:
         writeMessage(stream, value, 6)
     if hassyntax(message):
@@ -596,7 +609,7 @@ proc readgoogle_protobuf_Api*(stream: Stream): google_protobuf_Api =
         of 5:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            setsource_context(result, newgoogle_protobuf_SourceContext(data))
+            setsourceContext(result, newgoogle_protobuf_SourceContext(data))
         of 6:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
@@ -622,8 +635,8 @@ proc toJson*(message: google_protobuf_Api): JsonNode =
         result["options"] = arr
     if hasversion(message):
         result["version"] = %message.version
-    if hassource_context(message):
-        result["sourceContext"] = toJson(message.source_context)
+    if hassourceContext(message):
+        result["sourceContext"] = toJson(message.sourceContext)
     if hasmixins(message):
         let arr = newJArray()
         for value in message.mixins:
@@ -641,6 +654,11 @@ proc serialize*(message: google_protobuf_Api): string =
 proc newgoogle_protobuf_Api*(data: string): google_protobuf_Api =
     let
         ss = newStringStream(data)
+    result = readgoogle_protobuf_Api(ss)
+
+proc newgoogle_protobuf_Api*(data: seq[byte]): google_protobuf_Api =
+    let
+        ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_Api(ss)
 
 

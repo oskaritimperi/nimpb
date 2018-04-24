@@ -13,6 +13,7 @@ type
 
 proc newgoogle_protobuf_Empty*(): google_protobuf_Empty
 proc newgoogle_protobuf_Empty*(data: string): google_protobuf_Empty
+proc newgoogle_protobuf_Empty*(data: seq[byte]): google_protobuf_Empty
 proc writegoogle_protobuf_Empty*(stream: Stream, message: google_protobuf_Empty)
 proc readgoogle_protobuf_Empty*(stream: Stream): google_protobuf_Empty
 proc sizeOfgoogle_protobuf_Empty*(message: google_protobuf_Empty): uint64
@@ -51,6 +52,11 @@ proc serialize*(message: google_protobuf_Empty): string =
 proc newgoogle_protobuf_Empty*(data: string): google_protobuf_Empty =
     let
         ss = newStringStream(data)
+    result = readgoogle_protobuf_Empty(ss)
+
+proc newgoogle_protobuf_Empty*(data: seq[byte]): google_protobuf_Empty =
+    let
+        ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_Empty(ss)
 
 

@@ -20,8 +20,6 @@ type
 
     UnexpectedWireTypeError* = object of ParseError
 
-    bytes* = distinct string
-
     WireType* {.pure.} = enum
         Varint = 0
         Fixed64 = 1
@@ -349,11 +347,9 @@ proc protoWriteString*(stream: Stream, s: string, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.LengthDelimited)
     protoWriteString(stream, s)
 
-proc protoWriteBytes*(stream: Stream, s: bytes) =
-    protoWriteString(stream, string(s))
-
-proc protoWriteBytes*(stream: Stream, s: bytes, fieldNumber: int) =
-    protoWriteString(stream, string(s), fieldNumber)
+proc protoWriteBytes*(stream: Stream, bytes: var seq[byte], fieldNumber: int) =
+    writeTag(stream, fieldNumber, WireType.LengthDelimited)
+    writeData(stream, addr(bytes[0]), len(bytes))
 
 proc safeReadStr*(stream: Stream, size: int): string =
     result = newString(size)
@@ -364,8 +360,11 @@ proc protoReadString*(stream: Stream): string =
     let size = int(protoReadUInt64(stream))
     result = safeReadStr(stream, size)
 
-proc protoReadBytes*(stream: Stream): bytes =
-    bytes(protoReadString(stream))
+proc protoReadBytes*(stream: Stream): seq[byte] =
+    let size = int(protoReadUInt64(stream))
+    setLen(result, size)
+    if readData(stream, addr(result[0]), size) != size:
+        raise newException(IOError, "cannot read from stream")
 
 proc protoReadEnum*[T](stream: Stream): T =
     result = T(protoReadUInt32(stream))
@@ -403,11 +402,14 @@ proc packedFieldSize*[T](values: seq[T], fieldtype: FieldType): uint64 =
     else:
         raise newException(Exception, "invalid fieldtype")
 
+proc sizeOfLengthDelimited*(size: uint64): uint64 =
+    result = size + sizeOfVarint(size)
+
 proc sizeOfString*(s: string): uint64 =
     result = sizeOfVarint(len(s).uint64) + len(s).uint64
 
-proc sizeOfBytes*(s: bytes): uint64 =
-    result = sizeOfString(string(s))
+proc sizeOfBytes*(bytes: seq[byte]): uint64 =
+    result = sizeOfLengthDelimited(uint64(len(bytes)))
 
 proc sizeOfDouble*(value: float64): uint64 =
     result = 8
@@ -450,9 +452,6 @@ proc sizeOfSInt64*(value: int64): uint64 =
 
 proc sizeOfEnum*[T](value: T): uint64 =
     result = sizeOfUInt32(value.uint32)
-
-proc sizeOfLengthDelimited*(size: uint64): uint64 =
-    result = size + sizeOfVarint(size)
 
 proc sizeOfTag*(fieldNumber: int, wiretype: WireType): uint64 =
     result = sizeOfUInt32(uint32(makeTag(fieldNumber, wiretype)))

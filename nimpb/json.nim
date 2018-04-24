@@ -16,8 +16,8 @@ import wkt/any_pb
 proc `%`*(u: uint32): JsonNode =
     newJFloat(float(u))
 
-proc `%`*(b: bytes): JsonNode =
-    result = newJString(base64.encode(string(b), newLine=""))
+proc `%`*(b: seq[byte]): JsonNode =
+    result = newJString(base64.encode(cast[string](b), newLine=""))
 
 proc toJson*(value: float): JsonNode =
     case classify(value)
@@ -170,7 +170,7 @@ proc toJson*(message: google_protobuf_ListValue): JsonNode =
 proc toJson*(message: google_protobuf_Any): JsonNode =
     case message.typeUrl
     of "type.googleapis.com/google.protobuf.Duration":
-        let duration = newGoogleProtobufDuration(string(message.value))
+        let duration = newGoogleProtobufDuration(message.value)
         result = newJObject()
         result["@type"] = %message.typeUrl
         result["value"] = toJson(duration)
@@ -179,27 +179,27 @@ proc toJson*(message: google_protobuf_Any): JsonNode =
         result["@type"] = %message.typeUrl
         result["value"] = newJObject()
     of "type.googleapis.com/google.protobuf.FieldMask":
-        let mask = newGoogleProtobufFieldMask(string(message.value))
+        let mask = newGoogleProtobufFieldMask(message.value)
         result = newJObject()
         result["@type"] = %message.typeUrl
         result["value"] = toJson(mask)
     of "type.googleapis.com/google.protobuf.Struct":
-        let struct = newGoogleProtobufStruct(string(message.value))
+        let struct = newGoogleProtobufStruct(message.value)
         result = newJObject()
         result["@type"] = %message.typeUrl
         result["value"] = toJson(struct)
     of "type.googleapis.com/google.protobuf.Value":
-        let value = newGoogleProtobufValue(string(message.value))
+        let value = newGoogleProtobufValue(message.value)
         result = newJObject()
         result["@type"] = %message.typeUrl
         result["value"] = toJson(value)
     of "type.googleapis.com/google.protobuf.ListValue":
-        let lst = newGoogleProtobufListValue(string(message.value))
+        let lst = newGoogleProtobufListValue(message.value)
         result = newJObject()
         result["@type"] = %message.typeUrl
         result["value"] = toJson(lst)
     of "type.googleapis.com/google.protobuf.Timestamp":
-        let value = newGoogleProtobufTimestamp(string(message.value))
+        let value = newGoogleProtobufTimestamp(message.value)
         result = newJObject()
         result["@type"] = %message.typeUrl
         result["value"] = toJson(value)

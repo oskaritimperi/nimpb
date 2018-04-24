@@ -55,27 +55,27 @@ type
         name: string
         package: string
         dependency: seq[string]
-        public_dependency: seq[int32]
-        weak_dependency: seq[int32]
-        message_type: seq[google_protobuf_DescriptorProto]
-        enum_type: seq[google_protobuf_EnumDescriptorProto]
+        publicDependency: seq[int32]
+        weakDependency: seq[int32]
+        messageType: seq[google_protobuf_DescriptorProto]
+        enumType: seq[google_protobuf_EnumDescriptorProto]
         service: seq[google_protobuf_ServiceDescriptorProto]
         extension: seq[google_protobuf_FieldDescriptorProto]
         options: google_protobuf_FileOptions
-        source_code_info: google_protobuf_SourceCodeInfo
+        sourceCodeInfo: google_protobuf_SourceCodeInfo
         syntax: string
     google_protobuf_DescriptorProto* = ref google_protobuf_DescriptorProtoObj
     google_protobuf_DescriptorProtoObj* = object of Message
         name: string
         field: seq[google_protobuf_FieldDescriptorProto]
         extension: seq[google_protobuf_FieldDescriptorProto]
-        nested_type: seq[google_protobuf_DescriptorProto]
-        enum_type: seq[google_protobuf_EnumDescriptorProto]
-        extension_range: seq[google_protobuf_DescriptorProto_ExtensionRange]
-        oneof_decl: seq[google_protobuf_OneofDescriptorProto]
+        nestedType: seq[google_protobuf_DescriptorProto]
+        enumType: seq[google_protobuf_EnumDescriptorProto]
+        extensionRange: seq[google_protobuf_DescriptorProto_ExtensionRange]
+        oneofDecl: seq[google_protobuf_OneofDescriptorProto]
         options: google_protobuf_MessageOptions
-        reserved_range: seq[google_protobuf_DescriptorProto_ReservedRange]
-        reserved_name: seq[string]
+        reservedRange: seq[google_protobuf_DescriptorProto_ReservedRange]
+        reservedName: seq[string]
     google_protobuf_DescriptorProto_ReservedRange* = ref google_protobuf_DescriptorProto_ReservedRangeObj
     google_protobuf_DescriptorProto_ReservedRangeObj* = object of Message
         start: int32
@@ -87,18 +87,18 @@ type
         options: google_protobuf_ExtensionRangeOptions
     google_protobuf_ExtensionRangeOptions* = ref google_protobuf_ExtensionRangeOptionsObj
     google_protobuf_ExtensionRangeOptionsObj* = object of Message
-        uninterpreted_option: seq[google_protobuf_UninterpretedOption]
+        uninterpretedOption: seq[google_protobuf_UninterpretedOption]
     google_protobuf_FieldDescriptorProto* = ref google_protobuf_FieldDescriptorProtoObj
     google_protobuf_FieldDescriptorProtoObj* = object of Message
         name: string
         number: int32
         label: google_protobuf_FieldDescriptorProto_Label
         ftype: google_protobuf_FieldDescriptorProto_Type
-        type_name: string
+        typeName: string
         extendee: string
-        default_value: string
-        oneof_index: int32
-        json_name: string
+        defaultValue: string
+        oneofIndex: int32
+        jsonName: string
         options: google_protobuf_FieldOptions
     google_protobuf_OneofDescriptorProto* = ref google_protobuf_OneofDescriptorProtoObj
     google_protobuf_OneofDescriptorProtoObj* = object of Message
@@ -109,8 +109,8 @@ type
         name: string
         value: seq[google_protobuf_EnumValueDescriptorProto]
         options: google_protobuf_EnumOptions
-        reserved_range: seq[google_protobuf_EnumDescriptorProto_EnumReservedRange]
-        reserved_name: seq[string]
+        reservedRange: seq[google_protobuf_EnumDescriptorProto_EnumReservedRange]
+        reservedName: seq[string]
     google_protobuf_EnumDescriptorProto_EnumReservedRange* = ref google_protobuf_EnumDescriptorProto_EnumReservedRangeObj
     google_protobuf_EnumDescriptorProto_EnumReservedRangeObj* = object of Message
         start: int32
@@ -128,39 +128,39 @@ type
     google_protobuf_MethodDescriptorProto* = ref google_protobuf_MethodDescriptorProtoObj
     google_protobuf_MethodDescriptorProtoObj* = object of Message
         name: string
-        input_type: string
-        output_type: string
+        inputType: string
+        outputType: string
         options: google_protobuf_MethodOptions
-        client_streaming: bool
-        server_streaming: bool
+        clientStreaming: bool
+        serverStreaming: bool
     google_protobuf_FileOptions* = ref google_protobuf_FileOptionsObj
     google_protobuf_FileOptionsObj* = object of Message
-        java_package: string
-        java_outer_classname: string
-        java_multiple_files: bool
-        java_generate_equals_and_hash: bool
-        java_string_check_utf8: bool
-        optimize_for: google_protobuf_FileOptions_OptimizeMode
-        go_package: string
-        cc_generic_services: bool
-        java_generic_services: bool
-        py_generic_services: bool
-        php_generic_services: bool
+        javaPackage: string
+        javaOuterClassname: string
+        javaMultipleFiles: bool
+        javaGenerateEqualsAndHash: bool
+        javaStringCheckUtf8: bool
+        optimizeFor: google_protobuf_FileOptions_OptimizeMode
+        goPackage: string
+        ccGenericServices: bool
+        javaGenericServices: bool
+        pyGenericServices: bool
+        phpGenericServices: bool
         deprecated: bool
-        cc_enable_arenas: bool
-        objc_class_prefix: string
-        csharp_namespace: string
-        swift_prefix: string
-        php_class_prefix: string
-        php_namespace: string
-        uninterpreted_option: seq[google_protobuf_UninterpretedOption]
+        ccEnableArenas: bool
+        objcClassPrefix: string
+        csharpNamespace: string
+        swiftPrefix: string
+        phpClassPrefix: string
+        phpNamespace: string
+        uninterpretedOption: seq[google_protobuf_UninterpretedOption]
     google_protobuf_MessageOptions* = ref google_protobuf_MessageOptionsObj
     google_protobuf_MessageOptionsObj* = object of Message
-        message_set_wire_format: bool
-        no_standard_descriptor_accessor: bool
+        messageSetWireFormat: bool
+        noStandardDescriptorAccessor: bool
         deprecated: bool
-        map_entry: bool
-        uninterpreted_option: seq[google_protobuf_UninterpretedOption]
+        mapEntry: bool
+        uninterpretedOption: seq[google_protobuf_UninterpretedOption]
     google_protobuf_FieldOptions* = ref google_protobuf_FieldOptionsObj
     google_protobuf_FieldOptionsObj* = object of Message
         ctype: google_protobuf_FieldOptions_CType
@@ -169,41 +169,41 @@ type
         lazy: bool
         deprecated: bool
         weak: bool
-        uninterpreted_option: seq[google_protobuf_UninterpretedOption]
+        uninterpretedOption: seq[google_protobuf_UninterpretedOption]
     google_protobuf_OneofOptions* = ref google_protobuf_OneofOptionsObj
     google_protobuf_OneofOptionsObj* = object of Message
-        uninterpreted_option: seq[google_protobuf_UninterpretedOption]
+        uninterpretedOption: seq[google_protobuf_UninterpretedOption]
     google_protobuf_EnumOptions* = ref google_protobuf_EnumOptionsObj
     google_protobuf_EnumOptionsObj* = object of Message
-        allow_alias: bool
+        allowAlias: bool
         deprecated: bool
-        uninterpreted_option: seq[google_protobuf_UninterpretedOption]
+        uninterpretedOption: seq[google_protobuf_UninterpretedOption]
     google_protobuf_EnumValueOptions* = ref google_protobuf_EnumValueOptionsObj
     google_protobuf_EnumValueOptionsObj* = object of Message
         deprecated: bool
-        uninterpreted_option: seq[google_protobuf_UninterpretedOption]
+        uninterpretedOption: seq[google_protobuf_UninterpretedOption]
     google_protobuf_ServiceOptions* = ref google_protobuf_ServiceOptionsObj
     google_protobuf_ServiceOptionsObj* = object of Message
         deprecated: bool
-        uninterpreted_option: seq[google_protobuf_UninterpretedOption]
+        uninterpretedOption: seq[google_protobuf_UninterpretedOption]
     google_protobuf_MethodOptions* = ref google_protobuf_MethodOptionsObj
     google_protobuf_MethodOptionsObj* = object of Message
         deprecated: bool
-        idempotency_level: google_protobuf_MethodOptions_IdempotencyLevel
-        uninterpreted_option: seq[google_protobuf_UninterpretedOption]
+        idempotencyLevel: google_protobuf_MethodOptions_IdempotencyLevel
+        uninterpretedOption: seq[google_protobuf_UninterpretedOption]
     google_protobuf_UninterpretedOption* = ref google_protobuf_UninterpretedOptionObj
     google_protobuf_UninterpretedOptionObj* = object of Message
         name: seq[google_protobuf_UninterpretedOption_NamePart]
-        identifier_value: string
-        positive_int_value: uint64
-        negative_int_value: int64
-        double_value: float64
-        string_value: bytes
-        aggregate_value: string
+        identifierValue: string
+        positiveIntValue: uint64
+        negativeIntValue: int64
+        doubleValue: float64
+        stringValue: seq[byte]
+        aggregateValue: string
     google_protobuf_UninterpretedOption_NamePart* = ref google_protobuf_UninterpretedOption_NamePartObj
     google_protobuf_UninterpretedOption_NamePartObj* = object of Message
-        name_part: string
-        is_extension: bool
+        namePart: string
+        isExtension: bool
     google_protobuf_SourceCodeInfo* = ref google_protobuf_SourceCodeInfoObj
     google_protobuf_SourceCodeInfoObj* = object of Message
         location: seq[google_protobuf_SourceCodeInfo_Location]
@@ -211,21 +211,22 @@ type
     google_protobuf_SourceCodeInfo_LocationObj* = object of Message
         path: seq[int32]
         span: seq[int32]
-        leading_comments: string
-        trailing_comments: string
-        leading_detached_comments: seq[string]
+        leadingComments: string
+        trailingComments: string
+        leadingDetachedComments: seq[string]
     google_protobuf_GeneratedCodeInfo* = ref google_protobuf_GeneratedCodeInfoObj
     google_protobuf_GeneratedCodeInfoObj* = object of Message
         annotation: seq[google_protobuf_GeneratedCodeInfo_Annotation]
     google_protobuf_GeneratedCodeInfo_Annotation* = ref google_protobuf_GeneratedCodeInfo_AnnotationObj
     google_protobuf_GeneratedCodeInfo_AnnotationObj* = object of Message
         path: seq[int32]
-        source_file: string
+        sourceFile: string
         begin: int32
         fend: int32
 
 proc newgoogle_protobuf_UninterpretedOption_NamePart*(): google_protobuf_UninterpretedOption_NamePart
 proc newgoogle_protobuf_UninterpretedOption_NamePart*(data: string): google_protobuf_UninterpretedOption_NamePart
+proc newgoogle_protobuf_UninterpretedOption_NamePart*(data: seq[byte]): google_protobuf_UninterpretedOption_NamePart
 proc writegoogle_protobuf_UninterpretedOption_NamePart*(stream: Stream, message: google_protobuf_UninterpretedOption_NamePart)
 proc readgoogle_protobuf_UninterpretedOption_NamePart*(stream: Stream): google_protobuf_UninterpretedOption_NamePart
 proc sizeOfgoogle_protobuf_UninterpretedOption_NamePart*(message: google_protobuf_UninterpretedOption_NamePart): uint64
@@ -233,6 +234,7 @@ proc toJson*(message: google_protobuf_UninterpretedOption_NamePart): JsonNode
 
 proc newgoogle_protobuf_UninterpretedOption*(): google_protobuf_UninterpretedOption
 proc newgoogle_protobuf_UninterpretedOption*(data: string): google_protobuf_UninterpretedOption
+proc newgoogle_protobuf_UninterpretedOption*(data: seq[byte]): google_protobuf_UninterpretedOption
 proc writegoogle_protobuf_UninterpretedOption*(stream: Stream, message: google_protobuf_UninterpretedOption)
 proc readgoogle_protobuf_UninterpretedOption*(stream: Stream): google_protobuf_UninterpretedOption
 proc sizeOfgoogle_protobuf_UninterpretedOption*(message: google_protobuf_UninterpretedOption): uint64
@@ -240,6 +242,7 @@ proc toJson*(message: google_protobuf_UninterpretedOption): JsonNode
 
 proc newgoogle_protobuf_EnumValueOptions*(): google_protobuf_EnumValueOptions
 proc newgoogle_protobuf_EnumValueOptions*(data: string): google_protobuf_EnumValueOptions
+proc newgoogle_protobuf_EnumValueOptions*(data: seq[byte]): google_protobuf_EnumValueOptions
 proc writegoogle_protobuf_EnumValueOptions*(stream: Stream, message: google_protobuf_EnumValueOptions)
 proc readgoogle_protobuf_EnumValueOptions*(stream: Stream): google_protobuf_EnumValueOptions
 proc sizeOfgoogle_protobuf_EnumValueOptions*(message: google_protobuf_EnumValueOptions): uint64
@@ -247,6 +250,7 @@ proc toJson*(message: google_protobuf_EnumValueOptions): JsonNode
 
 proc newgoogle_protobuf_EnumValueDescriptorProto*(): google_protobuf_EnumValueDescriptorProto
 proc newgoogle_protobuf_EnumValueDescriptorProto*(data: string): google_protobuf_EnumValueDescriptorProto
+proc newgoogle_protobuf_EnumValueDescriptorProto*(data: seq[byte]): google_protobuf_EnumValueDescriptorProto
 proc writegoogle_protobuf_EnumValueDescriptorProto*(stream: Stream, message: google_protobuf_EnumValueDescriptorProto)
 proc readgoogle_protobuf_EnumValueDescriptorProto*(stream: Stream): google_protobuf_EnumValueDescriptorProto
 proc sizeOfgoogle_protobuf_EnumValueDescriptorProto*(message: google_protobuf_EnumValueDescriptorProto): uint64
@@ -254,6 +258,7 @@ proc toJson*(message: google_protobuf_EnumValueDescriptorProto): JsonNode
 
 proc newgoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(): google_protobuf_EnumDescriptorProto_EnumReservedRange
 proc newgoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(data: string): google_protobuf_EnumDescriptorProto_EnumReservedRange
+proc newgoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(data: seq[byte]): google_protobuf_EnumDescriptorProto_EnumReservedRange
 proc writegoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(stream: Stream, message: google_protobuf_EnumDescriptorProto_EnumReservedRange)
 proc readgoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(stream: Stream): google_protobuf_EnumDescriptorProto_EnumReservedRange
 proc sizeOfgoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(message: google_protobuf_EnumDescriptorProto_EnumReservedRange): uint64
@@ -261,6 +266,7 @@ proc toJson*(message: google_protobuf_EnumDescriptorProto_EnumReservedRange): Js
 
 proc newgoogle_protobuf_EnumOptions*(): google_protobuf_EnumOptions
 proc newgoogle_protobuf_EnumOptions*(data: string): google_protobuf_EnumOptions
+proc newgoogle_protobuf_EnumOptions*(data: seq[byte]): google_protobuf_EnumOptions
 proc writegoogle_protobuf_EnumOptions*(stream: Stream, message: google_protobuf_EnumOptions)
 proc readgoogle_protobuf_EnumOptions*(stream: Stream): google_protobuf_EnumOptions
 proc sizeOfgoogle_protobuf_EnumOptions*(message: google_protobuf_EnumOptions): uint64
@@ -268,6 +274,7 @@ proc toJson*(message: google_protobuf_EnumOptions): JsonNode
 
 proc newgoogle_protobuf_EnumDescriptorProto*(): google_protobuf_EnumDescriptorProto
 proc newgoogle_protobuf_EnumDescriptorProto*(data: string): google_protobuf_EnumDescriptorProto
+proc newgoogle_protobuf_EnumDescriptorProto*(data: seq[byte]): google_protobuf_EnumDescriptorProto
 proc writegoogle_protobuf_EnumDescriptorProto*(stream: Stream, message: google_protobuf_EnumDescriptorProto)
 proc readgoogle_protobuf_EnumDescriptorProto*(stream: Stream): google_protobuf_EnumDescriptorProto
 proc sizeOfgoogle_protobuf_EnumDescriptorProto*(message: google_protobuf_EnumDescriptorProto): uint64
@@ -275,6 +282,7 @@ proc toJson*(message: google_protobuf_EnumDescriptorProto): JsonNode
 
 proc newgoogle_protobuf_ExtensionRangeOptions*(): google_protobuf_ExtensionRangeOptions
 proc newgoogle_protobuf_ExtensionRangeOptions*(data: string): google_protobuf_ExtensionRangeOptions
+proc newgoogle_protobuf_ExtensionRangeOptions*(data: seq[byte]): google_protobuf_ExtensionRangeOptions
 proc writegoogle_protobuf_ExtensionRangeOptions*(stream: Stream, message: google_protobuf_ExtensionRangeOptions)
 proc readgoogle_protobuf_ExtensionRangeOptions*(stream: Stream): google_protobuf_ExtensionRangeOptions
 proc sizeOfgoogle_protobuf_ExtensionRangeOptions*(message: google_protobuf_ExtensionRangeOptions): uint64
@@ -282,6 +290,7 @@ proc toJson*(message: google_protobuf_ExtensionRangeOptions): JsonNode
 
 proc newgoogle_protobuf_SourceCodeInfo_Location*(): google_protobuf_SourceCodeInfo_Location
 proc newgoogle_protobuf_SourceCodeInfo_Location*(data: string): google_protobuf_SourceCodeInfo_Location
+proc newgoogle_protobuf_SourceCodeInfo_Location*(data: seq[byte]): google_protobuf_SourceCodeInfo_Location
 proc writegoogle_protobuf_SourceCodeInfo_Location*(stream: Stream, message: google_protobuf_SourceCodeInfo_Location)
 proc readgoogle_protobuf_SourceCodeInfo_Location*(stream: Stream): google_protobuf_SourceCodeInfo_Location
 proc sizeOfgoogle_protobuf_SourceCodeInfo_Location*(message: google_protobuf_SourceCodeInfo_Location): uint64
@@ -289,6 +298,7 @@ proc toJson*(message: google_protobuf_SourceCodeInfo_Location): JsonNode
 
 proc newgoogle_protobuf_SourceCodeInfo*(): google_protobuf_SourceCodeInfo
 proc newgoogle_protobuf_SourceCodeInfo*(data: string): google_protobuf_SourceCodeInfo
+proc newgoogle_protobuf_SourceCodeInfo*(data: seq[byte]): google_protobuf_SourceCodeInfo
 proc writegoogle_protobuf_SourceCodeInfo*(stream: Stream, message: google_protobuf_SourceCodeInfo)
 proc readgoogle_protobuf_SourceCodeInfo*(stream: Stream): google_protobuf_SourceCodeInfo
 proc sizeOfgoogle_protobuf_SourceCodeInfo*(message: google_protobuf_SourceCodeInfo): uint64
@@ -296,6 +306,7 @@ proc toJson*(message: google_protobuf_SourceCodeInfo): JsonNode
 
 proc newgoogle_protobuf_FieldOptions*(): google_protobuf_FieldOptions
 proc newgoogle_protobuf_FieldOptions*(data: string): google_protobuf_FieldOptions
+proc newgoogle_protobuf_FieldOptions*(data: seq[byte]): google_protobuf_FieldOptions
 proc writegoogle_protobuf_FieldOptions*(stream: Stream, message: google_protobuf_FieldOptions)
 proc readgoogle_protobuf_FieldOptions*(stream: Stream): google_protobuf_FieldOptions
 proc sizeOfgoogle_protobuf_FieldOptions*(message: google_protobuf_FieldOptions): uint64
@@ -303,6 +314,7 @@ proc toJson*(message: google_protobuf_FieldOptions): JsonNode
 
 proc newgoogle_protobuf_FieldDescriptorProto*(): google_protobuf_FieldDescriptorProto
 proc newgoogle_protobuf_FieldDescriptorProto*(data: string): google_protobuf_FieldDescriptorProto
+proc newgoogle_protobuf_FieldDescriptorProto*(data: seq[byte]): google_protobuf_FieldDescriptorProto
 proc writegoogle_protobuf_FieldDescriptorProto*(stream: Stream, message: google_protobuf_FieldDescriptorProto)
 proc readgoogle_protobuf_FieldDescriptorProto*(stream: Stream): google_protobuf_FieldDescriptorProto
 proc sizeOfgoogle_protobuf_FieldDescriptorProto*(message: google_protobuf_FieldDescriptorProto): uint64
@@ -310,6 +322,7 @@ proc toJson*(message: google_protobuf_FieldDescriptorProto): JsonNode
 
 proc newgoogle_protobuf_DescriptorProto_ExtensionRange*(): google_protobuf_DescriptorProto_ExtensionRange
 proc newgoogle_protobuf_DescriptorProto_ExtensionRange*(data: string): google_protobuf_DescriptorProto_ExtensionRange
+proc newgoogle_protobuf_DescriptorProto_ExtensionRange*(data: seq[byte]): google_protobuf_DescriptorProto_ExtensionRange
 proc writegoogle_protobuf_DescriptorProto_ExtensionRange*(stream: Stream, message: google_protobuf_DescriptorProto_ExtensionRange)
 proc readgoogle_protobuf_DescriptorProto_ExtensionRange*(stream: Stream): google_protobuf_DescriptorProto_ExtensionRange
 proc sizeOfgoogle_protobuf_DescriptorProto_ExtensionRange*(message: google_protobuf_DescriptorProto_ExtensionRange): uint64
@@ -317,6 +330,7 @@ proc toJson*(message: google_protobuf_DescriptorProto_ExtensionRange): JsonNode
 
 proc newgoogle_protobuf_MessageOptions*(): google_protobuf_MessageOptions
 proc newgoogle_protobuf_MessageOptions*(data: string): google_protobuf_MessageOptions
+proc newgoogle_protobuf_MessageOptions*(data: seq[byte]): google_protobuf_MessageOptions
 proc writegoogle_protobuf_MessageOptions*(stream: Stream, message: google_protobuf_MessageOptions)
 proc readgoogle_protobuf_MessageOptions*(stream: Stream): google_protobuf_MessageOptions
 proc sizeOfgoogle_protobuf_MessageOptions*(message: google_protobuf_MessageOptions): uint64
@@ -324,6 +338,7 @@ proc toJson*(message: google_protobuf_MessageOptions): JsonNode
 
 proc newgoogle_protobuf_OneofOptions*(): google_protobuf_OneofOptions
 proc newgoogle_protobuf_OneofOptions*(data: string): google_protobuf_OneofOptions
+proc newgoogle_protobuf_OneofOptions*(data: seq[byte]): google_protobuf_OneofOptions
 proc writegoogle_protobuf_OneofOptions*(stream: Stream, message: google_protobuf_OneofOptions)
 proc readgoogle_protobuf_OneofOptions*(stream: Stream): google_protobuf_OneofOptions
 proc sizeOfgoogle_protobuf_OneofOptions*(message: google_protobuf_OneofOptions): uint64
@@ -331,6 +346,7 @@ proc toJson*(message: google_protobuf_OneofOptions): JsonNode
 
 proc newgoogle_protobuf_OneofDescriptorProto*(): google_protobuf_OneofDescriptorProto
 proc newgoogle_protobuf_OneofDescriptorProto*(data: string): google_protobuf_OneofDescriptorProto
+proc newgoogle_protobuf_OneofDescriptorProto*(data: seq[byte]): google_protobuf_OneofDescriptorProto
 proc writegoogle_protobuf_OneofDescriptorProto*(stream: Stream, message: google_protobuf_OneofDescriptorProto)
 proc readgoogle_protobuf_OneofDescriptorProto*(stream: Stream): google_protobuf_OneofDescriptorProto
 proc sizeOfgoogle_protobuf_OneofDescriptorProto*(message: google_protobuf_OneofDescriptorProto): uint64
@@ -338,6 +354,7 @@ proc toJson*(message: google_protobuf_OneofDescriptorProto): JsonNode
 
 proc newgoogle_protobuf_DescriptorProto_ReservedRange*(): google_protobuf_DescriptorProto_ReservedRange
 proc newgoogle_protobuf_DescriptorProto_ReservedRange*(data: string): google_protobuf_DescriptorProto_ReservedRange
+proc newgoogle_protobuf_DescriptorProto_ReservedRange*(data: seq[byte]): google_protobuf_DescriptorProto_ReservedRange
 proc writegoogle_protobuf_DescriptorProto_ReservedRange*(stream: Stream, message: google_protobuf_DescriptorProto_ReservedRange)
 proc readgoogle_protobuf_DescriptorProto_ReservedRange*(stream: Stream): google_protobuf_DescriptorProto_ReservedRange
 proc sizeOfgoogle_protobuf_DescriptorProto_ReservedRange*(message: google_protobuf_DescriptorProto_ReservedRange): uint64
@@ -345,6 +362,7 @@ proc toJson*(message: google_protobuf_DescriptorProto_ReservedRange): JsonNode
 
 proc newgoogle_protobuf_DescriptorProto*(): google_protobuf_DescriptorProto
 proc newgoogle_protobuf_DescriptorProto*(data: string): google_protobuf_DescriptorProto
+proc newgoogle_protobuf_DescriptorProto*(data: seq[byte]): google_protobuf_DescriptorProto
 proc writegoogle_protobuf_DescriptorProto*(stream: Stream, message: google_protobuf_DescriptorProto)
 proc readgoogle_protobuf_DescriptorProto*(stream: Stream): google_protobuf_DescriptorProto
 proc sizeOfgoogle_protobuf_DescriptorProto*(message: google_protobuf_DescriptorProto): uint64
@@ -352,6 +370,7 @@ proc toJson*(message: google_protobuf_DescriptorProto): JsonNode
 
 proc newgoogle_protobuf_FileOptions*(): google_protobuf_FileOptions
 proc newgoogle_protobuf_FileOptions*(data: string): google_protobuf_FileOptions
+proc newgoogle_protobuf_FileOptions*(data: seq[byte]): google_protobuf_FileOptions
 proc writegoogle_protobuf_FileOptions*(stream: Stream, message: google_protobuf_FileOptions)
 proc readgoogle_protobuf_FileOptions*(stream: Stream): google_protobuf_FileOptions
 proc sizeOfgoogle_protobuf_FileOptions*(message: google_protobuf_FileOptions): uint64
@@ -359,6 +378,7 @@ proc toJson*(message: google_protobuf_FileOptions): JsonNode
 
 proc newgoogle_protobuf_ServiceOptions*(): google_protobuf_ServiceOptions
 proc newgoogle_protobuf_ServiceOptions*(data: string): google_protobuf_ServiceOptions
+proc newgoogle_protobuf_ServiceOptions*(data: seq[byte]): google_protobuf_ServiceOptions
 proc writegoogle_protobuf_ServiceOptions*(stream: Stream, message: google_protobuf_ServiceOptions)
 proc readgoogle_protobuf_ServiceOptions*(stream: Stream): google_protobuf_ServiceOptions
 proc sizeOfgoogle_protobuf_ServiceOptions*(message: google_protobuf_ServiceOptions): uint64
@@ -366,6 +386,7 @@ proc toJson*(message: google_protobuf_ServiceOptions): JsonNode
 
 proc newgoogle_protobuf_MethodOptions*(): google_protobuf_MethodOptions
 proc newgoogle_protobuf_MethodOptions*(data: string): google_protobuf_MethodOptions
+proc newgoogle_protobuf_MethodOptions*(data: seq[byte]): google_protobuf_MethodOptions
 proc writegoogle_protobuf_MethodOptions*(stream: Stream, message: google_protobuf_MethodOptions)
 proc readgoogle_protobuf_MethodOptions*(stream: Stream): google_protobuf_MethodOptions
 proc sizeOfgoogle_protobuf_MethodOptions*(message: google_protobuf_MethodOptions): uint64
@@ -373,6 +394,7 @@ proc toJson*(message: google_protobuf_MethodOptions): JsonNode
 
 proc newgoogle_protobuf_MethodDescriptorProto*(): google_protobuf_MethodDescriptorProto
 proc newgoogle_protobuf_MethodDescriptorProto*(data: string): google_protobuf_MethodDescriptorProto
+proc newgoogle_protobuf_MethodDescriptorProto*(data: seq[byte]): google_protobuf_MethodDescriptorProto
 proc writegoogle_protobuf_MethodDescriptorProto*(stream: Stream, message: google_protobuf_MethodDescriptorProto)
 proc readgoogle_protobuf_MethodDescriptorProto*(stream: Stream): google_protobuf_MethodDescriptorProto
 proc sizeOfgoogle_protobuf_MethodDescriptorProto*(message: google_protobuf_MethodDescriptorProto): uint64
@@ -380,6 +402,7 @@ proc toJson*(message: google_protobuf_MethodDescriptorProto): JsonNode
 
 proc newgoogle_protobuf_ServiceDescriptorProto*(): google_protobuf_ServiceDescriptorProto
 proc newgoogle_protobuf_ServiceDescriptorProto*(data: string): google_protobuf_ServiceDescriptorProto
+proc newgoogle_protobuf_ServiceDescriptorProto*(data: seq[byte]): google_protobuf_ServiceDescriptorProto
 proc writegoogle_protobuf_ServiceDescriptorProto*(stream: Stream, message: google_protobuf_ServiceDescriptorProto)
 proc readgoogle_protobuf_ServiceDescriptorProto*(stream: Stream): google_protobuf_ServiceDescriptorProto
 proc sizeOfgoogle_protobuf_ServiceDescriptorProto*(message: google_protobuf_ServiceDescriptorProto): uint64
@@ -387,6 +410,7 @@ proc toJson*(message: google_protobuf_ServiceDescriptorProto): JsonNode
 
 proc newgoogle_protobuf_FileDescriptorProto*(): google_protobuf_FileDescriptorProto
 proc newgoogle_protobuf_FileDescriptorProto*(data: string): google_protobuf_FileDescriptorProto
+proc newgoogle_protobuf_FileDescriptorProto*(data: seq[byte]): google_protobuf_FileDescriptorProto
 proc writegoogle_protobuf_FileDescriptorProto*(stream: Stream, message: google_protobuf_FileDescriptorProto)
 proc readgoogle_protobuf_FileDescriptorProto*(stream: Stream): google_protobuf_FileDescriptorProto
 proc sizeOfgoogle_protobuf_FileDescriptorProto*(message: google_protobuf_FileDescriptorProto): uint64
@@ -394,6 +418,7 @@ proc toJson*(message: google_protobuf_FileDescriptorProto): JsonNode
 
 proc newgoogle_protobuf_FileDescriptorSet*(): google_protobuf_FileDescriptorSet
 proc newgoogle_protobuf_FileDescriptorSet*(data: string): google_protobuf_FileDescriptorSet
+proc newgoogle_protobuf_FileDescriptorSet*(data: seq[byte]): google_protobuf_FileDescriptorSet
 proc writegoogle_protobuf_FileDescriptorSet*(stream: Stream, message: google_protobuf_FileDescriptorSet)
 proc readgoogle_protobuf_FileDescriptorSet*(stream: Stream): google_protobuf_FileDescriptorSet
 proc sizeOfgoogle_protobuf_FileDescriptorSet*(message: google_protobuf_FileDescriptorSet): uint64
@@ -401,6 +426,7 @@ proc toJson*(message: google_protobuf_FileDescriptorSet): JsonNode
 
 proc newgoogle_protobuf_GeneratedCodeInfo_Annotation*(): google_protobuf_GeneratedCodeInfo_Annotation
 proc newgoogle_protobuf_GeneratedCodeInfo_Annotation*(data: string): google_protobuf_GeneratedCodeInfo_Annotation
+proc newgoogle_protobuf_GeneratedCodeInfo_Annotation*(data: seq[byte]): google_protobuf_GeneratedCodeInfo_Annotation
 proc writegoogle_protobuf_GeneratedCodeInfo_Annotation*(stream: Stream, message: google_protobuf_GeneratedCodeInfo_Annotation)
 proc readgoogle_protobuf_GeneratedCodeInfo_Annotation*(stream: Stream): google_protobuf_GeneratedCodeInfo_Annotation
 proc sizeOfgoogle_protobuf_GeneratedCodeInfo_Annotation*(message: google_protobuf_GeneratedCodeInfo_Annotation): uint64
@@ -408,6 +434,7 @@ proc toJson*(message: google_protobuf_GeneratedCodeInfo_Annotation): JsonNode
 
 proc newgoogle_protobuf_GeneratedCodeInfo*(): google_protobuf_GeneratedCodeInfo
 proc newgoogle_protobuf_GeneratedCodeInfo*(data: string): google_protobuf_GeneratedCodeInfo
+proc newgoogle_protobuf_GeneratedCodeInfo*(data: seq[byte]): google_protobuf_GeneratedCodeInfo
 proc writegoogle_protobuf_GeneratedCodeInfo*(stream: Stream, message: google_protobuf_GeneratedCodeInfo)
 proc readgoogle_protobuf_GeneratedCodeInfo*(stream: Stream): google_protobuf_GeneratedCodeInfo
 proc sizeOfgoogle_protobuf_GeneratedCodeInfo*(message: google_protobuf_GeneratedCodeInfo): uint64
@@ -416,57 +443,57 @@ proc toJson*(message: google_protobuf_GeneratedCodeInfo): JsonNode
 proc newgoogle_protobuf_UninterpretedOption_NamePart*(): google_protobuf_UninterpretedOption_NamePart =
     new(result)
     initMessage(result[])
-    result.name_part = ""
-    result.is_extension = false
+    result.namePart = ""
+    result.isExtension = false
 
-proc clearname_part*(message: google_protobuf_UninterpretedOption_NamePart) =
-    message.name_part = ""
+proc clearnamePart*(message: google_protobuf_UninterpretedOption_NamePart) =
+    message.namePart = ""
     clearFields(message, [1])
 
-proc hasname_part*(message: google_protobuf_UninterpretedOption_NamePart): bool =
+proc hasnamePart*(message: google_protobuf_UninterpretedOption_NamePart): bool =
     result = hasField(message, 1)
 
-proc setname_part*(message: google_protobuf_UninterpretedOption_NamePart, value: string) =
-    message.name_part = value
+proc setnamePart*(message: google_protobuf_UninterpretedOption_NamePart, value: string) =
+    message.namePart = value
     setField(message, 1)
 
-proc name_part*(message: google_protobuf_UninterpretedOption_NamePart): string {.inline.} =
-    message.name_part
+proc namePart*(message: google_protobuf_UninterpretedOption_NamePart): string {.inline.} =
+    message.namePart
 
-proc `name_part=`*(message: google_protobuf_UninterpretedOption_NamePart, value: string) {.inline.} =
-    setname_part(message, value)
+proc `namePart=`*(message: google_protobuf_UninterpretedOption_NamePart, value: string) {.inline.} =
+    setnamePart(message, value)
 
-proc clearis_extension*(message: google_protobuf_UninterpretedOption_NamePart) =
-    message.is_extension = false
+proc clearisExtension*(message: google_protobuf_UninterpretedOption_NamePart) =
+    message.isExtension = false
     clearFields(message, [2])
 
-proc hasis_extension*(message: google_protobuf_UninterpretedOption_NamePart): bool =
+proc hasisExtension*(message: google_protobuf_UninterpretedOption_NamePart): bool =
     result = hasField(message, 2)
 
-proc setis_extension*(message: google_protobuf_UninterpretedOption_NamePart, value: bool) =
-    message.is_extension = value
+proc setisExtension*(message: google_protobuf_UninterpretedOption_NamePart, value: bool) =
+    message.isExtension = value
     setField(message, 2)
 
-proc is_extension*(message: google_protobuf_UninterpretedOption_NamePart): bool {.inline.} =
-    message.is_extension
+proc isExtension*(message: google_protobuf_UninterpretedOption_NamePart): bool {.inline.} =
+    message.isExtension
 
-proc `is_extension=`*(message: google_protobuf_UninterpretedOption_NamePart, value: bool) {.inline.} =
-    setis_extension(message, value)
+proc `isExtension=`*(message: google_protobuf_UninterpretedOption_NamePart, value: bool) {.inline.} =
+    setisExtension(message, value)
 
 proc sizeOfgoogle_protobuf_UninterpretedOption_NamePart*(message: google_protobuf_UninterpretedOption_NamePart): uint64 =
-    if hasname_part(message):
+    if hasnamePart(message):
         result = result + sizeOfTag(1, WireType.LengthDelimited)
-        result = result + sizeOfString(message.name_part)
-    if hasis_extension(message):
+        result = result + sizeOfString(message.namePart)
+    if hasisExtension(message):
         result = result + sizeOfTag(2, WireType.Varint)
-        result = result + sizeOfBool(message.is_extension)
+        result = result + sizeOfBool(message.isExtension)
     result = result + sizeOfUnknownFields(message)
 
 proc writegoogle_protobuf_UninterpretedOption_NamePart*(stream: Stream, message: google_protobuf_UninterpretedOption_NamePart) =
-    if hasname_part(message):
-        protoWriteString(stream, message.name_part, 1)
-    if hasis_extension(message):
-        protoWriteBool(stream, message.is_extension, 2)
+    if hasnamePart(message):
+        protoWriteString(stream, message.namePart, 1)
+    if hasisExtension(message):
+        protoWriteBool(stream, message.isExtension, 2)
     writeUnknownFields(stream, message)
 
 proc readgoogle_protobuf_UninterpretedOption_NamePart*(stream: Stream): google_protobuf_UninterpretedOption_NamePart =
@@ -480,18 +507,18 @@ proc readgoogle_protobuf_UninterpretedOption_NamePart*(stream: Stream): google_p
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
             expectWireType(wireType, WireType.LengthDelimited)
-            setname_part(result, protoReadString(stream))
+            setnamePart(result, protoReadString(stream))
         of 2:
             expectWireType(wireType, WireType.Varint)
-            setis_extension(result, protoReadBool(stream))
+            setisExtension(result, protoReadBool(stream))
         else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_UninterpretedOption_NamePart): JsonNode =
     result = newJObject()
-    if hasname_part(message):
-        result["namePart"] = %message.name_part
-    if hasis_extension(message):
-        result["isExtension"] = %message.is_extension
+    if hasnamePart(message):
+        result["namePart"] = %message.namePart
+    if hasisExtension(message):
+        result["isExtension"] = %message.isExtension
 
 proc serialize*(message: google_protobuf_UninterpretedOption_NamePart): string =
     let
@@ -504,17 +531,22 @@ proc newgoogle_protobuf_UninterpretedOption_NamePart*(data: string): google_prot
         ss = newStringStream(data)
     result = readgoogle_protobuf_UninterpretedOption_NamePart(ss)
 
+proc newgoogle_protobuf_UninterpretedOption_NamePart*(data: seq[byte]): google_protobuf_UninterpretedOption_NamePart =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_UninterpretedOption_NamePart(ss)
+
 
 proc newgoogle_protobuf_UninterpretedOption*(): google_protobuf_UninterpretedOption =
     new(result)
     initMessage(result[])
     result.name = @[]
-    result.identifier_value = ""
-    result.positive_int_value = 0
-    result.negative_int_value = 0
-    result.double_value = 0
-    result.string_value = bytes("")
-    result.aggregate_value = ""
+    result.identifierValue = ""
+    result.positiveIntValue = 0
+    result.negativeIntValue = 0
+    result.doubleValue = 0
+    result.stringValue = @[]
+    result.aggregateValue = ""
 
 proc clearname*(message: google_protobuf_UninterpretedOption) =
     message.name = @[]
@@ -537,147 +569,147 @@ proc name*(message: google_protobuf_UninterpretedOption): seq[google_protobuf_Un
 proc `name=`*(message: google_protobuf_UninterpretedOption, value: seq[google_protobuf_UninterpretedOption_NamePart]) {.inline.} =
     setname(message, value)
 
-proc clearidentifier_value*(message: google_protobuf_UninterpretedOption) =
-    message.identifier_value = ""
+proc clearidentifierValue*(message: google_protobuf_UninterpretedOption) =
+    message.identifierValue = ""
     clearFields(message, [3])
 
-proc hasidentifier_value*(message: google_protobuf_UninterpretedOption): bool =
+proc hasidentifierValue*(message: google_protobuf_UninterpretedOption): bool =
     result = hasField(message, 3)
 
-proc setidentifier_value*(message: google_protobuf_UninterpretedOption, value: string) =
-    message.identifier_value = value
+proc setidentifierValue*(message: google_protobuf_UninterpretedOption, value: string) =
+    message.identifierValue = value
     setField(message, 3)
 
-proc identifier_value*(message: google_protobuf_UninterpretedOption): string {.inline.} =
-    message.identifier_value
+proc identifierValue*(message: google_protobuf_UninterpretedOption): string {.inline.} =
+    message.identifierValue
 
-proc `identifier_value=`*(message: google_protobuf_UninterpretedOption, value: string) {.inline.} =
-    setidentifier_value(message, value)
+proc `identifierValue=`*(message: google_protobuf_UninterpretedOption, value: string) {.inline.} =
+    setidentifierValue(message, value)
 
-proc clearpositive_int_value*(message: google_protobuf_UninterpretedOption) =
-    message.positive_int_value = 0
+proc clearpositiveIntValue*(message: google_protobuf_UninterpretedOption) =
+    message.positiveIntValue = 0
     clearFields(message, [4])
 
-proc haspositive_int_value*(message: google_protobuf_UninterpretedOption): bool =
+proc haspositiveIntValue*(message: google_protobuf_UninterpretedOption): bool =
     result = hasField(message, 4)
 
-proc setpositive_int_value*(message: google_protobuf_UninterpretedOption, value: uint64) =
-    message.positive_int_value = value
+proc setpositiveIntValue*(message: google_protobuf_UninterpretedOption, value: uint64) =
+    message.positiveIntValue = value
     setField(message, 4)
 
-proc positive_int_value*(message: google_protobuf_UninterpretedOption): uint64 {.inline.} =
-    message.positive_int_value
+proc positiveIntValue*(message: google_protobuf_UninterpretedOption): uint64 {.inline.} =
+    message.positiveIntValue
 
-proc `positive_int_value=`*(message: google_protobuf_UninterpretedOption, value: uint64) {.inline.} =
-    setpositive_int_value(message, value)
+proc `positiveIntValue=`*(message: google_protobuf_UninterpretedOption, value: uint64) {.inline.} =
+    setpositiveIntValue(message, value)
 
-proc clearnegative_int_value*(message: google_protobuf_UninterpretedOption) =
-    message.negative_int_value = 0
+proc clearnegativeIntValue*(message: google_protobuf_UninterpretedOption) =
+    message.negativeIntValue = 0
     clearFields(message, [5])
 
-proc hasnegative_int_value*(message: google_protobuf_UninterpretedOption): bool =
+proc hasnegativeIntValue*(message: google_protobuf_UninterpretedOption): bool =
     result = hasField(message, 5)
 
-proc setnegative_int_value*(message: google_protobuf_UninterpretedOption, value: int64) =
-    message.negative_int_value = value
+proc setnegativeIntValue*(message: google_protobuf_UninterpretedOption, value: int64) =
+    message.negativeIntValue = value
     setField(message, 5)
 
-proc negative_int_value*(message: google_protobuf_UninterpretedOption): int64 {.inline.} =
-    message.negative_int_value
+proc negativeIntValue*(message: google_protobuf_UninterpretedOption): int64 {.inline.} =
+    message.negativeIntValue
 
-proc `negative_int_value=`*(message: google_protobuf_UninterpretedOption, value: int64) {.inline.} =
-    setnegative_int_value(message, value)
+proc `negativeIntValue=`*(message: google_protobuf_UninterpretedOption, value: int64) {.inline.} =
+    setnegativeIntValue(message, value)
 
-proc cleardouble_value*(message: google_protobuf_UninterpretedOption) =
-    message.double_value = 0
+proc cleardoubleValue*(message: google_protobuf_UninterpretedOption) =
+    message.doubleValue = 0
     clearFields(message, [6])
 
-proc hasdouble_value*(message: google_protobuf_UninterpretedOption): bool =
+proc hasdoubleValue*(message: google_protobuf_UninterpretedOption): bool =
     result = hasField(message, 6)
 
-proc setdouble_value*(message: google_protobuf_UninterpretedOption, value: float64) =
-    message.double_value = value
+proc setdoubleValue*(message: google_protobuf_UninterpretedOption, value: float64) =
+    message.doubleValue = value
     setField(message, 6)
 
-proc double_value*(message: google_protobuf_UninterpretedOption): float64 {.inline.} =
-    message.double_value
+proc doubleValue*(message: google_protobuf_UninterpretedOption): float64 {.inline.} =
+    message.doubleValue
 
-proc `double_value=`*(message: google_protobuf_UninterpretedOption, value: float64) {.inline.} =
-    setdouble_value(message, value)
+proc `doubleValue=`*(message: google_protobuf_UninterpretedOption, value: float64) {.inline.} =
+    setdoubleValue(message, value)
 
-proc clearstring_value*(message: google_protobuf_UninterpretedOption) =
-    message.string_value = bytes("")
+proc clearstringValue*(message: google_protobuf_UninterpretedOption) =
+    message.stringValue = @[]
     clearFields(message, [7])
 
-proc hasstring_value*(message: google_protobuf_UninterpretedOption): bool =
+proc hasstringValue*(message: google_protobuf_UninterpretedOption): bool =
     result = hasField(message, 7)
 
-proc setstring_value*(message: google_protobuf_UninterpretedOption, value: bytes) =
-    message.string_value = value
+proc setstringValue*(message: google_protobuf_UninterpretedOption, value: seq[byte]) =
+    message.stringValue = value
     setField(message, 7)
 
-proc string_value*(message: google_protobuf_UninterpretedOption): bytes {.inline.} =
-    message.string_value
+proc stringValue*(message: google_protobuf_UninterpretedOption): seq[byte] {.inline.} =
+    message.stringValue
 
-proc `string_value=`*(message: google_protobuf_UninterpretedOption, value: bytes) {.inline.} =
-    setstring_value(message, value)
+proc `stringValue=`*(message: google_protobuf_UninterpretedOption, value: seq[byte]) {.inline.} =
+    setstringValue(message, value)
 
-proc clearaggregate_value*(message: google_protobuf_UninterpretedOption) =
-    message.aggregate_value = ""
+proc clearaggregateValue*(message: google_protobuf_UninterpretedOption) =
+    message.aggregateValue = ""
     clearFields(message, [8])
 
-proc hasaggregate_value*(message: google_protobuf_UninterpretedOption): bool =
+proc hasaggregateValue*(message: google_protobuf_UninterpretedOption): bool =
     result = hasField(message, 8)
 
-proc setaggregate_value*(message: google_protobuf_UninterpretedOption, value: string) =
-    message.aggregate_value = value
+proc setaggregateValue*(message: google_protobuf_UninterpretedOption, value: string) =
+    message.aggregateValue = value
     setField(message, 8)
 
-proc aggregate_value*(message: google_protobuf_UninterpretedOption): string {.inline.} =
-    message.aggregate_value
+proc aggregateValue*(message: google_protobuf_UninterpretedOption): string {.inline.} =
+    message.aggregateValue
 
-proc `aggregate_value=`*(message: google_protobuf_UninterpretedOption, value: string) {.inline.} =
-    setaggregate_value(message, value)
+proc `aggregateValue=`*(message: google_protobuf_UninterpretedOption, value: string) {.inline.} =
+    setaggregateValue(message, value)
 
 proc sizeOfgoogle_protobuf_UninterpretedOption*(message: google_protobuf_UninterpretedOption): uint64 =
     for value in message.name:
         result = result + sizeOfTag(2, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_UninterpretedOption_NamePart(value))
-    if hasidentifier_value(message):
+    if hasidentifierValue(message):
         result = result + sizeOfTag(3, WireType.LengthDelimited)
-        result = result + sizeOfString(message.identifier_value)
-    if haspositive_int_value(message):
+        result = result + sizeOfString(message.identifierValue)
+    if haspositiveIntValue(message):
         result = result + sizeOfTag(4, WireType.Varint)
-        result = result + sizeOfUInt64(message.positive_int_value)
-    if hasnegative_int_value(message):
+        result = result + sizeOfUInt64(message.positiveIntValue)
+    if hasnegativeIntValue(message):
         result = result + sizeOfTag(5, WireType.Varint)
-        result = result + sizeOfInt64(message.negative_int_value)
-    if hasdouble_value(message):
+        result = result + sizeOfInt64(message.negativeIntValue)
+    if hasdoubleValue(message):
         result = result + sizeOfTag(6, WireType.Fixed64)
-        result = result + sizeOfDouble(message.double_value)
-    if hasstring_value(message):
+        result = result + sizeOfDouble(message.doubleValue)
+    if hasstringValue(message):
         result = result + sizeOfTag(7, WireType.LengthDelimited)
-        result = result + sizeOfBytes(message.string_value)
-    if hasaggregate_value(message):
+        result = result + sizeOfBytes(message.stringValue)
+    if hasaggregateValue(message):
         result = result + sizeOfTag(8, WireType.LengthDelimited)
-        result = result + sizeOfString(message.aggregate_value)
+        result = result + sizeOfString(message.aggregateValue)
     result = result + sizeOfUnknownFields(message)
 
 proc writegoogle_protobuf_UninterpretedOption*(stream: Stream, message: google_protobuf_UninterpretedOption) =
     for value in message.name:
         writeMessage(stream, value, 2)
-    if hasidentifier_value(message):
-        protoWriteString(stream, message.identifier_value, 3)
-    if haspositive_int_value(message):
-        protoWriteUInt64(stream, message.positive_int_value, 4)
-    if hasnegative_int_value(message):
-        protoWriteInt64(stream, message.negative_int_value, 5)
-    if hasdouble_value(message):
-        protoWriteDouble(stream, message.double_value, 6)
-    if hasstring_value(message):
-        protoWriteBytes(stream, message.string_value, 7)
-    if hasaggregate_value(message):
-        protoWriteString(stream, message.aggregate_value, 8)
+    if hasidentifierValue(message):
+        protoWriteString(stream, message.identifierValue, 3)
+    if haspositiveIntValue(message):
+        protoWriteUInt64(stream, message.positiveIntValue, 4)
+    if hasnegativeIntValue(message):
+        protoWriteInt64(stream, message.negativeIntValue, 5)
+    if hasdoubleValue(message):
+        protoWriteDouble(stream, message.doubleValue, 6)
+    if hasstringValue(message):
+        protoWriteBytes(stream, message.stringValue, 7)
+    if hasaggregateValue(message):
+        protoWriteString(stream, message.aggregateValue, 8)
     writeUnknownFields(stream, message)
 
 proc readgoogle_protobuf_UninterpretedOption*(stream: Stream): google_protobuf_UninterpretedOption =
@@ -695,22 +727,22 @@ proc readgoogle_protobuf_UninterpretedOption*(stream: Stream): google_protobuf_U
             addname(result, newgoogle_protobuf_UninterpretedOption_NamePart(data))
         of 3:
             expectWireType(wireType, WireType.LengthDelimited)
-            setidentifier_value(result, protoReadString(stream))
+            setidentifierValue(result, protoReadString(stream))
         of 4:
             expectWireType(wireType, WireType.Varint)
-            setpositive_int_value(result, protoReadUInt64(stream))
+            setpositiveIntValue(result, protoReadUInt64(stream))
         of 5:
             expectWireType(wireType, WireType.Varint)
-            setnegative_int_value(result, protoReadInt64(stream))
+            setnegativeIntValue(result, protoReadInt64(stream))
         of 6:
             expectWireType(wireType, WireType.Fixed64)
-            setdouble_value(result, protoReadDouble(stream))
+            setdoubleValue(result, protoReadDouble(stream))
         of 7:
             expectWireType(wireType, WireType.LengthDelimited)
-            setstring_value(result, protoReadBytes(stream))
+            setstringValue(result, protoReadBytes(stream))
         of 8:
             expectWireType(wireType, WireType.LengthDelimited)
-            setaggregate_value(result, protoReadString(stream))
+            setaggregateValue(result, protoReadString(stream))
         else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_UninterpretedOption): JsonNode =
@@ -720,18 +752,18 @@ proc toJson*(message: google_protobuf_UninterpretedOption): JsonNode =
         for value in message.name:
             add(arr, toJson(value))
         result["name"] = arr
-    if hasidentifier_value(message):
-        result["identifierValue"] = %message.identifier_value
-    if haspositive_int_value(message):
-        result["positiveIntValue"] = toJson(message.positive_int_value)
-    if hasnegative_int_value(message):
-        result["negativeIntValue"] = toJson(message.negative_int_value)
-    if hasdouble_value(message):
-        result["doubleValue"] = toJson(message.double_value)
-    if hasstring_value(message):
-        result["stringValue"] = %message.string_value
-    if hasaggregate_value(message):
-        result["aggregateValue"] = %message.aggregate_value
+    if hasidentifierValue(message):
+        result["identifierValue"] = %message.identifierValue
+    if haspositiveIntValue(message):
+        result["positiveIntValue"] = toJson(message.positiveIntValue)
+    if hasnegativeIntValue(message):
+        result["negativeIntValue"] = toJson(message.negativeIntValue)
+    if hasdoubleValue(message):
+        result["doubleValue"] = toJson(message.doubleValue)
+    if hasstringValue(message):
+        result["stringValue"] = %message.stringValue
+    if hasaggregateValue(message):
+        result["aggregateValue"] = %message.aggregateValue
 
 proc serialize*(message: google_protobuf_UninterpretedOption): string =
     let
@@ -744,12 +776,17 @@ proc newgoogle_protobuf_UninterpretedOption*(data: string): google_protobuf_Unin
         ss = newStringStream(data)
     result = readgoogle_protobuf_UninterpretedOption(ss)
 
+proc newgoogle_protobuf_UninterpretedOption*(data: seq[byte]): google_protobuf_UninterpretedOption =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_UninterpretedOption(ss)
+
 
 proc newgoogle_protobuf_EnumValueOptions*(): google_protobuf_EnumValueOptions =
     new(result)
     initMessage(result[])
     result.deprecated = false
-    result.uninterpreted_option = @[]
+    result.uninterpretedOption = @[]
 
 proc cleardeprecated*(message: google_protobuf_EnumValueOptions) =
     message.deprecated = false
@@ -768,32 +805,32 @@ proc deprecated*(message: google_protobuf_EnumValueOptions): bool {.inline.} =
 proc `deprecated=`*(message: google_protobuf_EnumValueOptions, value: bool) {.inline.} =
     setdeprecated(message, value)
 
-proc clearuninterpreted_option*(message: google_protobuf_EnumValueOptions) =
-    message.uninterpreted_option = @[]
+proc clearuninterpretedOption*(message: google_protobuf_EnumValueOptions) =
+    message.uninterpretedOption = @[]
     clearFields(message, [999])
 
-proc hasuninterpreted_option*(message: google_protobuf_EnumValueOptions): bool =
-    result = hasField(message, 999) or (len(message.uninterpreted_option) > 0)
+proc hasuninterpretedOption*(message: google_protobuf_EnumValueOptions): bool =
+    result = hasField(message, 999) or (len(message.uninterpretedOption) > 0)
 
-proc setuninterpreted_option*(message: google_protobuf_EnumValueOptions, value: seq[google_protobuf_UninterpretedOption]) =
-    message.uninterpreted_option = value
+proc setuninterpretedOption*(message: google_protobuf_EnumValueOptions, value: seq[google_protobuf_UninterpretedOption]) =
+    message.uninterpretedOption = value
     setField(message, 999)
 
-proc adduninterpreted_option*(message: google_protobuf_EnumValueOptions, value: google_protobuf_UninterpretedOption) =
-    add(message.uninterpreted_option, value)
+proc adduninterpretedOption*(message: google_protobuf_EnumValueOptions, value: google_protobuf_UninterpretedOption) =
+    add(message.uninterpretedOption, value)
     setField(message, 999)
 
-proc uninterpreted_option*(message: google_protobuf_EnumValueOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
-    message.uninterpreted_option
+proc uninterpretedOption*(message: google_protobuf_EnumValueOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
+    message.uninterpretedOption
 
-proc `uninterpreted_option=`*(message: google_protobuf_EnumValueOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
-    setuninterpreted_option(message, value)
+proc `uninterpretedOption=`*(message: google_protobuf_EnumValueOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
+    setuninterpretedOption(message, value)
 
 proc sizeOfgoogle_protobuf_EnumValueOptions*(message: google_protobuf_EnumValueOptions): uint64 =
     if hasdeprecated(message):
         result = result + sizeOfTag(1, WireType.Varint)
         result = result + sizeOfBool(message.deprecated)
-    for value in message.uninterpreted_option:
+    for value in message.uninterpretedOption:
         result = result + sizeOfTag(999, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_UninterpretedOption(value))
     result = result + sizeOfUnknownFields(message)
@@ -801,7 +838,7 @@ proc sizeOfgoogle_protobuf_EnumValueOptions*(message: google_protobuf_EnumValueO
 proc writegoogle_protobuf_EnumValueOptions*(stream: Stream, message: google_protobuf_EnumValueOptions) =
     if hasdeprecated(message):
         protoWriteBool(stream, message.deprecated, 1)
-    for value in message.uninterpreted_option:
+    for value in message.uninterpretedOption:
         writeMessage(stream, value, 999)
     writeUnknownFields(stream, message)
 
@@ -820,16 +857,16 @@ proc readgoogle_protobuf_EnumValueOptions*(stream: Stream): google_protobuf_Enum
         of 999:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            adduninterpreted_option(result, newgoogle_protobuf_UninterpretedOption(data))
+            adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_EnumValueOptions): JsonNode =
     result = newJObject()
     if hasdeprecated(message):
         result["deprecated"] = %message.deprecated
-    if hasuninterpreted_option(message):
+    if hasuninterpretedOption(message):
         let arr = newJArray()
-        for value in message.uninterpreted_option:
+        for value in message.uninterpretedOption:
             add(arr, toJson(value))
         result["uninterpretedOption"] = arr
 
@@ -842,6 +879,11 @@ proc serialize*(message: google_protobuf_EnumValueOptions): string =
 proc newgoogle_protobuf_EnumValueOptions*(data: string): google_protobuf_EnumValueOptions =
     let
         ss = newStringStream(data)
+    result = readgoogle_protobuf_EnumValueOptions(ss)
+
+proc newgoogle_protobuf_EnumValueOptions*(data: seq[byte]): google_protobuf_EnumValueOptions =
+    let
+        ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_EnumValueOptions(ss)
 
 
@@ -965,6 +1007,11 @@ proc newgoogle_protobuf_EnumValueDescriptorProto*(data: string): google_protobuf
         ss = newStringStream(data)
     result = readgoogle_protobuf_EnumValueDescriptorProto(ss)
 
+proc newgoogle_protobuf_EnumValueDescriptorProto*(data: seq[byte]): google_protobuf_EnumValueDescriptorProto =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_EnumValueDescriptorProto(ss)
+
 
 proc newgoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(): google_protobuf_EnumDescriptorProto_EnumReservedRange =
     new(result)
@@ -1057,30 +1104,35 @@ proc newgoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(data: string): go
         ss = newStringStream(data)
     result = readgoogle_protobuf_EnumDescriptorProto_EnumReservedRange(ss)
 
+proc newgoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(data: seq[byte]): google_protobuf_EnumDescriptorProto_EnumReservedRange =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_EnumDescriptorProto_EnumReservedRange(ss)
+
 
 proc newgoogle_protobuf_EnumOptions*(): google_protobuf_EnumOptions =
     new(result)
     initMessage(result[])
-    result.allow_alias = false
+    result.allowAlias = false
     result.deprecated = false
-    result.uninterpreted_option = @[]
+    result.uninterpretedOption = @[]
 
-proc clearallow_alias*(message: google_protobuf_EnumOptions) =
-    message.allow_alias = false
+proc clearallowAlias*(message: google_protobuf_EnumOptions) =
+    message.allowAlias = false
     clearFields(message, [2])
 
-proc hasallow_alias*(message: google_protobuf_EnumOptions): bool =
+proc hasallowAlias*(message: google_protobuf_EnumOptions): bool =
     result = hasField(message, 2)
 
-proc setallow_alias*(message: google_protobuf_EnumOptions, value: bool) =
-    message.allow_alias = value
+proc setallowAlias*(message: google_protobuf_EnumOptions, value: bool) =
+    message.allowAlias = value
     setField(message, 2)
 
-proc allow_alias*(message: google_protobuf_EnumOptions): bool {.inline.} =
-    message.allow_alias
+proc allowAlias*(message: google_protobuf_EnumOptions): bool {.inline.} =
+    message.allowAlias
 
-proc `allow_alias=`*(message: google_protobuf_EnumOptions, value: bool) {.inline.} =
-    setallow_alias(message, value)
+proc `allowAlias=`*(message: google_protobuf_EnumOptions, value: bool) {.inline.} =
+    setallowAlias(message, value)
 
 proc cleardeprecated*(message: google_protobuf_EnumOptions) =
     message.deprecated = false
@@ -1099,45 +1151,45 @@ proc deprecated*(message: google_protobuf_EnumOptions): bool {.inline.} =
 proc `deprecated=`*(message: google_protobuf_EnumOptions, value: bool) {.inline.} =
     setdeprecated(message, value)
 
-proc clearuninterpreted_option*(message: google_protobuf_EnumOptions) =
-    message.uninterpreted_option = @[]
+proc clearuninterpretedOption*(message: google_protobuf_EnumOptions) =
+    message.uninterpretedOption = @[]
     clearFields(message, [999])
 
-proc hasuninterpreted_option*(message: google_protobuf_EnumOptions): bool =
-    result = hasField(message, 999) or (len(message.uninterpreted_option) > 0)
+proc hasuninterpretedOption*(message: google_protobuf_EnumOptions): bool =
+    result = hasField(message, 999) or (len(message.uninterpretedOption) > 0)
 
-proc setuninterpreted_option*(message: google_protobuf_EnumOptions, value: seq[google_protobuf_UninterpretedOption]) =
-    message.uninterpreted_option = value
+proc setuninterpretedOption*(message: google_protobuf_EnumOptions, value: seq[google_protobuf_UninterpretedOption]) =
+    message.uninterpretedOption = value
     setField(message, 999)
 
-proc adduninterpreted_option*(message: google_protobuf_EnumOptions, value: google_protobuf_UninterpretedOption) =
-    add(message.uninterpreted_option, value)
+proc adduninterpretedOption*(message: google_protobuf_EnumOptions, value: google_protobuf_UninterpretedOption) =
+    add(message.uninterpretedOption, value)
     setField(message, 999)
 
-proc uninterpreted_option*(message: google_protobuf_EnumOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
-    message.uninterpreted_option
+proc uninterpretedOption*(message: google_protobuf_EnumOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
+    message.uninterpretedOption
 
-proc `uninterpreted_option=`*(message: google_protobuf_EnumOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
-    setuninterpreted_option(message, value)
+proc `uninterpretedOption=`*(message: google_protobuf_EnumOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
+    setuninterpretedOption(message, value)
 
 proc sizeOfgoogle_protobuf_EnumOptions*(message: google_protobuf_EnumOptions): uint64 =
-    if hasallow_alias(message):
+    if hasallowAlias(message):
         result = result + sizeOfTag(2, WireType.Varint)
-        result = result + sizeOfBool(message.allow_alias)
+        result = result + sizeOfBool(message.allowAlias)
     if hasdeprecated(message):
         result = result + sizeOfTag(3, WireType.Varint)
         result = result + sizeOfBool(message.deprecated)
-    for value in message.uninterpreted_option:
+    for value in message.uninterpretedOption:
         result = result + sizeOfTag(999, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_UninterpretedOption(value))
     result = result + sizeOfUnknownFields(message)
 
 proc writegoogle_protobuf_EnumOptions*(stream: Stream, message: google_protobuf_EnumOptions) =
-    if hasallow_alias(message):
-        protoWriteBool(stream, message.allow_alias, 2)
+    if hasallowAlias(message):
+        protoWriteBool(stream, message.allowAlias, 2)
     if hasdeprecated(message):
         protoWriteBool(stream, message.deprecated, 3)
-    for value in message.uninterpreted_option:
+    for value in message.uninterpretedOption:
         writeMessage(stream, value, 999)
     writeUnknownFields(stream, message)
 
@@ -1152,25 +1204,25 @@ proc readgoogle_protobuf_EnumOptions*(stream: Stream): google_protobuf_EnumOptio
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 2:
             expectWireType(wireType, WireType.Varint)
-            setallow_alias(result, protoReadBool(stream))
+            setallowAlias(result, protoReadBool(stream))
         of 3:
             expectWireType(wireType, WireType.Varint)
             setdeprecated(result, protoReadBool(stream))
         of 999:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            adduninterpreted_option(result, newgoogle_protobuf_UninterpretedOption(data))
+            adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_EnumOptions): JsonNode =
     result = newJObject()
-    if hasallow_alias(message):
-        result["allowAlias"] = %message.allow_alias
+    if hasallowAlias(message):
+        result["allowAlias"] = %message.allowAlias
     if hasdeprecated(message):
         result["deprecated"] = %message.deprecated
-    if hasuninterpreted_option(message):
+    if hasuninterpretedOption(message):
         let arr = newJArray()
-        for value in message.uninterpreted_option:
+        for value in message.uninterpretedOption:
             add(arr, toJson(value))
         result["uninterpretedOption"] = arr
 
@@ -1185,6 +1237,11 @@ proc newgoogle_protobuf_EnumOptions*(data: string): google_protobuf_EnumOptions 
         ss = newStringStream(data)
     result = readgoogle_protobuf_EnumOptions(ss)
 
+proc newgoogle_protobuf_EnumOptions*(data: seq[byte]): google_protobuf_EnumOptions =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_EnumOptions(ss)
+
 
 proc newgoogle_protobuf_EnumDescriptorProto*(): google_protobuf_EnumDescriptorProto =
     new(result)
@@ -1192,8 +1249,8 @@ proc newgoogle_protobuf_EnumDescriptorProto*(): google_protobuf_EnumDescriptorPr
     result.name = ""
     result.value = @[]
     result.options = nil
-    result.reserved_range = @[]
-    result.reserved_name = @[]
+    result.reservedRange = @[]
+    result.reservedName = @[]
 
 proc clearname*(message: google_protobuf_EnumDescriptorProto) =
     message.name = ""
@@ -1250,47 +1307,47 @@ proc options*(message: google_protobuf_EnumDescriptorProto): google_protobuf_Enu
 proc `options=`*(message: google_protobuf_EnumDescriptorProto, value: google_protobuf_EnumOptions) {.inline.} =
     setoptions(message, value)
 
-proc clearreserved_range*(message: google_protobuf_EnumDescriptorProto) =
-    message.reserved_range = @[]
+proc clearreservedRange*(message: google_protobuf_EnumDescriptorProto) =
+    message.reservedRange = @[]
     clearFields(message, [4])
 
-proc hasreserved_range*(message: google_protobuf_EnumDescriptorProto): bool =
-    result = hasField(message, 4) or (len(message.reserved_range) > 0)
+proc hasreservedRange*(message: google_protobuf_EnumDescriptorProto): bool =
+    result = hasField(message, 4) or (len(message.reservedRange) > 0)
 
-proc setreserved_range*(message: google_protobuf_EnumDescriptorProto, value: seq[google_protobuf_EnumDescriptorProto_EnumReservedRange]) =
-    message.reserved_range = value
+proc setreservedRange*(message: google_protobuf_EnumDescriptorProto, value: seq[google_protobuf_EnumDescriptorProto_EnumReservedRange]) =
+    message.reservedRange = value
     setField(message, 4)
 
-proc addreserved_range*(message: google_protobuf_EnumDescriptorProto, value: google_protobuf_EnumDescriptorProto_EnumReservedRange) =
-    add(message.reserved_range, value)
+proc addreservedRange*(message: google_protobuf_EnumDescriptorProto, value: google_protobuf_EnumDescriptorProto_EnumReservedRange) =
+    add(message.reservedRange, value)
     setField(message, 4)
 
-proc reserved_range*(message: google_protobuf_EnumDescriptorProto): seq[google_protobuf_EnumDescriptorProto_EnumReservedRange] {.inline.} =
-    message.reserved_range
+proc reservedRange*(message: google_protobuf_EnumDescriptorProto): seq[google_protobuf_EnumDescriptorProto_EnumReservedRange] {.inline.} =
+    message.reservedRange
 
-proc `reserved_range=`*(message: google_protobuf_EnumDescriptorProto, value: seq[google_protobuf_EnumDescriptorProto_EnumReservedRange]) {.inline.} =
-    setreserved_range(message, value)
+proc `reservedRange=`*(message: google_protobuf_EnumDescriptorProto, value: seq[google_protobuf_EnumDescriptorProto_EnumReservedRange]) {.inline.} =
+    setreservedRange(message, value)
 
-proc clearreserved_name*(message: google_protobuf_EnumDescriptorProto) =
-    message.reserved_name = @[]
+proc clearreservedName*(message: google_protobuf_EnumDescriptorProto) =
+    message.reservedName = @[]
     clearFields(message, [5])
 
-proc hasreserved_name*(message: google_protobuf_EnumDescriptorProto): bool =
-    result = hasField(message, 5) or (len(message.reserved_name) > 0)
+proc hasreservedName*(message: google_protobuf_EnumDescriptorProto): bool =
+    result = hasField(message, 5) or (len(message.reservedName) > 0)
 
-proc setreserved_name*(message: google_protobuf_EnumDescriptorProto, value: seq[string]) =
-    message.reserved_name = value
+proc setreservedName*(message: google_protobuf_EnumDescriptorProto, value: seq[string]) =
+    message.reservedName = value
     setField(message, 5)
 
-proc addreserved_name*(message: google_protobuf_EnumDescriptorProto, value: string) =
-    add(message.reserved_name, value)
+proc addreservedName*(message: google_protobuf_EnumDescriptorProto, value: string) =
+    add(message.reservedName, value)
     setField(message, 5)
 
-proc reserved_name*(message: google_protobuf_EnumDescriptorProto): seq[string] {.inline.} =
-    message.reserved_name
+proc reservedName*(message: google_protobuf_EnumDescriptorProto): seq[string] {.inline.} =
+    message.reservedName
 
-proc `reserved_name=`*(message: google_protobuf_EnumDescriptorProto, value: seq[string]) {.inline.} =
-    setreserved_name(message, value)
+proc `reservedName=`*(message: google_protobuf_EnumDescriptorProto, value: seq[string]) {.inline.} =
+    setreservedName(message, value)
 
 proc sizeOfgoogle_protobuf_EnumDescriptorProto*(message: google_protobuf_EnumDescriptorProto): uint64 =
     if hasname(message):
@@ -1302,10 +1359,10 @@ proc sizeOfgoogle_protobuf_EnumDescriptorProto*(message: google_protobuf_EnumDes
     if hasoptions(message):
         result = result + sizeOfTag(3, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_EnumOptions(message.options))
-    for value in message.reserved_range:
+    for value in message.reservedRange:
         result = result + sizeOfTag(4, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_EnumDescriptorProto_EnumReservedRange(value))
-    for value in message.reserved_name:
+    for value in message.reservedName:
         result = result + sizeOfTag(5, WireType.LengthDelimited)
         result = result + sizeOfString(value)
     result = result + sizeOfUnknownFields(message)
@@ -1317,9 +1374,9 @@ proc writegoogle_protobuf_EnumDescriptorProto*(stream: Stream, message: google_p
         writeMessage(stream, value, 2)
     if hasoptions(message):
         writeMessage(stream, message.options, 3)
-    for value in message.reserved_range:
+    for value in message.reservedRange:
         writeMessage(stream, value, 4)
-    for value in message.reserved_name:
+    for value in message.reservedName:
         protoWriteString(stream, value, 5)
     writeUnknownFields(stream, message)
 
@@ -1346,10 +1403,10 @@ proc readgoogle_protobuf_EnumDescriptorProto*(stream: Stream): google_protobuf_E
         of 4:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            addreserved_range(result, newgoogle_protobuf_EnumDescriptorProto_EnumReservedRange(data))
+            addreservedRange(result, newgoogle_protobuf_EnumDescriptorProto_EnumReservedRange(data))
         of 5:
             expectWireType(wireType, WireType.LengthDelimited)
-            addreserved_name(result, protoReadString(stream))
+            addreservedName(result, protoReadString(stream))
         else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_EnumDescriptorProto): JsonNode =
@@ -1363,14 +1420,14 @@ proc toJson*(message: google_protobuf_EnumDescriptorProto): JsonNode =
         result["value"] = arr
     if hasoptions(message):
         result["options"] = toJson(message.options)
-    if hasreserved_range(message):
+    if hasreservedRange(message):
         let arr = newJArray()
-        for value in message.reserved_range:
+        for value in message.reservedRange:
             add(arr, toJson(value))
         result["reservedRange"] = arr
-    if hasreserved_name(message):
+    if hasreservedName(message):
         let arr = newJArray()
-        for value in message.reserved_name:
+        for value in message.reservedName:
             add(arr, %value)
         result["reservedName"] = arr
 
@@ -1385,41 +1442,46 @@ proc newgoogle_protobuf_EnumDescriptorProto*(data: string): google_protobuf_Enum
         ss = newStringStream(data)
     result = readgoogle_protobuf_EnumDescriptorProto(ss)
 
+proc newgoogle_protobuf_EnumDescriptorProto*(data: seq[byte]): google_protobuf_EnumDescriptorProto =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_EnumDescriptorProto(ss)
+
 
 proc newgoogle_protobuf_ExtensionRangeOptions*(): google_protobuf_ExtensionRangeOptions =
     new(result)
     initMessage(result[])
-    result.uninterpreted_option = @[]
+    result.uninterpretedOption = @[]
 
-proc clearuninterpreted_option*(message: google_protobuf_ExtensionRangeOptions) =
-    message.uninterpreted_option = @[]
+proc clearuninterpretedOption*(message: google_protobuf_ExtensionRangeOptions) =
+    message.uninterpretedOption = @[]
     clearFields(message, [999])
 
-proc hasuninterpreted_option*(message: google_protobuf_ExtensionRangeOptions): bool =
-    result = hasField(message, 999) or (len(message.uninterpreted_option) > 0)
+proc hasuninterpretedOption*(message: google_protobuf_ExtensionRangeOptions): bool =
+    result = hasField(message, 999) or (len(message.uninterpretedOption) > 0)
 
-proc setuninterpreted_option*(message: google_protobuf_ExtensionRangeOptions, value: seq[google_protobuf_UninterpretedOption]) =
-    message.uninterpreted_option = value
+proc setuninterpretedOption*(message: google_protobuf_ExtensionRangeOptions, value: seq[google_protobuf_UninterpretedOption]) =
+    message.uninterpretedOption = value
     setField(message, 999)
 
-proc adduninterpreted_option*(message: google_protobuf_ExtensionRangeOptions, value: google_protobuf_UninterpretedOption) =
-    add(message.uninterpreted_option, value)
+proc adduninterpretedOption*(message: google_protobuf_ExtensionRangeOptions, value: google_protobuf_UninterpretedOption) =
+    add(message.uninterpretedOption, value)
     setField(message, 999)
 
-proc uninterpreted_option*(message: google_protobuf_ExtensionRangeOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
-    message.uninterpreted_option
+proc uninterpretedOption*(message: google_protobuf_ExtensionRangeOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
+    message.uninterpretedOption
 
-proc `uninterpreted_option=`*(message: google_protobuf_ExtensionRangeOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
-    setuninterpreted_option(message, value)
+proc `uninterpretedOption=`*(message: google_protobuf_ExtensionRangeOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
+    setuninterpretedOption(message, value)
 
 proc sizeOfgoogle_protobuf_ExtensionRangeOptions*(message: google_protobuf_ExtensionRangeOptions): uint64 =
-    for value in message.uninterpreted_option:
+    for value in message.uninterpretedOption:
         result = result + sizeOfTag(999, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_UninterpretedOption(value))
     result = result + sizeOfUnknownFields(message)
 
 proc writegoogle_protobuf_ExtensionRangeOptions*(stream: Stream, message: google_protobuf_ExtensionRangeOptions) =
-    for value in message.uninterpreted_option:
+    for value in message.uninterpretedOption:
         writeMessage(stream, value, 999)
     writeUnknownFields(stream, message)
 
@@ -1435,14 +1497,14 @@ proc readgoogle_protobuf_ExtensionRangeOptions*(stream: Stream): google_protobuf
         of 999:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            adduninterpreted_option(result, newgoogle_protobuf_UninterpretedOption(data))
+            adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_ExtensionRangeOptions): JsonNode =
     result = newJObject()
-    if hasuninterpreted_option(message):
+    if hasuninterpretedOption(message):
         let arr = newJArray()
-        for value in message.uninterpreted_option:
+        for value in message.uninterpretedOption:
             add(arr, toJson(value))
         result["uninterpretedOption"] = arr
 
@@ -1457,15 +1519,20 @@ proc newgoogle_protobuf_ExtensionRangeOptions*(data: string): google_protobuf_Ex
         ss = newStringStream(data)
     result = readgoogle_protobuf_ExtensionRangeOptions(ss)
 
+proc newgoogle_protobuf_ExtensionRangeOptions*(data: seq[byte]): google_protobuf_ExtensionRangeOptions =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_ExtensionRangeOptions(ss)
+
 
 proc newgoogle_protobuf_SourceCodeInfo_Location*(): google_protobuf_SourceCodeInfo_Location =
     new(result)
     initMessage(result[])
     result.path = @[]
     result.span = @[]
-    result.leading_comments = ""
-    result.trailing_comments = ""
-    result.leading_detached_comments = @[]
+    result.leadingComments = ""
+    result.trailingComments = ""
+    result.leadingDetachedComments = @[]
 
 proc clearpath*(message: google_protobuf_SourceCodeInfo_Location) =
     message.path = @[]
@@ -1509,60 +1576,60 @@ proc span*(message: google_protobuf_SourceCodeInfo_Location): seq[int32] {.inlin
 proc `span=`*(message: google_protobuf_SourceCodeInfo_Location, value: seq[int32]) {.inline.} =
     setspan(message, value)
 
-proc clearleading_comments*(message: google_protobuf_SourceCodeInfo_Location) =
-    message.leading_comments = ""
+proc clearleadingComments*(message: google_protobuf_SourceCodeInfo_Location) =
+    message.leadingComments = ""
     clearFields(message, [3])
 
-proc hasleading_comments*(message: google_protobuf_SourceCodeInfo_Location): bool =
+proc hasleadingComments*(message: google_protobuf_SourceCodeInfo_Location): bool =
     result = hasField(message, 3)
 
-proc setleading_comments*(message: google_protobuf_SourceCodeInfo_Location, value: string) =
-    message.leading_comments = value
+proc setleadingComments*(message: google_protobuf_SourceCodeInfo_Location, value: string) =
+    message.leadingComments = value
     setField(message, 3)
 
-proc leading_comments*(message: google_protobuf_SourceCodeInfo_Location): string {.inline.} =
-    message.leading_comments
+proc leadingComments*(message: google_protobuf_SourceCodeInfo_Location): string {.inline.} =
+    message.leadingComments
 
-proc `leading_comments=`*(message: google_protobuf_SourceCodeInfo_Location, value: string) {.inline.} =
-    setleading_comments(message, value)
+proc `leadingComments=`*(message: google_protobuf_SourceCodeInfo_Location, value: string) {.inline.} =
+    setleadingComments(message, value)
 
-proc cleartrailing_comments*(message: google_protobuf_SourceCodeInfo_Location) =
-    message.trailing_comments = ""
+proc cleartrailingComments*(message: google_protobuf_SourceCodeInfo_Location) =
+    message.trailingComments = ""
     clearFields(message, [4])
 
-proc hastrailing_comments*(message: google_protobuf_SourceCodeInfo_Location): bool =
+proc hastrailingComments*(message: google_protobuf_SourceCodeInfo_Location): bool =
     result = hasField(message, 4)
 
-proc settrailing_comments*(message: google_protobuf_SourceCodeInfo_Location, value: string) =
-    message.trailing_comments = value
+proc settrailingComments*(message: google_protobuf_SourceCodeInfo_Location, value: string) =
+    message.trailingComments = value
     setField(message, 4)
 
-proc trailing_comments*(message: google_protobuf_SourceCodeInfo_Location): string {.inline.} =
-    message.trailing_comments
+proc trailingComments*(message: google_protobuf_SourceCodeInfo_Location): string {.inline.} =
+    message.trailingComments
 
-proc `trailing_comments=`*(message: google_protobuf_SourceCodeInfo_Location, value: string) {.inline.} =
-    settrailing_comments(message, value)
+proc `trailingComments=`*(message: google_protobuf_SourceCodeInfo_Location, value: string) {.inline.} =
+    settrailingComments(message, value)
 
-proc clearleading_detached_comments*(message: google_protobuf_SourceCodeInfo_Location) =
-    message.leading_detached_comments = @[]
+proc clearleadingDetachedComments*(message: google_protobuf_SourceCodeInfo_Location) =
+    message.leadingDetachedComments = @[]
     clearFields(message, [6])
 
-proc hasleading_detached_comments*(message: google_protobuf_SourceCodeInfo_Location): bool =
-    result = hasField(message, 6) or (len(message.leading_detached_comments) > 0)
+proc hasleadingDetachedComments*(message: google_protobuf_SourceCodeInfo_Location): bool =
+    result = hasField(message, 6) or (len(message.leadingDetachedComments) > 0)
 
-proc setleading_detached_comments*(message: google_protobuf_SourceCodeInfo_Location, value: seq[string]) =
-    message.leading_detached_comments = value
+proc setleadingDetachedComments*(message: google_protobuf_SourceCodeInfo_Location, value: seq[string]) =
+    message.leadingDetachedComments = value
     setField(message, 6)
 
-proc addleading_detached_comments*(message: google_protobuf_SourceCodeInfo_Location, value: string) =
-    add(message.leading_detached_comments, value)
+proc addleadingDetachedComments*(message: google_protobuf_SourceCodeInfo_Location, value: string) =
+    add(message.leadingDetachedComments, value)
     setField(message, 6)
 
-proc leading_detached_comments*(message: google_protobuf_SourceCodeInfo_Location): seq[string] {.inline.} =
-    message.leading_detached_comments
+proc leadingDetachedComments*(message: google_protobuf_SourceCodeInfo_Location): seq[string] {.inline.} =
+    message.leadingDetachedComments
 
-proc `leading_detached_comments=`*(message: google_protobuf_SourceCodeInfo_Location, value: seq[string]) {.inline.} =
-    setleading_detached_comments(message, value)
+proc `leadingDetachedComments=`*(message: google_protobuf_SourceCodeInfo_Location, value: seq[string]) {.inline.} =
+    setleadingDetachedComments(message, value)
 
 proc sizeOfgoogle_protobuf_SourceCodeInfo_Location*(message: google_protobuf_SourceCodeInfo_Location): uint64 =
     if haspath(message):
@@ -1571,13 +1638,13 @@ proc sizeOfgoogle_protobuf_SourceCodeInfo_Location*(message: google_protobuf_Sou
     if hasspan(message):
         result = result + sizeOfTag(2, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(packedFieldSize(message.span, FieldType.Int32))
-    if hasleading_comments(message):
+    if hasleadingComments(message):
         result = result + sizeOfTag(3, WireType.LengthDelimited)
-        result = result + sizeOfString(message.leading_comments)
-    if hastrailing_comments(message):
+        result = result + sizeOfString(message.leadingComments)
+    if hastrailingComments(message):
         result = result + sizeOfTag(4, WireType.LengthDelimited)
-        result = result + sizeOfString(message.trailing_comments)
-    for value in message.leading_detached_comments:
+        result = result + sizeOfString(message.trailingComments)
+    for value in message.leadingDetachedComments:
         result = result + sizeOfTag(6, WireType.LengthDelimited)
         result = result + sizeOfString(value)
     result = result + sizeOfUnknownFields(message)
@@ -1593,11 +1660,11 @@ proc writegoogle_protobuf_SourceCodeInfo_Location*(stream: Stream, message: goog
         writeVarint(stream, packedFieldSize(message.span, FieldType.Int32))
         for value in message.span:
             protoWriteInt32(stream, value)
-    if hasleading_comments(message):
-        protoWriteString(stream, message.leading_comments, 3)
-    if hastrailing_comments(message):
-        protoWriteString(stream, message.trailing_comments, 4)
-    for value in message.leading_detached_comments:
+    if hasleadingComments(message):
+        protoWriteString(stream, message.leadingComments, 3)
+    if hastrailingComments(message):
+        protoWriteString(stream, message.trailingComments, 4)
+    for value in message.leadingDetachedComments:
         protoWriteString(stream, value, 6)
     writeUnknownFields(stream, message)
 
@@ -1640,13 +1707,13 @@ proc readgoogle_protobuf_SourceCodeInfo_Location*(stream: Stream): google_protob
                 addspan(result, protoReadInt32(stream))
         of 3:
             expectWireType(wireType, WireType.LengthDelimited)
-            setleading_comments(result, protoReadString(stream))
+            setleadingComments(result, protoReadString(stream))
         of 4:
             expectWireType(wireType, WireType.LengthDelimited)
-            settrailing_comments(result, protoReadString(stream))
+            settrailingComments(result, protoReadString(stream))
         of 6:
             expectWireType(wireType, WireType.LengthDelimited)
-            addleading_detached_comments(result, protoReadString(stream))
+            addleadingDetachedComments(result, protoReadString(stream))
         else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_SourceCodeInfo_Location): JsonNode =
@@ -1661,13 +1728,13 @@ proc toJson*(message: google_protobuf_SourceCodeInfo_Location): JsonNode =
         for value in message.span:
             add(arr, %value)
         result["span"] = arr
-    if hasleading_comments(message):
-        result["leadingComments"] = %message.leading_comments
-    if hastrailing_comments(message):
-        result["trailingComments"] = %message.trailing_comments
-    if hasleading_detached_comments(message):
+    if hasleadingComments(message):
+        result["leadingComments"] = %message.leadingComments
+    if hastrailingComments(message):
+        result["trailingComments"] = %message.trailingComments
+    if hasleadingDetachedComments(message):
         let arr = newJArray()
-        for value in message.leading_detached_comments:
+        for value in message.leadingDetachedComments:
             add(arr, %value)
         result["leadingDetachedComments"] = arr
 
@@ -1680,6 +1747,11 @@ proc serialize*(message: google_protobuf_SourceCodeInfo_Location): string =
 proc newgoogle_protobuf_SourceCodeInfo_Location*(data: string): google_protobuf_SourceCodeInfo_Location =
     let
         ss = newStringStream(data)
+    result = readgoogle_protobuf_SourceCodeInfo_Location(ss)
+
+proc newgoogle_protobuf_SourceCodeInfo_Location*(data: seq[byte]): google_protobuf_SourceCodeInfo_Location =
+    let
+        ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_SourceCodeInfo_Location(ss)
 
 
@@ -1754,6 +1826,11 @@ proc newgoogle_protobuf_SourceCodeInfo*(data: string): google_protobuf_SourceCod
         ss = newStringStream(data)
     result = readgoogle_protobuf_SourceCodeInfo(ss)
 
+proc newgoogle_protobuf_SourceCodeInfo*(data: seq[byte]): google_protobuf_SourceCodeInfo =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_SourceCodeInfo(ss)
+
 
 proc newgoogle_protobuf_FieldOptions*(): google_protobuf_FieldOptions =
     new(result)
@@ -1764,7 +1841,7 @@ proc newgoogle_protobuf_FieldOptions*(): google_protobuf_FieldOptions =
     result.lazy = false
     result.deprecated = false
     result.weak = false
-    result.uninterpreted_option = @[]
+    result.uninterpretedOption = @[]
 
 proc clearctype*(message: google_protobuf_FieldOptions) =
     message.ctype = google_protobuf_FieldOptions_CType.STRING
@@ -1868,26 +1945,26 @@ proc weak*(message: google_protobuf_FieldOptions): bool {.inline.} =
 proc `weak=`*(message: google_protobuf_FieldOptions, value: bool) {.inline.} =
     setweak(message, value)
 
-proc clearuninterpreted_option*(message: google_protobuf_FieldOptions) =
-    message.uninterpreted_option = @[]
+proc clearuninterpretedOption*(message: google_protobuf_FieldOptions) =
+    message.uninterpretedOption = @[]
     clearFields(message, [999])
 
-proc hasuninterpreted_option*(message: google_protobuf_FieldOptions): bool =
-    result = hasField(message, 999) or (len(message.uninterpreted_option) > 0)
+proc hasuninterpretedOption*(message: google_protobuf_FieldOptions): bool =
+    result = hasField(message, 999) or (len(message.uninterpretedOption) > 0)
 
-proc setuninterpreted_option*(message: google_protobuf_FieldOptions, value: seq[google_protobuf_UninterpretedOption]) =
-    message.uninterpreted_option = value
+proc setuninterpretedOption*(message: google_protobuf_FieldOptions, value: seq[google_protobuf_UninterpretedOption]) =
+    message.uninterpretedOption = value
     setField(message, 999)
 
-proc adduninterpreted_option*(message: google_protobuf_FieldOptions, value: google_protobuf_UninterpretedOption) =
-    add(message.uninterpreted_option, value)
+proc adduninterpretedOption*(message: google_protobuf_FieldOptions, value: google_protobuf_UninterpretedOption) =
+    add(message.uninterpretedOption, value)
     setField(message, 999)
 
-proc uninterpreted_option*(message: google_protobuf_FieldOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
-    message.uninterpreted_option
+proc uninterpretedOption*(message: google_protobuf_FieldOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
+    message.uninterpretedOption
 
-proc `uninterpreted_option=`*(message: google_protobuf_FieldOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
-    setuninterpreted_option(message, value)
+proc `uninterpretedOption=`*(message: google_protobuf_FieldOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
+    setuninterpretedOption(message, value)
 
 proc sizeOfgoogle_protobuf_FieldOptions*(message: google_protobuf_FieldOptions): uint64 =
     if hasctype(message):
@@ -1908,7 +1985,7 @@ proc sizeOfgoogle_protobuf_FieldOptions*(message: google_protobuf_FieldOptions):
     if hasweak(message):
         result = result + sizeOfTag(10, WireType.Varint)
         result = result + sizeOfBool(message.weak)
-    for value in message.uninterpreted_option:
+    for value in message.uninterpretedOption:
         result = result + sizeOfTag(999, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_UninterpretedOption(value))
     result = result + sizeOfUnknownFields(message)
@@ -1926,7 +2003,7 @@ proc writegoogle_protobuf_FieldOptions*(stream: Stream, message: google_protobuf
         protoWriteBool(stream, message.deprecated, 3)
     if hasweak(message):
         protoWriteBool(stream, message.weak, 10)
-    for value in message.uninterpreted_option:
+    for value in message.uninterpretedOption:
         writeMessage(stream, value, 999)
     writeUnknownFields(stream, message)
 
@@ -1960,7 +2037,7 @@ proc readgoogle_protobuf_FieldOptions*(stream: Stream): google_protobuf_FieldOpt
         of 999:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            adduninterpreted_option(result, newgoogle_protobuf_UninterpretedOption(data))
+            adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_FieldOptions): JsonNode =
@@ -1977,9 +2054,9 @@ proc toJson*(message: google_protobuf_FieldOptions): JsonNode =
         result["deprecated"] = %message.deprecated
     if hasweak(message):
         result["weak"] = %message.weak
-    if hasuninterpreted_option(message):
+    if hasuninterpretedOption(message):
         let arr = newJArray()
-        for value in message.uninterpreted_option:
+        for value in message.uninterpretedOption:
             add(arr, toJson(value))
         result["uninterpretedOption"] = arr
 
@@ -1994,6 +2071,11 @@ proc newgoogle_protobuf_FieldOptions*(data: string): google_protobuf_FieldOption
         ss = newStringStream(data)
     result = readgoogle_protobuf_FieldOptions(ss)
 
+proc newgoogle_protobuf_FieldOptions*(data: seq[byte]): google_protobuf_FieldOptions =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_FieldOptions(ss)
+
 
 proc newgoogle_protobuf_FieldDescriptorProto*(): google_protobuf_FieldDescriptorProto =
     new(result)
@@ -2002,11 +2084,11 @@ proc newgoogle_protobuf_FieldDescriptorProto*(): google_protobuf_FieldDescriptor
     result.number = 0
     result.label = google_protobuf_FieldDescriptorProto_Label.LABEL_OPTIONAL
     result.ftype = google_protobuf_FieldDescriptorProto_Type.TYPE_DOUBLE
-    result.type_name = ""
+    result.typeName = ""
     result.extendee = ""
-    result.default_value = ""
-    result.oneof_index = 0
-    result.json_name = ""
+    result.defaultValue = ""
+    result.oneofIndex = 0
+    result.jsonName = ""
     result.options = nil
 
 proc clearname*(message: google_protobuf_FieldDescriptorProto) =
@@ -2077,22 +2159,22 @@ proc ftype*(message: google_protobuf_FieldDescriptorProto): google_protobuf_Fiel
 proc `ftype=`*(message: google_protobuf_FieldDescriptorProto, value: google_protobuf_FieldDescriptorProto_Type) {.inline.} =
     setftype(message, value)
 
-proc cleartype_name*(message: google_protobuf_FieldDescriptorProto) =
-    message.type_name = ""
+proc cleartypeName*(message: google_protobuf_FieldDescriptorProto) =
+    message.typeName = ""
     clearFields(message, [6])
 
-proc hastype_name*(message: google_protobuf_FieldDescriptorProto): bool =
+proc hastypeName*(message: google_protobuf_FieldDescriptorProto): bool =
     result = hasField(message, 6)
 
-proc settype_name*(message: google_protobuf_FieldDescriptorProto, value: string) =
-    message.type_name = value
+proc settypeName*(message: google_protobuf_FieldDescriptorProto, value: string) =
+    message.typeName = value
     setField(message, 6)
 
-proc type_name*(message: google_protobuf_FieldDescriptorProto): string {.inline.} =
-    message.type_name
+proc typeName*(message: google_protobuf_FieldDescriptorProto): string {.inline.} =
+    message.typeName
 
-proc `type_name=`*(message: google_protobuf_FieldDescriptorProto, value: string) {.inline.} =
-    settype_name(message, value)
+proc `typeName=`*(message: google_protobuf_FieldDescriptorProto, value: string) {.inline.} =
+    settypeName(message, value)
 
 proc clearextendee*(message: google_protobuf_FieldDescriptorProto) =
     message.extendee = ""
@@ -2111,56 +2193,56 @@ proc extendee*(message: google_protobuf_FieldDescriptorProto): string {.inline.}
 proc `extendee=`*(message: google_protobuf_FieldDescriptorProto, value: string) {.inline.} =
     setextendee(message, value)
 
-proc cleardefault_value*(message: google_protobuf_FieldDescriptorProto) =
-    message.default_value = ""
+proc cleardefaultValue*(message: google_protobuf_FieldDescriptorProto) =
+    message.defaultValue = ""
     clearFields(message, [7])
 
-proc hasdefault_value*(message: google_protobuf_FieldDescriptorProto): bool =
+proc hasdefaultValue*(message: google_protobuf_FieldDescriptorProto): bool =
     result = hasField(message, 7)
 
-proc setdefault_value*(message: google_protobuf_FieldDescriptorProto, value: string) =
-    message.default_value = value
+proc setdefaultValue*(message: google_protobuf_FieldDescriptorProto, value: string) =
+    message.defaultValue = value
     setField(message, 7)
 
-proc default_value*(message: google_protobuf_FieldDescriptorProto): string {.inline.} =
-    message.default_value
+proc defaultValue*(message: google_protobuf_FieldDescriptorProto): string {.inline.} =
+    message.defaultValue
 
-proc `default_value=`*(message: google_protobuf_FieldDescriptorProto, value: string) {.inline.} =
-    setdefault_value(message, value)
+proc `defaultValue=`*(message: google_protobuf_FieldDescriptorProto, value: string) {.inline.} =
+    setdefaultValue(message, value)
 
-proc clearoneof_index*(message: google_protobuf_FieldDescriptorProto) =
-    message.oneof_index = 0
+proc clearoneofIndex*(message: google_protobuf_FieldDescriptorProto) =
+    message.oneofIndex = 0
     clearFields(message, [9])
 
-proc hasoneof_index*(message: google_protobuf_FieldDescriptorProto): bool =
+proc hasoneofIndex*(message: google_protobuf_FieldDescriptorProto): bool =
     result = hasField(message, 9)
 
-proc setoneof_index*(message: google_protobuf_FieldDescriptorProto, value: int32) =
-    message.oneof_index = value
+proc setoneofIndex*(message: google_protobuf_FieldDescriptorProto, value: int32) =
+    message.oneofIndex = value
     setField(message, 9)
 
-proc oneof_index*(message: google_protobuf_FieldDescriptorProto): int32 {.inline.} =
-    message.oneof_index
+proc oneofIndex*(message: google_protobuf_FieldDescriptorProto): int32 {.inline.} =
+    message.oneofIndex
 
-proc `oneof_index=`*(message: google_protobuf_FieldDescriptorProto, value: int32) {.inline.} =
-    setoneof_index(message, value)
+proc `oneofIndex=`*(message: google_protobuf_FieldDescriptorProto, value: int32) {.inline.} =
+    setoneofIndex(message, value)
 
-proc clearjson_name*(message: google_protobuf_FieldDescriptorProto) =
-    message.json_name = ""
+proc clearjsonName*(message: google_protobuf_FieldDescriptorProto) =
+    message.jsonName = ""
     clearFields(message, [10])
 
-proc hasjson_name*(message: google_protobuf_FieldDescriptorProto): bool =
+proc hasjsonName*(message: google_protobuf_FieldDescriptorProto): bool =
     result = hasField(message, 10)
 
-proc setjson_name*(message: google_protobuf_FieldDescriptorProto, value: string) =
-    message.json_name = value
+proc setjsonName*(message: google_protobuf_FieldDescriptorProto, value: string) =
+    message.jsonName = value
     setField(message, 10)
 
-proc json_name*(message: google_protobuf_FieldDescriptorProto): string {.inline.} =
-    message.json_name
+proc jsonName*(message: google_protobuf_FieldDescriptorProto): string {.inline.} =
+    message.jsonName
 
-proc `json_name=`*(message: google_protobuf_FieldDescriptorProto, value: string) {.inline.} =
-    setjson_name(message, value)
+proc `jsonName=`*(message: google_protobuf_FieldDescriptorProto, value: string) {.inline.} =
+    setjsonName(message, value)
 
 proc clearoptions*(message: google_protobuf_FieldDescriptorProto) =
     message.options = nil
@@ -2192,21 +2274,21 @@ proc sizeOfgoogle_protobuf_FieldDescriptorProto*(message: google_protobuf_FieldD
     if hasftype(message):
         result = result + sizeOfTag(5, WireType.Varint)
         result = result + sizeOfEnum[google_protobuf_FieldDescriptorProto_Type](message.ftype)
-    if hastype_name(message):
+    if hastypeName(message):
         result = result + sizeOfTag(6, WireType.LengthDelimited)
-        result = result + sizeOfString(message.type_name)
+        result = result + sizeOfString(message.typeName)
     if hasextendee(message):
         result = result + sizeOfTag(2, WireType.LengthDelimited)
         result = result + sizeOfString(message.extendee)
-    if hasdefault_value(message):
+    if hasdefaultValue(message):
         result = result + sizeOfTag(7, WireType.LengthDelimited)
-        result = result + sizeOfString(message.default_value)
-    if hasoneof_index(message):
+        result = result + sizeOfString(message.defaultValue)
+    if hasoneofIndex(message):
         result = result + sizeOfTag(9, WireType.Varint)
-        result = result + sizeOfInt32(message.oneof_index)
-    if hasjson_name(message):
+        result = result + sizeOfInt32(message.oneofIndex)
+    if hasjsonName(message):
         result = result + sizeOfTag(10, WireType.LengthDelimited)
-        result = result + sizeOfString(message.json_name)
+        result = result + sizeOfString(message.jsonName)
     if hasoptions(message):
         result = result + sizeOfTag(8, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_FieldOptions(message.options))
@@ -2221,16 +2303,16 @@ proc writegoogle_protobuf_FieldDescriptorProto*(stream: Stream, message: google_
         protoWriteEnum(stream, message.label, 4)
     if hasftype(message):
         protoWriteEnum(stream, message.ftype, 5)
-    if hastype_name(message):
-        protoWriteString(stream, message.type_name, 6)
+    if hastypeName(message):
+        protoWriteString(stream, message.typeName, 6)
     if hasextendee(message):
         protoWriteString(stream, message.extendee, 2)
-    if hasdefault_value(message):
-        protoWriteString(stream, message.default_value, 7)
-    if hasoneof_index(message):
-        protoWriteInt32(stream, message.oneof_index, 9)
-    if hasjson_name(message):
-        protoWriteString(stream, message.json_name, 10)
+    if hasdefaultValue(message):
+        protoWriteString(stream, message.defaultValue, 7)
+    if hasoneofIndex(message):
+        protoWriteInt32(stream, message.oneofIndex, 9)
+    if hasjsonName(message):
+        protoWriteString(stream, message.jsonName, 10)
     if hasoptions(message):
         writeMessage(stream, message.options, 8)
     writeUnknownFields(stream, message)
@@ -2258,19 +2340,19 @@ proc readgoogle_protobuf_FieldDescriptorProto*(stream: Stream): google_protobuf_
             setftype(result, protoReadEnum[google_protobuf_FieldDescriptorProto_Type](stream))
         of 6:
             expectWireType(wireType, WireType.LengthDelimited)
-            settype_name(result, protoReadString(stream))
+            settypeName(result, protoReadString(stream))
         of 2:
             expectWireType(wireType, WireType.LengthDelimited)
             setextendee(result, protoReadString(stream))
         of 7:
             expectWireType(wireType, WireType.LengthDelimited)
-            setdefault_value(result, protoReadString(stream))
+            setdefaultValue(result, protoReadString(stream))
         of 9:
             expectWireType(wireType, WireType.Varint)
-            setoneof_index(result, protoReadInt32(stream))
+            setoneofIndex(result, protoReadInt32(stream))
         of 10:
             expectWireType(wireType, WireType.LengthDelimited)
-            setjson_name(result, protoReadString(stream))
+            setjsonName(result, protoReadString(stream))
         of 8:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
@@ -2287,16 +2369,16 @@ proc toJson*(message: google_protobuf_FieldDescriptorProto): JsonNode =
         result["label"] = %($message.label)
     if hasftype(message):
         result["type"] = %($message.ftype)
-    if hastype_name(message):
-        result["typeName"] = %message.type_name
+    if hastypeName(message):
+        result["typeName"] = %message.typeName
     if hasextendee(message):
         result["extendee"] = %message.extendee
-    if hasdefault_value(message):
-        result["defaultValue"] = %message.default_value
-    if hasoneof_index(message):
-        result["oneofIndex"] = %message.oneof_index
-    if hasjson_name(message):
-        result["jsonName"] = %message.json_name
+    if hasdefaultValue(message):
+        result["defaultValue"] = %message.defaultValue
+    if hasoneofIndex(message):
+        result["oneofIndex"] = %message.oneofIndex
+    if hasjsonName(message):
+        result["jsonName"] = %message.jsonName
     if hasoptions(message):
         result["options"] = toJson(message.options)
 
@@ -2309,6 +2391,11 @@ proc serialize*(message: google_protobuf_FieldDescriptorProto): string =
 proc newgoogle_protobuf_FieldDescriptorProto*(data: string): google_protobuf_FieldDescriptorProto =
     let
         ss = newStringStream(data)
+    result = readgoogle_protobuf_FieldDescriptorProto(ss)
+
+proc newgoogle_protobuf_FieldDescriptorProto*(data: seq[byte]): google_protobuf_FieldDescriptorProto =
+    let
+        ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_FieldDescriptorProto(ss)
 
 
@@ -2432,49 +2519,54 @@ proc newgoogle_protobuf_DescriptorProto_ExtensionRange*(data: string): google_pr
         ss = newStringStream(data)
     result = readgoogle_protobuf_DescriptorProto_ExtensionRange(ss)
 
+proc newgoogle_protobuf_DescriptorProto_ExtensionRange*(data: seq[byte]): google_protobuf_DescriptorProto_ExtensionRange =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_DescriptorProto_ExtensionRange(ss)
+
 
 proc newgoogle_protobuf_MessageOptions*(): google_protobuf_MessageOptions =
     new(result)
     initMessage(result[])
-    result.message_set_wire_format = false
-    result.no_standard_descriptor_accessor = false
+    result.messageSetWireFormat = false
+    result.noStandardDescriptorAccessor = false
     result.deprecated = false
-    result.map_entry = false
-    result.uninterpreted_option = @[]
+    result.mapEntry = false
+    result.uninterpretedOption = @[]
 
-proc clearmessage_set_wire_format*(message: google_protobuf_MessageOptions) =
-    message.message_set_wire_format = false
+proc clearmessageSetWireFormat*(message: google_protobuf_MessageOptions) =
+    message.messageSetWireFormat = false
     clearFields(message, [1])
 
-proc hasmessage_set_wire_format*(message: google_protobuf_MessageOptions): bool =
+proc hasmessageSetWireFormat*(message: google_protobuf_MessageOptions): bool =
     result = hasField(message, 1)
 
-proc setmessage_set_wire_format*(message: google_protobuf_MessageOptions, value: bool) =
-    message.message_set_wire_format = value
+proc setmessageSetWireFormat*(message: google_protobuf_MessageOptions, value: bool) =
+    message.messageSetWireFormat = value
     setField(message, 1)
 
-proc message_set_wire_format*(message: google_protobuf_MessageOptions): bool {.inline.} =
-    message.message_set_wire_format
+proc messageSetWireFormat*(message: google_protobuf_MessageOptions): bool {.inline.} =
+    message.messageSetWireFormat
 
-proc `message_set_wire_format=`*(message: google_protobuf_MessageOptions, value: bool) {.inline.} =
-    setmessage_set_wire_format(message, value)
+proc `messageSetWireFormat=`*(message: google_protobuf_MessageOptions, value: bool) {.inline.} =
+    setmessageSetWireFormat(message, value)
 
-proc clearno_standard_descriptor_accessor*(message: google_protobuf_MessageOptions) =
-    message.no_standard_descriptor_accessor = false
+proc clearnoStandardDescriptorAccessor*(message: google_protobuf_MessageOptions) =
+    message.noStandardDescriptorAccessor = false
     clearFields(message, [2])
 
-proc hasno_standard_descriptor_accessor*(message: google_protobuf_MessageOptions): bool =
+proc hasnoStandardDescriptorAccessor*(message: google_protobuf_MessageOptions): bool =
     result = hasField(message, 2)
 
-proc setno_standard_descriptor_accessor*(message: google_protobuf_MessageOptions, value: bool) =
-    message.no_standard_descriptor_accessor = value
+proc setnoStandardDescriptorAccessor*(message: google_protobuf_MessageOptions, value: bool) =
+    message.noStandardDescriptorAccessor = value
     setField(message, 2)
 
-proc no_standard_descriptor_accessor*(message: google_protobuf_MessageOptions): bool {.inline.} =
-    message.no_standard_descriptor_accessor
+proc noStandardDescriptorAccessor*(message: google_protobuf_MessageOptions): bool {.inline.} =
+    message.noStandardDescriptorAccessor
 
-proc `no_standard_descriptor_accessor=`*(message: google_protobuf_MessageOptions, value: bool) {.inline.} =
-    setno_standard_descriptor_accessor(message, value)
+proc `noStandardDescriptorAccessor=`*(message: google_protobuf_MessageOptions, value: bool) {.inline.} =
+    setnoStandardDescriptorAccessor(message, value)
 
 proc cleardeprecated*(message: google_protobuf_MessageOptions) =
     message.deprecated = false
@@ -2493,72 +2585,72 @@ proc deprecated*(message: google_protobuf_MessageOptions): bool {.inline.} =
 proc `deprecated=`*(message: google_protobuf_MessageOptions, value: bool) {.inline.} =
     setdeprecated(message, value)
 
-proc clearmap_entry*(message: google_protobuf_MessageOptions) =
-    message.map_entry = false
+proc clearmapEntry*(message: google_protobuf_MessageOptions) =
+    message.mapEntry = false
     clearFields(message, [7])
 
-proc hasmap_entry*(message: google_protobuf_MessageOptions): bool =
+proc hasmapEntry*(message: google_protobuf_MessageOptions): bool =
     result = hasField(message, 7)
 
-proc setmap_entry*(message: google_protobuf_MessageOptions, value: bool) =
-    message.map_entry = value
+proc setmapEntry*(message: google_protobuf_MessageOptions, value: bool) =
+    message.mapEntry = value
     setField(message, 7)
 
-proc map_entry*(message: google_protobuf_MessageOptions): bool {.inline.} =
-    message.map_entry
+proc mapEntry*(message: google_protobuf_MessageOptions): bool {.inline.} =
+    message.mapEntry
 
-proc `map_entry=`*(message: google_protobuf_MessageOptions, value: bool) {.inline.} =
-    setmap_entry(message, value)
+proc `mapEntry=`*(message: google_protobuf_MessageOptions, value: bool) {.inline.} =
+    setmapEntry(message, value)
 
-proc clearuninterpreted_option*(message: google_protobuf_MessageOptions) =
-    message.uninterpreted_option = @[]
+proc clearuninterpretedOption*(message: google_protobuf_MessageOptions) =
+    message.uninterpretedOption = @[]
     clearFields(message, [999])
 
-proc hasuninterpreted_option*(message: google_protobuf_MessageOptions): bool =
-    result = hasField(message, 999) or (len(message.uninterpreted_option) > 0)
+proc hasuninterpretedOption*(message: google_protobuf_MessageOptions): bool =
+    result = hasField(message, 999) or (len(message.uninterpretedOption) > 0)
 
-proc setuninterpreted_option*(message: google_protobuf_MessageOptions, value: seq[google_protobuf_UninterpretedOption]) =
-    message.uninterpreted_option = value
+proc setuninterpretedOption*(message: google_protobuf_MessageOptions, value: seq[google_protobuf_UninterpretedOption]) =
+    message.uninterpretedOption = value
     setField(message, 999)
 
-proc adduninterpreted_option*(message: google_protobuf_MessageOptions, value: google_protobuf_UninterpretedOption) =
-    add(message.uninterpreted_option, value)
+proc adduninterpretedOption*(message: google_protobuf_MessageOptions, value: google_protobuf_UninterpretedOption) =
+    add(message.uninterpretedOption, value)
     setField(message, 999)
 
-proc uninterpreted_option*(message: google_protobuf_MessageOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
-    message.uninterpreted_option
+proc uninterpretedOption*(message: google_protobuf_MessageOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
+    message.uninterpretedOption
 
-proc `uninterpreted_option=`*(message: google_protobuf_MessageOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
-    setuninterpreted_option(message, value)
+proc `uninterpretedOption=`*(message: google_protobuf_MessageOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
+    setuninterpretedOption(message, value)
 
 proc sizeOfgoogle_protobuf_MessageOptions*(message: google_protobuf_MessageOptions): uint64 =
-    if hasmessage_set_wire_format(message):
+    if hasmessageSetWireFormat(message):
         result = result + sizeOfTag(1, WireType.Varint)
-        result = result + sizeOfBool(message.message_set_wire_format)
-    if hasno_standard_descriptor_accessor(message):
+        result = result + sizeOfBool(message.messageSetWireFormat)
+    if hasnoStandardDescriptorAccessor(message):
         result = result + sizeOfTag(2, WireType.Varint)
-        result = result + sizeOfBool(message.no_standard_descriptor_accessor)
+        result = result + sizeOfBool(message.noStandardDescriptorAccessor)
     if hasdeprecated(message):
         result = result + sizeOfTag(3, WireType.Varint)
         result = result + sizeOfBool(message.deprecated)
-    if hasmap_entry(message):
+    if hasmapEntry(message):
         result = result + sizeOfTag(7, WireType.Varint)
-        result = result + sizeOfBool(message.map_entry)
-    for value in message.uninterpreted_option:
+        result = result + sizeOfBool(message.mapEntry)
+    for value in message.uninterpretedOption:
         result = result + sizeOfTag(999, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_UninterpretedOption(value))
     result = result + sizeOfUnknownFields(message)
 
 proc writegoogle_protobuf_MessageOptions*(stream: Stream, message: google_protobuf_MessageOptions) =
-    if hasmessage_set_wire_format(message):
-        protoWriteBool(stream, message.message_set_wire_format, 1)
-    if hasno_standard_descriptor_accessor(message):
-        protoWriteBool(stream, message.no_standard_descriptor_accessor, 2)
+    if hasmessageSetWireFormat(message):
+        protoWriteBool(stream, message.messageSetWireFormat, 1)
+    if hasnoStandardDescriptorAccessor(message):
+        protoWriteBool(stream, message.noStandardDescriptorAccessor, 2)
     if hasdeprecated(message):
         protoWriteBool(stream, message.deprecated, 3)
-    if hasmap_entry(message):
-        protoWriteBool(stream, message.map_entry, 7)
-    for value in message.uninterpreted_option:
+    if hasmapEntry(message):
+        protoWriteBool(stream, message.mapEntry, 7)
+    for value in message.uninterpretedOption:
         writeMessage(stream, value, 999)
     writeUnknownFields(stream, message)
 
@@ -2573,35 +2665,35 @@ proc readgoogle_protobuf_MessageOptions*(stream: Stream): google_protobuf_Messag
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
             expectWireType(wireType, WireType.Varint)
-            setmessage_set_wire_format(result, protoReadBool(stream))
+            setmessageSetWireFormat(result, protoReadBool(stream))
         of 2:
             expectWireType(wireType, WireType.Varint)
-            setno_standard_descriptor_accessor(result, protoReadBool(stream))
+            setnoStandardDescriptorAccessor(result, protoReadBool(stream))
         of 3:
             expectWireType(wireType, WireType.Varint)
             setdeprecated(result, protoReadBool(stream))
         of 7:
             expectWireType(wireType, WireType.Varint)
-            setmap_entry(result, protoReadBool(stream))
+            setmapEntry(result, protoReadBool(stream))
         of 999:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            adduninterpreted_option(result, newgoogle_protobuf_UninterpretedOption(data))
+            adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_MessageOptions): JsonNode =
     result = newJObject()
-    if hasmessage_set_wire_format(message):
-        result["messageSetWireFormat"] = %message.message_set_wire_format
-    if hasno_standard_descriptor_accessor(message):
-        result["noStandardDescriptorAccessor"] = %message.no_standard_descriptor_accessor
+    if hasmessageSetWireFormat(message):
+        result["messageSetWireFormat"] = %message.messageSetWireFormat
+    if hasnoStandardDescriptorAccessor(message):
+        result["noStandardDescriptorAccessor"] = %message.noStandardDescriptorAccessor
     if hasdeprecated(message):
         result["deprecated"] = %message.deprecated
-    if hasmap_entry(message):
-        result["mapEntry"] = %message.map_entry
-    if hasuninterpreted_option(message):
+    if hasmapEntry(message):
+        result["mapEntry"] = %message.mapEntry
+    if hasuninterpretedOption(message):
         let arr = newJArray()
-        for value in message.uninterpreted_option:
+        for value in message.uninterpretedOption:
             add(arr, toJson(value))
         result["uninterpretedOption"] = arr
 
@@ -2616,41 +2708,46 @@ proc newgoogle_protobuf_MessageOptions*(data: string): google_protobuf_MessageOp
         ss = newStringStream(data)
     result = readgoogle_protobuf_MessageOptions(ss)
 
+proc newgoogle_protobuf_MessageOptions*(data: seq[byte]): google_protobuf_MessageOptions =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_MessageOptions(ss)
+
 
 proc newgoogle_protobuf_OneofOptions*(): google_protobuf_OneofOptions =
     new(result)
     initMessage(result[])
-    result.uninterpreted_option = @[]
+    result.uninterpretedOption = @[]
 
-proc clearuninterpreted_option*(message: google_protobuf_OneofOptions) =
-    message.uninterpreted_option = @[]
+proc clearuninterpretedOption*(message: google_protobuf_OneofOptions) =
+    message.uninterpretedOption = @[]
     clearFields(message, [999])
 
-proc hasuninterpreted_option*(message: google_protobuf_OneofOptions): bool =
-    result = hasField(message, 999) or (len(message.uninterpreted_option) > 0)
+proc hasuninterpretedOption*(message: google_protobuf_OneofOptions): bool =
+    result = hasField(message, 999) or (len(message.uninterpretedOption) > 0)
 
-proc setuninterpreted_option*(message: google_protobuf_OneofOptions, value: seq[google_protobuf_UninterpretedOption]) =
-    message.uninterpreted_option = value
+proc setuninterpretedOption*(message: google_protobuf_OneofOptions, value: seq[google_protobuf_UninterpretedOption]) =
+    message.uninterpretedOption = value
     setField(message, 999)
 
-proc adduninterpreted_option*(message: google_protobuf_OneofOptions, value: google_protobuf_UninterpretedOption) =
-    add(message.uninterpreted_option, value)
+proc adduninterpretedOption*(message: google_protobuf_OneofOptions, value: google_protobuf_UninterpretedOption) =
+    add(message.uninterpretedOption, value)
     setField(message, 999)
 
-proc uninterpreted_option*(message: google_protobuf_OneofOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
-    message.uninterpreted_option
+proc uninterpretedOption*(message: google_protobuf_OneofOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
+    message.uninterpretedOption
 
-proc `uninterpreted_option=`*(message: google_protobuf_OneofOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
-    setuninterpreted_option(message, value)
+proc `uninterpretedOption=`*(message: google_protobuf_OneofOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
+    setuninterpretedOption(message, value)
 
 proc sizeOfgoogle_protobuf_OneofOptions*(message: google_protobuf_OneofOptions): uint64 =
-    for value in message.uninterpreted_option:
+    for value in message.uninterpretedOption:
         result = result + sizeOfTag(999, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_UninterpretedOption(value))
     result = result + sizeOfUnknownFields(message)
 
 proc writegoogle_protobuf_OneofOptions*(stream: Stream, message: google_protobuf_OneofOptions) =
-    for value in message.uninterpreted_option:
+    for value in message.uninterpretedOption:
         writeMessage(stream, value, 999)
     writeUnknownFields(stream, message)
 
@@ -2666,14 +2763,14 @@ proc readgoogle_protobuf_OneofOptions*(stream: Stream): google_protobuf_OneofOpt
         of 999:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            adduninterpreted_option(result, newgoogle_protobuf_UninterpretedOption(data))
+            adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_OneofOptions): JsonNode =
     result = newJObject()
-    if hasuninterpreted_option(message):
+    if hasuninterpretedOption(message):
         let arr = newJArray()
-        for value in message.uninterpreted_option:
+        for value in message.uninterpretedOption:
             add(arr, toJson(value))
         result["uninterpretedOption"] = arr
 
@@ -2686,6 +2783,11 @@ proc serialize*(message: google_protobuf_OneofOptions): string =
 proc newgoogle_protobuf_OneofOptions*(data: string): google_protobuf_OneofOptions =
     let
         ss = newStringStream(data)
+    result = readgoogle_protobuf_OneofOptions(ss)
+
+proc newgoogle_protobuf_OneofOptions*(data: seq[byte]): google_protobuf_OneofOptions =
+    let
+        ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_OneofOptions(ss)
 
 
@@ -2781,6 +2883,11 @@ proc newgoogle_protobuf_OneofDescriptorProto*(data: string): google_protobuf_One
         ss = newStringStream(data)
     result = readgoogle_protobuf_OneofDescriptorProto(ss)
 
+proc newgoogle_protobuf_OneofDescriptorProto*(data: seq[byte]): google_protobuf_OneofDescriptorProto =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_OneofDescriptorProto(ss)
+
 
 proc newgoogle_protobuf_DescriptorProto_ReservedRange*(): google_protobuf_DescriptorProto_ReservedRange =
     new(result)
@@ -2873,6 +2980,11 @@ proc newgoogle_protobuf_DescriptorProto_ReservedRange*(data: string): google_pro
         ss = newStringStream(data)
     result = readgoogle_protobuf_DescriptorProto_ReservedRange(ss)
 
+proc newgoogle_protobuf_DescriptorProto_ReservedRange*(data: seq[byte]): google_protobuf_DescriptorProto_ReservedRange =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_DescriptorProto_ReservedRange(ss)
+
 
 proc newgoogle_protobuf_DescriptorProto*(): google_protobuf_DescriptorProto =
     new(result)
@@ -2880,13 +2992,13 @@ proc newgoogle_protobuf_DescriptorProto*(): google_protobuf_DescriptorProto =
     result.name = ""
     result.field = @[]
     result.extension = @[]
-    result.nested_type = @[]
-    result.enum_type = @[]
-    result.extension_range = @[]
-    result.oneof_decl = @[]
+    result.nestedType = @[]
+    result.enumType = @[]
+    result.extensionRange = @[]
+    result.oneofDecl = @[]
     result.options = nil
-    result.reserved_range = @[]
-    result.reserved_name = @[]
+    result.reservedRange = @[]
+    result.reservedName = @[]
 
 proc clearname*(message: google_protobuf_DescriptorProto) =
     message.name = ""
@@ -2947,89 +3059,89 @@ proc extension*(message: google_protobuf_DescriptorProto): seq[google_protobuf_F
 proc `extension=`*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_FieldDescriptorProto]) {.inline.} =
     setextension(message, value)
 
-proc clearnested_type*(message: google_protobuf_DescriptorProto) =
-    message.nested_type = @[]
+proc clearnestedType*(message: google_protobuf_DescriptorProto) =
+    message.nestedType = @[]
     clearFields(message, [3])
 
-proc hasnested_type*(message: google_protobuf_DescriptorProto): bool =
-    result = hasField(message, 3) or (len(message.nested_type) > 0)
+proc hasnestedType*(message: google_protobuf_DescriptorProto): bool =
+    result = hasField(message, 3) or (len(message.nestedType) > 0)
 
-proc setnested_type*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_DescriptorProto]) =
-    message.nested_type = value
+proc setnestedType*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_DescriptorProto]) =
+    message.nestedType = value
     setField(message, 3)
 
-proc addnested_type*(message: google_protobuf_DescriptorProto, value: google_protobuf_DescriptorProto) =
-    add(message.nested_type, value)
+proc addnestedType*(message: google_protobuf_DescriptorProto, value: google_protobuf_DescriptorProto) =
+    add(message.nestedType, value)
     setField(message, 3)
 
-proc nested_type*(message: google_protobuf_DescriptorProto): seq[google_protobuf_DescriptorProto] {.inline.} =
-    message.nested_type
+proc nestedType*(message: google_protobuf_DescriptorProto): seq[google_protobuf_DescriptorProto] {.inline.} =
+    message.nestedType
 
-proc `nested_type=`*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_DescriptorProto]) {.inline.} =
-    setnested_type(message, value)
+proc `nestedType=`*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_DescriptorProto]) {.inline.} =
+    setnestedType(message, value)
 
-proc clearenum_type*(message: google_protobuf_DescriptorProto) =
-    message.enum_type = @[]
+proc clearenumType*(message: google_protobuf_DescriptorProto) =
+    message.enumType = @[]
     clearFields(message, [4])
 
-proc hasenum_type*(message: google_protobuf_DescriptorProto): bool =
-    result = hasField(message, 4) or (len(message.enum_type) > 0)
+proc hasenumType*(message: google_protobuf_DescriptorProto): bool =
+    result = hasField(message, 4) or (len(message.enumType) > 0)
 
-proc setenum_type*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_EnumDescriptorProto]) =
-    message.enum_type = value
+proc setenumType*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_EnumDescriptorProto]) =
+    message.enumType = value
     setField(message, 4)
 
-proc addenum_type*(message: google_protobuf_DescriptorProto, value: google_protobuf_EnumDescriptorProto) =
-    add(message.enum_type, value)
+proc addenumType*(message: google_protobuf_DescriptorProto, value: google_protobuf_EnumDescriptorProto) =
+    add(message.enumType, value)
     setField(message, 4)
 
-proc enum_type*(message: google_protobuf_DescriptorProto): seq[google_protobuf_EnumDescriptorProto] {.inline.} =
-    message.enum_type
+proc enumType*(message: google_protobuf_DescriptorProto): seq[google_protobuf_EnumDescriptorProto] {.inline.} =
+    message.enumType
 
-proc `enum_type=`*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_EnumDescriptorProto]) {.inline.} =
-    setenum_type(message, value)
+proc `enumType=`*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_EnumDescriptorProto]) {.inline.} =
+    setenumType(message, value)
 
-proc clearextension_range*(message: google_protobuf_DescriptorProto) =
-    message.extension_range = @[]
+proc clearextensionRange*(message: google_protobuf_DescriptorProto) =
+    message.extensionRange = @[]
     clearFields(message, [5])
 
-proc hasextension_range*(message: google_protobuf_DescriptorProto): bool =
-    result = hasField(message, 5) or (len(message.extension_range) > 0)
+proc hasextensionRange*(message: google_protobuf_DescriptorProto): bool =
+    result = hasField(message, 5) or (len(message.extensionRange) > 0)
 
-proc setextension_range*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_DescriptorProto_ExtensionRange]) =
-    message.extension_range = value
+proc setextensionRange*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_DescriptorProto_ExtensionRange]) =
+    message.extensionRange = value
     setField(message, 5)
 
-proc addextension_range*(message: google_protobuf_DescriptorProto, value: google_protobuf_DescriptorProto_ExtensionRange) =
-    add(message.extension_range, value)
+proc addextensionRange*(message: google_protobuf_DescriptorProto, value: google_protobuf_DescriptorProto_ExtensionRange) =
+    add(message.extensionRange, value)
     setField(message, 5)
 
-proc extension_range*(message: google_protobuf_DescriptorProto): seq[google_protobuf_DescriptorProto_ExtensionRange] {.inline.} =
-    message.extension_range
+proc extensionRange*(message: google_protobuf_DescriptorProto): seq[google_protobuf_DescriptorProto_ExtensionRange] {.inline.} =
+    message.extensionRange
 
-proc `extension_range=`*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_DescriptorProto_ExtensionRange]) {.inline.} =
-    setextension_range(message, value)
+proc `extensionRange=`*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_DescriptorProto_ExtensionRange]) {.inline.} =
+    setextensionRange(message, value)
 
-proc clearoneof_decl*(message: google_protobuf_DescriptorProto) =
-    message.oneof_decl = @[]
+proc clearoneofDecl*(message: google_protobuf_DescriptorProto) =
+    message.oneofDecl = @[]
     clearFields(message, [8])
 
-proc hasoneof_decl*(message: google_protobuf_DescriptorProto): bool =
-    result = hasField(message, 8) or (len(message.oneof_decl) > 0)
+proc hasoneofDecl*(message: google_protobuf_DescriptorProto): bool =
+    result = hasField(message, 8) or (len(message.oneofDecl) > 0)
 
-proc setoneof_decl*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_OneofDescriptorProto]) =
-    message.oneof_decl = value
+proc setoneofDecl*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_OneofDescriptorProto]) =
+    message.oneofDecl = value
     setField(message, 8)
 
-proc addoneof_decl*(message: google_protobuf_DescriptorProto, value: google_protobuf_OneofDescriptorProto) =
-    add(message.oneof_decl, value)
+proc addoneofDecl*(message: google_protobuf_DescriptorProto, value: google_protobuf_OneofDescriptorProto) =
+    add(message.oneofDecl, value)
     setField(message, 8)
 
-proc oneof_decl*(message: google_protobuf_DescriptorProto): seq[google_protobuf_OneofDescriptorProto] {.inline.} =
-    message.oneof_decl
+proc oneofDecl*(message: google_protobuf_DescriptorProto): seq[google_protobuf_OneofDescriptorProto] {.inline.} =
+    message.oneofDecl
 
-proc `oneof_decl=`*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_OneofDescriptorProto]) {.inline.} =
-    setoneof_decl(message, value)
+proc `oneofDecl=`*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_OneofDescriptorProto]) {.inline.} =
+    setoneofDecl(message, value)
 
 proc clearoptions*(message: google_protobuf_DescriptorProto) =
     message.options = nil
@@ -3048,47 +3160,47 @@ proc options*(message: google_protobuf_DescriptorProto): google_protobuf_Message
 proc `options=`*(message: google_protobuf_DescriptorProto, value: google_protobuf_MessageOptions) {.inline.} =
     setoptions(message, value)
 
-proc clearreserved_range*(message: google_protobuf_DescriptorProto) =
-    message.reserved_range = @[]
+proc clearreservedRange*(message: google_protobuf_DescriptorProto) =
+    message.reservedRange = @[]
     clearFields(message, [9])
 
-proc hasreserved_range*(message: google_protobuf_DescriptorProto): bool =
-    result = hasField(message, 9) or (len(message.reserved_range) > 0)
+proc hasreservedRange*(message: google_protobuf_DescriptorProto): bool =
+    result = hasField(message, 9) or (len(message.reservedRange) > 0)
 
-proc setreserved_range*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_DescriptorProto_ReservedRange]) =
-    message.reserved_range = value
+proc setreservedRange*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_DescriptorProto_ReservedRange]) =
+    message.reservedRange = value
     setField(message, 9)
 
-proc addreserved_range*(message: google_protobuf_DescriptorProto, value: google_protobuf_DescriptorProto_ReservedRange) =
-    add(message.reserved_range, value)
+proc addreservedRange*(message: google_protobuf_DescriptorProto, value: google_protobuf_DescriptorProto_ReservedRange) =
+    add(message.reservedRange, value)
     setField(message, 9)
 
-proc reserved_range*(message: google_protobuf_DescriptorProto): seq[google_protobuf_DescriptorProto_ReservedRange] {.inline.} =
-    message.reserved_range
+proc reservedRange*(message: google_protobuf_DescriptorProto): seq[google_protobuf_DescriptorProto_ReservedRange] {.inline.} =
+    message.reservedRange
 
-proc `reserved_range=`*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_DescriptorProto_ReservedRange]) {.inline.} =
-    setreserved_range(message, value)
+proc `reservedRange=`*(message: google_protobuf_DescriptorProto, value: seq[google_protobuf_DescriptorProto_ReservedRange]) {.inline.} =
+    setreservedRange(message, value)
 
-proc clearreserved_name*(message: google_protobuf_DescriptorProto) =
-    message.reserved_name = @[]
+proc clearreservedName*(message: google_protobuf_DescriptorProto) =
+    message.reservedName = @[]
     clearFields(message, [10])
 
-proc hasreserved_name*(message: google_protobuf_DescriptorProto): bool =
-    result = hasField(message, 10) or (len(message.reserved_name) > 0)
+proc hasreservedName*(message: google_protobuf_DescriptorProto): bool =
+    result = hasField(message, 10) or (len(message.reservedName) > 0)
 
-proc setreserved_name*(message: google_protobuf_DescriptorProto, value: seq[string]) =
-    message.reserved_name = value
+proc setreservedName*(message: google_protobuf_DescriptorProto, value: seq[string]) =
+    message.reservedName = value
     setField(message, 10)
 
-proc addreserved_name*(message: google_protobuf_DescriptorProto, value: string) =
-    add(message.reserved_name, value)
+proc addreservedName*(message: google_protobuf_DescriptorProto, value: string) =
+    add(message.reservedName, value)
     setField(message, 10)
 
-proc reserved_name*(message: google_protobuf_DescriptorProto): seq[string] {.inline.} =
-    message.reserved_name
+proc reservedName*(message: google_protobuf_DescriptorProto): seq[string] {.inline.} =
+    message.reservedName
 
-proc `reserved_name=`*(message: google_protobuf_DescriptorProto, value: seq[string]) {.inline.} =
-    setreserved_name(message, value)
+proc `reservedName=`*(message: google_protobuf_DescriptorProto, value: seq[string]) {.inline.} =
+    setreservedName(message, value)
 
 proc sizeOfgoogle_protobuf_DescriptorProto*(message: google_protobuf_DescriptorProto): uint64 =
     if hasname(message):
@@ -3100,25 +3212,25 @@ proc sizeOfgoogle_protobuf_DescriptorProto*(message: google_protobuf_DescriptorP
     for value in message.extension:
         result = result + sizeOfTag(6, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_FieldDescriptorProto(value))
-    for value in message.nested_type:
+    for value in message.nestedType:
         result = result + sizeOfTag(3, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_DescriptorProto(value))
-    for value in message.enum_type:
+    for value in message.enumType:
         result = result + sizeOfTag(4, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_EnumDescriptorProto(value))
-    for value in message.extension_range:
+    for value in message.extensionRange:
         result = result + sizeOfTag(5, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_DescriptorProto_ExtensionRange(value))
-    for value in message.oneof_decl:
+    for value in message.oneofDecl:
         result = result + sizeOfTag(8, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_OneofDescriptorProto(value))
     if hasoptions(message):
         result = result + sizeOfTag(7, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_MessageOptions(message.options))
-    for value in message.reserved_range:
+    for value in message.reservedRange:
         result = result + sizeOfTag(9, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_DescriptorProto_ReservedRange(value))
-    for value in message.reserved_name:
+    for value in message.reservedName:
         result = result + sizeOfTag(10, WireType.LengthDelimited)
         result = result + sizeOfString(value)
     result = result + sizeOfUnknownFields(message)
@@ -3130,19 +3242,19 @@ proc writegoogle_protobuf_DescriptorProto*(stream: Stream, message: google_proto
         writeMessage(stream, value, 2)
     for value in message.extension:
         writeMessage(stream, value, 6)
-    for value in message.nested_type:
+    for value in message.nestedType:
         writeMessage(stream, value, 3)
-    for value in message.enum_type:
+    for value in message.enumType:
         writeMessage(stream, value, 4)
-    for value in message.extension_range:
+    for value in message.extensionRange:
         writeMessage(stream, value, 5)
-    for value in message.oneof_decl:
+    for value in message.oneofDecl:
         writeMessage(stream, value, 8)
     if hasoptions(message):
         writeMessage(stream, message.options, 7)
-    for value in message.reserved_range:
+    for value in message.reservedRange:
         writeMessage(stream, value, 9)
-    for value in message.reserved_name:
+    for value in message.reservedName:
         protoWriteString(stream, value, 10)
     writeUnknownFields(stream, message)
 
@@ -3169,19 +3281,19 @@ proc readgoogle_protobuf_DescriptorProto*(stream: Stream): google_protobuf_Descr
         of 3:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            addnested_type(result, newgoogle_protobuf_DescriptorProto(data))
+            addnestedType(result, newgoogle_protobuf_DescriptorProto(data))
         of 4:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            addenum_type(result, newgoogle_protobuf_EnumDescriptorProto(data))
+            addenumType(result, newgoogle_protobuf_EnumDescriptorProto(data))
         of 5:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            addextension_range(result, newgoogle_protobuf_DescriptorProto_ExtensionRange(data))
+            addextensionRange(result, newgoogle_protobuf_DescriptorProto_ExtensionRange(data))
         of 8:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            addoneof_decl(result, newgoogle_protobuf_OneofDescriptorProto(data))
+            addoneofDecl(result, newgoogle_protobuf_OneofDescriptorProto(data))
         of 7:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
@@ -3189,10 +3301,10 @@ proc readgoogle_protobuf_DescriptorProto*(stream: Stream): google_protobuf_Descr
         of 9:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            addreserved_range(result, newgoogle_protobuf_DescriptorProto_ReservedRange(data))
+            addreservedRange(result, newgoogle_protobuf_DescriptorProto_ReservedRange(data))
         of 10:
             expectWireType(wireType, WireType.LengthDelimited)
-            addreserved_name(result, protoReadString(stream))
+            addreservedName(result, protoReadString(stream))
         else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_DescriptorProto): JsonNode =
@@ -3209,36 +3321,36 @@ proc toJson*(message: google_protobuf_DescriptorProto): JsonNode =
         for value in message.extension:
             add(arr, toJson(value))
         result["extension"] = arr
-    if hasnested_type(message):
+    if hasnestedType(message):
         let arr = newJArray()
-        for value in message.nested_type:
+        for value in message.nestedType:
             add(arr, toJson(value))
         result["nestedType"] = arr
-    if hasenum_type(message):
+    if hasenumType(message):
         let arr = newJArray()
-        for value in message.enum_type:
+        for value in message.enumType:
             add(arr, toJson(value))
         result["enumType"] = arr
-    if hasextension_range(message):
+    if hasextensionRange(message):
         let arr = newJArray()
-        for value in message.extension_range:
+        for value in message.extensionRange:
             add(arr, toJson(value))
         result["extensionRange"] = arr
-    if hasoneof_decl(message):
+    if hasoneofDecl(message):
         let arr = newJArray()
-        for value in message.oneof_decl:
+        for value in message.oneofDecl:
             add(arr, toJson(value))
         result["oneofDecl"] = arr
     if hasoptions(message):
         result["options"] = toJson(message.options)
-    if hasreserved_range(message):
+    if hasreservedRange(message):
         let arr = newJArray()
-        for value in message.reserved_range:
+        for value in message.reservedRange:
             add(arr, toJson(value))
         result["reservedRange"] = arr
-    if hasreserved_name(message):
+    if hasreservedName(message):
         let arr = newJArray()
-        for value in message.reserved_name:
+        for value in message.reservedName:
             add(arr, %value)
         result["reservedName"] = arr
 
@@ -3253,216 +3365,221 @@ proc newgoogle_protobuf_DescriptorProto*(data: string): google_protobuf_Descript
         ss = newStringStream(data)
     result = readgoogle_protobuf_DescriptorProto(ss)
 
+proc newgoogle_protobuf_DescriptorProto*(data: seq[byte]): google_protobuf_DescriptorProto =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_DescriptorProto(ss)
+
 
 proc newgoogle_protobuf_FileOptions*(): google_protobuf_FileOptions =
     new(result)
     initMessage(result[])
-    result.java_package = ""
-    result.java_outer_classname = ""
-    result.java_multiple_files = false
-    result.java_generate_equals_and_hash = false
-    result.java_string_check_utf8 = false
-    result.optimize_for = google_protobuf_FileOptions_OptimizeMode.SPEED
-    result.go_package = ""
-    result.cc_generic_services = false
-    result.java_generic_services = false
-    result.py_generic_services = false
-    result.php_generic_services = false
+    result.javaPackage = ""
+    result.javaOuterClassname = ""
+    result.javaMultipleFiles = false
+    result.javaGenerateEqualsAndHash = false
+    result.javaStringCheckUtf8 = false
+    result.optimizeFor = google_protobuf_FileOptions_OptimizeMode.SPEED
+    result.goPackage = ""
+    result.ccGenericServices = false
+    result.javaGenericServices = false
+    result.pyGenericServices = false
+    result.phpGenericServices = false
     result.deprecated = false
-    result.cc_enable_arenas = false
-    result.objc_class_prefix = ""
-    result.csharp_namespace = ""
-    result.swift_prefix = ""
-    result.php_class_prefix = ""
-    result.php_namespace = ""
-    result.uninterpreted_option = @[]
+    result.ccEnableArenas = false
+    result.objcClassPrefix = ""
+    result.csharpNamespace = ""
+    result.swiftPrefix = ""
+    result.phpClassPrefix = ""
+    result.phpNamespace = ""
+    result.uninterpretedOption = @[]
 
-proc clearjava_package*(message: google_protobuf_FileOptions) =
-    message.java_package = ""
+proc clearjavaPackage*(message: google_protobuf_FileOptions) =
+    message.javaPackage = ""
     clearFields(message, [1])
 
-proc hasjava_package*(message: google_protobuf_FileOptions): bool =
+proc hasjavaPackage*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 1)
 
-proc setjava_package*(message: google_protobuf_FileOptions, value: string) =
-    message.java_package = value
+proc setjavaPackage*(message: google_protobuf_FileOptions, value: string) =
+    message.javaPackage = value
     setField(message, 1)
 
-proc java_package*(message: google_protobuf_FileOptions): string {.inline.} =
-    message.java_package
+proc javaPackage*(message: google_protobuf_FileOptions): string {.inline.} =
+    message.javaPackage
 
-proc `java_package=`*(message: google_protobuf_FileOptions, value: string) {.inline.} =
-    setjava_package(message, value)
+proc `javaPackage=`*(message: google_protobuf_FileOptions, value: string) {.inline.} =
+    setjavaPackage(message, value)
 
-proc clearjava_outer_classname*(message: google_protobuf_FileOptions) =
-    message.java_outer_classname = ""
+proc clearjavaOuterClassname*(message: google_protobuf_FileOptions) =
+    message.javaOuterClassname = ""
     clearFields(message, [8])
 
-proc hasjava_outer_classname*(message: google_protobuf_FileOptions): bool =
+proc hasjavaOuterClassname*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 8)
 
-proc setjava_outer_classname*(message: google_protobuf_FileOptions, value: string) =
-    message.java_outer_classname = value
+proc setjavaOuterClassname*(message: google_protobuf_FileOptions, value: string) =
+    message.javaOuterClassname = value
     setField(message, 8)
 
-proc java_outer_classname*(message: google_protobuf_FileOptions): string {.inline.} =
-    message.java_outer_classname
+proc javaOuterClassname*(message: google_protobuf_FileOptions): string {.inline.} =
+    message.javaOuterClassname
 
-proc `java_outer_classname=`*(message: google_protobuf_FileOptions, value: string) {.inline.} =
-    setjava_outer_classname(message, value)
+proc `javaOuterClassname=`*(message: google_protobuf_FileOptions, value: string) {.inline.} =
+    setjavaOuterClassname(message, value)
 
-proc clearjava_multiple_files*(message: google_protobuf_FileOptions) =
-    message.java_multiple_files = false
+proc clearjavaMultipleFiles*(message: google_protobuf_FileOptions) =
+    message.javaMultipleFiles = false
     clearFields(message, [10])
 
-proc hasjava_multiple_files*(message: google_protobuf_FileOptions): bool =
+proc hasjavaMultipleFiles*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 10)
 
-proc setjava_multiple_files*(message: google_protobuf_FileOptions, value: bool) =
-    message.java_multiple_files = value
+proc setjavaMultipleFiles*(message: google_protobuf_FileOptions, value: bool) =
+    message.javaMultipleFiles = value
     setField(message, 10)
 
-proc java_multiple_files*(message: google_protobuf_FileOptions): bool {.inline.} =
-    message.java_multiple_files
+proc javaMultipleFiles*(message: google_protobuf_FileOptions): bool {.inline.} =
+    message.javaMultipleFiles
 
-proc `java_multiple_files=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
-    setjava_multiple_files(message, value)
+proc `javaMultipleFiles=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
+    setjavaMultipleFiles(message, value)
 
-proc clearjava_generate_equals_and_hash*(message: google_protobuf_FileOptions) =
-    message.java_generate_equals_and_hash = false
+proc clearjavaGenerateEqualsAndHash*(message: google_protobuf_FileOptions) =
+    message.javaGenerateEqualsAndHash = false
     clearFields(message, [20])
 
-proc hasjava_generate_equals_and_hash*(message: google_protobuf_FileOptions): bool =
+proc hasjavaGenerateEqualsAndHash*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 20)
 
-proc setjava_generate_equals_and_hash*(message: google_protobuf_FileOptions, value: bool) =
-    message.java_generate_equals_and_hash = value
+proc setjavaGenerateEqualsAndHash*(message: google_protobuf_FileOptions, value: bool) =
+    message.javaGenerateEqualsAndHash = value
     setField(message, 20)
 
-proc java_generate_equals_and_hash*(message: google_protobuf_FileOptions): bool {.inline.} =
-    message.java_generate_equals_and_hash
+proc javaGenerateEqualsAndHash*(message: google_protobuf_FileOptions): bool {.inline.} =
+    message.javaGenerateEqualsAndHash
 
-proc `java_generate_equals_and_hash=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
-    setjava_generate_equals_and_hash(message, value)
+proc `javaGenerateEqualsAndHash=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
+    setjavaGenerateEqualsAndHash(message, value)
 
-proc clearjava_string_check_utf8*(message: google_protobuf_FileOptions) =
-    message.java_string_check_utf8 = false
+proc clearjavaStringCheckUtf8*(message: google_protobuf_FileOptions) =
+    message.javaStringCheckUtf8 = false
     clearFields(message, [27])
 
-proc hasjava_string_check_utf8*(message: google_protobuf_FileOptions): bool =
+proc hasjavaStringCheckUtf8*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 27)
 
-proc setjava_string_check_utf8*(message: google_protobuf_FileOptions, value: bool) =
-    message.java_string_check_utf8 = value
+proc setjavaStringCheckUtf8*(message: google_protobuf_FileOptions, value: bool) =
+    message.javaStringCheckUtf8 = value
     setField(message, 27)
 
-proc java_string_check_utf8*(message: google_protobuf_FileOptions): bool {.inline.} =
-    message.java_string_check_utf8
+proc javaStringCheckUtf8*(message: google_protobuf_FileOptions): bool {.inline.} =
+    message.javaStringCheckUtf8
 
-proc `java_string_check_utf8=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
-    setjava_string_check_utf8(message, value)
+proc `javaStringCheckUtf8=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
+    setjavaStringCheckUtf8(message, value)
 
-proc clearoptimize_for*(message: google_protobuf_FileOptions) =
-    message.optimize_for = google_protobuf_FileOptions_OptimizeMode.SPEED
+proc clearoptimizeFor*(message: google_protobuf_FileOptions) =
+    message.optimizeFor = google_protobuf_FileOptions_OptimizeMode.SPEED
     clearFields(message, [9])
 
-proc hasoptimize_for*(message: google_protobuf_FileOptions): bool =
+proc hasoptimizeFor*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 9)
 
-proc setoptimize_for*(message: google_protobuf_FileOptions, value: google_protobuf_FileOptions_OptimizeMode) =
-    message.optimize_for = value
+proc setoptimizeFor*(message: google_protobuf_FileOptions, value: google_protobuf_FileOptions_OptimizeMode) =
+    message.optimizeFor = value
     setField(message, 9)
 
-proc optimize_for*(message: google_protobuf_FileOptions): google_protobuf_FileOptions_OptimizeMode {.inline.} =
-    message.optimize_for
+proc optimizeFor*(message: google_protobuf_FileOptions): google_protobuf_FileOptions_OptimizeMode {.inline.} =
+    message.optimizeFor
 
-proc `optimize_for=`*(message: google_protobuf_FileOptions, value: google_protobuf_FileOptions_OptimizeMode) {.inline.} =
-    setoptimize_for(message, value)
+proc `optimizeFor=`*(message: google_protobuf_FileOptions, value: google_protobuf_FileOptions_OptimizeMode) {.inline.} =
+    setoptimizeFor(message, value)
 
-proc cleargo_package*(message: google_protobuf_FileOptions) =
-    message.go_package = ""
+proc cleargoPackage*(message: google_protobuf_FileOptions) =
+    message.goPackage = ""
     clearFields(message, [11])
 
-proc hasgo_package*(message: google_protobuf_FileOptions): bool =
+proc hasgoPackage*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 11)
 
-proc setgo_package*(message: google_protobuf_FileOptions, value: string) =
-    message.go_package = value
+proc setgoPackage*(message: google_protobuf_FileOptions, value: string) =
+    message.goPackage = value
     setField(message, 11)
 
-proc go_package*(message: google_protobuf_FileOptions): string {.inline.} =
-    message.go_package
+proc goPackage*(message: google_protobuf_FileOptions): string {.inline.} =
+    message.goPackage
 
-proc `go_package=`*(message: google_protobuf_FileOptions, value: string) {.inline.} =
-    setgo_package(message, value)
+proc `goPackage=`*(message: google_protobuf_FileOptions, value: string) {.inline.} =
+    setgoPackage(message, value)
 
-proc clearcc_generic_services*(message: google_protobuf_FileOptions) =
-    message.cc_generic_services = false
+proc clearccGenericServices*(message: google_protobuf_FileOptions) =
+    message.ccGenericServices = false
     clearFields(message, [16])
 
-proc hascc_generic_services*(message: google_protobuf_FileOptions): bool =
+proc hasccGenericServices*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 16)
 
-proc setcc_generic_services*(message: google_protobuf_FileOptions, value: bool) =
-    message.cc_generic_services = value
+proc setccGenericServices*(message: google_protobuf_FileOptions, value: bool) =
+    message.ccGenericServices = value
     setField(message, 16)
 
-proc cc_generic_services*(message: google_protobuf_FileOptions): bool {.inline.} =
-    message.cc_generic_services
+proc ccGenericServices*(message: google_protobuf_FileOptions): bool {.inline.} =
+    message.ccGenericServices
 
-proc `cc_generic_services=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
-    setcc_generic_services(message, value)
+proc `ccGenericServices=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
+    setccGenericServices(message, value)
 
-proc clearjava_generic_services*(message: google_protobuf_FileOptions) =
-    message.java_generic_services = false
+proc clearjavaGenericServices*(message: google_protobuf_FileOptions) =
+    message.javaGenericServices = false
     clearFields(message, [17])
 
-proc hasjava_generic_services*(message: google_protobuf_FileOptions): bool =
+proc hasjavaGenericServices*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 17)
 
-proc setjava_generic_services*(message: google_protobuf_FileOptions, value: bool) =
-    message.java_generic_services = value
+proc setjavaGenericServices*(message: google_protobuf_FileOptions, value: bool) =
+    message.javaGenericServices = value
     setField(message, 17)
 
-proc java_generic_services*(message: google_protobuf_FileOptions): bool {.inline.} =
-    message.java_generic_services
+proc javaGenericServices*(message: google_protobuf_FileOptions): bool {.inline.} =
+    message.javaGenericServices
 
-proc `java_generic_services=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
-    setjava_generic_services(message, value)
+proc `javaGenericServices=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
+    setjavaGenericServices(message, value)
 
-proc clearpy_generic_services*(message: google_protobuf_FileOptions) =
-    message.py_generic_services = false
+proc clearpyGenericServices*(message: google_protobuf_FileOptions) =
+    message.pyGenericServices = false
     clearFields(message, [18])
 
-proc haspy_generic_services*(message: google_protobuf_FileOptions): bool =
+proc haspyGenericServices*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 18)
 
-proc setpy_generic_services*(message: google_protobuf_FileOptions, value: bool) =
-    message.py_generic_services = value
+proc setpyGenericServices*(message: google_protobuf_FileOptions, value: bool) =
+    message.pyGenericServices = value
     setField(message, 18)
 
-proc py_generic_services*(message: google_protobuf_FileOptions): bool {.inline.} =
-    message.py_generic_services
+proc pyGenericServices*(message: google_protobuf_FileOptions): bool {.inline.} =
+    message.pyGenericServices
 
-proc `py_generic_services=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
-    setpy_generic_services(message, value)
+proc `pyGenericServices=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
+    setpyGenericServices(message, value)
 
-proc clearphp_generic_services*(message: google_protobuf_FileOptions) =
-    message.php_generic_services = false
+proc clearphpGenericServices*(message: google_protobuf_FileOptions) =
+    message.phpGenericServices = false
     clearFields(message, [42])
 
-proc hasphp_generic_services*(message: google_protobuf_FileOptions): bool =
+proc hasphpGenericServices*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 42)
 
-proc setphp_generic_services*(message: google_protobuf_FileOptions, value: bool) =
-    message.php_generic_services = value
+proc setphpGenericServices*(message: google_protobuf_FileOptions, value: bool) =
+    message.phpGenericServices = value
     setField(message, 42)
 
-proc php_generic_services*(message: google_protobuf_FileOptions): bool {.inline.} =
-    message.php_generic_services
+proc phpGenericServices*(message: google_protobuf_FileOptions): bool {.inline.} =
+    message.phpGenericServices
 
-proc `php_generic_services=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
-    setphp_generic_services(message, value)
+proc `phpGenericServices=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
+    setphpGenericServices(message, value)
 
 proc cleardeprecated*(message: google_protobuf_FileOptions) =
     message.deprecated = false
@@ -3481,227 +3598,227 @@ proc deprecated*(message: google_protobuf_FileOptions): bool {.inline.} =
 proc `deprecated=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
     setdeprecated(message, value)
 
-proc clearcc_enable_arenas*(message: google_protobuf_FileOptions) =
-    message.cc_enable_arenas = false
+proc clearccEnableArenas*(message: google_protobuf_FileOptions) =
+    message.ccEnableArenas = false
     clearFields(message, [31])
 
-proc hascc_enable_arenas*(message: google_protobuf_FileOptions): bool =
+proc hasccEnableArenas*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 31)
 
-proc setcc_enable_arenas*(message: google_protobuf_FileOptions, value: bool) =
-    message.cc_enable_arenas = value
+proc setccEnableArenas*(message: google_protobuf_FileOptions, value: bool) =
+    message.ccEnableArenas = value
     setField(message, 31)
 
-proc cc_enable_arenas*(message: google_protobuf_FileOptions): bool {.inline.} =
-    message.cc_enable_arenas
+proc ccEnableArenas*(message: google_protobuf_FileOptions): bool {.inline.} =
+    message.ccEnableArenas
 
-proc `cc_enable_arenas=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
-    setcc_enable_arenas(message, value)
+proc `ccEnableArenas=`*(message: google_protobuf_FileOptions, value: bool) {.inline.} =
+    setccEnableArenas(message, value)
 
-proc clearobjc_class_prefix*(message: google_protobuf_FileOptions) =
-    message.objc_class_prefix = ""
+proc clearobjcClassPrefix*(message: google_protobuf_FileOptions) =
+    message.objcClassPrefix = ""
     clearFields(message, [36])
 
-proc hasobjc_class_prefix*(message: google_protobuf_FileOptions): bool =
+proc hasobjcClassPrefix*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 36)
 
-proc setobjc_class_prefix*(message: google_protobuf_FileOptions, value: string) =
-    message.objc_class_prefix = value
+proc setobjcClassPrefix*(message: google_protobuf_FileOptions, value: string) =
+    message.objcClassPrefix = value
     setField(message, 36)
 
-proc objc_class_prefix*(message: google_protobuf_FileOptions): string {.inline.} =
-    message.objc_class_prefix
+proc objcClassPrefix*(message: google_protobuf_FileOptions): string {.inline.} =
+    message.objcClassPrefix
 
-proc `objc_class_prefix=`*(message: google_protobuf_FileOptions, value: string) {.inline.} =
-    setobjc_class_prefix(message, value)
+proc `objcClassPrefix=`*(message: google_protobuf_FileOptions, value: string) {.inline.} =
+    setobjcClassPrefix(message, value)
 
-proc clearcsharp_namespace*(message: google_protobuf_FileOptions) =
-    message.csharp_namespace = ""
+proc clearcsharpNamespace*(message: google_protobuf_FileOptions) =
+    message.csharpNamespace = ""
     clearFields(message, [37])
 
-proc hascsharp_namespace*(message: google_protobuf_FileOptions): bool =
+proc hascsharpNamespace*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 37)
 
-proc setcsharp_namespace*(message: google_protobuf_FileOptions, value: string) =
-    message.csharp_namespace = value
+proc setcsharpNamespace*(message: google_protobuf_FileOptions, value: string) =
+    message.csharpNamespace = value
     setField(message, 37)
 
-proc csharp_namespace*(message: google_protobuf_FileOptions): string {.inline.} =
-    message.csharp_namespace
+proc csharpNamespace*(message: google_protobuf_FileOptions): string {.inline.} =
+    message.csharpNamespace
 
-proc `csharp_namespace=`*(message: google_protobuf_FileOptions, value: string) {.inline.} =
-    setcsharp_namespace(message, value)
+proc `csharpNamespace=`*(message: google_protobuf_FileOptions, value: string) {.inline.} =
+    setcsharpNamespace(message, value)
 
-proc clearswift_prefix*(message: google_protobuf_FileOptions) =
-    message.swift_prefix = ""
+proc clearswiftPrefix*(message: google_protobuf_FileOptions) =
+    message.swiftPrefix = ""
     clearFields(message, [39])
 
-proc hasswift_prefix*(message: google_protobuf_FileOptions): bool =
+proc hasswiftPrefix*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 39)
 
-proc setswift_prefix*(message: google_protobuf_FileOptions, value: string) =
-    message.swift_prefix = value
+proc setswiftPrefix*(message: google_protobuf_FileOptions, value: string) =
+    message.swiftPrefix = value
     setField(message, 39)
 
-proc swift_prefix*(message: google_protobuf_FileOptions): string {.inline.} =
-    message.swift_prefix
+proc swiftPrefix*(message: google_protobuf_FileOptions): string {.inline.} =
+    message.swiftPrefix
 
-proc `swift_prefix=`*(message: google_protobuf_FileOptions, value: string) {.inline.} =
-    setswift_prefix(message, value)
+proc `swiftPrefix=`*(message: google_protobuf_FileOptions, value: string) {.inline.} =
+    setswiftPrefix(message, value)
 
-proc clearphp_class_prefix*(message: google_protobuf_FileOptions) =
-    message.php_class_prefix = ""
+proc clearphpClassPrefix*(message: google_protobuf_FileOptions) =
+    message.phpClassPrefix = ""
     clearFields(message, [40])
 
-proc hasphp_class_prefix*(message: google_protobuf_FileOptions): bool =
+proc hasphpClassPrefix*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 40)
 
-proc setphp_class_prefix*(message: google_protobuf_FileOptions, value: string) =
-    message.php_class_prefix = value
+proc setphpClassPrefix*(message: google_protobuf_FileOptions, value: string) =
+    message.phpClassPrefix = value
     setField(message, 40)
 
-proc php_class_prefix*(message: google_protobuf_FileOptions): string {.inline.} =
-    message.php_class_prefix
+proc phpClassPrefix*(message: google_protobuf_FileOptions): string {.inline.} =
+    message.phpClassPrefix
 
-proc `php_class_prefix=`*(message: google_protobuf_FileOptions, value: string) {.inline.} =
-    setphp_class_prefix(message, value)
+proc `phpClassPrefix=`*(message: google_protobuf_FileOptions, value: string) {.inline.} =
+    setphpClassPrefix(message, value)
 
-proc clearphp_namespace*(message: google_protobuf_FileOptions) =
-    message.php_namespace = ""
+proc clearphpNamespace*(message: google_protobuf_FileOptions) =
+    message.phpNamespace = ""
     clearFields(message, [41])
 
-proc hasphp_namespace*(message: google_protobuf_FileOptions): bool =
+proc hasphpNamespace*(message: google_protobuf_FileOptions): bool =
     result = hasField(message, 41)
 
-proc setphp_namespace*(message: google_protobuf_FileOptions, value: string) =
-    message.php_namespace = value
+proc setphpNamespace*(message: google_protobuf_FileOptions, value: string) =
+    message.phpNamespace = value
     setField(message, 41)
 
-proc php_namespace*(message: google_protobuf_FileOptions): string {.inline.} =
-    message.php_namespace
+proc phpNamespace*(message: google_protobuf_FileOptions): string {.inline.} =
+    message.phpNamespace
 
-proc `php_namespace=`*(message: google_protobuf_FileOptions, value: string) {.inline.} =
-    setphp_namespace(message, value)
+proc `phpNamespace=`*(message: google_protobuf_FileOptions, value: string) {.inline.} =
+    setphpNamespace(message, value)
 
-proc clearuninterpreted_option*(message: google_protobuf_FileOptions) =
-    message.uninterpreted_option = @[]
+proc clearuninterpretedOption*(message: google_protobuf_FileOptions) =
+    message.uninterpretedOption = @[]
     clearFields(message, [999])
 
-proc hasuninterpreted_option*(message: google_protobuf_FileOptions): bool =
-    result = hasField(message, 999) or (len(message.uninterpreted_option) > 0)
+proc hasuninterpretedOption*(message: google_protobuf_FileOptions): bool =
+    result = hasField(message, 999) or (len(message.uninterpretedOption) > 0)
 
-proc setuninterpreted_option*(message: google_protobuf_FileOptions, value: seq[google_protobuf_UninterpretedOption]) =
-    message.uninterpreted_option = value
+proc setuninterpretedOption*(message: google_protobuf_FileOptions, value: seq[google_protobuf_UninterpretedOption]) =
+    message.uninterpretedOption = value
     setField(message, 999)
 
-proc adduninterpreted_option*(message: google_protobuf_FileOptions, value: google_protobuf_UninterpretedOption) =
-    add(message.uninterpreted_option, value)
+proc adduninterpretedOption*(message: google_protobuf_FileOptions, value: google_protobuf_UninterpretedOption) =
+    add(message.uninterpretedOption, value)
     setField(message, 999)
 
-proc uninterpreted_option*(message: google_protobuf_FileOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
-    message.uninterpreted_option
+proc uninterpretedOption*(message: google_protobuf_FileOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
+    message.uninterpretedOption
 
-proc `uninterpreted_option=`*(message: google_protobuf_FileOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
-    setuninterpreted_option(message, value)
+proc `uninterpretedOption=`*(message: google_protobuf_FileOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
+    setuninterpretedOption(message, value)
 
 proc sizeOfgoogle_protobuf_FileOptions*(message: google_protobuf_FileOptions): uint64 =
-    if hasjava_package(message):
+    if hasjavaPackage(message):
         result = result + sizeOfTag(1, WireType.LengthDelimited)
-        result = result + sizeOfString(message.java_package)
-    if hasjava_outer_classname(message):
+        result = result + sizeOfString(message.javaPackage)
+    if hasjavaOuterClassname(message):
         result = result + sizeOfTag(8, WireType.LengthDelimited)
-        result = result + sizeOfString(message.java_outer_classname)
-    if hasjava_multiple_files(message):
+        result = result + sizeOfString(message.javaOuterClassname)
+    if hasjavaMultipleFiles(message):
         result = result + sizeOfTag(10, WireType.Varint)
-        result = result + sizeOfBool(message.java_multiple_files)
-    if hasjava_generate_equals_and_hash(message):
+        result = result + sizeOfBool(message.javaMultipleFiles)
+    if hasjavaGenerateEqualsAndHash(message):
         result = result + sizeOfTag(20, WireType.Varint)
-        result = result + sizeOfBool(message.java_generate_equals_and_hash)
-    if hasjava_string_check_utf8(message):
+        result = result + sizeOfBool(message.javaGenerateEqualsAndHash)
+    if hasjavaStringCheckUtf8(message):
         result = result + sizeOfTag(27, WireType.Varint)
-        result = result + sizeOfBool(message.java_string_check_utf8)
-    if hasoptimize_for(message):
+        result = result + sizeOfBool(message.javaStringCheckUtf8)
+    if hasoptimizeFor(message):
         result = result + sizeOfTag(9, WireType.Varint)
-        result = result + sizeOfEnum[google_protobuf_FileOptions_OptimizeMode](message.optimize_for)
-    if hasgo_package(message):
+        result = result + sizeOfEnum[google_protobuf_FileOptions_OptimizeMode](message.optimizeFor)
+    if hasgoPackage(message):
         result = result + sizeOfTag(11, WireType.LengthDelimited)
-        result = result + sizeOfString(message.go_package)
-    if hascc_generic_services(message):
+        result = result + sizeOfString(message.goPackage)
+    if hasccGenericServices(message):
         result = result + sizeOfTag(16, WireType.Varint)
-        result = result + sizeOfBool(message.cc_generic_services)
-    if hasjava_generic_services(message):
+        result = result + sizeOfBool(message.ccGenericServices)
+    if hasjavaGenericServices(message):
         result = result + sizeOfTag(17, WireType.Varint)
-        result = result + sizeOfBool(message.java_generic_services)
-    if haspy_generic_services(message):
+        result = result + sizeOfBool(message.javaGenericServices)
+    if haspyGenericServices(message):
         result = result + sizeOfTag(18, WireType.Varint)
-        result = result + sizeOfBool(message.py_generic_services)
-    if hasphp_generic_services(message):
+        result = result + sizeOfBool(message.pyGenericServices)
+    if hasphpGenericServices(message):
         result = result + sizeOfTag(42, WireType.Varint)
-        result = result + sizeOfBool(message.php_generic_services)
+        result = result + sizeOfBool(message.phpGenericServices)
     if hasdeprecated(message):
         result = result + sizeOfTag(23, WireType.Varint)
         result = result + sizeOfBool(message.deprecated)
-    if hascc_enable_arenas(message):
+    if hasccEnableArenas(message):
         result = result + sizeOfTag(31, WireType.Varint)
-        result = result + sizeOfBool(message.cc_enable_arenas)
-    if hasobjc_class_prefix(message):
+        result = result + sizeOfBool(message.ccEnableArenas)
+    if hasobjcClassPrefix(message):
         result = result + sizeOfTag(36, WireType.LengthDelimited)
-        result = result + sizeOfString(message.objc_class_prefix)
-    if hascsharp_namespace(message):
+        result = result + sizeOfString(message.objcClassPrefix)
+    if hascsharpNamespace(message):
         result = result + sizeOfTag(37, WireType.LengthDelimited)
-        result = result + sizeOfString(message.csharp_namespace)
-    if hasswift_prefix(message):
+        result = result + sizeOfString(message.csharpNamespace)
+    if hasswiftPrefix(message):
         result = result + sizeOfTag(39, WireType.LengthDelimited)
-        result = result + sizeOfString(message.swift_prefix)
-    if hasphp_class_prefix(message):
+        result = result + sizeOfString(message.swiftPrefix)
+    if hasphpClassPrefix(message):
         result = result + sizeOfTag(40, WireType.LengthDelimited)
-        result = result + sizeOfString(message.php_class_prefix)
-    if hasphp_namespace(message):
+        result = result + sizeOfString(message.phpClassPrefix)
+    if hasphpNamespace(message):
         result = result + sizeOfTag(41, WireType.LengthDelimited)
-        result = result + sizeOfString(message.php_namespace)
-    for value in message.uninterpreted_option:
+        result = result + sizeOfString(message.phpNamespace)
+    for value in message.uninterpretedOption:
         result = result + sizeOfTag(999, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_UninterpretedOption(value))
     result = result + sizeOfUnknownFields(message)
 
 proc writegoogle_protobuf_FileOptions*(stream: Stream, message: google_protobuf_FileOptions) =
-    if hasjava_package(message):
-        protoWriteString(stream, message.java_package, 1)
-    if hasjava_outer_classname(message):
-        protoWriteString(stream, message.java_outer_classname, 8)
-    if hasjava_multiple_files(message):
-        protoWriteBool(stream, message.java_multiple_files, 10)
-    if hasjava_generate_equals_and_hash(message):
-        protoWriteBool(stream, message.java_generate_equals_and_hash, 20)
-    if hasjava_string_check_utf8(message):
-        protoWriteBool(stream, message.java_string_check_utf8, 27)
-    if hasoptimize_for(message):
-        protoWriteEnum(stream, message.optimize_for, 9)
-    if hasgo_package(message):
-        protoWriteString(stream, message.go_package, 11)
-    if hascc_generic_services(message):
-        protoWriteBool(stream, message.cc_generic_services, 16)
-    if hasjava_generic_services(message):
-        protoWriteBool(stream, message.java_generic_services, 17)
-    if haspy_generic_services(message):
-        protoWriteBool(stream, message.py_generic_services, 18)
-    if hasphp_generic_services(message):
-        protoWriteBool(stream, message.php_generic_services, 42)
+    if hasjavaPackage(message):
+        protoWriteString(stream, message.javaPackage, 1)
+    if hasjavaOuterClassname(message):
+        protoWriteString(stream, message.javaOuterClassname, 8)
+    if hasjavaMultipleFiles(message):
+        protoWriteBool(stream, message.javaMultipleFiles, 10)
+    if hasjavaGenerateEqualsAndHash(message):
+        protoWriteBool(stream, message.javaGenerateEqualsAndHash, 20)
+    if hasjavaStringCheckUtf8(message):
+        protoWriteBool(stream, message.javaStringCheckUtf8, 27)
+    if hasoptimizeFor(message):
+        protoWriteEnum(stream, message.optimizeFor, 9)
+    if hasgoPackage(message):
+        protoWriteString(stream, message.goPackage, 11)
+    if hasccGenericServices(message):
+        protoWriteBool(stream, message.ccGenericServices, 16)
+    if hasjavaGenericServices(message):
+        protoWriteBool(stream, message.javaGenericServices, 17)
+    if haspyGenericServices(message):
+        protoWriteBool(stream, message.pyGenericServices, 18)
+    if hasphpGenericServices(message):
+        protoWriteBool(stream, message.phpGenericServices, 42)
     if hasdeprecated(message):
         protoWriteBool(stream, message.deprecated, 23)
-    if hascc_enable_arenas(message):
-        protoWriteBool(stream, message.cc_enable_arenas, 31)
-    if hasobjc_class_prefix(message):
-        protoWriteString(stream, message.objc_class_prefix, 36)
-    if hascsharp_namespace(message):
-        protoWriteString(stream, message.csharp_namespace, 37)
-    if hasswift_prefix(message):
-        protoWriteString(stream, message.swift_prefix, 39)
-    if hasphp_class_prefix(message):
-        protoWriteString(stream, message.php_class_prefix, 40)
-    if hasphp_namespace(message):
-        protoWriteString(stream, message.php_namespace, 41)
-    for value in message.uninterpreted_option:
+    if hasccEnableArenas(message):
+        protoWriteBool(stream, message.ccEnableArenas, 31)
+    if hasobjcClassPrefix(message):
+        protoWriteString(stream, message.objcClassPrefix, 36)
+    if hascsharpNamespace(message):
+        protoWriteString(stream, message.csharpNamespace, 37)
+    if hasswiftPrefix(message):
+        protoWriteString(stream, message.swiftPrefix, 39)
+    if hasphpClassPrefix(message):
+        protoWriteString(stream, message.phpClassPrefix, 40)
+    if hasphpNamespace(message):
+        protoWriteString(stream, message.phpNamespace, 41)
+    for value in message.uninterpretedOption:
         writeMessage(stream, value, 999)
     writeUnknownFields(stream, message)
 
@@ -3716,105 +3833,105 @@ proc readgoogle_protobuf_FileOptions*(stream: Stream): google_protobuf_FileOptio
             raise newException(InvalidFieldNumberError, "Invalid field number: 0")
         of 1:
             expectWireType(wireType, WireType.LengthDelimited)
-            setjava_package(result, protoReadString(stream))
+            setjavaPackage(result, protoReadString(stream))
         of 8:
             expectWireType(wireType, WireType.LengthDelimited)
-            setjava_outer_classname(result, protoReadString(stream))
+            setjavaOuterClassname(result, protoReadString(stream))
         of 10:
             expectWireType(wireType, WireType.Varint)
-            setjava_multiple_files(result, protoReadBool(stream))
+            setjavaMultipleFiles(result, protoReadBool(stream))
         of 20:
             expectWireType(wireType, WireType.Varint)
-            setjava_generate_equals_and_hash(result, protoReadBool(stream))
+            setjavaGenerateEqualsAndHash(result, protoReadBool(stream))
         of 27:
             expectWireType(wireType, WireType.Varint)
-            setjava_string_check_utf8(result, protoReadBool(stream))
+            setjavaStringCheckUtf8(result, protoReadBool(stream))
         of 9:
             expectWireType(wireType, WireType.Varint)
-            setoptimize_for(result, protoReadEnum[google_protobuf_FileOptions_OptimizeMode](stream))
+            setoptimizeFor(result, protoReadEnum[google_protobuf_FileOptions_OptimizeMode](stream))
         of 11:
             expectWireType(wireType, WireType.LengthDelimited)
-            setgo_package(result, protoReadString(stream))
+            setgoPackage(result, protoReadString(stream))
         of 16:
             expectWireType(wireType, WireType.Varint)
-            setcc_generic_services(result, protoReadBool(stream))
+            setccGenericServices(result, protoReadBool(stream))
         of 17:
             expectWireType(wireType, WireType.Varint)
-            setjava_generic_services(result, protoReadBool(stream))
+            setjavaGenericServices(result, protoReadBool(stream))
         of 18:
             expectWireType(wireType, WireType.Varint)
-            setpy_generic_services(result, protoReadBool(stream))
+            setpyGenericServices(result, protoReadBool(stream))
         of 42:
             expectWireType(wireType, WireType.Varint)
-            setphp_generic_services(result, protoReadBool(stream))
+            setphpGenericServices(result, protoReadBool(stream))
         of 23:
             expectWireType(wireType, WireType.Varint)
             setdeprecated(result, protoReadBool(stream))
         of 31:
             expectWireType(wireType, WireType.Varint)
-            setcc_enable_arenas(result, protoReadBool(stream))
+            setccEnableArenas(result, protoReadBool(stream))
         of 36:
             expectWireType(wireType, WireType.LengthDelimited)
-            setobjc_class_prefix(result, protoReadString(stream))
+            setobjcClassPrefix(result, protoReadString(stream))
         of 37:
             expectWireType(wireType, WireType.LengthDelimited)
-            setcsharp_namespace(result, protoReadString(stream))
+            setcsharpNamespace(result, protoReadString(stream))
         of 39:
             expectWireType(wireType, WireType.LengthDelimited)
-            setswift_prefix(result, protoReadString(stream))
+            setswiftPrefix(result, protoReadString(stream))
         of 40:
             expectWireType(wireType, WireType.LengthDelimited)
-            setphp_class_prefix(result, protoReadString(stream))
+            setphpClassPrefix(result, protoReadString(stream))
         of 41:
             expectWireType(wireType, WireType.LengthDelimited)
-            setphp_namespace(result, protoReadString(stream))
+            setphpNamespace(result, protoReadString(stream))
         of 999:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            adduninterpreted_option(result, newgoogle_protobuf_UninterpretedOption(data))
+            adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_FileOptions): JsonNode =
     result = newJObject()
-    if hasjava_package(message):
-        result["javaPackage"] = %message.java_package
-    if hasjava_outer_classname(message):
-        result["javaOuterClassname"] = %message.java_outer_classname
-    if hasjava_multiple_files(message):
-        result["javaMultipleFiles"] = %message.java_multiple_files
-    if hasjava_generate_equals_and_hash(message):
-        result["javaGenerateEqualsAndHash"] = %message.java_generate_equals_and_hash
-    if hasjava_string_check_utf8(message):
-        result["javaStringCheckUtf8"] = %message.java_string_check_utf8
-    if hasoptimize_for(message):
-        result["optimizeFor"] = %($message.optimize_for)
-    if hasgo_package(message):
-        result["goPackage"] = %message.go_package
-    if hascc_generic_services(message):
-        result["ccGenericServices"] = %message.cc_generic_services
-    if hasjava_generic_services(message):
-        result["javaGenericServices"] = %message.java_generic_services
-    if haspy_generic_services(message):
-        result["pyGenericServices"] = %message.py_generic_services
-    if hasphp_generic_services(message):
-        result["phpGenericServices"] = %message.php_generic_services
+    if hasjavaPackage(message):
+        result["javaPackage"] = %message.javaPackage
+    if hasjavaOuterClassname(message):
+        result["javaOuterClassname"] = %message.javaOuterClassname
+    if hasjavaMultipleFiles(message):
+        result["javaMultipleFiles"] = %message.javaMultipleFiles
+    if hasjavaGenerateEqualsAndHash(message):
+        result["javaGenerateEqualsAndHash"] = %message.javaGenerateEqualsAndHash
+    if hasjavaStringCheckUtf8(message):
+        result["javaStringCheckUtf8"] = %message.javaStringCheckUtf8
+    if hasoptimizeFor(message):
+        result["optimizeFor"] = %($message.optimizeFor)
+    if hasgoPackage(message):
+        result["goPackage"] = %message.goPackage
+    if hasccGenericServices(message):
+        result["ccGenericServices"] = %message.ccGenericServices
+    if hasjavaGenericServices(message):
+        result["javaGenericServices"] = %message.javaGenericServices
+    if haspyGenericServices(message):
+        result["pyGenericServices"] = %message.pyGenericServices
+    if hasphpGenericServices(message):
+        result["phpGenericServices"] = %message.phpGenericServices
     if hasdeprecated(message):
         result["deprecated"] = %message.deprecated
-    if hascc_enable_arenas(message):
-        result["ccEnableArenas"] = %message.cc_enable_arenas
-    if hasobjc_class_prefix(message):
-        result["objcClassPrefix"] = %message.objc_class_prefix
-    if hascsharp_namespace(message):
-        result["csharpNamespace"] = %message.csharp_namespace
-    if hasswift_prefix(message):
-        result["swiftPrefix"] = %message.swift_prefix
-    if hasphp_class_prefix(message):
-        result["phpClassPrefix"] = %message.php_class_prefix
-    if hasphp_namespace(message):
-        result["phpNamespace"] = %message.php_namespace
-    if hasuninterpreted_option(message):
+    if hasccEnableArenas(message):
+        result["ccEnableArenas"] = %message.ccEnableArenas
+    if hasobjcClassPrefix(message):
+        result["objcClassPrefix"] = %message.objcClassPrefix
+    if hascsharpNamespace(message):
+        result["csharpNamespace"] = %message.csharpNamespace
+    if hasswiftPrefix(message):
+        result["swiftPrefix"] = %message.swiftPrefix
+    if hasphpClassPrefix(message):
+        result["phpClassPrefix"] = %message.phpClassPrefix
+    if hasphpNamespace(message):
+        result["phpNamespace"] = %message.phpNamespace
+    if hasuninterpretedOption(message):
         let arr = newJArray()
-        for value in message.uninterpreted_option:
+        for value in message.uninterpretedOption:
             add(arr, toJson(value))
         result["uninterpretedOption"] = arr
 
@@ -3829,12 +3946,17 @@ proc newgoogle_protobuf_FileOptions*(data: string): google_protobuf_FileOptions 
         ss = newStringStream(data)
     result = readgoogle_protobuf_FileOptions(ss)
 
+proc newgoogle_protobuf_FileOptions*(data: seq[byte]): google_protobuf_FileOptions =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_FileOptions(ss)
+
 
 proc newgoogle_protobuf_ServiceOptions*(): google_protobuf_ServiceOptions =
     new(result)
     initMessage(result[])
     result.deprecated = false
-    result.uninterpreted_option = @[]
+    result.uninterpretedOption = @[]
 
 proc cleardeprecated*(message: google_protobuf_ServiceOptions) =
     message.deprecated = false
@@ -3853,32 +3975,32 @@ proc deprecated*(message: google_protobuf_ServiceOptions): bool {.inline.} =
 proc `deprecated=`*(message: google_protobuf_ServiceOptions, value: bool) {.inline.} =
     setdeprecated(message, value)
 
-proc clearuninterpreted_option*(message: google_protobuf_ServiceOptions) =
-    message.uninterpreted_option = @[]
+proc clearuninterpretedOption*(message: google_protobuf_ServiceOptions) =
+    message.uninterpretedOption = @[]
     clearFields(message, [999])
 
-proc hasuninterpreted_option*(message: google_protobuf_ServiceOptions): bool =
-    result = hasField(message, 999) or (len(message.uninterpreted_option) > 0)
+proc hasuninterpretedOption*(message: google_protobuf_ServiceOptions): bool =
+    result = hasField(message, 999) or (len(message.uninterpretedOption) > 0)
 
-proc setuninterpreted_option*(message: google_protobuf_ServiceOptions, value: seq[google_protobuf_UninterpretedOption]) =
-    message.uninterpreted_option = value
+proc setuninterpretedOption*(message: google_protobuf_ServiceOptions, value: seq[google_protobuf_UninterpretedOption]) =
+    message.uninterpretedOption = value
     setField(message, 999)
 
-proc adduninterpreted_option*(message: google_protobuf_ServiceOptions, value: google_protobuf_UninterpretedOption) =
-    add(message.uninterpreted_option, value)
+proc adduninterpretedOption*(message: google_protobuf_ServiceOptions, value: google_protobuf_UninterpretedOption) =
+    add(message.uninterpretedOption, value)
     setField(message, 999)
 
-proc uninterpreted_option*(message: google_protobuf_ServiceOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
-    message.uninterpreted_option
+proc uninterpretedOption*(message: google_protobuf_ServiceOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
+    message.uninterpretedOption
 
-proc `uninterpreted_option=`*(message: google_protobuf_ServiceOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
-    setuninterpreted_option(message, value)
+proc `uninterpretedOption=`*(message: google_protobuf_ServiceOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
+    setuninterpretedOption(message, value)
 
 proc sizeOfgoogle_protobuf_ServiceOptions*(message: google_protobuf_ServiceOptions): uint64 =
     if hasdeprecated(message):
         result = result + sizeOfTag(33, WireType.Varint)
         result = result + sizeOfBool(message.deprecated)
-    for value in message.uninterpreted_option:
+    for value in message.uninterpretedOption:
         result = result + sizeOfTag(999, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_UninterpretedOption(value))
     result = result + sizeOfUnknownFields(message)
@@ -3886,7 +4008,7 @@ proc sizeOfgoogle_protobuf_ServiceOptions*(message: google_protobuf_ServiceOptio
 proc writegoogle_protobuf_ServiceOptions*(stream: Stream, message: google_protobuf_ServiceOptions) =
     if hasdeprecated(message):
         protoWriteBool(stream, message.deprecated, 33)
-    for value in message.uninterpreted_option:
+    for value in message.uninterpretedOption:
         writeMessage(stream, value, 999)
     writeUnknownFields(stream, message)
 
@@ -3905,16 +4027,16 @@ proc readgoogle_protobuf_ServiceOptions*(stream: Stream): google_protobuf_Servic
         of 999:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            adduninterpreted_option(result, newgoogle_protobuf_UninterpretedOption(data))
+            adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_ServiceOptions): JsonNode =
     result = newJObject()
     if hasdeprecated(message):
         result["deprecated"] = %message.deprecated
-    if hasuninterpreted_option(message):
+    if hasuninterpretedOption(message):
         let arr = newJArray()
-        for value in message.uninterpreted_option:
+        for value in message.uninterpretedOption:
             add(arr, toJson(value))
         result["uninterpretedOption"] = arr
 
@@ -3929,13 +4051,18 @@ proc newgoogle_protobuf_ServiceOptions*(data: string): google_protobuf_ServiceOp
         ss = newStringStream(data)
     result = readgoogle_protobuf_ServiceOptions(ss)
 
+proc newgoogle_protobuf_ServiceOptions*(data: seq[byte]): google_protobuf_ServiceOptions =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_ServiceOptions(ss)
+
 
 proc newgoogle_protobuf_MethodOptions*(): google_protobuf_MethodOptions =
     new(result)
     initMessage(result[])
     result.deprecated = false
-    result.idempotency_level = google_protobuf_MethodOptions_IdempotencyLevel.IDEMPOTENCY_UNKNOWN
-    result.uninterpreted_option = @[]
+    result.idempotencyLevel = google_protobuf_MethodOptions_IdempotencyLevel.IDEMPOTENCY_UNKNOWN
+    result.uninterpretedOption = @[]
 
 proc cleardeprecated*(message: google_protobuf_MethodOptions) =
     message.deprecated = false
@@ -3954,52 +4081,52 @@ proc deprecated*(message: google_protobuf_MethodOptions): bool {.inline.} =
 proc `deprecated=`*(message: google_protobuf_MethodOptions, value: bool) {.inline.} =
     setdeprecated(message, value)
 
-proc clearidempotency_level*(message: google_protobuf_MethodOptions) =
-    message.idempotency_level = google_protobuf_MethodOptions_IdempotencyLevel.IDEMPOTENCY_UNKNOWN
+proc clearidempotencyLevel*(message: google_protobuf_MethodOptions) =
+    message.idempotencyLevel = google_protobuf_MethodOptions_IdempotencyLevel.IDEMPOTENCY_UNKNOWN
     clearFields(message, [34])
 
-proc hasidempotency_level*(message: google_protobuf_MethodOptions): bool =
+proc hasidempotencyLevel*(message: google_protobuf_MethodOptions): bool =
     result = hasField(message, 34)
 
-proc setidempotency_level*(message: google_protobuf_MethodOptions, value: google_protobuf_MethodOptions_IdempotencyLevel) =
-    message.idempotency_level = value
+proc setidempotencyLevel*(message: google_protobuf_MethodOptions, value: google_protobuf_MethodOptions_IdempotencyLevel) =
+    message.idempotencyLevel = value
     setField(message, 34)
 
-proc idempotency_level*(message: google_protobuf_MethodOptions): google_protobuf_MethodOptions_IdempotencyLevel {.inline.} =
-    message.idempotency_level
+proc idempotencyLevel*(message: google_protobuf_MethodOptions): google_protobuf_MethodOptions_IdempotencyLevel {.inline.} =
+    message.idempotencyLevel
 
-proc `idempotency_level=`*(message: google_protobuf_MethodOptions, value: google_protobuf_MethodOptions_IdempotencyLevel) {.inline.} =
-    setidempotency_level(message, value)
+proc `idempotencyLevel=`*(message: google_protobuf_MethodOptions, value: google_protobuf_MethodOptions_IdempotencyLevel) {.inline.} =
+    setidempotencyLevel(message, value)
 
-proc clearuninterpreted_option*(message: google_protobuf_MethodOptions) =
-    message.uninterpreted_option = @[]
+proc clearuninterpretedOption*(message: google_protobuf_MethodOptions) =
+    message.uninterpretedOption = @[]
     clearFields(message, [999])
 
-proc hasuninterpreted_option*(message: google_protobuf_MethodOptions): bool =
-    result = hasField(message, 999) or (len(message.uninterpreted_option) > 0)
+proc hasuninterpretedOption*(message: google_protobuf_MethodOptions): bool =
+    result = hasField(message, 999) or (len(message.uninterpretedOption) > 0)
 
-proc setuninterpreted_option*(message: google_protobuf_MethodOptions, value: seq[google_protobuf_UninterpretedOption]) =
-    message.uninterpreted_option = value
+proc setuninterpretedOption*(message: google_protobuf_MethodOptions, value: seq[google_protobuf_UninterpretedOption]) =
+    message.uninterpretedOption = value
     setField(message, 999)
 
-proc adduninterpreted_option*(message: google_protobuf_MethodOptions, value: google_protobuf_UninterpretedOption) =
-    add(message.uninterpreted_option, value)
+proc adduninterpretedOption*(message: google_protobuf_MethodOptions, value: google_protobuf_UninterpretedOption) =
+    add(message.uninterpretedOption, value)
     setField(message, 999)
 
-proc uninterpreted_option*(message: google_protobuf_MethodOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
-    message.uninterpreted_option
+proc uninterpretedOption*(message: google_protobuf_MethodOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
+    message.uninterpretedOption
 
-proc `uninterpreted_option=`*(message: google_protobuf_MethodOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
-    setuninterpreted_option(message, value)
+proc `uninterpretedOption=`*(message: google_protobuf_MethodOptions, value: seq[google_protobuf_UninterpretedOption]) {.inline.} =
+    setuninterpretedOption(message, value)
 
 proc sizeOfgoogle_protobuf_MethodOptions*(message: google_protobuf_MethodOptions): uint64 =
     if hasdeprecated(message):
         result = result + sizeOfTag(33, WireType.Varint)
         result = result + sizeOfBool(message.deprecated)
-    if hasidempotency_level(message):
+    if hasidempotencyLevel(message):
         result = result + sizeOfTag(34, WireType.Varint)
-        result = result + sizeOfEnum[google_protobuf_MethodOptions_IdempotencyLevel](message.idempotency_level)
-    for value in message.uninterpreted_option:
+        result = result + sizeOfEnum[google_protobuf_MethodOptions_IdempotencyLevel](message.idempotencyLevel)
+    for value in message.uninterpretedOption:
         result = result + sizeOfTag(999, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_UninterpretedOption(value))
     result = result + sizeOfUnknownFields(message)
@@ -4007,9 +4134,9 @@ proc sizeOfgoogle_protobuf_MethodOptions*(message: google_protobuf_MethodOptions
 proc writegoogle_protobuf_MethodOptions*(stream: Stream, message: google_protobuf_MethodOptions) =
     if hasdeprecated(message):
         protoWriteBool(stream, message.deprecated, 33)
-    if hasidempotency_level(message):
-        protoWriteEnum(stream, message.idempotency_level, 34)
-    for value in message.uninterpreted_option:
+    if hasidempotencyLevel(message):
+        protoWriteEnum(stream, message.idempotencyLevel, 34)
+    for value in message.uninterpretedOption:
         writeMessage(stream, value, 999)
     writeUnknownFields(stream, message)
 
@@ -4027,22 +4154,22 @@ proc readgoogle_protobuf_MethodOptions*(stream: Stream): google_protobuf_MethodO
             setdeprecated(result, protoReadBool(stream))
         of 34:
             expectWireType(wireType, WireType.Varint)
-            setidempotency_level(result, protoReadEnum[google_protobuf_MethodOptions_IdempotencyLevel](stream))
+            setidempotencyLevel(result, protoReadEnum[google_protobuf_MethodOptions_IdempotencyLevel](stream))
         of 999:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            adduninterpreted_option(result, newgoogle_protobuf_UninterpretedOption(data))
+            adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_MethodOptions): JsonNode =
     result = newJObject()
     if hasdeprecated(message):
         result["deprecated"] = %message.deprecated
-    if hasidempotency_level(message):
-        result["idempotencyLevel"] = %($message.idempotency_level)
-    if hasuninterpreted_option(message):
+    if hasidempotencyLevel(message):
+        result["idempotencyLevel"] = %($message.idempotencyLevel)
+    if hasuninterpretedOption(message):
         let arr = newJArray()
-        for value in message.uninterpreted_option:
+        for value in message.uninterpretedOption:
             add(arr, toJson(value))
         result["uninterpretedOption"] = arr
 
@@ -4057,16 +4184,21 @@ proc newgoogle_protobuf_MethodOptions*(data: string): google_protobuf_MethodOpti
         ss = newStringStream(data)
     result = readgoogle_protobuf_MethodOptions(ss)
 
+proc newgoogle_protobuf_MethodOptions*(data: seq[byte]): google_protobuf_MethodOptions =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_MethodOptions(ss)
+
 
 proc newgoogle_protobuf_MethodDescriptorProto*(): google_protobuf_MethodDescriptorProto =
     new(result)
     initMessage(result[])
     result.name = ""
-    result.input_type = ""
-    result.output_type = ""
+    result.inputType = ""
+    result.outputType = ""
     result.options = nil
-    result.client_streaming = false
-    result.server_streaming = false
+    result.clientStreaming = false
+    result.serverStreaming = false
 
 proc clearname*(message: google_protobuf_MethodDescriptorProto) =
     message.name = ""
@@ -4085,39 +4217,39 @@ proc name*(message: google_protobuf_MethodDescriptorProto): string {.inline.} =
 proc `name=`*(message: google_protobuf_MethodDescriptorProto, value: string) {.inline.} =
     setname(message, value)
 
-proc clearinput_type*(message: google_protobuf_MethodDescriptorProto) =
-    message.input_type = ""
+proc clearinputType*(message: google_protobuf_MethodDescriptorProto) =
+    message.inputType = ""
     clearFields(message, [2])
 
-proc hasinput_type*(message: google_protobuf_MethodDescriptorProto): bool =
+proc hasinputType*(message: google_protobuf_MethodDescriptorProto): bool =
     result = hasField(message, 2)
 
-proc setinput_type*(message: google_protobuf_MethodDescriptorProto, value: string) =
-    message.input_type = value
+proc setinputType*(message: google_protobuf_MethodDescriptorProto, value: string) =
+    message.inputType = value
     setField(message, 2)
 
-proc input_type*(message: google_protobuf_MethodDescriptorProto): string {.inline.} =
-    message.input_type
+proc inputType*(message: google_protobuf_MethodDescriptorProto): string {.inline.} =
+    message.inputType
 
-proc `input_type=`*(message: google_protobuf_MethodDescriptorProto, value: string) {.inline.} =
-    setinput_type(message, value)
+proc `inputType=`*(message: google_protobuf_MethodDescriptorProto, value: string) {.inline.} =
+    setinputType(message, value)
 
-proc clearoutput_type*(message: google_protobuf_MethodDescriptorProto) =
-    message.output_type = ""
+proc clearoutputType*(message: google_protobuf_MethodDescriptorProto) =
+    message.outputType = ""
     clearFields(message, [3])
 
-proc hasoutput_type*(message: google_protobuf_MethodDescriptorProto): bool =
+proc hasoutputType*(message: google_protobuf_MethodDescriptorProto): bool =
     result = hasField(message, 3)
 
-proc setoutput_type*(message: google_protobuf_MethodDescriptorProto, value: string) =
-    message.output_type = value
+proc setoutputType*(message: google_protobuf_MethodDescriptorProto, value: string) =
+    message.outputType = value
     setField(message, 3)
 
-proc output_type*(message: google_protobuf_MethodDescriptorProto): string {.inline.} =
-    message.output_type
+proc outputType*(message: google_protobuf_MethodDescriptorProto): string {.inline.} =
+    message.outputType
 
-proc `output_type=`*(message: google_protobuf_MethodDescriptorProto, value: string) {.inline.} =
-    setoutput_type(message, value)
+proc `outputType=`*(message: google_protobuf_MethodDescriptorProto, value: string) {.inline.} =
+    setoutputType(message, value)
 
 proc clearoptions*(message: google_protobuf_MethodDescriptorProto) =
     message.options = nil
@@ -4136,74 +4268,74 @@ proc options*(message: google_protobuf_MethodDescriptorProto): google_protobuf_M
 proc `options=`*(message: google_protobuf_MethodDescriptorProto, value: google_protobuf_MethodOptions) {.inline.} =
     setoptions(message, value)
 
-proc clearclient_streaming*(message: google_protobuf_MethodDescriptorProto) =
-    message.client_streaming = false
+proc clearclientStreaming*(message: google_protobuf_MethodDescriptorProto) =
+    message.clientStreaming = false
     clearFields(message, [5])
 
-proc hasclient_streaming*(message: google_protobuf_MethodDescriptorProto): bool =
+proc hasclientStreaming*(message: google_protobuf_MethodDescriptorProto): bool =
     result = hasField(message, 5)
 
-proc setclient_streaming*(message: google_protobuf_MethodDescriptorProto, value: bool) =
-    message.client_streaming = value
+proc setclientStreaming*(message: google_protobuf_MethodDescriptorProto, value: bool) =
+    message.clientStreaming = value
     setField(message, 5)
 
-proc client_streaming*(message: google_protobuf_MethodDescriptorProto): bool {.inline.} =
-    message.client_streaming
+proc clientStreaming*(message: google_protobuf_MethodDescriptorProto): bool {.inline.} =
+    message.clientStreaming
 
-proc `client_streaming=`*(message: google_protobuf_MethodDescriptorProto, value: bool) {.inline.} =
-    setclient_streaming(message, value)
+proc `clientStreaming=`*(message: google_protobuf_MethodDescriptorProto, value: bool) {.inline.} =
+    setclientStreaming(message, value)
 
-proc clearserver_streaming*(message: google_protobuf_MethodDescriptorProto) =
-    message.server_streaming = false
+proc clearserverStreaming*(message: google_protobuf_MethodDescriptorProto) =
+    message.serverStreaming = false
     clearFields(message, [6])
 
-proc hasserver_streaming*(message: google_protobuf_MethodDescriptorProto): bool =
+proc hasserverStreaming*(message: google_protobuf_MethodDescriptorProto): bool =
     result = hasField(message, 6)
 
-proc setserver_streaming*(message: google_protobuf_MethodDescriptorProto, value: bool) =
-    message.server_streaming = value
+proc setserverStreaming*(message: google_protobuf_MethodDescriptorProto, value: bool) =
+    message.serverStreaming = value
     setField(message, 6)
 
-proc server_streaming*(message: google_protobuf_MethodDescriptorProto): bool {.inline.} =
-    message.server_streaming
+proc serverStreaming*(message: google_protobuf_MethodDescriptorProto): bool {.inline.} =
+    message.serverStreaming
 
-proc `server_streaming=`*(message: google_protobuf_MethodDescriptorProto, value: bool) {.inline.} =
-    setserver_streaming(message, value)
+proc `serverStreaming=`*(message: google_protobuf_MethodDescriptorProto, value: bool) {.inline.} =
+    setserverStreaming(message, value)
 
 proc sizeOfgoogle_protobuf_MethodDescriptorProto*(message: google_protobuf_MethodDescriptorProto): uint64 =
     if hasname(message):
         result = result + sizeOfTag(1, WireType.LengthDelimited)
         result = result + sizeOfString(message.name)
-    if hasinput_type(message):
+    if hasinputType(message):
         result = result + sizeOfTag(2, WireType.LengthDelimited)
-        result = result + sizeOfString(message.input_type)
-    if hasoutput_type(message):
+        result = result + sizeOfString(message.inputType)
+    if hasoutputType(message):
         result = result + sizeOfTag(3, WireType.LengthDelimited)
-        result = result + sizeOfString(message.output_type)
+        result = result + sizeOfString(message.outputType)
     if hasoptions(message):
         result = result + sizeOfTag(4, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_MethodOptions(message.options))
-    if hasclient_streaming(message):
+    if hasclientStreaming(message):
         result = result + sizeOfTag(5, WireType.Varint)
-        result = result + sizeOfBool(message.client_streaming)
-    if hasserver_streaming(message):
+        result = result + sizeOfBool(message.clientStreaming)
+    if hasserverStreaming(message):
         result = result + sizeOfTag(6, WireType.Varint)
-        result = result + sizeOfBool(message.server_streaming)
+        result = result + sizeOfBool(message.serverStreaming)
     result = result + sizeOfUnknownFields(message)
 
 proc writegoogle_protobuf_MethodDescriptorProto*(stream: Stream, message: google_protobuf_MethodDescriptorProto) =
     if hasname(message):
         protoWriteString(stream, message.name, 1)
-    if hasinput_type(message):
-        protoWriteString(stream, message.input_type, 2)
-    if hasoutput_type(message):
-        protoWriteString(stream, message.output_type, 3)
+    if hasinputType(message):
+        protoWriteString(stream, message.inputType, 2)
+    if hasoutputType(message):
+        protoWriteString(stream, message.outputType, 3)
     if hasoptions(message):
         writeMessage(stream, message.options, 4)
-    if hasclient_streaming(message):
-        protoWriteBool(stream, message.client_streaming, 5)
-    if hasserver_streaming(message):
-        protoWriteBool(stream, message.server_streaming, 6)
+    if hasclientStreaming(message):
+        protoWriteBool(stream, message.clientStreaming, 5)
+    if hasserverStreaming(message):
+        protoWriteBool(stream, message.serverStreaming, 6)
     writeUnknownFields(stream, message)
 
 proc readgoogle_protobuf_MethodDescriptorProto*(stream: Stream): google_protobuf_MethodDescriptorProto =
@@ -4220,36 +4352,36 @@ proc readgoogle_protobuf_MethodDescriptorProto*(stream: Stream): google_protobuf
             setname(result, protoReadString(stream))
         of 2:
             expectWireType(wireType, WireType.LengthDelimited)
-            setinput_type(result, protoReadString(stream))
+            setinputType(result, protoReadString(stream))
         of 3:
             expectWireType(wireType, WireType.LengthDelimited)
-            setoutput_type(result, protoReadString(stream))
+            setoutputType(result, protoReadString(stream))
         of 4:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
             setoptions(result, newgoogle_protobuf_MethodOptions(data))
         of 5:
             expectWireType(wireType, WireType.Varint)
-            setclient_streaming(result, protoReadBool(stream))
+            setclientStreaming(result, protoReadBool(stream))
         of 6:
             expectWireType(wireType, WireType.Varint)
-            setserver_streaming(result, protoReadBool(stream))
+            setserverStreaming(result, protoReadBool(stream))
         else: readUnknownField(stream, result, tag)
 
 proc toJson*(message: google_protobuf_MethodDescriptorProto): JsonNode =
     result = newJObject()
     if hasname(message):
         result["name"] = %message.name
-    if hasinput_type(message):
-        result["inputType"] = %message.input_type
-    if hasoutput_type(message):
-        result["outputType"] = %message.output_type
+    if hasinputType(message):
+        result["inputType"] = %message.inputType
+    if hasoutputType(message):
+        result["outputType"] = %message.outputType
     if hasoptions(message):
         result["options"] = toJson(message.options)
-    if hasclient_streaming(message):
-        result["clientStreaming"] = %message.client_streaming
-    if hasserver_streaming(message):
-        result["serverStreaming"] = %message.server_streaming
+    if hasclientStreaming(message):
+        result["clientStreaming"] = %message.clientStreaming
+    if hasserverStreaming(message):
+        result["serverStreaming"] = %message.serverStreaming
 
 proc serialize*(message: google_protobuf_MethodDescriptorProto): string =
     let
@@ -4260,6 +4392,11 @@ proc serialize*(message: google_protobuf_MethodDescriptorProto): string =
 proc newgoogle_protobuf_MethodDescriptorProto*(data: string): google_protobuf_MethodDescriptorProto =
     let
         ss = newStringStream(data)
+    result = readgoogle_protobuf_MethodDescriptorProto(ss)
+
+proc newgoogle_protobuf_MethodDescriptorProto*(data: seq[byte]): google_protobuf_MethodDescriptorProto =
+    let
+        ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_MethodDescriptorProto(ss)
 
 
@@ -4391,6 +4528,11 @@ proc newgoogle_protobuf_ServiceDescriptorProto*(data: string): google_protobuf_S
         ss = newStringStream(data)
     result = readgoogle_protobuf_ServiceDescriptorProto(ss)
 
+proc newgoogle_protobuf_ServiceDescriptorProto*(data: seq[byte]): google_protobuf_ServiceDescriptorProto =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_ServiceDescriptorProto(ss)
+
 
 proc newgoogle_protobuf_FileDescriptorProto*(): google_protobuf_FileDescriptorProto =
     new(result)
@@ -4398,14 +4540,14 @@ proc newgoogle_protobuf_FileDescriptorProto*(): google_protobuf_FileDescriptorPr
     result.name = ""
     result.package = ""
     result.dependency = @[]
-    result.public_dependency = @[]
-    result.weak_dependency = @[]
-    result.message_type = @[]
-    result.enum_type = @[]
+    result.publicDependency = @[]
+    result.weakDependency = @[]
+    result.messageType = @[]
+    result.enumType = @[]
     result.service = @[]
     result.extension = @[]
     result.options = nil
-    result.source_code_info = nil
+    result.sourceCodeInfo = nil
     result.syntax = ""
 
 proc clearname*(message: google_protobuf_FileDescriptorProto) =
@@ -4463,89 +4605,89 @@ proc dependency*(message: google_protobuf_FileDescriptorProto): seq[string] {.in
 proc `dependency=`*(message: google_protobuf_FileDescriptorProto, value: seq[string]) {.inline.} =
     setdependency(message, value)
 
-proc clearpublic_dependency*(message: google_protobuf_FileDescriptorProto) =
-    message.public_dependency = @[]
+proc clearpublicDependency*(message: google_protobuf_FileDescriptorProto) =
+    message.publicDependency = @[]
     clearFields(message, [10])
 
-proc haspublic_dependency*(message: google_protobuf_FileDescriptorProto): bool =
-    result = hasField(message, 10) or (len(message.public_dependency) > 0)
+proc haspublicDependency*(message: google_protobuf_FileDescriptorProto): bool =
+    result = hasField(message, 10) or (len(message.publicDependency) > 0)
 
-proc setpublic_dependency*(message: google_protobuf_FileDescriptorProto, value: seq[int32]) =
-    message.public_dependency = value
+proc setpublicDependency*(message: google_protobuf_FileDescriptorProto, value: seq[int32]) =
+    message.publicDependency = value
     setField(message, 10)
 
-proc addpublic_dependency*(message: google_protobuf_FileDescriptorProto, value: int32) =
-    add(message.public_dependency, value)
+proc addpublicDependency*(message: google_protobuf_FileDescriptorProto, value: int32) =
+    add(message.publicDependency, value)
     setField(message, 10)
 
-proc public_dependency*(message: google_protobuf_FileDescriptorProto): seq[int32] {.inline.} =
-    message.public_dependency
+proc publicDependency*(message: google_protobuf_FileDescriptorProto): seq[int32] {.inline.} =
+    message.publicDependency
 
-proc `public_dependency=`*(message: google_protobuf_FileDescriptorProto, value: seq[int32]) {.inline.} =
-    setpublic_dependency(message, value)
+proc `publicDependency=`*(message: google_protobuf_FileDescriptorProto, value: seq[int32]) {.inline.} =
+    setpublicDependency(message, value)
 
-proc clearweak_dependency*(message: google_protobuf_FileDescriptorProto) =
-    message.weak_dependency = @[]
+proc clearweakDependency*(message: google_protobuf_FileDescriptorProto) =
+    message.weakDependency = @[]
     clearFields(message, [11])
 
-proc hasweak_dependency*(message: google_protobuf_FileDescriptorProto): bool =
-    result = hasField(message, 11) or (len(message.weak_dependency) > 0)
+proc hasweakDependency*(message: google_protobuf_FileDescriptorProto): bool =
+    result = hasField(message, 11) or (len(message.weakDependency) > 0)
 
-proc setweak_dependency*(message: google_protobuf_FileDescriptorProto, value: seq[int32]) =
-    message.weak_dependency = value
+proc setweakDependency*(message: google_protobuf_FileDescriptorProto, value: seq[int32]) =
+    message.weakDependency = value
     setField(message, 11)
 
-proc addweak_dependency*(message: google_protobuf_FileDescriptorProto, value: int32) =
-    add(message.weak_dependency, value)
+proc addweakDependency*(message: google_protobuf_FileDescriptorProto, value: int32) =
+    add(message.weakDependency, value)
     setField(message, 11)
 
-proc weak_dependency*(message: google_protobuf_FileDescriptorProto): seq[int32] {.inline.} =
-    message.weak_dependency
+proc weakDependency*(message: google_protobuf_FileDescriptorProto): seq[int32] {.inline.} =
+    message.weakDependency
 
-proc `weak_dependency=`*(message: google_protobuf_FileDescriptorProto, value: seq[int32]) {.inline.} =
-    setweak_dependency(message, value)
+proc `weakDependency=`*(message: google_protobuf_FileDescriptorProto, value: seq[int32]) {.inline.} =
+    setweakDependency(message, value)
 
-proc clearmessage_type*(message: google_protobuf_FileDescriptorProto) =
-    message.message_type = @[]
+proc clearmessageType*(message: google_protobuf_FileDescriptorProto) =
+    message.messageType = @[]
     clearFields(message, [4])
 
-proc hasmessage_type*(message: google_protobuf_FileDescriptorProto): bool =
-    result = hasField(message, 4) or (len(message.message_type) > 0)
+proc hasmessageType*(message: google_protobuf_FileDescriptorProto): bool =
+    result = hasField(message, 4) or (len(message.messageType) > 0)
 
-proc setmessage_type*(message: google_protobuf_FileDescriptorProto, value: seq[google_protobuf_DescriptorProto]) =
-    message.message_type = value
+proc setmessageType*(message: google_protobuf_FileDescriptorProto, value: seq[google_protobuf_DescriptorProto]) =
+    message.messageType = value
     setField(message, 4)
 
-proc addmessage_type*(message: google_protobuf_FileDescriptorProto, value: google_protobuf_DescriptorProto) =
-    add(message.message_type, value)
+proc addmessageType*(message: google_protobuf_FileDescriptorProto, value: google_protobuf_DescriptorProto) =
+    add(message.messageType, value)
     setField(message, 4)
 
-proc message_type*(message: google_protobuf_FileDescriptorProto): seq[google_protobuf_DescriptorProto] {.inline.} =
-    message.message_type
+proc messageType*(message: google_protobuf_FileDescriptorProto): seq[google_protobuf_DescriptorProto] {.inline.} =
+    message.messageType
 
-proc `message_type=`*(message: google_protobuf_FileDescriptorProto, value: seq[google_protobuf_DescriptorProto]) {.inline.} =
-    setmessage_type(message, value)
+proc `messageType=`*(message: google_protobuf_FileDescriptorProto, value: seq[google_protobuf_DescriptorProto]) {.inline.} =
+    setmessageType(message, value)
 
-proc clearenum_type*(message: google_protobuf_FileDescriptorProto) =
-    message.enum_type = @[]
+proc clearenumType*(message: google_protobuf_FileDescriptorProto) =
+    message.enumType = @[]
     clearFields(message, [5])
 
-proc hasenum_type*(message: google_protobuf_FileDescriptorProto): bool =
-    result = hasField(message, 5) or (len(message.enum_type) > 0)
+proc hasenumType*(message: google_protobuf_FileDescriptorProto): bool =
+    result = hasField(message, 5) or (len(message.enumType) > 0)
 
-proc setenum_type*(message: google_protobuf_FileDescriptorProto, value: seq[google_protobuf_EnumDescriptorProto]) =
-    message.enum_type = value
+proc setenumType*(message: google_protobuf_FileDescriptorProto, value: seq[google_protobuf_EnumDescriptorProto]) =
+    message.enumType = value
     setField(message, 5)
 
-proc addenum_type*(message: google_protobuf_FileDescriptorProto, value: google_protobuf_EnumDescriptorProto) =
-    add(message.enum_type, value)
+proc addenumType*(message: google_protobuf_FileDescriptorProto, value: google_protobuf_EnumDescriptorProto) =
+    add(message.enumType, value)
     setField(message, 5)
 
-proc enum_type*(message: google_protobuf_FileDescriptorProto): seq[google_protobuf_EnumDescriptorProto] {.inline.} =
-    message.enum_type
+proc enumType*(message: google_protobuf_FileDescriptorProto): seq[google_protobuf_EnumDescriptorProto] {.inline.} =
+    message.enumType
 
-proc `enum_type=`*(message: google_protobuf_FileDescriptorProto, value: seq[google_protobuf_EnumDescriptorProto]) {.inline.} =
-    setenum_type(message, value)
+proc `enumType=`*(message: google_protobuf_FileDescriptorProto, value: seq[google_protobuf_EnumDescriptorProto]) {.inline.} =
+    setenumType(message, value)
 
 proc clearservice*(message: google_protobuf_FileDescriptorProto) =
     message.service = @[]
@@ -4606,22 +4748,22 @@ proc options*(message: google_protobuf_FileDescriptorProto): google_protobuf_Fil
 proc `options=`*(message: google_protobuf_FileDescriptorProto, value: google_protobuf_FileOptions) {.inline.} =
     setoptions(message, value)
 
-proc clearsource_code_info*(message: google_protobuf_FileDescriptorProto) =
-    message.source_code_info = nil
+proc clearsourceCodeInfo*(message: google_protobuf_FileDescriptorProto) =
+    message.sourceCodeInfo = nil
     clearFields(message, [9])
 
-proc hassource_code_info*(message: google_protobuf_FileDescriptorProto): bool =
+proc hassourceCodeInfo*(message: google_protobuf_FileDescriptorProto): bool =
     result = hasField(message, 9)
 
-proc setsource_code_info*(message: google_protobuf_FileDescriptorProto, value: google_protobuf_SourceCodeInfo) =
-    message.source_code_info = value
+proc setsourceCodeInfo*(message: google_protobuf_FileDescriptorProto, value: google_protobuf_SourceCodeInfo) =
+    message.sourceCodeInfo = value
     setField(message, 9)
 
-proc source_code_info*(message: google_protobuf_FileDescriptorProto): google_protobuf_SourceCodeInfo {.inline.} =
-    message.source_code_info
+proc sourceCodeInfo*(message: google_protobuf_FileDescriptorProto): google_protobuf_SourceCodeInfo {.inline.} =
+    message.sourceCodeInfo
 
-proc `source_code_info=`*(message: google_protobuf_FileDescriptorProto, value: google_protobuf_SourceCodeInfo) {.inline.} =
-    setsource_code_info(message, value)
+proc `sourceCodeInfo=`*(message: google_protobuf_FileDescriptorProto, value: google_protobuf_SourceCodeInfo) {.inline.} =
+    setsourceCodeInfo(message, value)
 
 proc clearsyntax*(message: google_protobuf_FileDescriptorProto) =
     message.syntax = ""
@@ -4650,16 +4792,16 @@ proc sizeOfgoogle_protobuf_FileDescriptorProto*(message: google_protobuf_FileDes
     for value in message.dependency:
         result = result + sizeOfTag(3, WireType.LengthDelimited)
         result = result + sizeOfString(value)
-    if haspublic_dependency(message):
+    if haspublicDependency(message):
         result = result + sizeOfTag(10, WireType.LengthDelimited)
-        result = result + sizeOfLengthDelimited(packedFieldSize(message.public_dependency, FieldType.Int32))
-    if hasweak_dependency(message):
+        result = result + sizeOfLengthDelimited(packedFieldSize(message.publicDependency, FieldType.Int32))
+    if hasweakDependency(message):
         result = result + sizeOfTag(11, WireType.LengthDelimited)
-        result = result + sizeOfLengthDelimited(packedFieldSize(message.weak_dependency, FieldType.Int32))
-    for value in message.message_type:
+        result = result + sizeOfLengthDelimited(packedFieldSize(message.weakDependency, FieldType.Int32))
+    for value in message.messageType:
         result = result + sizeOfTag(4, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_DescriptorProto(value))
-    for value in message.enum_type:
+    for value in message.enumType:
         result = result + sizeOfTag(5, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_EnumDescriptorProto(value))
     for value in message.service:
@@ -4671,9 +4813,9 @@ proc sizeOfgoogle_protobuf_FileDescriptorProto*(message: google_protobuf_FileDes
     if hasoptions(message):
         result = result + sizeOfTag(8, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_FileOptions(message.options))
-    if hassource_code_info(message):
+    if hassourceCodeInfo(message):
         result = result + sizeOfTag(9, WireType.LengthDelimited)
-        result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_SourceCodeInfo(message.source_code_info))
+        result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_SourceCodeInfo(message.sourceCodeInfo))
     if hassyntax(message):
         result = result + sizeOfTag(12, WireType.LengthDelimited)
         result = result + sizeOfString(message.syntax)
@@ -4686,13 +4828,13 @@ proc writegoogle_protobuf_FileDescriptorProto*(stream: Stream, message: google_p
         protoWriteString(stream, message.package, 2)
     for value in message.dependency:
         protoWriteString(stream, value, 3)
-    for value in message.public_dependency:
+    for value in message.publicDependency:
         protoWriteInt32(stream, value, 10)
-    for value in message.weak_dependency:
+    for value in message.weakDependency:
         protoWriteInt32(stream, value, 11)
-    for value in message.message_type:
+    for value in message.messageType:
         writeMessage(stream, value, 4)
-    for value in message.enum_type:
+    for value in message.enumType:
         writeMessage(stream, value, 5)
     for value in message.service:
         writeMessage(stream, value, 6)
@@ -4700,8 +4842,8 @@ proc writegoogle_protobuf_FileDescriptorProto*(stream: Stream, message: google_p
         writeMessage(stream, value, 7)
     if hasoptions(message):
         writeMessage(stream, message.options, 8)
-    if hassource_code_info(message):
-        writeMessage(stream, message.source_code_info, 9)
+    if hassourceCodeInfo(message):
+        writeMessage(stream, message.sourceCodeInfo, 9)
     if hassyntax(message):
         protoWriteString(stream, message.syntax, 12)
     writeUnknownFields(stream, message)
@@ -4732,12 +4874,12 @@ proc readgoogle_protobuf_FileDescriptorProto*(stream: Stream): google_protobuf_F
                     start = uint64(getPosition(stream))
                 var consumed = 0'u64
                 while consumed < size:
-                    addpublic_dependency(result, protoReadInt32(stream))
+                    addpublicDependency(result, protoReadInt32(stream))
                     consumed = uint64(getPosition(stream)) - start
                 if consumed != size:
                     raise newException(Exception, "packed field size mismatch")
             else:
-                addpublic_dependency(result, protoReadInt32(stream))
+                addpublicDependency(result, protoReadInt32(stream))
         of 11:
             expectWireType(wireType, WireType.Varint, WireType.LengthDelimited)
             if wireType == WireType.LengthDelimited:
@@ -4746,20 +4888,20 @@ proc readgoogle_protobuf_FileDescriptorProto*(stream: Stream): google_protobuf_F
                     start = uint64(getPosition(stream))
                 var consumed = 0'u64
                 while consumed < size:
-                    addweak_dependency(result, protoReadInt32(stream))
+                    addweakDependency(result, protoReadInt32(stream))
                     consumed = uint64(getPosition(stream)) - start
                 if consumed != size:
                     raise newException(Exception, "packed field size mismatch")
             else:
-                addweak_dependency(result, protoReadInt32(stream))
+                addweakDependency(result, protoReadInt32(stream))
         of 4:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            addmessage_type(result, newgoogle_protobuf_DescriptorProto(data))
+            addmessageType(result, newgoogle_protobuf_DescriptorProto(data))
         of 5:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            addenum_type(result, newgoogle_protobuf_EnumDescriptorProto(data))
+            addenumType(result, newgoogle_protobuf_EnumDescriptorProto(data))
         of 6:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
@@ -4775,7 +4917,7 @@ proc readgoogle_protobuf_FileDescriptorProto*(stream: Stream): google_protobuf_F
         of 9:
             expectWireType(wireType, WireType.LengthDelimited)
             let data = readLengthDelimited(stream)
-            setsource_code_info(result, newgoogle_protobuf_SourceCodeInfo(data))
+            setsourceCodeInfo(result, newgoogle_protobuf_SourceCodeInfo(data))
         of 12:
             expectWireType(wireType, WireType.LengthDelimited)
             setsyntax(result, protoReadString(stream))
@@ -4792,24 +4934,24 @@ proc toJson*(message: google_protobuf_FileDescriptorProto): JsonNode =
         for value in message.dependency:
             add(arr, %value)
         result["dependency"] = arr
-    if haspublic_dependency(message):
+    if haspublicDependency(message):
         let arr = newJArray()
-        for value in message.public_dependency:
+        for value in message.publicDependency:
             add(arr, %value)
         result["publicDependency"] = arr
-    if hasweak_dependency(message):
+    if hasweakDependency(message):
         let arr = newJArray()
-        for value in message.weak_dependency:
+        for value in message.weakDependency:
             add(arr, %value)
         result["weakDependency"] = arr
-    if hasmessage_type(message):
+    if hasmessageType(message):
         let arr = newJArray()
-        for value in message.message_type:
+        for value in message.messageType:
             add(arr, toJson(value))
         result["messageType"] = arr
-    if hasenum_type(message):
+    if hasenumType(message):
         let arr = newJArray()
-        for value in message.enum_type:
+        for value in message.enumType:
             add(arr, toJson(value))
         result["enumType"] = arr
     if hasservice(message):
@@ -4824,8 +4966,8 @@ proc toJson*(message: google_protobuf_FileDescriptorProto): JsonNode =
         result["extension"] = arr
     if hasoptions(message):
         result["options"] = toJson(message.options)
-    if hassource_code_info(message):
-        result["sourceCodeInfo"] = toJson(message.source_code_info)
+    if hassourceCodeInfo(message):
+        result["sourceCodeInfo"] = toJson(message.sourceCodeInfo)
     if hassyntax(message):
         result["syntax"] = %message.syntax
 
@@ -4838,6 +4980,11 @@ proc serialize*(message: google_protobuf_FileDescriptorProto): string =
 proc newgoogle_protobuf_FileDescriptorProto*(data: string): google_protobuf_FileDescriptorProto =
     let
         ss = newStringStream(data)
+    result = readgoogle_protobuf_FileDescriptorProto(ss)
+
+proc newgoogle_protobuf_FileDescriptorProto*(data: seq[byte]): google_protobuf_FileDescriptorProto =
+    let
+        ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_FileDescriptorProto(ss)
 
 
@@ -4912,12 +5059,17 @@ proc newgoogle_protobuf_FileDescriptorSet*(data: string): google_protobuf_FileDe
         ss = newStringStream(data)
     result = readgoogle_protobuf_FileDescriptorSet(ss)
 
+proc newgoogle_protobuf_FileDescriptorSet*(data: seq[byte]): google_protobuf_FileDescriptorSet =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_FileDescriptorSet(ss)
+
 
 proc newgoogle_protobuf_GeneratedCodeInfo_Annotation*(): google_protobuf_GeneratedCodeInfo_Annotation =
     new(result)
     initMessage(result[])
     result.path = @[]
-    result.source_file = ""
+    result.sourceFile = ""
     result.begin = 0
     result.fend = 0
 
@@ -4942,22 +5094,22 @@ proc path*(message: google_protobuf_GeneratedCodeInfo_Annotation): seq[int32] {.
 proc `path=`*(message: google_protobuf_GeneratedCodeInfo_Annotation, value: seq[int32]) {.inline.} =
     setpath(message, value)
 
-proc clearsource_file*(message: google_protobuf_GeneratedCodeInfo_Annotation) =
-    message.source_file = ""
+proc clearsourceFile*(message: google_protobuf_GeneratedCodeInfo_Annotation) =
+    message.sourceFile = ""
     clearFields(message, [2])
 
-proc hassource_file*(message: google_protobuf_GeneratedCodeInfo_Annotation): bool =
+proc hassourceFile*(message: google_protobuf_GeneratedCodeInfo_Annotation): bool =
     result = hasField(message, 2)
 
-proc setsource_file*(message: google_protobuf_GeneratedCodeInfo_Annotation, value: string) =
-    message.source_file = value
+proc setsourceFile*(message: google_protobuf_GeneratedCodeInfo_Annotation, value: string) =
+    message.sourceFile = value
     setField(message, 2)
 
-proc source_file*(message: google_protobuf_GeneratedCodeInfo_Annotation): string {.inline.} =
-    message.source_file
+proc sourceFile*(message: google_protobuf_GeneratedCodeInfo_Annotation): string {.inline.} =
+    message.sourceFile
 
-proc `source_file=`*(message: google_protobuf_GeneratedCodeInfo_Annotation, value: string) {.inline.} =
-    setsource_file(message, value)
+proc `sourceFile=`*(message: google_protobuf_GeneratedCodeInfo_Annotation, value: string) {.inline.} =
+    setsourceFile(message, value)
 
 proc clearbegin*(message: google_protobuf_GeneratedCodeInfo_Annotation) =
     message.begin = 0
@@ -4997,9 +5149,9 @@ proc sizeOfgoogle_protobuf_GeneratedCodeInfo_Annotation*(message: google_protobu
     if haspath(message):
         result = result + sizeOfTag(1, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(packedFieldSize(message.path, FieldType.Int32))
-    if hassource_file(message):
+    if hassourceFile(message):
         result = result + sizeOfTag(2, WireType.LengthDelimited)
-        result = result + sizeOfString(message.source_file)
+        result = result + sizeOfString(message.sourceFile)
     if hasbegin(message):
         result = result + sizeOfTag(3, WireType.Varint)
         result = result + sizeOfInt32(message.begin)
@@ -5014,8 +5166,8 @@ proc writegoogle_protobuf_GeneratedCodeInfo_Annotation*(stream: Stream, message:
         writeVarint(stream, packedFieldSize(message.path, FieldType.Int32))
         for value in message.path:
             protoWriteInt32(stream, value)
-    if hassource_file(message):
-        protoWriteString(stream, message.source_file, 2)
+    if hassourceFile(message):
+        protoWriteString(stream, message.sourceFile, 2)
     if hasbegin(message):
         protoWriteInt32(stream, message.begin, 3)
     if hasfend(message):
@@ -5047,7 +5199,7 @@ proc readgoogle_protobuf_GeneratedCodeInfo_Annotation*(stream: Stream): google_p
                 addpath(result, protoReadInt32(stream))
         of 2:
             expectWireType(wireType, WireType.LengthDelimited)
-            setsource_file(result, protoReadString(stream))
+            setsourceFile(result, protoReadString(stream))
         of 3:
             expectWireType(wireType, WireType.Varint)
             setbegin(result, protoReadInt32(stream))
@@ -5063,8 +5215,8 @@ proc toJson*(message: google_protobuf_GeneratedCodeInfo_Annotation): JsonNode =
         for value in message.path:
             add(arr, %value)
         result["path"] = arr
-    if hassource_file(message):
-        result["sourceFile"] = %message.source_file
+    if hassourceFile(message):
+        result["sourceFile"] = %message.sourceFile
     if hasbegin(message):
         result["begin"] = %message.begin
     if hasfend(message):
@@ -5079,6 +5231,11 @@ proc serialize*(message: google_protobuf_GeneratedCodeInfo_Annotation): string =
 proc newgoogle_protobuf_GeneratedCodeInfo_Annotation*(data: string): google_protobuf_GeneratedCodeInfo_Annotation =
     let
         ss = newStringStream(data)
+    result = readgoogle_protobuf_GeneratedCodeInfo_Annotation(ss)
+
+proc newgoogle_protobuf_GeneratedCodeInfo_Annotation*(data: seq[byte]): google_protobuf_GeneratedCodeInfo_Annotation =
+    let
+        ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_GeneratedCodeInfo_Annotation(ss)
 
 
@@ -5151,6 +5308,11 @@ proc serialize*(message: google_protobuf_GeneratedCodeInfo): string =
 proc newgoogle_protobuf_GeneratedCodeInfo*(data: string): google_protobuf_GeneratedCodeInfo =
     let
         ss = newStringStream(data)
+    result = readgoogle_protobuf_GeneratedCodeInfo(ss)
+
+proc newgoogle_protobuf_GeneratedCodeInfo*(data: seq[byte]): google_protobuf_GeneratedCodeInfo =
+    let
+        ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_GeneratedCodeInfo(ss)
 
 

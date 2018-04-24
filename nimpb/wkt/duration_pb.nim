@@ -15,6 +15,7 @@ type
 
 proc newgoogle_protobuf_Duration*(): google_protobuf_Duration
 proc newgoogle_protobuf_Duration*(data: string): google_protobuf_Duration
+proc newgoogle_protobuf_Duration*(data: seq[byte]): google_protobuf_Duration
 proc writegoogle_protobuf_Duration*(stream: Stream, message: google_protobuf_Duration)
 proc readgoogle_protobuf_Duration*(stream: Stream): google_protobuf_Duration
 proc sizeOfgoogle_protobuf_Duration*(message: google_protobuf_Duration): uint64
@@ -101,6 +102,11 @@ proc serialize*(message: google_protobuf_Duration): string =
 proc newgoogle_protobuf_Duration*(data: string): google_protobuf_Duration =
     let
         ss = newStringStream(data)
+    result = readgoogle_protobuf_Duration(ss)
+
+proc newgoogle_protobuf_Duration*(data: seq[byte]): google_protobuf_Duration =
+    let
+        ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_Duration(ss)
 
 
