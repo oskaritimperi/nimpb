@@ -18,6 +18,7 @@ type
 
 proc newTest1*(): Test1
 proc newTest1*(data: string): Test1
+proc newTest1*(data: seq[byte]): Test1
 proc writeTest1*(stream: Stream, message: Test1)
 proc readTest1*(stream: Stream): Test1
 proc sizeOfTest1*(message: Test1): uint64
@@ -112,6 +113,11 @@ proc serialize*(message: Test1): string =
 proc newTest1*(data: string): Test1 =
     let
         ss = newStringStream(data)
+    result = readTest1(ss)
+
+proc newTest1*(data: seq[byte]): Test1 =
+    let
+        ss = newStringStream(cast[string](data))
     result = readTest1(ss)
 
 

@@ -22,6 +22,7 @@ type
 
 proc newPerson*(): Person
 proc newPerson*(data: string): Person
+proc newPerson*(data: seq[byte]): Person
 proc writePerson*(stream: Stream, message: Person)
 proc readPerson*(stream: Stream): Person
 proc sizeOfPerson*(message: Person): uint64
@@ -29,6 +30,7 @@ proc toJson*(message: Person): JsonNode
 
 proc newAddressBook*(): AddressBook
 proc newAddressBook*(data: string): AddressBook
+proc newAddressBook*(data: seq[byte]): AddressBook
 proc writeAddressBook*(stream: Stream, message: AddressBook)
 proc readAddressBook*(stream: Stream): AddressBook
 proc sizeOfAddressBook*(message: AddressBook): uint64
@@ -189,6 +191,11 @@ proc newPerson*(data: string): Person =
         ss = newStringStream(data)
     result = readPerson(ss)
 
+proc newPerson*(data: seq[byte]): Person =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readPerson(ss)
+
 
 proc newAddressBook*(): AddressBook =
     new(result)
@@ -259,6 +266,11 @@ proc serialize*(message: AddressBook): string =
 proc newAddressBook*(data: string): AddressBook =
     let
         ss = newStringStream(data)
+    result = readAddressBook(ss)
+
+proc newAddressBook*(data: seq[byte]): AddressBook =
+    let
+        ss = newStringStream(cast[string](data))
     result = readAddressBook(ss)
 
 

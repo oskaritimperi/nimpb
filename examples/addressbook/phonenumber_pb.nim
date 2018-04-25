@@ -19,6 +19,7 @@ type
 
 proc newPhoneNumber*(): PhoneNumber
 proc newPhoneNumber*(data: string): PhoneNumber
+proc newPhoneNumber*(data: seq[byte]): PhoneNumber
 proc writePhoneNumber*(stream: Stream, message: PhoneNumber)
 proc readPhoneNumber*(stream: Stream): PhoneNumber
 proc sizeOfPhoneNumber*(message: PhoneNumber): uint64
@@ -113,6 +114,11 @@ proc serialize*(message: PhoneNumber): string =
 proc newPhoneNumber*(data: string): PhoneNumber =
     let
         ss = newStringStream(data)
+    result = readPhoneNumber(ss)
+
+proc newPhoneNumber*(data: seq[byte]): PhoneNumber =
+    let
+        ss = newStringStream(cast[string](data))
     result = readPhoneNumber(ss)
 
 
