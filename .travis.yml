@@ -16,6 +16,8 @@ matrix:
   fast_finish: true
 install:
   - |
+    STARTDIR=$(pwd)
+    cd ..
     # Simply replacing "master" with `$nim_branch` everywhere means we can reuse
     # this installation script for both branches.
     if [ ! -x nim-$nim_branch/bin/nim ]; then
@@ -28,20 +30,20 @@ install:
       rm -rf csources
       bin/nim c koch
       ./koch boot -d:release
-      ./koch nimble
+      ./koch tools
     else
       cd nim-$nim_branch
       git fetch origin
       if ! git merge FETCH_HEAD | grep "Already up-to-date"; then
         bin/nim c koch
         ./koch boot -d:release
-        ./koch nimble
+        ./koch tools
       fi
     fi
-    cd ..
+    cd $STARTDIR
 before_script:
   # `$nim_branch` is used here as well, to add the specific compiler to PATH
-  - export PATH="nim-$nim_branch/bin${PATH:+:$PATH}"
+  - export PATH="$PWD/../nim-$nim_branch/bin${PATH:+:$PATH}"
 script:
   # Specify the C compiler to Nim
   # (the `compiler` option of the build matrix sets the `$CC` variable)
@@ -51,8 +53,8 @@ script:
 cache:
   # Cache both compilers easily
   directories:
-    - nim-master
-    - nim-devel
+    - ../nim-master
+    - ../nim-devel
 branches:
   except:
     - gh-pages
