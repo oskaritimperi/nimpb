@@ -7,7 +7,7 @@ import json
 import nimpb/nimpb
 import nimpb/json as nimpb_json
 
-import nimpb/wkt/any_pb
+import nimpb/wkt/any
 import nimpb/wkt/source_context_pb
 
 type

@@ -91,6 +91,16 @@ type
         clientStreaming*: bool
         serverStreaming*: bool
 
+const
+    WktsWithExtras = [
+        "any",
+        "duration",
+        "field_mask",
+        "struct",
+        "timestamp",
+        "wrappers",
+    ]
+
 when defined(debug):
     proc log(msg: string) =
         stderr.write(msg)
@@ -1069,9 +1079,12 @@ proc processFile(fdesc: google_protobuf_FileDescriptorProto,
 
         if dir == "google/protobuf":
             dir = "nimpb/wkt"
+            if depname notin WktsWithExtras:
+                depname &= "_pb"
+        else:
+            depname &= "_pb"
 
-        var deppbname = (dir / depname) & "_pb"
-        addLine(pbFile.data, &"import {deppbname}")
+        addLine(pbFile.data, &"import {dir / depname}")
 
     if hasDependency(fdesc):
         addLine(pbFile.data, "")
