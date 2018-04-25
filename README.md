@@ -1,5 +1,7 @@
 # Protocol Buffers for Nim
 
+[![Build Status](https://travis-ci.org/oswjk/nimpb.svg?branch=master)](https://travis-ci.org/oswjk/nimpb)
+
 A Nim library to serialize/deserialize Protocol Buffers.
 
 To actually generate Nim code from protobuf definitions, you need the protoc
