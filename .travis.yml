@@ -49,6 +49,10 @@ script:
   # (the `compiler` option of the build matrix sets the `$CC` variable)
   - nimble install -y https://github.com/oswjk/nimpb_protoc
   - nimble build -y --cc:$CC
+  - cd examples/simple
+  - make
+  - cd ../addressbook
+  - make
   # - nim compile --cc:$CC --verbosity:0
 cache:
   # Cache both compilers easily
