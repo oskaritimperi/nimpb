@@ -27,6 +27,9 @@ proc myReadString(s: Stream, size: int): string =
     if readData(s, addr(result[0]), size) != size:
         raise newException(Exception, "failed to read data")
 
+proc errorMessage(exc: ref Exception): string =
+    result = $exc.name & ": " & exc.msg & "\n" & getStackTrace(exc)
+
 while true:
     var requestSize = 0'i32
 
@@ -43,24 +46,39 @@ while true:
 
     if request.messageType == "protobuf_test_messages.proto2.TestAllTypesProto2":
         response.skipped = "skipping proto2 tests"
-    elif hasJsonPayload(request):
-        response.skipped = "dont know how to parse json"
     else:
         try:
-            let parsed = newprotobuf_test_messages_proto3_TestAllTypesProto3(request.protobufPayload)
+            var parsed: protobuf_test_messages_proto3_TestAllTypesProto3
+
+            if hasProtobufPayload(request):
+                parsed = newprotobuf_test_messages_proto3_TestAllTypesProto3(request.protobufPayload)
+            elif hasJsonPayload(request):
+                var j: JsonNode
+
+                try:
+                    j = parseJson(request.jsonPayload)
+                except Exception as exc:
+                    raise newException(JsonParsingError, exc.msg)
+
+                parsed = parseprotobuf_test_messages_proto3_TestAllTypesProto3(j)
+
             if request.requestedOutputFormat == conformance_WireFormat.PROTOBUF:
                 let ser = serialize(parsed)
                 response.protobufPayload = cast[seq[byte]](ser)
             elif request.requestedOutputFormat == conformance_WireFormat.JSON:
                 response.jsonPayload = $toJson(parsed)
         except IOError as exc:
-            response.parse_error = exc.msg
-        except ParseError as exc:
-            response.parse_error = exc.msg
+            response.parse_error = errorMessage(exc)
+        except OverflowError as exc:
+            response.parseError = errorMessage(exc)
+        except nimpb.ParseError as exc:
+            response.parse_error = errorMessage(exc)
+        except JsonParsingError as exc:
+            response.parseError = errorMessage(exc)
         except ValueError as exc:
-            response.serializeError = exc.msg
+            response.serializeError = errorMessage(exc)
         except Exception as exc:
-            response.runtimeError = exc.msg
+            response.runtimeError = errorMessage(exc)
 
     let responseData = serialize(response)
 

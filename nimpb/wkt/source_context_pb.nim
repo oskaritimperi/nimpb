@@ -3,6 +3,7 @@
 import base64
 import intsets
 import json
+import strutils
 
 import nimpb/nimpb
 import nimpb/json as nimpb_json
@@ -19,6 +20,7 @@ proc writegoogle_protobuf_SourceContext*(stream: Stream, message: google_protobu
 proc readgoogle_protobuf_SourceContext*(stream: Stream): google_protobuf_SourceContext
 proc sizeOfgoogle_protobuf_SourceContext*(message: google_protobuf_SourceContext): uint64
 proc toJson*(message: google_protobuf_SourceContext): JsonNode
+proc parsegoogle_protobuf_SourceContext*(obj: JsonNode): google_protobuf_SourceContext
 
 proc newgoogle_protobuf_SourceContext*(): google_protobuf_SourceContext =
     new(result)
@@ -71,6 +73,15 @@ proc toJson*(message: google_protobuf_SourceContext): JsonNode =
     result = newJObject()
     if hasfileName(message):
         result["fileName"] = %message.fileName
+
+proc parsegoogle_protobuf_SourceContext*(obj: JsonNode): google_protobuf_SourceContext =
+    result = newgoogle_protobuf_SourceContext()
+    var node: JsonNode
+    if obj.kind != JObject:
+        raise newException(nimpb_json.ParseError, "object expected")
+    node = getJsonField(obj, "file_name", "fileName")
+    if node != nil and node.kind != JNull:
+        setfileName(result, parseString(node))
 
 proc serialize*(message: google_protobuf_SourceContext): string =
     let

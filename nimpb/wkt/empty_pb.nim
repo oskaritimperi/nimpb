@@ -3,6 +3,7 @@
 import base64
 import intsets
 import json
+import strutils
 
 import nimpb/nimpb
 import nimpb/json as nimpb_json
@@ -18,6 +19,7 @@ proc writegoogle_protobuf_Empty*(stream: Stream, message: google_protobuf_Empty)
 proc readgoogle_protobuf_Empty*(stream: Stream): google_protobuf_Empty
 proc sizeOfgoogle_protobuf_Empty*(message: google_protobuf_Empty): uint64
 proc toJson*(message: google_protobuf_Empty): JsonNode
+proc parsegoogle_protobuf_Empty*(obj: JsonNode): google_protobuf_Empty
 
 proc newgoogle_protobuf_Empty*(): google_protobuf_Empty =
     new(result)
@@ -42,6 +44,12 @@ proc readgoogle_protobuf_Empty*(stream: Stream): google_protobuf_Empty =
 
 proc toJson*(message: google_protobuf_Empty): JsonNode =
     result = newJObject()
+
+proc parsegoogle_protobuf_Empty*(obj: JsonNode): google_protobuf_Empty =
+    result = newgoogle_protobuf_Empty()
+    var node: JsonNode
+    if obj.kind != JObject:
+        raise newException(nimpb_json.ParseError, "object expected")
 
 proc serialize*(message: google_protobuf_Empty): string =
     let

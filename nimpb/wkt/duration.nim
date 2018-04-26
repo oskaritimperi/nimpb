@@ -21,9 +21,48 @@ proc toJson*(message: google_protobuf_Duration): JsonNode =
 
     if message.nanos != 0:
         add(s, ".")
-        add(s, intToStr(message.nanos, 9))
+        add(s, intToStr(sgn(message.nanos) * message.nanos, 9))
         removeSuffix(s, '0')
 
     add(s, "s")
 
     result = %s
+
+proc parsegoogle_protobuf_Duration*(node: JsonNode): google_protobuf_Duration =
+    if node.kind != JString:
+        raise newException(nimpb_json.ParseError, "string expected")
+
+    if not endsWith(node.str, "s"):
+        raise newException(nimpb_json.ParseError, "string does not end with s")
+
+    result = newgoogle_protobuf_Duration()
+
+    let dotIndex = find(node.str, '.')
+
+    if dotIndex == -1:
+        result.seconds = parseBiggestInt(node.str[0..^2])
+        if result.seconds < -315_576_000_000'i64 or
+           result.seconds > 315_576_000_000'i64:
+           raise newException(nimpb_json.ParseError, "duration seconds out of bounds")
+        return
+
+    result.seconds = parseBiggestInt(node.str[0..dotIndex-1])
+
+    if result.seconds < -315_576_000_000'i64 or
+       result.seconds > 315_576_000_000'i64:
+       raise newException(nimpb_json.ParseError, "duration seconds out of bounds")
+
+    let nanoStr = node.str[dotIndex+1..^2]
+    var factor = 100_000_000
+
+    result.nanos = 0
+
+    for ch in nanoStr:
+        result.nanos = result.nanos + int32(factor * (ord(ch) - ord('0')))
+        factor = factor div 10
+
+    if result.nanos > 999_999_999:
+        raise newException(ValueError, "duration nanos out of bounds")
+
+    if result.seconds < 0:
+        result.nanos = -result.nanos

@@ -43,3 +43,13 @@ proc toJson*(message: google_protobuf_FieldMask): JsonNode =
             add(resultString, ",")
 
     result = %resultString
+
+proc parsegoogle_protobuf_FieldMask*(node: JsonNode): google_protobuf_FieldMask =
+    if node.kind != JString:
+        raise newException(nimpb_json.ParseError, "string expected")
+
+    result = newgoogle_protobuf_FieldMask()
+    result.paths = @[]
+
+    for path in split(node.str, ","):
+        addPaths(result, camelCaseToSnakeCase(path))

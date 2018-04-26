@@ -47,3 +47,6 @@ proc toJson*(message: google_protobuf_Any): JsonNode =
         result = newJObject()
         result["typeUrl"] = %message.typeUrl
         result["value"] = %message.value
+
+proc parsegoogle_protobuf_Any*(node: JsonNode): google_protobuf_Any =
+    raise newException(nimpb_json.ParseError, "not supported yet")

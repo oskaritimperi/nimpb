@@ -3,6 +3,7 @@
 import base64
 import intsets
 import json
+import strutils
 
 import nimpb/nimpb
 import nimpb/json as nimpb_json
@@ -83,6 +84,7 @@ proc writegoogle_protobuf_Option*(stream: Stream, message: google_protobuf_Optio
 proc readgoogle_protobuf_Option*(stream: Stream): google_protobuf_Option
 proc sizeOfgoogle_protobuf_Option*(message: google_protobuf_Option): uint64
 proc toJson*(message: google_protobuf_Option): JsonNode
+proc parsegoogle_protobuf_Option*(obj: JsonNode): google_protobuf_Option
 
 proc newgoogle_protobuf_Field*(): google_protobuf_Field
 proc newgoogle_protobuf_Field*(data: string): google_protobuf_Field
@@ -91,6 +93,7 @@ proc writegoogle_protobuf_Field*(stream: Stream, message: google_protobuf_Field)
 proc readgoogle_protobuf_Field*(stream: Stream): google_protobuf_Field
 proc sizeOfgoogle_protobuf_Field*(message: google_protobuf_Field): uint64
 proc toJson*(message: google_protobuf_Field): JsonNode
+proc parsegoogle_protobuf_Field*(obj: JsonNode): google_protobuf_Field
 
 proc newgoogle_protobuf_Type*(): google_protobuf_Type
 proc newgoogle_protobuf_Type*(data: string): google_protobuf_Type
@@ -99,6 +102,7 @@ proc writegoogle_protobuf_Type*(stream: Stream, message: google_protobuf_Type)
 proc readgoogle_protobuf_Type*(stream: Stream): google_protobuf_Type
 proc sizeOfgoogle_protobuf_Type*(message: google_protobuf_Type): uint64
 proc toJson*(message: google_protobuf_Type): JsonNode
+proc parsegoogle_protobuf_Type*(obj: JsonNode): google_protobuf_Type
 
 proc newgoogle_protobuf_EnumValue*(): google_protobuf_EnumValue
 proc newgoogle_protobuf_EnumValue*(data: string): google_protobuf_EnumValue
@@ -107,6 +111,7 @@ proc writegoogle_protobuf_EnumValue*(stream: Stream, message: google_protobuf_En
 proc readgoogle_protobuf_EnumValue*(stream: Stream): google_protobuf_EnumValue
 proc sizeOfgoogle_protobuf_EnumValue*(message: google_protobuf_EnumValue): uint64
 proc toJson*(message: google_protobuf_EnumValue): JsonNode
+proc parsegoogle_protobuf_EnumValue*(obj: JsonNode): google_protobuf_EnumValue
 
 proc newgoogle_protobuf_Enum*(): google_protobuf_Enum
 proc newgoogle_protobuf_Enum*(data: string): google_protobuf_Enum
@@ -115,6 +120,7 @@ proc writegoogle_protobuf_Enum*(stream: Stream, message: google_protobuf_Enum)
 proc readgoogle_protobuf_Enum*(stream: Stream): google_protobuf_Enum
 proc sizeOfgoogle_protobuf_Enum*(message: google_protobuf_Enum): uint64
 proc toJson*(message: google_protobuf_Enum): JsonNode
+proc parsegoogle_protobuf_Enum*(obj: JsonNode): google_protobuf_Enum
 
 proc newgoogle_protobuf_Option*(): google_protobuf_Option =
     new(result)
@@ -196,6 +202,18 @@ proc toJson*(message: google_protobuf_Option): JsonNode =
         result["name"] = %message.name
     if hasvalue(message):
         result["value"] = toJson(message.value)
+
+proc parsegoogle_protobuf_Option*(obj: JsonNode): google_protobuf_Option =
+    result = newgoogle_protobuf_Option()
+    var node: JsonNode
+    if obj.kind != JObject:
+        raise newException(nimpb_json.ParseError, "object expected")
+    node = getJsonField(obj, "name", "name")
+    if node != nil and node.kind != JNull:
+        setname(result, parseString(node))
+    node = getJsonField(obj, "value", "value")
+    if node != nil and node.kind != JNull:
+        setvalue(result, parsegoogle_protobuf_Any(node))
 
 proc serialize*(message: google_protobuf_Option): string =
     let
@@ -503,9 +521,9 @@ proc readgoogle_protobuf_Field*(stream: Stream): google_protobuf_Field =
 proc toJson*(message: google_protobuf_Field): JsonNode =
     result = newJObject()
     if haskind(message):
-        result["kind"] = %($message.kind)
+        result["kind"] = toJson(message.kind)
     if hascardinality(message):
-        result["cardinality"] = %($message.cardinality)
+        result["cardinality"] = toJson(message.cardinality)
     if hasnumber(message):
         result["number"] = %message.number
     if hasname(message):
@@ -525,6 +543,45 @@ proc toJson*(message: google_protobuf_Field): JsonNode =
         result["jsonName"] = %message.jsonName
     if hasdefaultValue(message):
         result["defaultValue"] = %message.defaultValue
+
+proc parsegoogle_protobuf_Field*(obj: JsonNode): google_protobuf_Field =
+    result = newgoogle_protobuf_Field()
+    var node: JsonNode
+    if obj.kind != JObject:
+        raise newException(nimpb_json.ParseError, "object expected")
+    node = getJsonField(obj, "kind", "kind")
+    if node != nil and node.kind != JNull:
+        setkind(result, parseEnum[google_protobuf_Field_Kind](node))
+    node = getJsonField(obj, "cardinality", "cardinality")
+    if node != nil and node.kind != JNull:
+        setcardinality(result, parseEnum[google_protobuf_Field_Cardinality](node))
+    node = getJsonField(obj, "number", "number")
+    if node != nil and node.kind != JNull:
+        setnumber(result, parseInt[int32](node))
+    node = getJsonField(obj, "name", "name")
+    if node != nil and node.kind != JNull:
+        setname(result, parseString(node))
+    node = getJsonField(obj, "type_url", "typeUrl")
+    if node != nil and node.kind != JNull:
+        settypeUrl(result, parseString(node))
+    node = getJsonField(obj, "oneof_index", "oneofIndex")
+    if node != nil and node.kind != JNull:
+        setoneofIndex(result, parseInt[int32](node))
+    node = getJsonField(obj, "packed", "packed")
+    if node != nil and node.kind != JNull:
+        setpacked(result, parseBool(node))
+    node = getJsonField(obj, "options", "options")
+    if node != nil and node.kind != JNull:
+        if node.kind != JArray:
+            raise newException(ValueError, "not an array")
+        for value in node:
+            addoptions(result, parsegoogle_protobuf_Option(value))
+    node = getJsonField(obj, "json_name", "jsonName")
+    if node != nil and node.kind != JNull:
+        setjsonName(result, parseString(node))
+    node = getJsonField(obj, "default_value", "defaultValue")
+    if node != nil and node.kind != JNull:
+        setdefaultValue(result, parseString(node))
 
 proc serialize*(message: google_protobuf_Field): string =
     let
@@ -757,7 +814,40 @@ proc toJson*(message: google_protobuf_Type): JsonNode =
     if hassourceContext(message):
         result["sourceContext"] = toJson(message.sourceContext)
     if hassyntax(message):
-        result["syntax"] = %($message.syntax)
+        result["syntax"] = toJson(message.syntax)
+
+proc parsegoogle_protobuf_Type*(obj: JsonNode): google_protobuf_Type =
+    result = newgoogle_protobuf_Type()
+    var node: JsonNode
+    if obj.kind != JObject:
+        raise newException(nimpb_json.ParseError, "object expected")
+    node = getJsonField(obj, "name", "name")
+    if node != nil and node.kind != JNull:
+        setname(result, parseString(node))
+    node = getJsonField(obj, "fields", "fields")
+    if node != nil and node.kind != JNull:
+        if node.kind != JArray:
+            raise newException(ValueError, "not an array")
+        for value in node:
+            addfields(result, parsegoogle_protobuf_Field(value))
+    node = getJsonField(obj, "oneofs", "oneofs")
+    if node != nil and node.kind != JNull:
+        if node.kind != JArray:
+            raise newException(ValueError, "not an array")
+        for value in node:
+            addoneofs(result, parseString(value))
+    node = getJsonField(obj, "options", "options")
+    if node != nil and node.kind != JNull:
+        if node.kind != JArray:
+            raise newException(ValueError, "not an array")
+        for value in node:
+            addoptions(result, parsegoogle_protobuf_Option(value))
+    node = getJsonField(obj, "source_context", "sourceContext")
+    if node != nil and node.kind != JNull:
+        setsourceContext(result, parsegoogle_protobuf_SourceContext(node))
+    node = getJsonField(obj, "syntax", "syntax")
+    if node != nil and node.kind != JNull:
+        setsyntax(result, parseEnum[google_protobuf_Syntax](node))
 
 proc serialize*(message: google_protobuf_Type): string =
     let
@@ -891,6 +981,24 @@ proc toJson*(message: google_protobuf_EnumValue): JsonNode =
         for value in message.options:
             add(arr, toJson(value))
         result["options"] = arr
+
+proc parsegoogle_protobuf_EnumValue*(obj: JsonNode): google_protobuf_EnumValue =
+    result = newgoogle_protobuf_EnumValue()
+    var node: JsonNode
+    if obj.kind != JObject:
+        raise newException(nimpb_json.ParseError, "object expected")
+    node = getJsonField(obj, "name", "name")
+    if node != nil and node.kind != JNull:
+        setname(result, parseString(node))
+    node = getJsonField(obj, "number", "number")
+    if node != nil and node.kind != JNull:
+        setnumber(result, parseInt[int32](node))
+    node = getJsonField(obj, "options", "options")
+    if node != nil and node.kind != JNull:
+        if node.kind != JArray:
+            raise newException(ValueError, "not an array")
+        for value in node:
+            addoptions(result, parsegoogle_protobuf_Option(value))
 
 proc serialize*(message: google_protobuf_EnumValue): string =
     let
@@ -1088,7 +1196,34 @@ proc toJson*(message: google_protobuf_Enum): JsonNode =
     if hassourceContext(message):
         result["sourceContext"] = toJson(message.sourceContext)
     if hassyntax(message):
-        result["syntax"] = %($message.syntax)
+        result["syntax"] = toJson(message.syntax)
+
+proc parsegoogle_protobuf_Enum*(obj: JsonNode): google_protobuf_Enum =
+    result = newgoogle_protobuf_Enum()
+    var node: JsonNode
+    if obj.kind != JObject:
+        raise newException(nimpb_json.ParseError, "object expected")
+    node = getJsonField(obj, "name", "name")
+    if node != nil and node.kind != JNull:
+        setname(result, parseString(node))
+    node = getJsonField(obj, "enumvalue", "enumvalue")
+    if node != nil and node.kind != JNull:
+        if node.kind != JArray:
+            raise newException(ValueError, "not an array")
+        for value in node:
+            addenumvalue(result, parsegoogle_protobuf_EnumValue(value))
+    node = getJsonField(obj, "options", "options")
+    if node != nil and node.kind != JNull:
+        if node.kind != JArray:
+            raise newException(ValueError, "not an array")
+        for value in node:
+            addoptions(result, parsegoogle_protobuf_Option(value))
+    node = getJsonField(obj, "source_context", "sourceContext")
+    if node != nil and node.kind != JNull:
+        setsourceContext(result, parsegoogle_protobuf_SourceContext(node))
+    node = getJsonField(obj, "syntax", "syntax")
+    if node != nil and node.kind != JNull:
+        setsyntax(result, parseEnum[google_protobuf_Syntax](node))
 
 proc serialize*(message: google_protobuf_Enum): string =
     let

@@ -3,6 +3,7 @@
 import base64
 import intsets
 import json
+import strutils
 
 import nimpb/nimpb
 import nimpb/json as nimpb_json
@@ -41,6 +42,7 @@ proc writegoogle_protobuf_Method*(stream: Stream, message: google_protobuf_Metho
 proc readgoogle_protobuf_Method*(stream: Stream): google_protobuf_Method
 proc sizeOfgoogle_protobuf_Method*(message: google_protobuf_Method): uint64
 proc toJson*(message: google_protobuf_Method): JsonNode
+proc parsegoogle_protobuf_Method*(obj: JsonNode): google_protobuf_Method
 
 proc newgoogle_protobuf_Mixin*(): google_protobuf_Mixin
 proc newgoogle_protobuf_Mixin*(data: string): google_protobuf_Mixin
@@ -49,6 +51,7 @@ proc writegoogle_protobuf_Mixin*(stream: Stream, message: google_protobuf_Mixin)
 proc readgoogle_protobuf_Mixin*(stream: Stream): google_protobuf_Mixin
 proc sizeOfgoogle_protobuf_Mixin*(message: google_protobuf_Mixin): uint64
 proc toJson*(message: google_protobuf_Mixin): JsonNode
+proc parsegoogle_protobuf_Mixin*(obj: JsonNode): google_protobuf_Mixin
 
 proc newgoogle_protobuf_Api*(): google_protobuf_Api
 proc newgoogle_protobuf_Api*(data: string): google_protobuf_Api
@@ -57,6 +60,7 @@ proc writegoogle_protobuf_Api*(stream: Stream, message: google_protobuf_Api)
 proc readgoogle_protobuf_Api*(stream: Stream): google_protobuf_Api
 proc sizeOfgoogle_protobuf_Api*(message: google_protobuf_Api): uint64
 proc toJson*(message: google_protobuf_Api): JsonNode
+proc parsegoogle_protobuf_Api*(obj: JsonNode): google_protobuf_Api
 
 proc newgoogle_protobuf_Method*(): google_protobuf_Method =
     new(result)
@@ -284,7 +288,37 @@ proc toJson*(message: google_protobuf_Method): JsonNode =
             add(arr, toJson(value))
         result["options"] = arr
     if hassyntax(message):
-        result["syntax"] = %($message.syntax)
+        result["syntax"] = toJson(message.syntax)
+
+proc parsegoogle_protobuf_Method*(obj: JsonNode): google_protobuf_Method =
+    result = newgoogle_protobuf_Method()
+    var node: JsonNode
+    if obj.kind != JObject:
+        raise newException(nimpb_json.ParseError, "object expected")
+    node = getJsonField(obj, "name", "name")
+    if node != nil and node.kind != JNull:
+        setname(result, parseString(node))
+    node = getJsonField(obj, "request_type_url", "requestTypeUrl")
+    if node != nil and node.kind != JNull:
+        setrequestTypeUrl(result, parseString(node))
+    node = getJsonField(obj, "request_streaming", "requestStreaming")
+    if node != nil and node.kind != JNull:
+        setrequestStreaming(result, parseBool(node))
+    node = getJsonField(obj, "response_type_url", "responseTypeUrl")
+    if node != nil and node.kind != JNull:
+        setresponseTypeUrl(result, parseString(node))
+    node = getJsonField(obj, "response_streaming", "responseStreaming")
+    if node != nil and node.kind != JNull:
+        setresponseStreaming(result, parseBool(node))
+    node = getJsonField(obj, "options", "options")
+    if node != nil and node.kind != JNull:
+        if node.kind != JArray:
+            raise newException(ValueError, "not an array")
+        for value in node:
+            addoptions(result, parsegoogle_protobuf_Option(value))
+    node = getJsonField(obj, "syntax", "syntax")
+    if node != nil and node.kind != JNull:
+        setsyntax(result, parseEnum[google_protobuf_Syntax](node))
 
 proc serialize*(message: google_protobuf_Method): string =
     let
@@ -382,6 +416,18 @@ proc toJson*(message: google_protobuf_Mixin): JsonNode =
         result["name"] = %message.name
     if hasroot(message):
         result["root"] = %message.root
+
+proc parsegoogle_protobuf_Mixin*(obj: JsonNode): google_protobuf_Mixin =
+    result = newgoogle_protobuf_Mixin()
+    var node: JsonNode
+    if obj.kind != JObject:
+        raise newException(nimpb_json.ParseError, "object expected")
+    node = getJsonField(obj, "name", "name")
+    if node != nil and node.kind != JNull:
+        setname(result, parseString(node))
+    node = getJsonField(obj, "root", "root")
+    if node != nil and node.kind != JNull:
+        setroot(result, parseString(node))
 
 proc serialize*(message: google_protobuf_Mixin): string =
     let
@@ -643,7 +689,43 @@ proc toJson*(message: google_protobuf_Api): JsonNode =
             add(arr, toJson(value))
         result["mixins"] = arr
     if hassyntax(message):
-        result["syntax"] = %($message.syntax)
+        result["syntax"] = toJson(message.syntax)
+
+proc parsegoogle_protobuf_Api*(obj: JsonNode): google_protobuf_Api =
+    result = newgoogle_protobuf_Api()
+    var node: JsonNode
+    if obj.kind != JObject:
+        raise newException(nimpb_json.ParseError, "object expected")
+    node = getJsonField(obj, "name", "name")
+    if node != nil and node.kind != JNull:
+        setname(result, parseString(node))
+    node = getJsonField(obj, "methods", "methods")
+    if node != nil and node.kind != JNull:
+        if node.kind != JArray:
+            raise newException(ValueError, "not an array")
+        for value in node:
+            addmethods(result, parsegoogle_protobuf_Method(value))
+    node = getJsonField(obj, "options", "options")
+    if node != nil and node.kind != JNull:
+        if node.kind != JArray:
+            raise newException(ValueError, "not an array")
+        for value in node:
+            addoptions(result, parsegoogle_protobuf_Option(value))
+    node = getJsonField(obj, "version", "version")
+    if node != nil and node.kind != JNull:
+        setversion(result, parseString(node))
+    node = getJsonField(obj, "source_context", "sourceContext")
+    if node != nil and node.kind != JNull:
+        setsourceContext(result, parsegoogle_protobuf_SourceContext(node))
+    node = getJsonField(obj, "mixins", "mixins")
+    if node != nil and node.kind != JNull:
+        if node.kind != JArray:
+            raise newException(ValueError, "not an array")
+        for value in node:
+            addmixins(result, parsegoogle_protobuf_Mixin(value))
+    node = getJsonField(obj, "syntax", "syntax")
+    if node != nil and node.kind != JNull:
+        setsyntax(result, parseEnum[google_protobuf_Syntax](node))
 
 proc serialize*(message: google_protobuf_Api): string =
     let
