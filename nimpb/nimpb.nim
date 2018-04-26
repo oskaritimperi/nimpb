@@ -347,9 +347,12 @@ proc protoWriteString*(stream: Stream, s: string, fieldNumber: int) =
     writeTag(stream, fieldNumber, WireType.LengthDelimited)
     protoWriteString(stream, s)
 
-proc protoWriteBytes*(stream: Stream, bytes: var seq[byte], fieldNumber: int) =
+proc protoWriteBytes*(stream: Stream, bytes: seq[byte], fieldNumber: int) =
+    var bytes = bytes
     writeTag(stream, fieldNumber, WireType.LengthDelimited)
-    writeData(stream, addr(bytes[0]), len(bytes))
+    protoWriteUInt64(stream, len(bytes).uint64)
+    if len(bytes) > 0:
+        writeData(stream, addr(bytes[0]), len(bytes))
 
 proc safeReadStr*(stream: Stream, size: int): string =
     result = newString(size)
@@ -362,7 +365,9 @@ proc protoReadString*(stream: Stream): string =
 
 proc protoReadBytes*(stream: Stream): seq[byte] =
     let size = int(protoReadUInt64(stream))
-    setLen(result, size)
+    newSeq(result, size)
+    if size == 0:
+        return
     if readData(stream, addr(result[0]), size) != size:
         raise newException(IOError, "cannot read from stream")
 

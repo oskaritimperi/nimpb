@@ -47,10 +47,10 @@ while true:
         response.skipped = "dont know how to parse json"
     else:
         try:
-            let parsed = newprotobuf_test_messages_proto3_TestAllTypesProto3(string(request.protobufPayload))
+            let parsed = newprotobuf_test_messages_proto3_TestAllTypesProto3(request.protobufPayload)
             if request.requestedOutputFormat == conformance_WireFormat.PROTOBUF:
                 let ser = serialize(parsed)
-                response.protobufPayload = bytes(ser)
+                response.protobufPayload = cast[seq[byte]](ser)
             elif request.requestedOutputFormat == conformance_WireFormat.JSON:
                 response.jsonPayload = $toJson(parsed)
         except IOError as exc:
