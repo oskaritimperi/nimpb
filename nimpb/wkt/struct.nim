@@ -53,17 +53,17 @@ proc parsegoogle_protobuf_Value*(node: JsonNode): google_protobuf_Value =
     result = newgoogle_protobuf_Value()
 
     if node.kind == JNull:
-        result.nullValue = google_protobuf_NullValue.NULL_VALUE
+        setNullValue(result, google_protobuf_NullValue.NULL_VALUE)
     elif node.kind == JInt or node.kind == JFloat:
-        result.numberValue = getFloat(node)
+        setNumberValue(result, getFloat(node))
     elif node.kind == JString:
-        result.stringValue = getStr(node)
+        setStringValue(result, getStr(node))
     elif node.kind == JBool:
-        result.boolValue = getBool(node)
+        setBoolValue(result, getBool(node))
     elif node.kind == JObject:
-        result.structValue = parsegoogle_protobuf_Struct(node)
+        setStructValue(result, parsegoogle_protobuf_Struct(node))
     elif node.kind == JArray:
-        result.listValue = parsegoogle_protobuf_ListValue(node)
+        setListValue(result, parsegoogle_protobuf_ListValue(node))
 
 proc parsegoogle_protobuf_NullValue*(node: JsonNode): google_protobuf_NullValue =
     if node.kind != JNull:

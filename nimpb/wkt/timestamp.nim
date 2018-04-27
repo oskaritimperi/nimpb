@@ -69,5 +69,5 @@ offset <- 'Z' / (('+' / '-') \d\d ':' \d\d)
 
     result = newgoogle_protobuf_Timestamp()
 
-    result.seconds = toUnix(toTime(dt))
-    result.nanos = int32(nanos)
+    setSeconds(result, toUnix(toTime(dt)))
+    setNanos(result, int32(nanos))
