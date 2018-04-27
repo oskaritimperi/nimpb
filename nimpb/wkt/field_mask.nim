@@ -31,8 +31,16 @@ proc snakeCaseToCamelCase(s: string): string =
         raise newException(ValueError, "trailing underscore")
 
 proc camelCaseToSnakeCase(s: string): string =
-    # TODO
-    result = s
+    # Nimification from https://github.com/google/protobuf/blob/master/src/google/protobuf/util/field_mask_util.cc
+    result = newStringOfCap(len(s) * 2)
+    for ch in s:
+        if ch == '_':
+            raise newException(ValueError, "unexpected underscore")
+        if isUpperAscii(ch):
+            add(result, '_')
+            add(result, toLowerAscii(ch))
+        else:
+            add(result, ch)
 
 proc toJson*(message: google_protobuf_FieldMask): JsonNode =
     var resultString = ""
@@ -51,5 +59,8 @@ proc parsegoogle_protobuf_FieldMask*(node: JsonNode): google_protobuf_FieldMask 
     result = newgoogle_protobuf_FieldMask()
     result.paths = @[]
 
-    for path in split(node.str, ","):
-        addPaths(result, camelCaseToSnakeCase(path))
+    try:
+        for path in split(node.str, ","):
+            addPaths(result, camelCaseToSnakeCase(path))
+    except ValueError as exc:
+        raise newException(nimpb_json.ParseError, exc.msg)
