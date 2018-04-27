@@ -659,16 +659,22 @@ iterator genType(message: Message): string =
 
         for oneof in message.oneofs:
             yield ""
-            yield &"{message.names}_{oneof.name}_OneOf* {{.union.}} = object"
+            yield indent(&"{message.names}_{oneof.name}_Kind* {{.pure.}} = enum", 0)
             for field in oneof.fields:
-                yield indent(&"{quoteReserved(field.name)}: {field.fullType}", 4)
+                yield indent(&"{field.name.capitalizeAscii}", 4)
+            yield ""
+            yield &"{message.names}_{oneof.name}_OneOf* = object"
+            yield indent(&"case kind*: {message.names}_{oneof.name}_Kind", 4)
+            for field in oneof.fields:
+                yield indent(&"of {message.names}_{oneof.name}_Kind.{field.name.capitalizeAscii}: {quoteReserved(field.name)}*: {field.fullType}", 4)
 
 iterator genNewMessageProc(msg: Message): string =
     yield &"proc new{msg.names}*(): {msg.names} ="
     yield indent("new(result)", 4)
     yield indent("initMessage(result[])", 4)
     for field in msg.fields:
-        yield indent(&"result.{field.accessor} = {defaultValue(field)}", 4)
+        if field.oneof == nil:
+            yield indent(&"result.{field.accessor} = {defaultValue(field)}", 4)
     yield ""
 
 iterator oneofSiblings(field: Field): Field =
@@ -680,7 +686,10 @@ iterator oneofSiblings(field: Field): Field =
 
 iterator genClearFieldProc(msg: Message, field: Field): string =
     yield &"proc clear{field.name}*(message: {msg.names}) ="
-    yield indent(&"message.{field.accessor} = {defaultValue(field)}", 4)
+    if field.oneof == nil:
+        yield indent(&"message.{field.accessor} = {defaultValue(field)}", 4)
+    else:
+        yield indent(&"reset(message.{field.oneof.name})", 4)
     var numbers: seq[int] = @[field.number]
     for sibling in oneofSiblings(field):
         add(numbers, sibling.number)
@@ -697,7 +706,13 @@ iterator genHasFieldProc(msg: Message, field: Field): string =
 
 iterator genSetFieldProc(msg: Message, field: Field): string =
     yield &"proc set{field.name}*(message: {msg.names}, value: {field.fullType}) ="
-    yield indent(&"message.{field.accessor} = value", 4)
+    if field.oneof == nil:
+        yield indent(&"message.{field.accessor} = value", 4)
+    else:
+        yield indent(&"if message.{field.oneof.name}.kind != {msg.names}_{field.oneof.name}_Kind.{field.name.capitalizeAscii}:", 4)
+        yield indent(&"reset(message.{field.oneof.name})", 8)
+        yield indent(&"message.{field.oneof.name}.kind = {msg.names}_{field.oneof.name}_Kind.{field.name.capitalizeAscii}", 8)
+        yield indent(&"message.{field.accessor} = value", 4)
     yield indent(&"setField(message, {field.number})", 4)
     var numbers: seq[int] = @[]
     for sibling in oneofSiblings(field):
