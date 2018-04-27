@@ -1008,9 +1008,19 @@ iterator genMessageFromJsonProc(msg: Message): string =
         elif field.ftype == google_protobuf_FieldDescriptorProto_Type.TypeBytes:
             result = &"parseBytes({n})"
 
+    var oneOfsHandled: seq[string] = @[]
+
     for field in msg.fields:
+        if field.oneof != nil:
+            if field.oneof.name notin oneOfsHandled:
+                yield indent(&"var {field.oneof.name}Done = false", 4)
+                add(oneOfsHandled, field.oneof.name)
         yield indent(&"node = getJsonField(obj, \"{field.protoName}\", \"{field.jsonName}\")", 4)
         yield indent(&"if node != nil and node.kind != JNull:", 4)
+        if field.oneof != nil:
+            yield indent(&"if {field.oneof.name}Done:", 8)
+            yield indent(&"raise newException(nimpb_json.ParseError, \"multiple values for oneof encountered\")", 12)
+            yield indent(&"{field.oneof.name}Done = true", 8)
         if isMapEntry(field):
             yield indent("if node.kind != JObject:", 8)
             yield indent("raise newException(ValueError, \"not an object\")", 12)
