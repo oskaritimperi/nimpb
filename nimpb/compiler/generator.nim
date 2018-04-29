@@ -767,6 +767,8 @@ iterator genWriteMapKVProc(msg: Message): string =
 proc hasFieldCheck(msg: string, field: Field): string =
     if isRepeated(field) or isMapEntry(field):
         return &"len({msg}.{field.accessor}) > 0"
+    elif field.message.file.syntax == Syntax.Proto2:
+        return &"has{field.name}({msg})"
     elif field.oneof != nil:
         # Oneof fields only check the kind of the oneof field. If we anded this
         # check with a check from below, we couldn't convey to the deserializing

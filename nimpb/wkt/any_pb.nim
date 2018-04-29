@@ -29,14 +29,9 @@ proc newgoogle_protobuf_Any*(): google_protobuf_Any =
 
 proc cleartypeUrl*(message: google_protobuf_Any) =
     message.typeUrl = ""
-    clearFields(message, [1])
-
-proc hastypeUrl*(message: google_protobuf_Any): bool =
-    result = hasField(message, 1)
 
 proc settypeUrl*(message: google_protobuf_Any, value: string) =
     message.typeUrl = value
-    setField(message, 1)
 
 proc typeUrl*(message: google_protobuf_Any): string {.inline.} =
     message.typeUrl
@@ -46,14 +41,9 @@ proc `typeUrl=`*(message: google_protobuf_Any, value: string) {.inline.} =
 
 proc clearvalue*(message: google_protobuf_Any) =
     message.value = @[]
-    clearFields(message, [2])
-
-proc hasvalue*(message: google_protobuf_Any): bool =
-    result = hasField(message, 2)
 
 proc setvalue*(message: google_protobuf_Any, value: seq[byte]) =
     message.value = value
-    setField(message, 2)
 
 proc value*(message: google_protobuf_Any): seq[byte] {.inline.} =
     message.value
@@ -62,18 +52,18 @@ proc `value=`*(message: google_protobuf_Any, value: seq[byte]) {.inline.} =
     setvalue(message, value)
 
 proc sizeOfgoogle_protobuf_Any*(message: google_protobuf_Any): uint64 =
-    if hastypeUrl(message):
+    if len(message.typeUrl) > 0:
         result = result + sizeOfTag(1, WireType.LengthDelimited)
         result = result + sizeOfString(message.typeUrl)
-    if hasvalue(message):
+    if len(message.value) > 0:
         result = result + sizeOfTag(2, WireType.LengthDelimited)
         result = result + sizeOfBytes(message.value)
     result = result + sizeOfUnknownFields(message)
 
 proc writegoogle_protobuf_Any*(stream: Stream, message: google_protobuf_Any) =
-    if hastypeUrl(message):
+    if len(message.typeUrl) > 0:
         protoWriteString(stream, message.typeUrl, 1)
-    if hasvalue(message):
+    if len(message.value) > 0:
         protoWriteBytes(stream, message.value, 2)
     writeUnknownFields(stream, message)
 

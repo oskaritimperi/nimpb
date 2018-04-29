@@ -29,14 +29,9 @@ proc newgoogle_protobuf_Duration*(): google_protobuf_Duration =
 
 proc clearseconds*(message: google_protobuf_Duration) =
     message.seconds = 0
-    clearFields(message, [1])
-
-proc hasseconds*(message: google_protobuf_Duration): bool =
-    result = hasField(message, 1)
 
 proc setseconds*(message: google_protobuf_Duration, value: int64) =
     message.seconds = value
-    setField(message, 1)
 
 proc seconds*(message: google_protobuf_Duration): int64 {.inline.} =
     message.seconds
@@ -46,14 +41,9 @@ proc `seconds=`*(message: google_protobuf_Duration, value: int64) {.inline.} =
 
 proc clearnanos*(message: google_protobuf_Duration) =
     message.nanos = 0
-    clearFields(message, [2])
-
-proc hasnanos*(message: google_protobuf_Duration): bool =
-    result = hasField(message, 2)
 
 proc setnanos*(message: google_protobuf_Duration, value: int32) =
     message.nanos = value
-    setField(message, 2)
 
 proc nanos*(message: google_protobuf_Duration): int32 {.inline.} =
     message.nanos
@@ -62,18 +52,18 @@ proc `nanos=`*(message: google_protobuf_Duration, value: int32) {.inline.} =
     setnanos(message, value)
 
 proc sizeOfgoogle_protobuf_Duration*(message: google_protobuf_Duration): uint64 =
-    if hasseconds(message):
+    if message.seconds != 0:
         result = result + sizeOfTag(1, WireType.Varint)
         result = result + sizeOfInt64(message.seconds)
-    if hasnanos(message):
+    if message.nanos != 0:
         result = result + sizeOfTag(2, WireType.Varint)
         result = result + sizeOfInt32(message.nanos)
     result = result + sizeOfUnknownFields(message)
 
 proc writegoogle_protobuf_Duration*(stream: Stream, message: google_protobuf_Duration) =
-    if hasseconds(message):
+    if message.seconds != 0:
         protoWriteInt64(stream, message.seconds, 1)
-    if hasnanos(message):
+    if message.nanos != 0:
         protoWriteInt32(stream, message.nanos, 2)
     writeUnknownFields(stream, message)
 

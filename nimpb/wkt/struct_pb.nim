@@ -20,13 +20,24 @@ type
     google_protobuf_ValueObj* = object of Message
         kind: google_protobuf_Value_kind_OneOf
 
-    google_protobuf_Value_kind_OneOf* {.union.} = object
-        nullValue: google_protobuf_NullValue
-        numberValue: float64
-        stringValue: string
-        boolValue: bool
-        structValue: google_protobuf_Struct
-        listValue: google_protobuf_ListValue
+    google_protobuf_Value_kind_Kind* {.pure.} = enum
+        NullValue
+        NumberValue
+        StringValue
+        BoolValue
+        StructValue
+        ListValue
+        NotSet
+
+    google_protobuf_Value_kind_OneOf* = object
+        case kind*: google_protobuf_Value_kind_Kind
+        of google_protobuf_Value_kind_Kind.NullValue: nullValue*: google_protobuf_NullValue
+        of google_protobuf_Value_kind_Kind.NumberValue: numberValue*: float64
+        of google_protobuf_Value_kind_Kind.StringValue: stringValue*: string
+        of google_protobuf_Value_kind_Kind.BoolValue: boolValue*: bool
+        of google_protobuf_Value_kind_Kind.StructValue: structValue*: google_protobuf_Struct
+        of google_protobuf_Value_kind_Kind.ListValue: listValue*: google_protobuf_ListValue
+        of google_protobuf_Value_kind_Kind.NotSet: nil
     google_protobuf_ListValue* = ref google_protobuf_ListValueObj
     google_protobuf_ListValueObj* = object of Message
         values: seq[google_protobuf_Value]
@@ -102,14 +113,9 @@ proc newgoogle_protobuf_Struct*(): google_protobuf_Struct =
 
 proc clearfields*(message: google_protobuf_Struct) =
     message.fields = newTable[string, google_protobuf_Value]()
-    clearFields(message, [1])
-
-proc hasfields*(message: google_protobuf_Struct): bool =
-    result = hasField(message, 1) or (len(message.fields) > 0)
 
 proc setfields*(message: google_protobuf_Struct, value: TableRef[string, google_protobuf_Value]) =
     message.fields = value
-    setField(message, 1)
 
 proc fields*(message: google_protobuf_Struct): TableRef[string, google_protobuf_Value] {.inline.} =
     message.fields
@@ -118,7 +124,7 @@ proc `fields=`*(message: google_protobuf_Struct, value: TableRef[string, google_
     setfields(message, value)
 
 proc sizeOfgoogle_protobuf_Struct*(message: google_protobuf_Struct): uint64 =
-    if hasfields(message):
+    if len(message.fields) > 0:
         var sizeOfKV = 0'u64
         for key, value in message.fields:
             sizeOfKV = sizeOfKV + sizeOfgoogle_protobuf_Struct_FieldsEntryKV(key, value)
@@ -186,7 +192,6 @@ proc setvalues*(message: google_protobuf_ListValue, value: seq[google_protobuf_V
 
 proc addvalues*(message: google_protobuf_ListValue, value: google_protobuf_Value) =
     add(message.values, value)
-    setField(message, 1)
 
 proc values*(message: google_protobuf_ListValue): seq[google_protobuf_Value] {.inline.} =
     message.values
@@ -240,21 +245,20 @@ proc newgoogle_protobuf_ListValue*(data: seq[byte]): google_protobuf_ListValue =
 proc newgoogle_protobuf_Value*(): google_protobuf_Value =
     new(result)
     initMessage(result[])
-    result.kind.nullValue = google_protobuf_NullValue.NULL_VALUE
-    result.kind.numberValue = 0
-    result.kind.stringValue = ""
-    result.kind.boolValue = false
-    result.kind.structValue = nil
-    result.kind.listValue = nil
+    result.kind.kind = google_protobuf_Value_kind_Kind.NotSet
 
 proc clearnullValue*(message: google_protobuf_Value) =
-    message.kind.nullValue = google_protobuf_NullValue.NULL_VALUE
+    reset(message.kind)
+    message.kind.kind = google_protobuf_Value_kind_Kind.NotSet
     clearFields(message, [1, 2, 3, 4, 5, 6])
 
 proc hasnullValue*(message: google_protobuf_Value): bool =
     result = hasField(message, 1)
 
 proc setnullValue*(message: google_protobuf_Value, value: google_protobuf_NullValue) =
+    if message.kind.kind != google_protobuf_Value_kind_Kind.NullValue:
+        reset(message.kind)
+        message.kind.kind = google_protobuf_Value_kind_Kind.NullValue
     message.kind.nullValue = value
     setField(message, 1)
     clearFields(message, [2, 3, 4, 5, 6])
@@ -266,13 +270,17 @@ proc `nullValue=`*(message: google_protobuf_Value, value: google_protobuf_NullVa
     setnullValue(message, value)
 
 proc clearnumberValue*(message: google_protobuf_Value) =
-    message.kind.numberValue = 0
+    reset(message.kind)
+    message.kind.kind = google_protobuf_Value_kind_Kind.NotSet
     clearFields(message, [2, 1, 3, 4, 5, 6])
 
 proc hasnumberValue*(message: google_protobuf_Value): bool =
     result = hasField(message, 2)
 
 proc setnumberValue*(message: google_protobuf_Value, value: float64) =
+    if message.kind.kind != google_protobuf_Value_kind_Kind.NumberValue:
+        reset(message.kind)
+        message.kind.kind = google_protobuf_Value_kind_Kind.NumberValue
     message.kind.numberValue = value
     setField(message, 2)
     clearFields(message, [1, 3, 4, 5, 6])
@@ -284,13 +292,17 @@ proc `numberValue=`*(message: google_protobuf_Value, value: float64) {.inline.} 
     setnumberValue(message, value)
 
 proc clearstringValue*(message: google_protobuf_Value) =
-    message.kind.stringValue = ""
+    reset(message.kind)
+    message.kind.kind = google_protobuf_Value_kind_Kind.NotSet
     clearFields(message, [3, 1, 2, 4, 5, 6])
 
 proc hasstringValue*(message: google_protobuf_Value): bool =
     result = hasField(message, 3)
 
 proc setstringValue*(message: google_protobuf_Value, value: string) =
+    if message.kind.kind != google_protobuf_Value_kind_Kind.StringValue:
+        reset(message.kind)
+        message.kind.kind = google_protobuf_Value_kind_Kind.StringValue
     message.kind.stringValue = value
     setField(message, 3)
     clearFields(message, [1, 2, 4, 5, 6])
@@ -302,13 +314,17 @@ proc `stringValue=`*(message: google_protobuf_Value, value: string) {.inline.} =
     setstringValue(message, value)
 
 proc clearboolValue*(message: google_protobuf_Value) =
-    message.kind.boolValue = false
+    reset(message.kind)
+    message.kind.kind = google_protobuf_Value_kind_Kind.NotSet
     clearFields(message, [4, 1, 2, 3, 5, 6])
 
 proc hasboolValue*(message: google_protobuf_Value): bool =
     result = hasField(message, 4)
 
 proc setboolValue*(message: google_protobuf_Value, value: bool) =
+    if message.kind.kind != google_protobuf_Value_kind_Kind.BoolValue:
+        reset(message.kind)
+        message.kind.kind = google_protobuf_Value_kind_Kind.BoolValue
     message.kind.boolValue = value
     setField(message, 4)
     clearFields(message, [1, 2, 3, 5, 6])
@@ -320,13 +336,17 @@ proc `boolValue=`*(message: google_protobuf_Value, value: bool) {.inline.} =
     setboolValue(message, value)
 
 proc clearstructValue*(message: google_protobuf_Value) =
-    message.kind.structValue = nil
+    reset(message.kind)
+    message.kind.kind = google_protobuf_Value_kind_Kind.NotSet
     clearFields(message, [5, 1, 2, 3, 4, 6])
 
 proc hasstructValue*(message: google_protobuf_Value): bool =
     result = hasField(message, 5)
 
 proc setstructValue*(message: google_protobuf_Value, value: google_protobuf_Struct) =
+    if message.kind.kind != google_protobuf_Value_kind_Kind.StructValue:
+        reset(message.kind)
+        message.kind.kind = google_protobuf_Value_kind_Kind.StructValue
     message.kind.structValue = value
     setField(message, 5)
     clearFields(message, [1, 2, 3, 4, 6])
@@ -338,13 +358,17 @@ proc `structValue=`*(message: google_protobuf_Value, value: google_protobuf_Stru
     setstructValue(message, value)
 
 proc clearlistValue*(message: google_protobuf_Value) =
-    message.kind.listValue = nil
+    reset(message.kind)
+    message.kind.kind = google_protobuf_Value_kind_Kind.NotSet
     clearFields(message, [6, 1, 2, 3, 4, 5])
 
 proc haslistValue*(message: google_protobuf_Value): bool =
     result = hasField(message, 6)
 
 proc setlistValue*(message: google_protobuf_Value, value: google_protobuf_ListValue) =
+    if message.kind.kind != google_protobuf_Value_kind_Kind.ListValue:
+        reset(message.kind)
+        message.kind.kind = google_protobuf_Value_kind_Kind.ListValue
     message.kind.listValue = value
     setField(message, 6)
     clearFields(message, [1, 2, 3, 4, 5])
@@ -356,38 +380,38 @@ proc `listValue=`*(message: google_protobuf_Value, value: google_protobuf_ListVa
     setlistValue(message, value)
 
 proc sizeOfgoogle_protobuf_Value*(message: google_protobuf_Value): uint64 =
-    if hasnullValue(message):
+    if message.kind.kind == google_protobuf_Value_kind_Kind.NullValue:
         result = result + sizeOfTag(1, WireType.Varint)
         result = result + sizeOfEnum[google_protobuf_NullValue](message.kind.nullValue)
-    if hasnumberValue(message):
+    if message.kind.kind == google_protobuf_Value_kind_Kind.NumberValue:
         result = result + sizeOfTag(2, WireType.Fixed64)
         result = result + sizeOfDouble(message.kind.numberValue)
-    if hasstringValue(message):
+    if message.kind.kind == google_protobuf_Value_kind_Kind.StringValue:
         result = result + sizeOfTag(3, WireType.LengthDelimited)
         result = result + sizeOfString(message.kind.stringValue)
-    if hasboolValue(message):
+    if message.kind.kind == google_protobuf_Value_kind_Kind.BoolValue:
         result = result + sizeOfTag(4, WireType.Varint)
         result = result + sizeOfBool(message.kind.boolValue)
-    if hasstructValue(message):
+    if message.kind.kind == google_protobuf_Value_kind_Kind.StructValue:
         result = result + sizeOfTag(5, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_Struct(message.kind.structValue))
-    if haslistValue(message):
+    if message.kind.kind == google_protobuf_Value_kind_Kind.ListValue:
         result = result + sizeOfTag(6, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_ListValue(message.kind.listValue))
     result = result + sizeOfUnknownFields(message)
 
 proc writegoogle_protobuf_Value*(stream: Stream, message: google_protobuf_Value) =
-    if hasnullValue(message):
+    if message.kind.kind == google_protobuf_Value_kind_Kind.NullValue:
         protoWriteEnum(stream, message.kind.nullValue, 1)
-    if hasnumberValue(message):
+    if message.kind.kind == google_protobuf_Value_kind_Kind.NumberValue:
         protoWriteDouble(stream, message.kind.numberValue, 2)
-    if hasstringValue(message):
+    if message.kind.kind == google_protobuf_Value_kind_Kind.StringValue:
         protoWriteString(stream, message.kind.stringValue, 3)
-    if hasboolValue(message):
+    if message.kind.kind == google_protobuf_Value_kind_Kind.BoolValue:
         protoWriteBool(stream, message.kind.boolValue, 4)
-    if hasstructValue(message):
+    if message.kind.kind == google_protobuf_Value_kind_Kind.StructValue:
         writeMessage(stream, message.kind.structValue, 5)
-    if haslistValue(message):
+    if message.kind.kind == google_protobuf_Value_kind_Kind.ListValue:
         writeMessage(stream, message.kind.listValue, 6)
     writeUnknownFields(stream, message)
 

@@ -27,18 +27,12 @@ proc newgoogle_protobuf_FieldMask*(): google_protobuf_FieldMask =
 
 proc clearpaths*(message: google_protobuf_FieldMask) =
     message.paths = @[]
-    clearFields(message, [1])
-
-proc haspaths*(message: google_protobuf_FieldMask): bool =
-    result = hasField(message, 1) or (len(message.paths) > 0)
 
 proc setpaths*(message: google_protobuf_FieldMask, value: seq[string]) =
     message.paths = value
-    setField(message, 1)
 
 proc addpaths*(message: google_protobuf_FieldMask, value: string) =
     add(message.paths, value)
-    setField(message, 1)
 
 proc paths*(message: google_protobuf_FieldMask): seq[string] {.inline.} =
     message.paths

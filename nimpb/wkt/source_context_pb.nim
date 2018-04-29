@@ -29,14 +29,9 @@ proc newgoogle_protobuf_SourceContext*(): google_protobuf_SourceContext =
 
 proc clearfileName*(message: google_protobuf_SourceContext) =
     message.fileName = ""
-    clearFields(message, [1])
-
-proc hasfileName*(message: google_protobuf_SourceContext): bool =
-    result = hasField(message, 1)
 
 proc setfileName*(message: google_protobuf_SourceContext, value: string) =
     message.fileName = value
-    setField(message, 1)
 
 proc fileName*(message: google_protobuf_SourceContext): string {.inline.} =
     message.fileName
@@ -45,13 +40,13 @@ proc `fileName=`*(message: google_protobuf_SourceContext, value: string) {.inlin
     setfileName(message, value)
 
 proc sizeOfgoogle_protobuf_SourceContext*(message: google_protobuf_SourceContext): uint64 =
-    if hasfileName(message):
+    if len(message.fileName) > 0:
         result = result + sizeOfTag(1, WireType.LengthDelimited)
         result = result + sizeOfString(message.fileName)
     result = result + sizeOfUnknownFields(message)
 
 proc writegoogle_protobuf_SourceContext*(stream: Stream, message: google_protobuf_SourceContext) =
-    if hasfileName(message):
+    if len(message.fileName) > 0:
         protoWriteString(stream, message.fileName, 1)
     writeUnknownFields(stream, message)
 
@@ -71,7 +66,7 @@ proc readgoogle_protobuf_SourceContext*(stream: Stream): google_protobuf_SourceC
 
 proc toJson*(message: google_protobuf_SourceContext): JsonNode =
     result = newJObject()
-    if hasfileName(message):
+    if len(message.fileName) > 0:
         result["fileName"] = %message.fileName
 
 proc parsegoogle_protobuf_SourceContext*(obj: JsonNode): google_protobuf_SourceContext =

@@ -231,8 +231,6 @@ proc newgoogle_protobuf_UninterpretedOption_NamePart*(data: seq[byte]): google_p
 proc writegoogle_protobuf_UninterpretedOption_NamePart*(stream: Stream, message: google_protobuf_UninterpretedOption_NamePart)
 proc readgoogle_protobuf_UninterpretedOption_NamePart*(stream: Stream): google_protobuf_UninterpretedOption_NamePart
 proc sizeOfgoogle_protobuf_UninterpretedOption_NamePart*(message: google_protobuf_UninterpretedOption_NamePart): uint64
-proc toJson*(message: google_protobuf_UninterpretedOption_NamePart): JsonNode
-proc parsegoogle_protobuf_UninterpretedOption_NamePart*(obj: JsonNode): google_protobuf_UninterpretedOption_NamePart
 
 proc newgoogle_protobuf_UninterpretedOption*(): google_protobuf_UninterpretedOption
 proc newgoogle_protobuf_UninterpretedOption*(data: string): google_protobuf_UninterpretedOption
@@ -240,8 +238,6 @@ proc newgoogle_protobuf_UninterpretedOption*(data: seq[byte]): google_protobuf_U
 proc writegoogle_protobuf_UninterpretedOption*(stream: Stream, message: google_protobuf_UninterpretedOption)
 proc readgoogle_protobuf_UninterpretedOption*(stream: Stream): google_protobuf_UninterpretedOption
 proc sizeOfgoogle_protobuf_UninterpretedOption*(message: google_protobuf_UninterpretedOption): uint64
-proc toJson*(message: google_protobuf_UninterpretedOption): JsonNode
-proc parsegoogle_protobuf_UninterpretedOption*(obj: JsonNode): google_protobuf_UninterpretedOption
 
 proc newgoogle_protobuf_EnumValueOptions*(): google_protobuf_EnumValueOptions
 proc newgoogle_protobuf_EnumValueOptions*(data: string): google_protobuf_EnumValueOptions
@@ -249,8 +245,6 @@ proc newgoogle_protobuf_EnumValueOptions*(data: seq[byte]): google_protobuf_Enum
 proc writegoogle_protobuf_EnumValueOptions*(stream: Stream, message: google_protobuf_EnumValueOptions)
 proc readgoogle_protobuf_EnumValueOptions*(stream: Stream): google_protobuf_EnumValueOptions
 proc sizeOfgoogle_protobuf_EnumValueOptions*(message: google_protobuf_EnumValueOptions): uint64
-proc toJson*(message: google_protobuf_EnumValueOptions): JsonNode
-proc parsegoogle_protobuf_EnumValueOptions*(obj: JsonNode): google_protobuf_EnumValueOptions
 
 proc newgoogle_protobuf_EnumValueDescriptorProto*(): google_protobuf_EnumValueDescriptorProto
 proc newgoogle_protobuf_EnumValueDescriptorProto*(data: string): google_protobuf_EnumValueDescriptorProto
@@ -258,8 +252,6 @@ proc newgoogle_protobuf_EnumValueDescriptorProto*(data: seq[byte]): google_proto
 proc writegoogle_protobuf_EnumValueDescriptorProto*(stream: Stream, message: google_protobuf_EnumValueDescriptorProto)
 proc readgoogle_protobuf_EnumValueDescriptorProto*(stream: Stream): google_protobuf_EnumValueDescriptorProto
 proc sizeOfgoogle_protobuf_EnumValueDescriptorProto*(message: google_protobuf_EnumValueDescriptorProto): uint64
-proc toJson*(message: google_protobuf_EnumValueDescriptorProto): JsonNode
-proc parsegoogle_protobuf_EnumValueDescriptorProto*(obj: JsonNode): google_protobuf_EnumValueDescriptorProto
 
 proc newgoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(): google_protobuf_EnumDescriptorProto_EnumReservedRange
 proc newgoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(data: string): google_protobuf_EnumDescriptorProto_EnumReservedRange
@@ -267,8 +259,6 @@ proc newgoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(data: seq[byte]):
 proc writegoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(stream: Stream, message: google_protobuf_EnumDescriptorProto_EnumReservedRange)
 proc readgoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(stream: Stream): google_protobuf_EnumDescriptorProto_EnumReservedRange
 proc sizeOfgoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(message: google_protobuf_EnumDescriptorProto_EnumReservedRange): uint64
-proc toJson*(message: google_protobuf_EnumDescriptorProto_EnumReservedRange): JsonNode
-proc parsegoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(obj: JsonNode): google_protobuf_EnumDescriptorProto_EnumReservedRange
 
 proc newgoogle_protobuf_EnumOptions*(): google_protobuf_EnumOptions
 proc newgoogle_protobuf_EnumOptions*(data: string): google_protobuf_EnumOptions
@@ -276,8 +266,6 @@ proc newgoogle_protobuf_EnumOptions*(data: seq[byte]): google_protobuf_EnumOptio
 proc writegoogle_protobuf_EnumOptions*(stream: Stream, message: google_protobuf_EnumOptions)
 proc readgoogle_protobuf_EnumOptions*(stream: Stream): google_protobuf_EnumOptions
 proc sizeOfgoogle_protobuf_EnumOptions*(message: google_protobuf_EnumOptions): uint64
-proc toJson*(message: google_protobuf_EnumOptions): JsonNode
-proc parsegoogle_protobuf_EnumOptions*(obj: JsonNode): google_protobuf_EnumOptions
 
 proc newgoogle_protobuf_EnumDescriptorProto*(): google_protobuf_EnumDescriptorProto
 proc newgoogle_protobuf_EnumDescriptorProto*(data: string): google_protobuf_EnumDescriptorProto
@@ -285,8 +273,6 @@ proc newgoogle_protobuf_EnumDescriptorProto*(data: seq[byte]): google_protobuf_E
 proc writegoogle_protobuf_EnumDescriptorProto*(stream: Stream, message: google_protobuf_EnumDescriptorProto)
 proc readgoogle_protobuf_EnumDescriptorProto*(stream: Stream): google_protobuf_EnumDescriptorProto
 proc sizeOfgoogle_protobuf_EnumDescriptorProto*(message: google_protobuf_EnumDescriptorProto): uint64
-proc toJson*(message: google_protobuf_EnumDescriptorProto): JsonNode
-proc parsegoogle_protobuf_EnumDescriptorProto*(obj: JsonNode): google_protobuf_EnumDescriptorProto
 
 proc newgoogle_protobuf_ExtensionRangeOptions*(): google_protobuf_ExtensionRangeOptions
 proc newgoogle_protobuf_ExtensionRangeOptions*(data: string): google_protobuf_ExtensionRangeOptions
@@ -294,8 +280,6 @@ proc newgoogle_protobuf_ExtensionRangeOptions*(data: seq[byte]): google_protobuf
 proc writegoogle_protobuf_ExtensionRangeOptions*(stream: Stream, message: google_protobuf_ExtensionRangeOptions)
 proc readgoogle_protobuf_ExtensionRangeOptions*(stream: Stream): google_protobuf_ExtensionRangeOptions
 proc sizeOfgoogle_protobuf_ExtensionRangeOptions*(message: google_protobuf_ExtensionRangeOptions): uint64
-proc toJson*(message: google_protobuf_ExtensionRangeOptions): JsonNode
-proc parsegoogle_protobuf_ExtensionRangeOptions*(obj: JsonNode): google_protobuf_ExtensionRangeOptions
 
 proc newgoogle_protobuf_SourceCodeInfo_Location*(): google_protobuf_SourceCodeInfo_Location
 proc newgoogle_protobuf_SourceCodeInfo_Location*(data: string): google_protobuf_SourceCodeInfo_Location
@@ -303,8 +287,6 @@ proc newgoogle_protobuf_SourceCodeInfo_Location*(data: seq[byte]): google_protob
 proc writegoogle_protobuf_SourceCodeInfo_Location*(stream: Stream, message: google_protobuf_SourceCodeInfo_Location)
 proc readgoogle_protobuf_SourceCodeInfo_Location*(stream: Stream): google_protobuf_SourceCodeInfo_Location
 proc sizeOfgoogle_protobuf_SourceCodeInfo_Location*(message: google_protobuf_SourceCodeInfo_Location): uint64
-proc toJson*(message: google_protobuf_SourceCodeInfo_Location): JsonNode
-proc parsegoogle_protobuf_SourceCodeInfo_Location*(obj: JsonNode): google_protobuf_SourceCodeInfo_Location
 
 proc newgoogle_protobuf_SourceCodeInfo*(): google_protobuf_SourceCodeInfo
 proc newgoogle_protobuf_SourceCodeInfo*(data: string): google_protobuf_SourceCodeInfo
@@ -312,8 +294,6 @@ proc newgoogle_protobuf_SourceCodeInfo*(data: seq[byte]): google_protobuf_Source
 proc writegoogle_protobuf_SourceCodeInfo*(stream: Stream, message: google_protobuf_SourceCodeInfo)
 proc readgoogle_protobuf_SourceCodeInfo*(stream: Stream): google_protobuf_SourceCodeInfo
 proc sizeOfgoogle_protobuf_SourceCodeInfo*(message: google_protobuf_SourceCodeInfo): uint64
-proc toJson*(message: google_protobuf_SourceCodeInfo): JsonNode
-proc parsegoogle_protobuf_SourceCodeInfo*(obj: JsonNode): google_protobuf_SourceCodeInfo
 
 proc newgoogle_protobuf_FieldOptions*(): google_protobuf_FieldOptions
 proc newgoogle_protobuf_FieldOptions*(data: string): google_protobuf_FieldOptions
@@ -321,8 +301,6 @@ proc newgoogle_protobuf_FieldOptions*(data: seq[byte]): google_protobuf_FieldOpt
 proc writegoogle_protobuf_FieldOptions*(stream: Stream, message: google_protobuf_FieldOptions)
 proc readgoogle_protobuf_FieldOptions*(stream: Stream): google_protobuf_FieldOptions
 proc sizeOfgoogle_protobuf_FieldOptions*(message: google_protobuf_FieldOptions): uint64
-proc toJson*(message: google_protobuf_FieldOptions): JsonNode
-proc parsegoogle_protobuf_FieldOptions*(obj: JsonNode): google_protobuf_FieldOptions
 
 proc newgoogle_protobuf_FieldDescriptorProto*(): google_protobuf_FieldDescriptorProto
 proc newgoogle_protobuf_FieldDescriptorProto*(data: string): google_protobuf_FieldDescriptorProto
@@ -330,8 +308,6 @@ proc newgoogle_protobuf_FieldDescriptorProto*(data: seq[byte]): google_protobuf_
 proc writegoogle_protobuf_FieldDescriptorProto*(stream: Stream, message: google_protobuf_FieldDescriptorProto)
 proc readgoogle_protobuf_FieldDescriptorProto*(stream: Stream): google_protobuf_FieldDescriptorProto
 proc sizeOfgoogle_protobuf_FieldDescriptorProto*(message: google_protobuf_FieldDescriptorProto): uint64
-proc toJson*(message: google_protobuf_FieldDescriptorProto): JsonNode
-proc parsegoogle_protobuf_FieldDescriptorProto*(obj: JsonNode): google_protobuf_FieldDescriptorProto
 
 proc newgoogle_protobuf_DescriptorProto_ExtensionRange*(): google_protobuf_DescriptorProto_ExtensionRange
 proc newgoogle_protobuf_DescriptorProto_ExtensionRange*(data: string): google_protobuf_DescriptorProto_ExtensionRange
@@ -339,8 +315,6 @@ proc newgoogle_protobuf_DescriptorProto_ExtensionRange*(data: seq[byte]): google
 proc writegoogle_protobuf_DescriptorProto_ExtensionRange*(stream: Stream, message: google_protobuf_DescriptorProto_ExtensionRange)
 proc readgoogle_protobuf_DescriptorProto_ExtensionRange*(stream: Stream): google_protobuf_DescriptorProto_ExtensionRange
 proc sizeOfgoogle_protobuf_DescriptorProto_ExtensionRange*(message: google_protobuf_DescriptorProto_ExtensionRange): uint64
-proc toJson*(message: google_protobuf_DescriptorProto_ExtensionRange): JsonNode
-proc parsegoogle_protobuf_DescriptorProto_ExtensionRange*(obj: JsonNode): google_protobuf_DescriptorProto_ExtensionRange
 
 proc newgoogle_protobuf_MessageOptions*(): google_protobuf_MessageOptions
 proc newgoogle_protobuf_MessageOptions*(data: string): google_protobuf_MessageOptions
@@ -348,8 +322,6 @@ proc newgoogle_protobuf_MessageOptions*(data: seq[byte]): google_protobuf_Messag
 proc writegoogle_protobuf_MessageOptions*(stream: Stream, message: google_protobuf_MessageOptions)
 proc readgoogle_protobuf_MessageOptions*(stream: Stream): google_protobuf_MessageOptions
 proc sizeOfgoogle_protobuf_MessageOptions*(message: google_protobuf_MessageOptions): uint64
-proc toJson*(message: google_protobuf_MessageOptions): JsonNode
-proc parsegoogle_protobuf_MessageOptions*(obj: JsonNode): google_protobuf_MessageOptions
 
 proc newgoogle_protobuf_OneofOptions*(): google_protobuf_OneofOptions
 proc newgoogle_protobuf_OneofOptions*(data: string): google_protobuf_OneofOptions
@@ -357,8 +329,6 @@ proc newgoogle_protobuf_OneofOptions*(data: seq[byte]): google_protobuf_OneofOpt
 proc writegoogle_protobuf_OneofOptions*(stream: Stream, message: google_protobuf_OneofOptions)
 proc readgoogle_protobuf_OneofOptions*(stream: Stream): google_protobuf_OneofOptions
 proc sizeOfgoogle_protobuf_OneofOptions*(message: google_protobuf_OneofOptions): uint64
-proc toJson*(message: google_protobuf_OneofOptions): JsonNode
-proc parsegoogle_protobuf_OneofOptions*(obj: JsonNode): google_protobuf_OneofOptions
 
 proc newgoogle_protobuf_OneofDescriptorProto*(): google_protobuf_OneofDescriptorProto
 proc newgoogle_protobuf_OneofDescriptorProto*(data: string): google_protobuf_OneofDescriptorProto
@@ -366,8 +336,6 @@ proc newgoogle_protobuf_OneofDescriptorProto*(data: seq[byte]): google_protobuf_
 proc writegoogle_protobuf_OneofDescriptorProto*(stream: Stream, message: google_protobuf_OneofDescriptorProto)
 proc readgoogle_protobuf_OneofDescriptorProto*(stream: Stream): google_protobuf_OneofDescriptorProto
 proc sizeOfgoogle_protobuf_OneofDescriptorProto*(message: google_protobuf_OneofDescriptorProto): uint64
-proc toJson*(message: google_protobuf_OneofDescriptorProto): JsonNode
-proc parsegoogle_protobuf_OneofDescriptorProto*(obj: JsonNode): google_protobuf_OneofDescriptorProto
 
 proc newgoogle_protobuf_DescriptorProto_ReservedRange*(): google_protobuf_DescriptorProto_ReservedRange
 proc newgoogle_protobuf_DescriptorProto_ReservedRange*(data: string): google_protobuf_DescriptorProto_ReservedRange
@@ -375,8 +343,6 @@ proc newgoogle_protobuf_DescriptorProto_ReservedRange*(data: seq[byte]): google_
 proc writegoogle_protobuf_DescriptorProto_ReservedRange*(stream: Stream, message: google_protobuf_DescriptorProto_ReservedRange)
 proc readgoogle_protobuf_DescriptorProto_ReservedRange*(stream: Stream): google_protobuf_DescriptorProto_ReservedRange
 proc sizeOfgoogle_protobuf_DescriptorProto_ReservedRange*(message: google_protobuf_DescriptorProto_ReservedRange): uint64
-proc toJson*(message: google_protobuf_DescriptorProto_ReservedRange): JsonNode
-proc parsegoogle_protobuf_DescriptorProto_ReservedRange*(obj: JsonNode): google_protobuf_DescriptorProto_ReservedRange
 
 proc newgoogle_protobuf_DescriptorProto*(): google_protobuf_DescriptorProto
 proc newgoogle_protobuf_DescriptorProto*(data: string): google_protobuf_DescriptorProto
@@ -384,8 +350,6 @@ proc newgoogle_protobuf_DescriptorProto*(data: seq[byte]): google_protobuf_Descr
 proc writegoogle_protobuf_DescriptorProto*(stream: Stream, message: google_protobuf_DescriptorProto)
 proc readgoogle_protobuf_DescriptorProto*(stream: Stream): google_protobuf_DescriptorProto
 proc sizeOfgoogle_protobuf_DescriptorProto*(message: google_protobuf_DescriptorProto): uint64
-proc toJson*(message: google_protobuf_DescriptorProto): JsonNode
-proc parsegoogle_protobuf_DescriptorProto*(obj: JsonNode): google_protobuf_DescriptorProto
 
 proc newgoogle_protobuf_FileOptions*(): google_protobuf_FileOptions
 proc newgoogle_protobuf_FileOptions*(data: string): google_protobuf_FileOptions
@@ -393,8 +357,6 @@ proc newgoogle_protobuf_FileOptions*(data: seq[byte]): google_protobuf_FileOptio
 proc writegoogle_protobuf_FileOptions*(stream: Stream, message: google_protobuf_FileOptions)
 proc readgoogle_protobuf_FileOptions*(stream: Stream): google_protobuf_FileOptions
 proc sizeOfgoogle_protobuf_FileOptions*(message: google_protobuf_FileOptions): uint64
-proc toJson*(message: google_protobuf_FileOptions): JsonNode
-proc parsegoogle_protobuf_FileOptions*(obj: JsonNode): google_protobuf_FileOptions
 
 proc newgoogle_protobuf_ServiceOptions*(): google_protobuf_ServiceOptions
 proc newgoogle_protobuf_ServiceOptions*(data: string): google_protobuf_ServiceOptions
@@ -402,8 +364,6 @@ proc newgoogle_protobuf_ServiceOptions*(data: seq[byte]): google_protobuf_Servic
 proc writegoogle_protobuf_ServiceOptions*(stream: Stream, message: google_protobuf_ServiceOptions)
 proc readgoogle_protobuf_ServiceOptions*(stream: Stream): google_protobuf_ServiceOptions
 proc sizeOfgoogle_protobuf_ServiceOptions*(message: google_protobuf_ServiceOptions): uint64
-proc toJson*(message: google_protobuf_ServiceOptions): JsonNode
-proc parsegoogle_protobuf_ServiceOptions*(obj: JsonNode): google_protobuf_ServiceOptions
 
 proc newgoogle_protobuf_MethodOptions*(): google_protobuf_MethodOptions
 proc newgoogle_protobuf_MethodOptions*(data: string): google_protobuf_MethodOptions
@@ -411,8 +371,6 @@ proc newgoogle_protobuf_MethodOptions*(data: seq[byte]): google_protobuf_MethodO
 proc writegoogle_protobuf_MethodOptions*(stream: Stream, message: google_protobuf_MethodOptions)
 proc readgoogle_protobuf_MethodOptions*(stream: Stream): google_protobuf_MethodOptions
 proc sizeOfgoogle_protobuf_MethodOptions*(message: google_protobuf_MethodOptions): uint64
-proc toJson*(message: google_protobuf_MethodOptions): JsonNode
-proc parsegoogle_protobuf_MethodOptions*(obj: JsonNode): google_protobuf_MethodOptions
 
 proc newgoogle_protobuf_MethodDescriptorProto*(): google_protobuf_MethodDescriptorProto
 proc newgoogle_protobuf_MethodDescriptorProto*(data: string): google_protobuf_MethodDescriptorProto
@@ -420,8 +378,6 @@ proc newgoogle_protobuf_MethodDescriptorProto*(data: seq[byte]): google_protobuf
 proc writegoogle_protobuf_MethodDescriptorProto*(stream: Stream, message: google_protobuf_MethodDescriptorProto)
 proc readgoogle_protobuf_MethodDescriptorProto*(stream: Stream): google_protobuf_MethodDescriptorProto
 proc sizeOfgoogle_protobuf_MethodDescriptorProto*(message: google_protobuf_MethodDescriptorProto): uint64
-proc toJson*(message: google_protobuf_MethodDescriptorProto): JsonNode
-proc parsegoogle_protobuf_MethodDescriptorProto*(obj: JsonNode): google_protobuf_MethodDescriptorProto
 
 proc newgoogle_protobuf_ServiceDescriptorProto*(): google_protobuf_ServiceDescriptorProto
 proc newgoogle_protobuf_ServiceDescriptorProto*(data: string): google_protobuf_ServiceDescriptorProto
@@ -429,8 +385,6 @@ proc newgoogle_protobuf_ServiceDescriptorProto*(data: seq[byte]): google_protobu
 proc writegoogle_protobuf_ServiceDescriptorProto*(stream: Stream, message: google_protobuf_ServiceDescriptorProto)
 proc readgoogle_protobuf_ServiceDescriptorProto*(stream: Stream): google_protobuf_ServiceDescriptorProto
 proc sizeOfgoogle_protobuf_ServiceDescriptorProto*(message: google_protobuf_ServiceDescriptorProto): uint64
-proc toJson*(message: google_protobuf_ServiceDescriptorProto): JsonNode
-proc parsegoogle_protobuf_ServiceDescriptorProto*(obj: JsonNode): google_protobuf_ServiceDescriptorProto
 
 proc newgoogle_protobuf_FileDescriptorProto*(): google_protobuf_FileDescriptorProto
 proc newgoogle_protobuf_FileDescriptorProto*(data: string): google_protobuf_FileDescriptorProto
@@ -438,8 +392,6 @@ proc newgoogle_protobuf_FileDescriptorProto*(data: seq[byte]): google_protobuf_F
 proc writegoogle_protobuf_FileDescriptorProto*(stream: Stream, message: google_protobuf_FileDescriptorProto)
 proc readgoogle_protobuf_FileDescriptorProto*(stream: Stream): google_protobuf_FileDescriptorProto
 proc sizeOfgoogle_protobuf_FileDescriptorProto*(message: google_protobuf_FileDescriptorProto): uint64
-proc toJson*(message: google_protobuf_FileDescriptorProto): JsonNode
-proc parsegoogle_protobuf_FileDescriptorProto*(obj: JsonNode): google_protobuf_FileDescriptorProto
 
 proc newgoogle_protobuf_FileDescriptorSet*(): google_protobuf_FileDescriptorSet
 proc newgoogle_protobuf_FileDescriptorSet*(data: string): google_protobuf_FileDescriptorSet
@@ -447,8 +399,6 @@ proc newgoogle_protobuf_FileDescriptorSet*(data: seq[byte]): google_protobuf_Fil
 proc writegoogle_protobuf_FileDescriptorSet*(stream: Stream, message: google_protobuf_FileDescriptorSet)
 proc readgoogle_protobuf_FileDescriptorSet*(stream: Stream): google_protobuf_FileDescriptorSet
 proc sizeOfgoogle_protobuf_FileDescriptorSet*(message: google_protobuf_FileDescriptorSet): uint64
-proc toJson*(message: google_protobuf_FileDescriptorSet): JsonNode
-proc parsegoogle_protobuf_FileDescriptorSet*(obj: JsonNode): google_protobuf_FileDescriptorSet
 
 proc newgoogle_protobuf_GeneratedCodeInfo_Annotation*(): google_protobuf_GeneratedCodeInfo_Annotation
 proc newgoogle_protobuf_GeneratedCodeInfo_Annotation*(data: string): google_protobuf_GeneratedCodeInfo_Annotation
@@ -456,8 +406,6 @@ proc newgoogle_protobuf_GeneratedCodeInfo_Annotation*(data: seq[byte]): google_p
 proc writegoogle_protobuf_GeneratedCodeInfo_Annotation*(stream: Stream, message: google_protobuf_GeneratedCodeInfo_Annotation)
 proc readgoogle_protobuf_GeneratedCodeInfo_Annotation*(stream: Stream): google_protobuf_GeneratedCodeInfo_Annotation
 proc sizeOfgoogle_protobuf_GeneratedCodeInfo_Annotation*(message: google_protobuf_GeneratedCodeInfo_Annotation): uint64
-proc toJson*(message: google_protobuf_GeneratedCodeInfo_Annotation): JsonNode
-proc parsegoogle_protobuf_GeneratedCodeInfo_Annotation*(obj: JsonNode): google_protobuf_GeneratedCodeInfo_Annotation
 
 proc newgoogle_protobuf_GeneratedCodeInfo*(): google_protobuf_GeneratedCodeInfo
 proc newgoogle_protobuf_GeneratedCodeInfo*(data: string): google_protobuf_GeneratedCodeInfo
@@ -465,8 +413,6 @@ proc newgoogle_protobuf_GeneratedCodeInfo*(data: seq[byte]): google_protobuf_Gen
 proc writegoogle_protobuf_GeneratedCodeInfo*(stream: Stream, message: google_protobuf_GeneratedCodeInfo)
 proc readgoogle_protobuf_GeneratedCodeInfo*(stream: Stream): google_protobuf_GeneratedCodeInfo
 proc sizeOfgoogle_protobuf_GeneratedCodeInfo*(message: google_protobuf_GeneratedCodeInfo): uint64
-proc toJson*(message: google_protobuf_GeneratedCodeInfo): JsonNode
-proc parsegoogle_protobuf_GeneratedCodeInfo*(obj: JsonNode): google_protobuf_GeneratedCodeInfo
 
 proc newgoogle_protobuf_UninterpretedOption_NamePart*(): google_protobuf_UninterpretedOption_NamePart =
     new(result)
@@ -541,25 +487,6 @@ proc readgoogle_protobuf_UninterpretedOption_NamePart*(stream: Stream): google_p
             setisExtension(result, protoReadBool(stream))
         else: readUnknownField(stream, result, tag)
 
-proc toJson*(message: google_protobuf_UninterpretedOption_NamePart): JsonNode =
-    result = newJObject()
-    if hasnamePart(message):
-        result["namePart"] = %message.namePart
-    if hasisExtension(message):
-        result["isExtension"] = %message.isExtension
-
-proc parsegoogle_protobuf_UninterpretedOption_NamePart*(obj: JsonNode): google_protobuf_UninterpretedOption_NamePart =
-    result = newgoogle_protobuf_UninterpretedOption_NamePart()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "name_part", "namePart")
-    if node != nil and node.kind != JNull:
-        setnamePart(result, parseString(node))
-    node = getJsonField(obj, "is_extension", "isExtension")
-    if node != nil and node.kind != JNull:
-        setisExtension(result, parseBool(node))
-
 proc serialize*(message: google_protobuf_UninterpretedOption_NamePart): string =
     let
         ss = newStringStream()
@@ -601,7 +528,6 @@ proc setname*(message: google_protobuf_UninterpretedOption, value: seq[google_pr
 
 proc addname*(message: google_protobuf_UninterpretedOption, value: google_protobuf_UninterpretedOption_NamePart) =
     add(message.name, value)
-    setField(message, 2)
 
 proc name*(message: google_protobuf_UninterpretedOption): seq[google_protobuf_UninterpretedOption_NamePart] {.inline.} =
     message.name
@@ -785,56 +711,6 @@ proc readgoogle_protobuf_UninterpretedOption*(stream: Stream): google_protobuf_U
             setaggregateValue(result, protoReadString(stream))
         else: readUnknownField(stream, result, tag)
 
-proc toJson*(message: google_protobuf_UninterpretedOption): JsonNode =
-    result = newJObject()
-    if hasname(message):
-        let arr = newJArray()
-        for value in message.name:
-            add(arr, toJson(value))
-        result["name"] = arr
-    if hasidentifierValue(message):
-        result["identifierValue"] = %message.identifierValue
-    if haspositiveIntValue(message):
-        result["positiveIntValue"] = toJson(message.positiveIntValue)
-    if hasnegativeIntValue(message):
-        result["negativeIntValue"] = toJson(message.negativeIntValue)
-    if hasdoubleValue(message):
-        result["doubleValue"] = toJson(message.doubleValue)
-    if hasstringValue(message):
-        result["stringValue"] = %message.stringValue
-    if hasaggregateValue(message):
-        result["aggregateValue"] = %message.aggregateValue
-
-proc parsegoogle_protobuf_UninterpretedOption*(obj: JsonNode): google_protobuf_UninterpretedOption =
-    result = newgoogle_protobuf_UninterpretedOption()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "name", "name")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addname(result, parsegoogle_protobuf_UninterpretedOption_NamePart(value))
-    node = getJsonField(obj, "identifier_value", "identifierValue")
-    if node != nil and node.kind != JNull:
-        setidentifierValue(result, parseString(node))
-    node = getJsonField(obj, "positive_int_value", "positiveIntValue")
-    if node != nil and node.kind != JNull:
-        setpositiveIntValue(result, parseInt[uint64](node))
-    node = getJsonField(obj, "negative_int_value", "negativeIntValue")
-    if node != nil and node.kind != JNull:
-        setnegativeIntValue(result, parseInt[int64](node))
-    node = getJsonField(obj, "double_value", "doubleValue")
-    if node != nil and node.kind != JNull:
-        setdoubleValue(result, parseFloat[float64](node))
-    node = getJsonField(obj, "string_value", "stringValue")
-    if node != nil and node.kind != JNull:
-        setstringValue(result, parseBytes(node))
-    node = getJsonField(obj, "aggregate_value", "aggregateValue")
-    if node != nil and node.kind != JNull:
-        setaggregateValue(result, parseString(node))
-
 proc serialize*(message: google_protobuf_UninterpretedOption): string =
     let
         ss = newStringStream()
@@ -888,7 +764,6 @@ proc setuninterpretedOption*(message: google_protobuf_EnumValueOptions, value: s
 
 proc adduninterpretedOption*(message: google_protobuf_EnumValueOptions, value: google_protobuf_UninterpretedOption) =
     add(message.uninterpretedOption, value)
-    setField(message, 999)
 
 proc uninterpretedOption*(message: google_protobuf_EnumValueOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
     message.uninterpretedOption
@@ -929,31 +804,6 @@ proc readgoogle_protobuf_EnumValueOptions*(stream: Stream): google_protobuf_Enum
             let data = readLengthDelimited(stream)
             adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
-
-proc toJson*(message: google_protobuf_EnumValueOptions): JsonNode =
-    result = newJObject()
-    if hasdeprecated(message):
-        result["deprecated"] = %message.deprecated
-    if hasuninterpretedOption(message):
-        let arr = newJArray()
-        for value in message.uninterpretedOption:
-            add(arr, toJson(value))
-        result["uninterpretedOption"] = arr
-
-proc parsegoogle_protobuf_EnumValueOptions*(obj: JsonNode): google_protobuf_EnumValueOptions =
-    result = newgoogle_protobuf_EnumValueOptions()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "deprecated", "deprecated")
-    if node != nil and node.kind != JNull:
-        setdeprecated(result, parseBool(node))
-    node = getJsonField(obj, "uninterpreted_option", "uninterpretedOption")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            adduninterpretedOption(result, parsegoogle_protobuf_UninterpretedOption(value))
 
 proc serialize*(message: google_protobuf_EnumValueOptions): string =
     let
@@ -1072,30 +922,6 @@ proc readgoogle_protobuf_EnumValueDescriptorProto*(stream: Stream): google_proto
             setoptions(result, newgoogle_protobuf_EnumValueOptions(data))
         else: readUnknownField(stream, result, tag)
 
-proc toJson*(message: google_protobuf_EnumValueDescriptorProto): JsonNode =
-    result = newJObject()
-    if hasname(message):
-        result["name"] = %message.name
-    if hasnumber(message):
-        result["number"] = %message.number
-    if hasoptions(message):
-        result["options"] = toJson(message.options)
-
-proc parsegoogle_protobuf_EnumValueDescriptorProto*(obj: JsonNode): google_protobuf_EnumValueDescriptorProto =
-    result = newgoogle_protobuf_EnumValueDescriptorProto()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "name", "name")
-    if node != nil and node.kind != JNull:
-        setname(result, parseString(node))
-    node = getJsonField(obj, "number", "number")
-    if node != nil and node.kind != JNull:
-        setnumber(result, parseInt[int32](node))
-    node = getJsonField(obj, "options", "options")
-    if node != nil and node.kind != JNull:
-        setoptions(result, parsegoogle_protobuf_EnumValueOptions(node))
-
 proc serialize*(message: google_protobuf_EnumValueDescriptorProto): string =
     let
         ss = newStringStream()
@@ -1186,25 +1012,6 @@ proc readgoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(stream: Stream):
             setfend(result, protoReadInt32(stream))
         else: readUnknownField(stream, result, tag)
 
-proc toJson*(message: google_protobuf_EnumDescriptorProto_EnumReservedRange): JsonNode =
-    result = newJObject()
-    if hasstart(message):
-        result["start"] = %message.start
-    if hasfend(message):
-        result["end"] = %message.fend
-
-proc parsegoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(obj: JsonNode): google_protobuf_EnumDescriptorProto_EnumReservedRange =
-    result = newgoogle_protobuf_EnumDescriptorProto_EnumReservedRange()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "start", "start")
-    if node != nil and node.kind != JNull:
-        setstart(result, parseInt[int32](node))
-    node = getJsonField(obj, "end", "end")
-    if node != nil and node.kind != JNull:
-        setfend(result, parseInt[int32](node))
-
 proc serialize*(message: google_protobuf_EnumDescriptorProto_EnumReservedRange): string =
     let
         ss = newStringStream()
@@ -1276,7 +1083,6 @@ proc setuninterpretedOption*(message: google_protobuf_EnumOptions, value: seq[go
 
 proc adduninterpretedOption*(message: google_protobuf_EnumOptions, value: google_protobuf_UninterpretedOption) =
     add(message.uninterpretedOption, value)
-    setField(message, 999)
 
 proc uninterpretedOption*(message: google_protobuf_EnumOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
     message.uninterpretedOption
@@ -1325,36 +1131,6 @@ proc readgoogle_protobuf_EnumOptions*(stream: Stream): google_protobuf_EnumOptio
             let data = readLengthDelimited(stream)
             adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
-
-proc toJson*(message: google_protobuf_EnumOptions): JsonNode =
-    result = newJObject()
-    if hasallowAlias(message):
-        result["allowAlias"] = %message.allowAlias
-    if hasdeprecated(message):
-        result["deprecated"] = %message.deprecated
-    if hasuninterpretedOption(message):
-        let arr = newJArray()
-        for value in message.uninterpretedOption:
-            add(arr, toJson(value))
-        result["uninterpretedOption"] = arr
-
-proc parsegoogle_protobuf_EnumOptions*(obj: JsonNode): google_protobuf_EnumOptions =
-    result = newgoogle_protobuf_EnumOptions()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "allow_alias", "allowAlias")
-    if node != nil and node.kind != JNull:
-        setallowAlias(result, parseBool(node))
-    node = getJsonField(obj, "deprecated", "deprecated")
-    if node != nil and node.kind != JNull:
-        setdeprecated(result, parseBool(node))
-    node = getJsonField(obj, "uninterpreted_option", "uninterpretedOption")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            adduninterpretedOption(result, parsegoogle_protobuf_UninterpretedOption(value))
 
 proc serialize*(message: google_protobuf_EnumOptions): string =
     let
@@ -1412,7 +1188,6 @@ proc setvalue*(message: google_protobuf_EnumDescriptorProto, value: seq[google_p
 
 proc addvalue*(message: google_protobuf_EnumDescriptorProto, value: google_protobuf_EnumValueDescriptorProto) =
     add(message.value, value)
-    setField(message, 2)
 
 proc value*(message: google_protobuf_EnumDescriptorProto): seq[google_protobuf_EnumValueDescriptorProto] {.inline.} =
     message.value
@@ -1450,7 +1225,6 @@ proc setreservedRange*(message: google_protobuf_EnumDescriptorProto, value: seq[
 
 proc addreservedRange*(message: google_protobuf_EnumDescriptorProto, value: google_protobuf_EnumDescriptorProto_EnumReservedRange) =
     add(message.reservedRange, value)
-    setField(message, 4)
 
 proc reservedRange*(message: google_protobuf_EnumDescriptorProto): seq[google_protobuf_EnumDescriptorProto_EnumReservedRange] {.inline.} =
     message.reservedRange
@@ -1471,7 +1245,6 @@ proc setreservedName*(message: google_protobuf_EnumDescriptorProto, value: seq[s
 
 proc addreservedName*(message: google_protobuf_EnumDescriptorProto, value: string) =
     add(message.reservedName, value)
-    setField(message, 5)
 
 proc reservedName*(message: google_protobuf_EnumDescriptorProto): seq[string] {.inline.} =
     message.reservedName
@@ -1539,58 +1312,6 @@ proc readgoogle_protobuf_EnumDescriptorProto*(stream: Stream): google_protobuf_E
             addreservedName(result, protoReadString(stream))
         else: readUnknownField(stream, result, tag)
 
-proc toJson*(message: google_protobuf_EnumDescriptorProto): JsonNode =
-    result = newJObject()
-    if hasname(message):
-        result["name"] = %message.name
-    if hasvalue(message):
-        let arr = newJArray()
-        for value in message.value:
-            add(arr, toJson(value))
-        result["value"] = arr
-    if hasoptions(message):
-        result["options"] = toJson(message.options)
-    if hasreservedRange(message):
-        let arr = newJArray()
-        for value in message.reservedRange:
-            add(arr, toJson(value))
-        result["reservedRange"] = arr
-    if hasreservedName(message):
-        let arr = newJArray()
-        for value in message.reservedName:
-            add(arr, %value)
-        result["reservedName"] = arr
-
-proc parsegoogle_protobuf_EnumDescriptorProto*(obj: JsonNode): google_protobuf_EnumDescriptorProto =
-    result = newgoogle_protobuf_EnumDescriptorProto()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "name", "name")
-    if node != nil and node.kind != JNull:
-        setname(result, parseString(node))
-    node = getJsonField(obj, "value", "value")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addvalue(result, parsegoogle_protobuf_EnumValueDescriptorProto(value))
-    node = getJsonField(obj, "options", "options")
-    if node != nil and node.kind != JNull:
-        setoptions(result, parsegoogle_protobuf_EnumOptions(node))
-    node = getJsonField(obj, "reserved_range", "reservedRange")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addreservedRange(result, parsegoogle_protobuf_EnumDescriptorProto_EnumReservedRange(value))
-    node = getJsonField(obj, "reserved_name", "reservedName")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addreservedName(result, parseString(value))
-
 proc serialize*(message: google_protobuf_EnumDescriptorProto): string =
     let
         ss = newStringStream()
@@ -1626,7 +1347,6 @@ proc setuninterpretedOption*(message: google_protobuf_ExtensionRangeOptions, val
 
 proc adduninterpretedOption*(message: google_protobuf_ExtensionRangeOptions, value: google_protobuf_UninterpretedOption) =
     add(message.uninterpretedOption, value)
-    setField(message, 999)
 
 proc uninterpretedOption*(message: google_protobuf_ExtensionRangeOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
     message.uninterpretedOption
@@ -1659,26 +1379,6 @@ proc readgoogle_protobuf_ExtensionRangeOptions*(stream: Stream): google_protobuf
             let data = readLengthDelimited(stream)
             adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
-
-proc toJson*(message: google_protobuf_ExtensionRangeOptions): JsonNode =
-    result = newJObject()
-    if hasuninterpretedOption(message):
-        let arr = newJArray()
-        for value in message.uninterpretedOption:
-            add(arr, toJson(value))
-        result["uninterpretedOption"] = arr
-
-proc parsegoogle_protobuf_ExtensionRangeOptions*(obj: JsonNode): google_protobuf_ExtensionRangeOptions =
-    result = newgoogle_protobuf_ExtensionRangeOptions()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "uninterpreted_option", "uninterpretedOption")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            adduninterpretedOption(result, parsegoogle_protobuf_UninterpretedOption(value))
 
 proc serialize*(message: google_protobuf_ExtensionRangeOptions): string =
     let
@@ -1719,7 +1419,6 @@ proc setpath*(message: google_protobuf_SourceCodeInfo_Location, value: seq[int32
 
 proc addpath*(message: google_protobuf_SourceCodeInfo_Location, value: int32) =
     add(message.path, value)
-    setField(message, 1)
 
 proc path*(message: google_protobuf_SourceCodeInfo_Location): seq[int32] {.inline.} =
     message.path
@@ -1740,7 +1439,6 @@ proc setspan*(message: google_protobuf_SourceCodeInfo_Location, value: seq[int32
 
 proc addspan*(message: google_protobuf_SourceCodeInfo_Location, value: int32) =
     add(message.span, value)
-    setField(message, 2)
 
 proc span*(message: google_protobuf_SourceCodeInfo_Location): seq[int32] {.inline.} =
     message.span
@@ -1795,7 +1493,6 @@ proc setleadingDetachedComments*(message: google_protobuf_SourceCodeInfo_Locatio
 
 proc addleadingDetachedComments*(message: google_protobuf_SourceCodeInfo_Location, value: string) =
     add(message.leadingDetachedComments, value)
-    setField(message, 6)
 
 proc leadingDetachedComments*(message: google_protobuf_SourceCodeInfo_Location): seq[string] {.inline.} =
     message.leadingDetachedComments
@@ -1804,10 +1501,10 @@ proc `leadingDetachedComments=`*(message: google_protobuf_SourceCodeInfo_Locatio
     setleadingDetachedComments(message, value)
 
 proc sizeOfgoogle_protobuf_SourceCodeInfo_Location*(message: google_protobuf_SourceCodeInfo_Location): uint64 =
-    if haspath(message):
+    if len(message.path) > 0:
         result = result + sizeOfTag(1, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(packedFieldSize(message.path, FieldType.Int32))
-    if hasspan(message):
+    if len(message.span) > 0:
         result = result + sizeOfTag(2, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(packedFieldSize(message.span, FieldType.Int32))
     if hasleadingComments(message):
@@ -1822,12 +1519,12 @@ proc sizeOfgoogle_protobuf_SourceCodeInfo_Location*(message: google_protobuf_Sou
     result = result + sizeOfUnknownFields(message)
 
 proc writegoogle_protobuf_SourceCodeInfo_Location*(stream: Stream, message: google_protobuf_SourceCodeInfo_Location) =
-    if haspath(message):
+    if len(message.path) > 0:
         writeTag(stream, 1, WireType.LengthDelimited)
         writeVarint(stream, packedFieldSize(message.path, FieldType.Int32))
         for value in message.path:
             protoWriteInt32(stream, value)
-    if hasspan(message):
+    if len(message.span) > 0:
         writeTag(stream, 2, WireType.LengthDelimited)
         writeVarint(stream, packedFieldSize(message.span, FieldType.Int32))
         for value in message.span:
@@ -1888,58 +1585,6 @@ proc readgoogle_protobuf_SourceCodeInfo_Location*(stream: Stream): google_protob
             addleadingDetachedComments(result, protoReadString(stream))
         else: readUnknownField(stream, result, tag)
 
-proc toJson*(message: google_protobuf_SourceCodeInfo_Location): JsonNode =
-    result = newJObject()
-    if haspath(message):
-        let arr = newJArray()
-        for value in message.path:
-            add(arr, %value)
-        result["path"] = arr
-    if hasspan(message):
-        let arr = newJArray()
-        for value in message.span:
-            add(arr, %value)
-        result["span"] = arr
-    if hasleadingComments(message):
-        result["leadingComments"] = %message.leadingComments
-    if hastrailingComments(message):
-        result["trailingComments"] = %message.trailingComments
-    if hasleadingDetachedComments(message):
-        let arr = newJArray()
-        for value in message.leadingDetachedComments:
-            add(arr, %value)
-        result["leadingDetachedComments"] = arr
-
-proc parsegoogle_protobuf_SourceCodeInfo_Location*(obj: JsonNode): google_protobuf_SourceCodeInfo_Location =
-    result = newgoogle_protobuf_SourceCodeInfo_Location()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "path", "path")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addpath(result, parseInt[int32](value))
-    node = getJsonField(obj, "span", "span")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addspan(result, parseInt[int32](value))
-    node = getJsonField(obj, "leading_comments", "leadingComments")
-    if node != nil and node.kind != JNull:
-        setleadingComments(result, parseString(node))
-    node = getJsonField(obj, "trailing_comments", "trailingComments")
-    if node != nil and node.kind != JNull:
-        settrailingComments(result, parseString(node))
-    node = getJsonField(obj, "leading_detached_comments", "leadingDetachedComments")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addleadingDetachedComments(result, parseString(value))
-
 proc serialize*(message: google_protobuf_SourceCodeInfo_Location): string =
     let
         ss = newStringStream()
@@ -1975,7 +1620,6 @@ proc setlocation*(message: google_protobuf_SourceCodeInfo, value: seq[google_pro
 
 proc addlocation*(message: google_protobuf_SourceCodeInfo, value: google_protobuf_SourceCodeInfo_Location) =
     add(message.location, value)
-    setField(message, 1)
 
 proc location*(message: google_protobuf_SourceCodeInfo): seq[google_protobuf_SourceCodeInfo_Location] {.inline.} =
     message.location
@@ -2008,26 +1652,6 @@ proc readgoogle_protobuf_SourceCodeInfo*(stream: Stream): google_protobuf_Source
             let data = readLengthDelimited(stream)
             addlocation(result, newgoogle_protobuf_SourceCodeInfo_Location(data))
         else: readUnknownField(stream, result, tag)
-
-proc toJson*(message: google_protobuf_SourceCodeInfo): JsonNode =
-    result = newJObject()
-    if haslocation(message):
-        let arr = newJArray()
-        for value in message.location:
-            add(arr, toJson(value))
-        result["location"] = arr
-
-proc parsegoogle_protobuf_SourceCodeInfo*(obj: JsonNode): google_protobuf_SourceCodeInfo =
-    result = newgoogle_protobuf_SourceCodeInfo()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "location", "location")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addlocation(result, parsegoogle_protobuf_SourceCodeInfo_Location(value))
 
 proc serialize*(message: google_protobuf_SourceCodeInfo): string =
     let
@@ -2172,7 +1796,6 @@ proc setuninterpretedOption*(message: google_protobuf_FieldOptions, value: seq[g
 
 proc adduninterpretedOption*(message: google_protobuf_FieldOptions, value: google_protobuf_UninterpretedOption) =
     add(message.uninterpretedOption, value)
-    setField(message, 999)
 
 proc uninterpretedOption*(message: google_protobuf_FieldOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
     message.uninterpretedOption
@@ -2253,56 +1876,6 @@ proc readgoogle_protobuf_FieldOptions*(stream: Stream): google_protobuf_FieldOpt
             let data = readLengthDelimited(stream)
             adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
-
-proc toJson*(message: google_protobuf_FieldOptions): JsonNode =
-    result = newJObject()
-    if hasctype(message):
-        result["ctype"] = toJson(message.ctype)
-    if haspacked(message):
-        result["packed"] = %message.packed
-    if hasjstype(message):
-        result["jstype"] = toJson(message.jstype)
-    if haslazy(message):
-        result["lazy"] = %message.lazy
-    if hasdeprecated(message):
-        result["deprecated"] = %message.deprecated
-    if hasweak(message):
-        result["weak"] = %message.weak
-    if hasuninterpretedOption(message):
-        let arr = newJArray()
-        for value in message.uninterpretedOption:
-            add(arr, toJson(value))
-        result["uninterpretedOption"] = arr
-
-proc parsegoogle_protobuf_FieldOptions*(obj: JsonNode): google_protobuf_FieldOptions =
-    result = newgoogle_protobuf_FieldOptions()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "ctype", "ctype")
-    if node != nil and node.kind != JNull:
-        setctype(result, parseEnum[google_protobuf_FieldOptions_CType](node))
-    node = getJsonField(obj, "packed", "packed")
-    if node != nil and node.kind != JNull:
-        setpacked(result, parseBool(node))
-    node = getJsonField(obj, "jstype", "jstype")
-    if node != nil and node.kind != JNull:
-        setjstype(result, parseEnum[google_protobuf_FieldOptions_JSType](node))
-    node = getJsonField(obj, "lazy", "lazy")
-    if node != nil and node.kind != JNull:
-        setlazy(result, parseBool(node))
-    node = getJsonField(obj, "deprecated", "deprecated")
-    if node != nil and node.kind != JNull:
-        setdeprecated(result, parseBool(node))
-    node = getJsonField(obj, "weak", "weak")
-    if node != nil and node.kind != JNull:
-        setweak(result, parseBool(node))
-    node = getJsonField(obj, "uninterpreted_option", "uninterpretedOption")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            adduninterpretedOption(result, parsegoogle_protobuf_UninterpretedOption(value))
 
 proc serialize*(message: google_protobuf_FieldOptions): string =
     let
@@ -2603,65 +2176,6 @@ proc readgoogle_protobuf_FieldDescriptorProto*(stream: Stream): google_protobuf_
             setoptions(result, newgoogle_protobuf_FieldOptions(data))
         else: readUnknownField(stream, result, tag)
 
-proc toJson*(message: google_protobuf_FieldDescriptorProto): JsonNode =
-    result = newJObject()
-    if hasname(message):
-        result["name"] = %message.name
-    if hasnumber(message):
-        result["number"] = %message.number
-    if haslabel(message):
-        result["label"] = toJson(message.label)
-    if hasftype(message):
-        result["type"] = toJson(message.ftype)
-    if hastypeName(message):
-        result["typeName"] = %message.typeName
-    if hasextendee(message):
-        result["extendee"] = %message.extendee
-    if hasdefaultValue(message):
-        result["defaultValue"] = %message.defaultValue
-    if hasoneofIndex(message):
-        result["oneofIndex"] = %message.oneofIndex
-    if hasjsonName(message):
-        result["jsonName"] = %message.jsonName
-    if hasoptions(message):
-        result["options"] = toJson(message.options)
-
-proc parsegoogle_protobuf_FieldDescriptorProto*(obj: JsonNode): google_protobuf_FieldDescriptorProto =
-    result = newgoogle_protobuf_FieldDescriptorProto()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "name", "name")
-    if node != nil and node.kind != JNull:
-        setname(result, parseString(node))
-    node = getJsonField(obj, "number", "number")
-    if node != nil and node.kind != JNull:
-        setnumber(result, parseInt[int32](node))
-    node = getJsonField(obj, "label", "label")
-    if node != nil and node.kind != JNull:
-        setlabel(result, parseEnum[google_protobuf_FieldDescriptorProto_Label](node))
-    node = getJsonField(obj, "type", "type")
-    if node != nil and node.kind != JNull:
-        setftype(result, parseEnum[google_protobuf_FieldDescriptorProto_Type](node))
-    node = getJsonField(obj, "type_name", "typeName")
-    if node != nil and node.kind != JNull:
-        settypeName(result, parseString(node))
-    node = getJsonField(obj, "extendee", "extendee")
-    if node != nil and node.kind != JNull:
-        setextendee(result, parseString(node))
-    node = getJsonField(obj, "default_value", "defaultValue")
-    if node != nil and node.kind != JNull:
-        setdefaultValue(result, parseString(node))
-    node = getJsonField(obj, "oneof_index", "oneofIndex")
-    if node != nil and node.kind != JNull:
-        setoneofIndex(result, parseInt[int32](node))
-    node = getJsonField(obj, "json_name", "jsonName")
-    if node != nil and node.kind != JNull:
-        setjsonName(result, parseString(node))
-    node = getJsonField(obj, "options", "options")
-    if node != nil and node.kind != JNull:
-        setoptions(result, parsegoogle_protobuf_FieldOptions(node))
-
 proc serialize*(message: google_protobuf_FieldDescriptorProto): string =
     let
         ss = newStringStream()
@@ -2779,30 +2293,6 @@ proc readgoogle_protobuf_DescriptorProto_ExtensionRange*(stream: Stream): google
             setoptions(result, newgoogle_protobuf_ExtensionRangeOptions(data))
         else: readUnknownField(stream, result, tag)
 
-proc toJson*(message: google_protobuf_DescriptorProto_ExtensionRange): JsonNode =
-    result = newJObject()
-    if hasstart(message):
-        result["start"] = %message.start
-    if hasfend(message):
-        result["end"] = %message.fend
-    if hasoptions(message):
-        result["options"] = toJson(message.options)
-
-proc parsegoogle_protobuf_DescriptorProto_ExtensionRange*(obj: JsonNode): google_protobuf_DescriptorProto_ExtensionRange =
-    result = newgoogle_protobuf_DescriptorProto_ExtensionRange()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "start", "start")
-    if node != nil and node.kind != JNull:
-        setstart(result, parseInt[int32](node))
-    node = getJsonField(obj, "end", "end")
-    if node != nil and node.kind != JNull:
-        setfend(result, parseInt[int32](node))
-    node = getJsonField(obj, "options", "options")
-    if node != nil and node.kind != JNull:
-        setoptions(result, parsegoogle_protobuf_ExtensionRangeOptions(node))
-
 proc serialize*(message: google_protobuf_DescriptorProto_ExtensionRange): string =
     let
         ss = newStringStream()
@@ -2910,7 +2400,6 @@ proc setuninterpretedOption*(message: google_protobuf_MessageOptions, value: seq
 
 proc adduninterpretedOption*(message: google_protobuf_MessageOptions, value: google_protobuf_UninterpretedOption) =
     add(message.uninterpretedOption, value)
-    setField(message, 999)
 
 proc uninterpretedOption*(message: google_protobuf_MessageOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
     message.uninterpretedOption
@@ -2976,46 +2465,6 @@ proc readgoogle_protobuf_MessageOptions*(stream: Stream): google_protobuf_Messag
             adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
 
-proc toJson*(message: google_protobuf_MessageOptions): JsonNode =
-    result = newJObject()
-    if hasmessageSetWireFormat(message):
-        result["messageSetWireFormat"] = %message.messageSetWireFormat
-    if hasnoStandardDescriptorAccessor(message):
-        result["noStandardDescriptorAccessor"] = %message.noStandardDescriptorAccessor
-    if hasdeprecated(message):
-        result["deprecated"] = %message.deprecated
-    if hasmapEntry(message):
-        result["mapEntry"] = %message.mapEntry
-    if hasuninterpretedOption(message):
-        let arr = newJArray()
-        for value in message.uninterpretedOption:
-            add(arr, toJson(value))
-        result["uninterpretedOption"] = arr
-
-proc parsegoogle_protobuf_MessageOptions*(obj: JsonNode): google_protobuf_MessageOptions =
-    result = newgoogle_protobuf_MessageOptions()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "message_set_wire_format", "messageSetWireFormat")
-    if node != nil and node.kind != JNull:
-        setmessageSetWireFormat(result, parseBool(node))
-    node = getJsonField(obj, "no_standard_descriptor_accessor", "noStandardDescriptorAccessor")
-    if node != nil and node.kind != JNull:
-        setnoStandardDescriptorAccessor(result, parseBool(node))
-    node = getJsonField(obj, "deprecated", "deprecated")
-    if node != nil and node.kind != JNull:
-        setdeprecated(result, parseBool(node))
-    node = getJsonField(obj, "map_entry", "mapEntry")
-    if node != nil and node.kind != JNull:
-        setmapEntry(result, parseBool(node))
-    node = getJsonField(obj, "uninterpreted_option", "uninterpretedOption")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            adduninterpretedOption(result, parsegoogle_protobuf_UninterpretedOption(value))
-
 proc serialize*(message: google_protobuf_MessageOptions): string =
     let
         ss = newStringStream()
@@ -3051,7 +2500,6 @@ proc setuninterpretedOption*(message: google_protobuf_OneofOptions, value: seq[g
 
 proc adduninterpretedOption*(message: google_protobuf_OneofOptions, value: google_protobuf_UninterpretedOption) =
     add(message.uninterpretedOption, value)
-    setField(message, 999)
 
 proc uninterpretedOption*(message: google_protobuf_OneofOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
     message.uninterpretedOption
@@ -3084,26 +2532,6 @@ proc readgoogle_protobuf_OneofOptions*(stream: Stream): google_protobuf_OneofOpt
             let data = readLengthDelimited(stream)
             adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
-
-proc toJson*(message: google_protobuf_OneofOptions): JsonNode =
-    result = newJObject()
-    if hasuninterpretedOption(message):
-        let arr = newJArray()
-        for value in message.uninterpretedOption:
-            add(arr, toJson(value))
-        result["uninterpretedOption"] = arr
-
-proc parsegoogle_protobuf_OneofOptions*(obj: JsonNode): google_protobuf_OneofOptions =
-    result = newgoogle_protobuf_OneofOptions()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "uninterpreted_option", "uninterpretedOption")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            adduninterpretedOption(result, parsegoogle_protobuf_UninterpretedOption(value))
 
 proc serialize*(message: google_protobuf_OneofOptions): string =
     let
@@ -3196,25 +2624,6 @@ proc readgoogle_protobuf_OneofDescriptorProto*(stream: Stream): google_protobuf_
             setoptions(result, newgoogle_protobuf_OneofOptions(data))
         else: readUnknownField(stream, result, tag)
 
-proc toJson*(message: google_protobuf_OneofDescriptorProto): JsonNode =
-    result = newJObject()
-    if hasname(message):
-        result["name"] = %message.name
-    if hasoptions(message):
-        result["options"] = toJson(message.options)
-
-proc parsegoogle_protobuf_OneofDescriptorProto*(obj: JsonNode): google_protobuf_OneofDescriptorProto =
-    result = newgoogle_protobuf_OneofDescriptorProto()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "name", "name")
-    if node != nil and node.kind != JNull:
-        setname(result, parseString(node))
-    node = getJsonField(obj, "options", "options")
-    if node != nil and node.kind != JNull:
-        setoptions(result, parsegoogle_protobuf_OneofOptions(node))
-
 proc serialize*(message: google_protobuf_OneofDescriptorProto): string =
     let
         ss = newStringStream()
@@ -3305,25 +2714,6 @@ proc readgoogle_protobuf_DescriptorProto_ReservedRange*(stream: Stream): google_
             setfend(result, protoReadInt32(stream))
         else: readUnknownField(stream, result, tag)
 
-proc toJson*(message: google_protobuf_DescriptorProto_ReservedRange): JsonNode =
-    result = newJObject()
-    if hasstart(message):
-        result["start"] = %message.start
-    if hasfend(message):
-        result["end"] = %message.fend
-
-proc parsegoogle_protobuf_DescriptorProto_ReservedRange*(obj: JsonNode): google_protobuf_DescriptorProto_ReservedRange =
-    result = newgoogle_protobuf_DescriptorProto_ReservedRange()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "start", "start")
-    if node != nil and node.kind != JNull:
-        setstart(result, parseInt[int32](node))
-    node = getJsonField(obj, "end", "end")
-    if node != nil and node.kind != JNull:
-        setfend(result, parseInt[int32](node))
-
 proc serialize*(message: google_protobuf_DescriptorProto_ReservedRange): string =
     let
         ss = newStringStream()
@@ -3385,7 +2775,6 @@ proc setfield*(message: google_protobuf_DescriptorProto, value: seq[google_proto
 
 proc addfield*(message: google_protobuf_DescriptorProto, value: google_protobuf_FieldDescriptorProto) =
     add(message.field, value)
-    setField(message, 2)
 
 proc field*(message: google_protobuf_DescriptorProto): seq[google_protobuf_FieldDescriptorProto] {.inline.} =
     message.field
@@ -3406,7 +2795,6 @@ proc setextension*(message: google_protobuf_DescriptorProto, value: seq[google_p
 
 proc addextension*(message: google_protobuf_DescriptorProto, value: google_protobuf_FieldDescriptorProto) =
     add(message.extension, value)
-    setField(message, 6)
 
 proc extension*(message: google_protobuf_DescriptorProto): seq[google_protobuf_FieldDescriptorProto] {.inline.} =
     message.extension
@@ -3427,7 +2815,6 @@ proc setnestedType*(message: google_protobuf_DescriptorProto, value: seq[google_
 
 proc addnestedType*(message: google_protobuf_DescriptorProto, value: google_protobuf_DescriptorProto) =
     add(message.nestedType, value)
-    setField(message, 3)
 
 proc nestedType*(message: google_protobuf_DescriptorProto): seq[google_protobuf_DescriptorProto] {.inline.} =
     message.nestedType
@@ -3448,7 +2835,6 @@ proc setenumType*(message: google_protobuf_DescriptorProto, value: seq[google_pr
 
 proc addenumType*(message: google_protobuf_DescriptorProto, value: google_protobuf_EnumDescriptorProto) =
     add(message.enumType, value)
-    setField(message, 4)
 
 proc enumType*(message: google_protobuf_DescriptorProto): seq[google_protobuf_EnumDescriptorProto] {.inline.} =
     message.enumType
@@ -3469,7 +2855,6 @@ proc setextensionRange*(message: google_protobuf_DescriptorProto, value: seq[goo
 
 proc addextensionRange*(message: google_protobuf_DescriptorProto, value: google_protobuf_DescriptorProto_ExtensionRange) =
     add(message.extensionRange, value)
-    setField(message, 5)
 
 proc extensionRange*(message: google_protobuf_DescriptorProto): seq[google_protobuf_DescriptorProto_ExtensionRange] {.inline.} =
     message.extensionRange
@@ -3490,7 +2875,6 @@ proc setoneofDecl*(message: google_protobuf_DescriptorProto, value: seq[google_p
 
 proc addoneofDecl*(message: google_protobuf_DescriptorProto, value: google_protobuf_OneofDescriptorProto) =
     add(message.oneofDecl, value)
-    setField(message, 8)
 
 proc oneofDecl*(message: google_protobuf_DescriptorProto): seq[google_protobuf_OneofDescriptorProto] {.inline.} =
     message.oneofDecl
@@ -3528,7 +2912,6 @@ proc setreservedRange*(message: google_protobuf_DescriptorProto, value: seq[goog
 
 proc addreservedRange*(message: google_protobuf_DescriptorProto, value: google_protobuf_DescriptorProto_ReservedRange) =
     add(message.reservedRange, value)
-    setField(message, 9)
 
 proc reservedRange*(message: google_protobuf_DescriptorProto): seq[google_protobuf_DescriptorProto_ReservedRange] {.inline.} =
     message.reservedRange
@@ -3549,7 +2932,6 @@ proc setreservedName*(message: google_protobuf_DescriptorProto, value: seq[strin
 
 proc addreservedName*(message: google_protobuf_DescriptorProto, value: string) =
     add(message.reservedName, value)
-    setField(message, 10)
 
 proc reservedName*(message: google_protobuf_DescriptorProto): seq[string] {.inline.} =
     message.reservedName
@@ -3661,113 +3043,6 @@ proc readgoogle_protobuf_DescriptorProto*(stream: Stream): google_protobuf_Descr
             expectWireType(wireType, WireType.LengthDelimited)
             addreservedName(result, protoReadString(stream))
         else: readUnknownField(stream, result, tag)
-
-proc toJson*(message: google_protobuf_DescriptorProto): JsonNode =
-    result = newJObject()
-    if hasname(message):
-        result["name"] = %message.name
-    if hasfield(message):
-        let arr = newJArray()
-        for value in message.field:
-            add(arr, toJson(value))
-        result["field"] = arr
-    if hasextension(message):
-        let arr = newJArray()
-        for value in message.extension:
-            add(arr, toJson(value))
-        result["extension"] = arr
-    if hasnestedType(message):
-        let arr = newJArray()
-        for value in message.nestedType:
-            add(arr, toJson(value))
-        result["nestedType"] = arr
-    if hasenumType(message):
-        let arr = newJArray()
-        for value in message.enumType:
-            add(arr, toJson(value))
-        result["enumType"] = arr
-    if hasextensionRange(message):
-        let arr = newJArray()
-        for value in message.extensionRange:
-            add(arr, toJson(value))
-        result["extensionRange"] = arr
-    if hasoneofDecl(message):
-        let arr = newJArray()
-        for value in message.oneofDecl:
-            add(arr, toJson(value))
-        result["oneofDecl"] = arr
-    if hasoptions(message):
-        result["options"] = toJson(message.options)
-    if hasreservedRange(message):
-        let arr = newJArray()
-        for value in message.reservedRange:
-            add(arr, toJson(value))
-        result["reservedRange"] = arr
-    if hasreservedName(message):
-        let arr = newJArray()
-        for value in message.reservedName:
-            add(arr, %value)
-        result["reservedName"] = arr
-
-proc parsegoogle_protobuf_DescriptorProto*(obj: JsonNode): google_protobuf_DescriptorProto =
-    result = newgoogle_protobuf_DescriptorProto()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "name", "name")
-    if node != nil and node.kind != JNull:
-        setname(result, parseString(node))
-    node = getJsonField(obj, "field", "field")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addfield(result, parsegoogle_protobuf_FieldDescriptorProto(value))
-    node = getJsonField(obj, "extension", "extension")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addextension(result, parsegoogle_protobuf_FieldDescriptorProto(value))
-    node = getJsonField(obj, "nested_type", "nestedType")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addnestedType(result, parsegoogle_protobuf_DescriptorProto(value))
-    node = getJsonField(obj, "enum_type", "enumType")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addenumType(result, parsegoogle_protobuf_EnumDescriptorProto(value))
-    node = getJsonField(obj, "extension_range", "extensionRange")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addextensionRange(result, parsegoogle_protobuf_DescriptorProto_ExtensionRange(value))
-    node = getJsonField(obj, "oneof_decl", "oneofDecl")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addoneofDecl(result, parsegoogle_protobuf_OneofDescriptorProto(value))
-    node = getJsonField(obj, "options", "options")
-    if node != nil and node.kind != JNull:
-        setoptions(result, parsegoogle_protobuf_MessageOptions(node))
-    node = getJsonField(obj, "reserved_range", "reservedRange")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addreservedRange(result, parsegoogle_protobuf_DescriptorProto_ReservedRange(value))
-    node = getJsonField(obj, "reserved_name", "reservedName")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addreservedName(result, parseString(value))
 
 proc serialize*(message: google_protobuf_DescriptorProto): string =
     let
@@ -4128,7 +3403,6 @@ proc setuninterpretedOption*(message: google_protobuf_FileOptions, value: seq[go
 
 proc adduninterpretedOption*(message: google_protobuf_FileOptions, value: google_protobuf_UninterpretedOption) =
     add(message.uninterpretedOption, value)
-    setField(message, 999)
 
 proc uninterpretedOption*(message: google_protobuf_FileOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
     message.uninterpretedOption
@@ -4306,116 +3580,6 @@ proc readgoogle_protobuf_FileOptions*(stream: Stream): google_protobuf_FileOptio
             adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
 
-proc toJson*(message: google_protobuf_FileOptions): JsonNode =
-    result = newJObject()
-    if hasjavaPackage(message):
-        result["javaPackage"] = %message.javaPackage
-    if hasjavaOuterClassname(message):
-        result["javaOuterClassname"] = %message.javaOuterClassname
-    if hasjavaMultipleFiles(message):
-        result["javaMultipleFiles"] = %message.javaMultipleFiles
-    if hasjavaGenerateEqualsAndHash(message):
-        result["javaGenerateEqualsAndHash"] = %message.javaGenerateEqualsAndHash
-    if hasjavaStringCheckUtf8(message):
-        result["javaStringCheckUtf8"] = %message.javaStringCheckUtf8
-    if hasoptimizeFor(message):
-        result["optimizeFor"] = toJson(message.optimizeFor)
-    if hasgoPackage(message):
-        result["goPackage"] = %message.goPackage
-    if hasccGenericServices(message):
-        result["ccGenericServices"] = %message.ccGenericServices
-    if hasjavaGenericServices(message):
-        result["javaGenericServices"] = %message.javaGenericServices
-    if haspyGenericServices(message):
-        result["pyGenericServices"] = %message.pyGenericServices
-    if hasphpGenericServices(message):
-        result["phpGenericServices"] = %message.phpGenericServices
-    if hasdeprecated(message):
-        result["deprecated"] = %message.deprecated
-    if hasccEnableArenas(message):
-        result["ccEnableArenas"] = %message.ccEnableArenas
-    if hasobjcClassPrefix(message):
-        result["objcClassPrefix"] = %message.objcClassPrefix
-    if hascsharpNamespace(message):
-        result["csharpNamespace"] = %message.csharpNamespace
-    if hasswiftPrefix(message):
-        result["swiftPrefix"] = %message.swiftPrefix
-    if hasphpClassPrefix(message):
-        result["phpClassPrefix"] = %message.phpClassPrefix
-    if hasphpNamespace(message):
-        result["phpNamespace"] = %message.phpNamespace
-    if hasuninterpretedOption(message):
-        let arr = newJArray()
-        for value in message.uninterpretedOption:
-            add(arr, toJson(value))
-        result["uninterpretedOption"] = arr
-
-proc parsegoogle_protobuf_FileOptions*(obj: JsonNode): google_protobuf_FileOptions =
-    result = newgoogle_protobuf_FileOptions()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "java_package", "javaPackage")
-    if node != nil and node.kind != JNull:
-        setjavaPackage(result, parseString(node))
-    node = getJsonField(obj, "java_outer_classname", "javaOuterClassname")
-    if node != nil and node.kind != JNull:
-        setjavaOuterClassname(result, parseString(node))
-    node = getJsonField(obj, "java_multiple_files", "javaMultipleFiles")
-    if node != nil and node.kind != JNull:
-        setjavaMultipleFiles(result, parseBool(node))
-    node = getJsonField(obj, "java_generate_equals_and_hash", "javaGenerateEqualsAndHash")
-    if node != nil and node.kind != JNull:
-        setjavaGenerateEqualsAndHash(result, parseBool(node))
-    node = getJsonField(obj, "java_string_check_utf8", "javaStringCheckUtf8")
-    if node != nil and node.kind != JNull:
-        setjavaStringCheckUtf8(result, parseBool(node))
-    node = getJsonField(obj, "optimize_for", "optimizeFor")
-    if node != nil and node.kind != JNull:
-        setoptimizeFor(result, parseEnum[google_protobuf_FileOptions_OptimizeMode](node))
-    node = getJsonField(obj, "go_package", "goPackage")
-    if node != nil and node.kind != JNull:
-        setgoPackage(result, parseString(node))
-    node = getJsonField(obj, "cc_generic_services", "ccGenericServices")
-    if node != nil and node.kind != JNull:
-        setccGenericServices(result, parseBool(node))
-    node = getJsonField(obj, "java_generic_services", "javaGenericServices")
-    if node != nil and node.kind != JNull:
-        setjavaGenericServices(result, parseBool(node))
-    node = getJsonField(obj, "py_generic_services", "pyGenericServices")
-    if node != nil and node.kind != JNull:
-        setpyGenericServices(result, parseBool(node))
-    node = getJsonField(obj, "php_generic_services", "phpGenericServices")
-    if node != nil and node.kind != JNull:
-        setphpGenericServices(result, parseBool(node))
-    node = getJsonField(obj, "deprecated", "deprecated")
-    if node != nil and node.kind != JNull:
-        setdeprecated(result, parseBool(node))
-    node = getJsonField(obj, "cc_enable_arenas", "ccEnableArenas")
-    if node != nil and node.kind != JNull:
-        setccEnableArenas(result, parseBool(node))
-    node = getJsonField(obj, "objc_class_prefix", "objcClassPrefix")
-    if node != nil and node.kind != JNull:
-        setobjcClassPrefix(result, parseString(node))
-    node = getJsonField(obj, "csharp_namespace", "csharpNamespace")
-    if node != nil and node.kind != JNull:
-        setcsharpNamespace(result, parseString(node))
-    node = getJsonField(obj, "swift_prefix", "swiftPrefix")
-    if node != nil and node.kind != JNull:
-        setswiftPrefix(result, parseString(node))
-    node = getJsonField(obj, "php_class_prefix", "phpClassPrefix")
-    if node != nil and node.kind != JNull:
-        setphpClassPrefix(result, parseString(node))
-    node = getJsonField(obj, "php_namespace", "phpNamespace")
-    if node != nil and node.kind != JNull:
-        setphpNamespace(result, parseString(node))
-    node = getJsonField(obj, "uninterpreted_option", "uninterpretedOption")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            adduninterpretedOption(result, parsegoogle_protobuf_UninterpretedOption(value))
-
 proc serialize*(message: google_protobuf_FileOptions): string =
     let
         ss = newStringStream()
@@ -4469,7 +3633,6 @@ proc setuninterpretedOption*(message: google_protobuf_ServiceOptions, value: seq
 
 proc adduninterpretedOption*(message: google_protobuf_ServiceOptions, value: google_protobuf_UninterpretedOption) =
     add(message.uninterpretedOption, value)
-    setField(message, 999)
 
 proc uninterpretedOption*(message: google_protobuf_ServiceOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
     message.uninterpretedOption
@@ -4510,31 +3673,6 @@ proc readgoogle_protobuf_ServiceOptions*(stream: Stream): google_protobuf_Servic
             let data = readLengthDelimited(stream)
             adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
-
-proc toJson*(message: google_protobuf_ServiceOptions): JsonNode =
-    result = newJObject()
-    if hasdeprecated(message):
-        result["deprecated"] = %message.deprecated
-    if hasuninterpretedOption(message):
-        let arr = newJArray()
-        for value in message.uninterpretedOption:
-            add(arr, toJson(value))
-        result["uninterpretedOption"] = arr
-
-proc parsegoogle_protobuf_ServiceOptions*(obj: JsonNode): google_protobuf_ServiceOptions =
-    result = newgoogle_protobuf_ServiceOptions()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "deprecated", "deprecated")
-    if node != nil and node.kind != JNull:
-        setdeprecated(result, parseBool(node))
-    node = getJsonField(obj, "uninterpreted_option", "uninterpretedOption")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            adduninterpretedOption(result, parsegoogle_protobuf_UninterpretedOption(value))
 
 proc serialize*(message: google_protobuf_ServiceOptions): string =
     let
@@ -4607,7 +3745,6 @@ proc setuninterpretedOption*(message: google_protobuf_MethodOptions, value: seq[
 
 proc adduninterpretedOption*(message: google_protobuf_MethodOptions, value: google_protobuf_UninterpretedOption) =
     add(message.uninterpretedOption, value)
-    setField(message, 999)
 
 proc uninterpretedOption*(message: google_protobuf_MethodOptions): seq[google_protobuf_UninterpretedOption] {.inline.} =
     message.uninterpretedOption
@@ -4656,36 +3793,6 @@ proc readgoogle_protobuf_MethodOptions*(stream: Stream): google_protobuf_MethodO
             let data = readLengthDelimited(stream)
             adduninterpretedOption(result, newgoogle_protobuf_UninterpretedOption(data))
         else: readUnknownField(stream, result, tag)
-
-proc toJson*(message: google_protobuf_MethodOptions): JsonNode =
-    result = newJObject()
-    if hasdeprecated(message):
-        result["deprecated"] = %message.deprecated
-    if hasidempotencyLevel(message):
-        result["idempotencyLevel"] = toJson(message.idempotencyLevel)
-    if hasuninterpretedOption(message):
-        let arr = newJArray()
-        for value in message.uninterpretedOption:
-            add(arr, toJson(value))
-        result["uninterpretedOption"] = arr
-
-proc parsegoogle_protobuf_MethodOptions*(obj: JsonNode): google_protobuf_MethodOptions =
-    result = newgoogle_protobuf_MethodOptions()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "deprecated", "deprecated")
-    if node != nil and node.kind != JNull:
-        setdeprecated(result, parseBool(node))
-    node = getJsonField(obj, "idempotency_level", "idempotencyLevel")
-    if node != nil and node.kind != JNull:
-        setidempotencyLevel(result, parseEnum[google_protobuf_MethodOptions_IdempotencyLevel](node))
-    node = getJsonField(obj, "uninterpreted_option", "uninterpretedOption")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            adduninterpretedOption(result, parsegoogle_protobuf_UninterpretedOption(value))
 
 proc serialize*(message: google_protobuf_MethodOptions): string =
     let
@@ -4882,45 +3989,6 @@ proc readgoogle_protobuf_MethodDescriptorProto*(stream: Stream): google_protobuf
             setserverStreaming(result, protoReadBool(stream))
         else: readUnknownField(stream, result, tag)
 
-proc toJson*(message: google_protobuf_MethodDescriptorProto): JsonNode =
-    result = newJObject()
-    if hasname(message):
-        result["name"] = %message.name
-    if hasinputType(message):
-        result["inputType"] = %message.inputType
-    if hasoutputType(message):
-        result["outputType"] = %message.outputType
-    if hasoptions(message):
-        result["options"] = toJson(message.options)
-    if hasclientStreaming(message):
-        result["clientStreaming"] = %message.clientStreaming
-    if hasserverStreaming(message):
-        result["serverStreaming"] = %message.serverStreaming
-
-proc parsegoogle_protobuf_MethodDescriptorProto*(obj: JsonNode): google_protobuf_MethodDescriptorProto =
-    result = newgoogle_protobuf_MethodDescriptorProto()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "name", "name")
-    if node != nil and node.kind != JNull:
-        setname(result, parseString(node))
-    node = getJsonField(obj, "input_type", "inputType")
-    if node != nil and node.kind != JNull:
-        setinputType(result, parseString(node))
-    node = getJsonField(obj, "output_type", "outputType")
-    if node != nil and node.kind != JNull:
-        setoutputType(result, parseString(node))
-    node = getJsonField(obj, "options", "options")
-    if node != nil and node.kind != JNull:
-        setoptions(result, parsegoogle_protobuf_MethodOptions(node))
-    node = getJsonField(obj, "client_streaming", "clientStreaming")
-    if node != nil and node.kind != JNull:
-        setclientStreaming(result, parseBool(node))
-    node = getJsonField(obj, "server_streaming", "serverStreaming")
-    if node != nil and node.kind != JNull:
-        setserverStreaming(result, parseBool(node))
-
 proc serialize*(message: google_protobuf_MethodDescriptorProto): string =
     let
         ss = newStringStream()
@@ -4975,7 +4043,6 @@ proc setfmethod*(message: google_protobuf_ServiceDescriptorProto, value: seq[goo
 
 proc addfmethod*(message: google_protobuf_ServiceDescriptorProto, value: google_protobuf_MethodDescriptorProto) =
     add(message.fmethod, value)
-    setField(message, 2)
 
 proc fmethod*(message: google_protobuf_ServiceDescriptorProto): seq[google_protobuf_MethodDescriptorProto] {.inline.} =
     message.fmethod
@@ -5042,36 +4109,6 @@ proc readgoogle_protobuf_ServiceDescriptorProto*(stream: Stream): google_protobu
             let data = readLengthDelimited(stream)
             setoptions(result, newgoogle_protobuf_ServiceOptions(data))
         else: readUnknownField(stream, result, tag)
-
-proc toJson*(message: google_protobuf_ServiceDescriptorProto): JsonNode =
-    result = newJObject()
-    if hasname(message):
-        result["name"] = %message.name
-    if hasfmethod(message):
-        let arr = newJArray()
-        for value in message.fmethod:
-            add(arr, toJson(value))
-        result["method"] = arr
-    if hasoptions(message):
-        result["options"] = toJson(message.options)
-
-proc parsegoogle_protobuf_ServiceDescriptorProto*(obj: JsonNode): google_protobuf_ServiceDescriptorProto =
-    result = newgoogle_protobuf_ServiceDescriptorProto()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "name", "name")
-    if node != nil and node.kind != JNull:
-        setname(result, parseString(node))
-    node = getJsonField(obj, "method", "method")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addfmethod(result, parsegoogle_protobuf_MethodDescriptorProto(value))
-    node = getJsonField(obj, "options", "options")
-    if node != nil and node.kind != JNull:
-        setoptions(result, parsegoogle_protobuf_ServiceOptions(node))
 
 proc serialize*(message: google_protobuf_ServiceDescriptorProto): string =
     let
@@ -5153,7 +4190,6 @@ proc setdependency*(message: google_protobuf_FileDescriptorProto, value: seq[str
 
 proc adddependency*(message: google_protobuf_FileDescriptorProto, value: string) =
     add(message.dependency, value)
-    setField(message, 3)
 
 proc dependency*(message: google_protobuf_FileDescriptorProto): seq[string] {.inline.} =
     message.dependency
@@ -5174,7 +4210,6 @@ proc setpublicDependency*(message: google_protobuf_FileDescriptorProto, value: s
 
 proc addpublicDependency*(message: google_protobuf_FileDescriptorProto, value: int32) =
     add(message.publicDependency, value)
-    setField(message, 10)
 
 proc publicDependency*(message: google_protobuf_FileDescriptorProto): seq[int32] {.inline.} =
     message.publicDependency
@@ -5195,7 +4230,6 @@ proc setweakDependency*(message: google_protobuf_FileDescriptorProto, value: seq
 
 proc addweakDependency*(message: google_protobuf_FileDescriptorProto, value: int32) =
     add(message.weakDependency, value)
-    setField(message, 11)
 
 proc weakDependency*(message: google_protobuf_FileDescriptorProto): seq[int32] {.inline.} =
     message.weakDependency
@@ -5216,7 +4250,6 @@ proc setmessageType*(message: google_protobuf_FileDescriptorProto, value: seq[go
 
 proc addmessageType*(message: google_protobuf_FileDescriptorProto, value: google_protobuf_DescriptorProto) =
     add(message.messageType, value)
-    setField(message, 4)
 
 proc messageType*(message: google_protobuf_FileDescriptorProto): seq[google_protobuf_DescriptorProto] {.inline.} =
     message.messageType
@@ -5237,7 +4270,6 @@ proc setenumType*(message: google_protobuf_FileDescriptorProto, value: seq[googl
 
 proc addenumType*(message: google_protobuf_FileDescriptorProto, value: google_protobuf_EnumDescriptorProto) =
     add(message.enumType, value)
-    setField(message, 5)
 
 proc enumType*(message: google_protobuf_FileDescriptorProto): seq[google_protobuf_EnumDescriptorProto] {.inline.} =
     message.enumType
@@ -5258,7 +4290,6 @@ proc setservice*(message: google_protobuf_FileDescriptorProto, value: seq[google
 
 proc addservice*(message: google_protobuf_FileDescriptorProto, value: google_protobuf_ServiceDescriptorProto) =
     add(message.service, value)
-    setField(message, 6)
 
 proc service*(message: google_protobuf_FileDescriptorProto): seq[google_protobuf_ServiceDescriptorProto] {.inline.} =
     message.service
@@ -5279,7 +4310,6 @@ proc setextension*(message: google_protobuf_FileDescriptorProto, value: seq[goog
 
 proc addextension*(message: google_protobuf_FileDescriptorProto, value: google_protobuf_FieldDescriptorProto) =
     add(message.extension, value)
-    setField(message, 7)
 
 proc extension*(message: google_protobuf_FileDescriptorProto): seq[google_protobuf_FieldDescriptorProto] {.inline.} =
     message.extension
@@ -5348,10 +4378,10 @@ proc sizeOfgoogle_protobuf_FileDescriptorProto*(message: google_protobuf_FileDes
     for value in message.dependency:
         result = result + sizeOfTag(3, WireType.LengthDelimited)
         result = result + sizeOfString(value)
-    if haspublicDependency(message):
+    if len(message.publicDependency) > 0:
         result = result + sizeOfTag(10, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(packedFieldSize(message.publicDependency, FieldType.Int32))
-    if hasweakDependency(message):
+    if len(message.weakDependency) > 0:
         result = result + sizeOfTag(11, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(packedFieldSize(message.weakDependency, FieldType.Int32))
     for value in message.messageType:
@@ -5479,117 +4509,6 @@ proc readgoogle_protobuf_FileDescriptorProto*(stream: Stream): google_protobuf_F
             setsyntax(result, protoReadString(stream))
         else: readUnknownField(stream, result, tag)
 
-proc toJson*(message: google_protobuf_FileDescriptorProto): JsonNode =
-    result = newJObject()
-    if hasname(message):
-        result["name"] = %message.name
-    if haspackage(message):
-        result["package"] = %message.package
-    if hasdependency(message):
-        let arr = newJArray()
-        for value in message.dependency:
-            add(arr, %value)
-        result["dependency"] = arr
-    if haspublicDependency(message):
-        let arr = newJArray()
-        for value in message.publicDependency:
-            add(arr, %value)
-        result["publicDependency"] = arr
-    if hasweakDependency(message):
-        let arr = newJArray()
-        for value in message.weakDependency:
-            add(arr, %value)
-        result["weakDependency"] = arr
-    if hasmessageType(message):
-        let arr = newJArray()
-        for value in message.messageType:
-            add(arr, toJson(value))
-        result["messageType"] = arr
-    if hasenumType(message):
-        let arr = newJArray()
-        for value in message.enumType:
-            add(arr, toJson(value))
-        result["enumType"] = arr
-    if hasservice(message):
-        let arr = newJArray()
-        for value in message.service:
-            add(arr, toJson(value))
-        result["service"] = arr
-    if hasextension(message):
-        let arr = newJArray()
-        for value in message.extension:
-            add(arr, toJson(value))
-        result["extension"] = arr
-    if hasoptions(message):
-        result["options"] = toJson(message.options)
-    if hassourceCodeInfo(message):
-        result["sourceCodeInfo"] = toJson(message.sourceCodeInfo)
-    if hassyntax(message):
-        result["syntax"] = %message.syntax
-
-proc parsegoogle_protobuf_FileDescriptorProto*(obj: JsonNode): google_protobuf_FileDescriptorProto =
-    result = newgoogle_protobuf_FileDescriptorProto()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "name", "name")
-    if node != nil and node.kind != JNull:
-        setname(result, parseString(node))
-    node = getJsonField(obj, "package", "package")
-    if node != nil and node.kind != JNull:
-        setpackage(result, parseString(node))
-    node = getJsonField(obj, "dependency", "dependency")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            adddependency(result, parseString(value))
-    node = getJsonField(obj, "public_dependency", "publicDependency")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addpublicDependency(result, parseInt[int32](value))
-    node = getJsonField(obj, "weak_dependency", "weakDependency")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addweakDependency(result, parseInt[int32](value))
-    node = getJsonField(obj, "message_type", "messageType")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addmessageType(result, parsegoogle_protobuf_DescriptorProto(value))
-    node = getJsonField(obj, "enum_type", "enumType")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addenumType(result, parsegoogle_protobuf_EnumDescriptorProto(value))
-    node = getJsonField(obj, "service", "service")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addservice(result, parsegoogle_protobuf_ServiceDescriptorProto(value))
-    node = getJsonField(obj, "extension", "extension")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addextension(result, parsegoogle_protobuf_FieldDescriptorProto(value))
-    node = getJsonField(obj, "options", "options")
-    if node != nil and node.kind != JNull:
-        setoptions(result, parsegoogle_protobuf_FileOptions(node))
-    node = getJsonField(obj, "source_code_info", "sourceCodeInfo")
-    if node != nil and node.kind != JNull:
-        setsourceCodeInfo(result, parsegoogle_protobuf_SourceCodeInfo(node))
-    node = getJsonField(obj, "syntax", "syntax")
-    if node != nil and node.kind != JNull:
-        setsyntax(result, parseString(node))
-
 proc serialize*(message: google_protobuf_FileDescriptorProto): string =
     let
         ss = newStringStream()
@@ -5625,7 +4544,6 @@ proc setfile*(message: google_protobuf_FileDescriptorSet, value: seq[google_prot
 
 proc addfile*(message: google_protobuf_FileDescriptorSet, value: google_protobuf_FileDescriptorProto) =
     add(message.file, value)
-    setField(message, 1)
 
 proc file*(message: google_protobuf_FileDescriptorSet): seq[google_protobuf_FileDescriptorProto] {.inline.} =
     message.file
@@ -5658,26 +4576,6 @@ proc readgoogle_protobuf_FileDescriptorSet*(stream: Stream): google_protobuf_Fil
             let data = readLengthDelimited(stream)
             addfile(result, newgoogle_protobuf_FileDescriptorProto(data))
         else: readUnknownField(stream, result, tag)
-
-proc toJson*(message: google_protobuf_FileDescriptorSet): JsonNode =
-    result = newJObject()
-    if hasfile(message):
-        let arr = newJArray()
-        for value in message.file:
-            add(arr, toJson(value))
-        result["file"] = arr
-
-proc parsegoogle_protobuf_FileDescriptorSet*(obj: JsonNode): google_protobuf_FileDescriptorSet =
-    result = newgoogle_protobuf_FileDescriptorSet()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "file", "file")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addfile(result, parsegoogle_protobuf_FileDescriptorProto(value))
 
 proc serialize*(message: google_protobuf_FileDescriptorSet): string =
     let
@@ -5717,7 +4615,6 @@ proc setpath*(message: google_protobuf_GeneratedCodeInfo_Annotation, value: seq[
 
 proc addpath*(message: google_protobuf_GeneratedCodeInfo_Annotation, value: int32) =
     add(message.path, value)
-    setField(message, 1)
 
 proc path*(message: google_protobuf_GeneratedCodeInfo_Annotation): seq[int32] {.inline.} =
     message.path
@@ -5777,7 +4674,7 @@ proc `fend=`*(message: google_protobuf_GeneratedCodeInfo_Annotation, value: int3
     setfend(message, value)
 
 proc sizeOfgoogle_protobuf_GeneratedCodeInfo_Annotation*(message: google_protobuf_GeneratedCodeInfo_Annotation): uint64 =
-    if haspath(message):
+    if len(message.path) > 0:
         result = result + sizeOfTag(1, WireType.LengthDelimited)
         result = result + sizeOfLengthDelimited(packedFieldSize(message.path, FieldType.Int32))
     if hassourceFile(message):
@@ -5792,7 +4689,7 @@ proc sizeOfgoogle_protobuf_GeneratedCodeInfo_Annotation*(message: google_protobu
     result = result + sizeOfUnknownFields(message)
 
 proc writegoogle_protobuf_GeneratedCodeInfo_Annotation*(stream: Stream, message: google_protobuf_GeneratedCodeInfo_Annotation) =
-    if haspath(message):
+    if len(message.path) > 0:
         writeTag(stream, 1, WireType.LengthDelimited)
         writeVarint(stream, packedFieldSize(message.path, FieldType.Int32))
         for value in message.path:
@@ -5839,41 +4736,6 @@ proc readgoogle_protobuf_GeneratedCodeInfo_Annotation*(stream: Stream): google_p
             setfend(result, protoReadInt32(stream))
         else: readUnknownField(stream, result, tag)
 
-proc toJson*(message: google_protobuf_GeneratedCodeInfo_Annotation): JsonNode =
-    result = newJObject()
-    if haspath(message):
-        let arr = newJArray()
-        for value in message.path:
-            add(arr, %value)
-        result["path"] = arr
-    if hassourceFile(message):
-        result["sourceFile"] = %message.sourceFile
-    if hasbegin(message):
-        result["begin"] = %message.begin
-    if hasfend(message):
-        result["end"] = %message.fend
-
-proc parsegoogle_protobuf_GeneratedCodeInfo_Annotation*(obj: JsonNode): google_protobuf_GeneratedCodeInfo_Annotation =
-    result = newgoogle_protobuf_GeneratedCodeInfo_Annotation()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "path", "path")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addpath(result, parseInt[int32](value))
-    node = getJsonField(obj, "source_file", "sourceFile")
-    if node != nil and node.kind != JNull:
-        setsourceFile(result, parseString(node))
-    node = getJsonField(obj, "begin", "begin")
-    if node != nil and node.kind != JNull:
-        setbegin(result, parseInt[int32](node))
-    node = getJsonField(obj, "end", "end")
-    if node != nil and node.kind != JNull:
-        setfend(result, parseInt[int32](node))
-
 proc serialize*(message: google_protobuf_GeneratedCodeInfo_Annotation): string =
     let
         ss = newStringStream()
@@ -5909,7 +4771,6 @@ proc setannotation*(message: google_protobuf_GeneratedCodeInfo, value: seq[googl
 
 proc addannotation*(message: google_protobuf_GeneratedCodeInfo, value: google_protobuf_GeneratedCodeInfo_Annotation) =
     add(message.annotation, value)
-    setField(message, 1)
 
 proc annotation*(message: google_protobuf_GeneratedCodeInfo): seq[google_protobuf_GeneratedCodeInfo_Annotation] {.inline.} =
     message.annotation
@@ -5942,26 +4803,6 @@ proc readgoogle_protobuf_GeneratedCodeInfo*(stream: Stream): google_protobuf_Gen
             let data = readLengthDelimited(stream)
             addannotation(result, newgoogle_protobuf_GeneratedCodeInfo_Annotation(data))
         else: readUnknownField(stream, result, tag)
-
-proc toJson*(message: google_protobuf_GeneratedCodeInfo): JsonNode =
-    result = newJObject()
-    if hasannotation(message):
-        let arr = newJArray()
-        for value in message.annotation:
-            add(arr, toJson(value))
-        result["annotation"] = arr
-
-proc parsegoogle_protobuf_GeneratedCodeInfo*(obj: JsonNode): google_protobuf_GeneratedCodeInfo =
-    result = newgoogle_protobuf_GeneratedCodeInfo()
-    var node: JsonNode
-    if obj.kind != JObject:
-        raise newException(nimpb_json.ParseError, "object expected")
-    node = getJsonField(obj, "annotation", "annotation")
-    if node != nil and node.kind != JNull:
-        if node.kind != JArray:
-            raise newException(ValueError, "not an array")
-        for value in node:
-            addannotation(result, parsegoogle_protobuf_GeneratedCodeInfo_Annotation(value))
 
 proc serialize*(message: google_protobuf_GeneratedCodeInfo): string =
     let
