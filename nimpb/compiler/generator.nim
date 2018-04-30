@@ -685,6 +685,7 @@ iterator genNewMessageProc(msg: Message): string =
     yield &"proc new{msg.names}*(): {msg.names} ="
     yield indent("new(result)", 4)
     yield indent("initMessage(result[])", 4)
+    yield indent(&"result.procs = {msg.names}Procs()", 4)
     for field in msg.fields:
         if field.oneof == nil:
             yield indent(&"result.{field.accessor} = {defaultValue(field)}", 4)
@@ -1125,12 +1126,32 @@ iterator genMessageProcForwards(msg: Message): string =
         yield &"proc read{msg.names}KV(stream: Stream, tbl: TableRef[{key.fullType}, {value.fullType}])"
         yield &"proc sizeOf{msg.names}KV(key: {key.fullType}, value: {value.fullType}): uint64"
 
+iterator genMessageProcImpls(msg: Message): string =
+    yield &"proc read{msg.names}Impl(stream: Stream): Message = read{msg.names}(stream)"
+    yield &"proc write{msg.names}Impl(stream: Stream, msg: Message) = write{msg.names}(stream, {msg.names}(msg))"
+    if msg.file.syntax == Syntax.Proto3 and shouldGenerateJsonProcs($msg.names):
+        yield &"proc toJson{msg.names}Impl(msg: Message): JsonNode = toJson({msg.names}(msg))"
+        yield &"proc fromJson{msg.names}Impl(node: JsonNode): Message = parse{msg.names}(node)"
+    yield ""
+    yield &"proc {msg.names}Procs*(): MessageProcs ="
+    yield &"    result.readImpl = read{msg.names}Impl"
+    yield &"    result.writeImpl = write{msg.names}Impl"
+    if msg.file.syntax == Syntax.Proto3 and shouldGenerateJsonProcs($msg.names):
+        yield &"    result.toJsonImpl = toJson{msg.names}Impl"
+        yield &"    result.fromJsonImpl = fromJson{msg.names}Impl"
+    yield ""
+
 iterator genProcs(msg: Message): string =
     if isMapEntry(msg):
         for line in genSizeOfMapKVProc(msg): yield line
         for line in genWriteMapKVProc(msg): yield line
         for line in genReadMapKVProc(msg): yield line
     else:
+        yield &"proc fullyQualifiedName*(T: typedesc[{msg.names}]): string = \"{join(seq[string](msg.names), \".\")}\""
+        yield ""
+
+        for line in genMessageProcImpls(msg): yield line
+
         for line in genNewMessageProc(msg): yield line
 
         for field in msg.fields:

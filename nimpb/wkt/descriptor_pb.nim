@@ -414,9 +414,19 @@ proc writegoogle_protobuf_GeneratedCodeInfo*(stream: Stream, message: google_pro
 proc readgoogle_protobuf_GeneratedCodeInfo*(stream: Stream): google_protobuf_GeneratedCodeInfo
 proc sizeOfgoogle_protobuf_GeneratedCodeInfo*(message: google_protobuf_GeneratedCodeInfo): uint64
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_UninterpretedOption_NamePart]): string = "google.protobuf.UninterpretedOption.NamePart"
+
+proc readgoogle_protobuf_UninterpretedOption_NamePartImpl(stream: Stream): Message = readgoogle_protobuf_UninterpretedOption_NamePart(stream)
+proc writegoogle_protobuf_UninterpretedOption_NamePartImpl(stream: Stream, msg: Message) = writegoogle_protobuf_UninterpretedOption_NamePart(stream, google_protobuf_UninterpretedOption_NamePart(msg))
+
+proc google_protobuf_UninterpretedOption_NamePartProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_UninterpretedOption_NamePartImpl
+    result.writeImpl = writegoogle_protobuf_UninterpretedOption_NamePartImpl
+
 proc newgoogle_protobuf_UninterpretedOption_NamePart*(): google_protobuf_UninterpretedOption_NamePart =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_UninterpretedOption_NamePartProcs()
     result.namePart = ""
     result.isExtension = false
 
@@ -504,9 +514,19 @@ proc newgoogle_protobuf_UninterpretedOption_NamePart*(data: seq[byte]): google_p
     result = readgoogle_protobuf_UninterpretedOption_NamePart(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_UninterpretedOption]): string = "google.protobuf.UninterpretedOption"
+
+proc readgoogle_protobuf_UninterpretedOptionImpl(stream: Stream): Message = readgoogle_protobuf_UninterpretedOption(stream)
+proc writegoogle_protobuf_UninterpretedOptionImpl(stream: Stream, msg: Message) = writegoogle_protobuf_UninterpretedOption(stream, google_protobuf_UninterpretedOption(msg))
+
+proc google_protobuf_UninterpretedOptionProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_UninterpretedOptionImpl
+    result.writeImpl = writegoogle_protobuf_UninterpretedOptionImpl
+
 proc newgoogle_protobuf_UninterpretedOption*(): google_protobuf_UninterpretedOption =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_UninterpretedOptionProcs()
     result.name = @[]
     result.identifierValue = ""
     result.positiveIntValue = 0
@@ -728,9 +748,19 @@ proc newgoogle_protobuf_UninterpretedOption*(data: seq[byte]): google_protobuf_U
     result = readgoogle_protobuf_UninterpretedOption(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_EnumValueOptions]): string = "google.protobuf.EnumValueOptions"
+
+proc readgoogle_protobuf_EnumValueOptionsImpl(stream: Stream): Message = readgoogle_protobuf_EnumValueOptions(stream)
+proc writegoogle_protobuf_EnumValueOptionsImpl(stream: Stream, msg: Message) = writegoogle_protobuf_EnumValueOptions(stream, google_protobuf_EnumValueOptions(msg))
+
+proc google_protobuf_EnumValueOptionsProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_EnumValueOptionsImpl
+    result.writeImpl = writegoogle_protobuf_EnumValueOptionsImpl
+
 proc newgoogle_protobuf_EnumValueOptions*(): google_protobuf_EnumValueOptions =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_EnumValueOptionsProcs()
     result.deprecated = false
     result.uninterpretedOption = @[]
 
@@ -822,9 +852,19 @@ proc newgoogle_protobuf_EnumValueOptions*(data: seq[byte]): google_protobuf_Enum
     result = readgoogle_protobuf_EnumValueOptions(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_EnumValueDescriptorProto]): string = "google.protobuf.EnumValueDescriptorProto"
+
+proc readgoogle_protobuf_EnumValueDescriptorProtoImpl(stream: Stream): Message = readgoogle_protobuf_EnumValueDescriptorProto(stream)
+proc writegoogle_protobuf_EnumValueDescriptorProtoImpl(stream: Stream, msg: Message) = writegoogle_protobuf_EnumValueDescriptorProto(stream, google_protobuf_EnumValueDescriptorProto(msg))
+
+proc google_protobuf_EnumValueDescriptorProtoProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_EnumValueDescriptorProtoImpl
+    result.writeImpl = writegoogle_protobuf_EnumValueDescriptorProtoImpl
+
 proc newgoogle_protobuf_EnumValueDescriptorProto*(): google_protobuf_EnumValueDescriptorProto =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_EnumValueDescriptorProtoProcs()
     result.name = ""
     result.number = 0
     result.options = nil
@@ -939,9 +979,19 @@ proc newgoogle_protobuf_EnumValueDescriptorProto*(data: seq[byte]): google_proto
     result = readgoogle_protobuf_EnumValueDescriptorProto(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_EnumDescriptorProto_EnumReservedRange]): string = "google.protobuf.EnumDescriptorProto.EnumReservedRange"
+
+proc readgoogle_protobuf_EnumDescriptorProto_EnumReservedRangeImpl(stream: Stream): Message = readgoogle_protobuf_EnumDescriptorProto_EnumReservedRange(stream)
+proc writegoogle_protobuf_EnumDescriptorProto_EnumReservedRangeImpl(stream: Stream, msg: Message) = writegoogle_protobuf_EnumDescriptorProto_EnumReservedRange(stream, google_protobuf_EnumDescriptorProto_EnumReservedRange(msg))
+
+proc google_protobuf_EnumDescriptorProto_EnumReservedRangeProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_EnumDescriptorProto_EnumReservedRangeImpl
+    result.writeImpl = writegoogle_protobuf_EnumDescriptorProto_EnumReservedRangeImpl
+
 proc newgoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(): google_protobuf_EnumDescriptorProto_EnumReservedRange =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_EnumDescriptorProto_EnumReservedRangeProcs()
     result.start = 0
     result.fend = 0
 
@@ -1029,9 +1079,19 @@ proc newgoogle_protobuf_EnumDescriptorProto_EnumReservedRange*(data: seq[byte]):
     result = readgoogle_protobuf_EnumDescriptorProto_EnumReservedRange(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_EnumOptions]): string = "google.protobuf.EnumOptions"
+
+proc readgoogle_protobuf_EnumOptionsImpl(stream: Stream): Message = readgoogle_protobuf_EnumOptions(stream)
+proc writegoogle_protobuf_EnumOptionsImpl(stream: Stream, msg: Message) = writegoogle_protobuf_EnumOptions(stream, google_protobuf_EnumOptions(msg))
+
+proc google_protobuf_EnumOptionsProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_EnumOptionsImpl
+    result.writeImpl = writegoogle_protobuf_EnumOptionsImpl
+
 proc newgoogle_protobuf_EnumOptions*(): google_protobuf_EnumOptions =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_EnumOptionsProcs()
     result.allowAlias = false
     result.deprecated = false
     result.uninterpretedOption = @[]
@@ -1149,9 +1209,19 @@ proc newgoogle_protobuf_EnumOptions*(data: seq[byte]): google_protobuf_EnumOptio
     result = readgoogle_protobuf_EnumOptions(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_EnumDescriptorProto]): string = "google.protobuf.EnumDescriptorProto"
+
+proc readgoogle_protobuf_EnumDescriptorProtoImpl(stream: Stream): Message = readgoogle_protobuf_EnumDescriptorProto(stream)
+proc writegoogle_protobuf_EnumDescriptorProtoImpl(stream: Stream, msg: Message) = writegoogle_protobuf_EnumDescriptorProto(stream, google_protobuf_EnumDescriptorProto(msg))
+
+proc google_protobuf_EnumDescriptorProtoProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_EnumDescriptorProtoImpl
+    result.writeImpl = writegoogle_protobuf_EnumDescriptorProtoImpl
+
 proc newgoogle_protobuf_EnumDescriptorProto*(): google_protobuf_EnumDescriptorProto =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_EnumDescriptorProtoProcs()
     result.name = ""
     result.value = @[]
     result.options = nil
@@ -1329,9 +1399,19 @@ proc newgoogle_protobuf_EnumDescriptorProto*(data: seq[byte]): google_protobuf_E
     result = readgoogle_protobuf_EnumDescriptorProto(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_ExtensionRangeOptions]): string = "google.protobuf.ExtensionRangeOptions"
+
+proc readgoogle_protobuf_ExtensionRangeOptionsImpl(stream: Stream): Message = readgoogle_protobuf_ExtensionRangeOptions(stream)
+proc writegoogle_protobuf_ExtensionRangeOptionsImpl(stream: Stream, msg: Message) = writegoogle_protobuf_ExtensionRangeOptions(stream, google_protobuf_ExtensionRangeOptions(msg))
+
+proc google_protobuf_ExtensionRangeOptionsProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_ExtensionRangeOptionsImpl
+    result.writeImpl = writegoogle_protobuf_ExtensionRangeOptionsImpl
+
 proc newgoogle_protobuf_ExtensionRangeOptions*(): google_protobuf_ExtensionRangeOptions =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_ExtensionRangeOptionsProcs()
     result.uninterpretedOption = @[]
 
 proc clearuninterpretedOption*(message: google_protobuf_ExtensionRangeOptions) =
@@ -1397,9 +1477,19 @@ proc newgoogle_protobuf_ExtensionRangeOptions*(data: seq[byte]): google_protobuf
     result = readgoogle_protobuf_ExtensionRangeOptions(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_SourceCodeInfo_Location]): string = "google.protobuf.SourceCodeInfo.Location"
+
+proc readgoogle_protobuf_SourceCodeInfo_LocationImpl(stream: Stream): Message = readgoogle_protobuf_SourceCodeInfo_Location(stream)
+proc writegoogle_protobuf_SourceCodeInfo_LocationImpl(stream: Stream, msg: Message) = writegoogle_protobuf_SourceCodeInfo_Location(stream, google_protobuf_SourceCodeInfo_Location(msg))
+
+proc google_protobuf_SourceCodeInfo_LocationProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_SourceCodeInfo_LocationImpl
+    result.writeImpl = writegoogle_protobuf_SourceCodeInfo_LocationImpl
+
 proc newgoogle_protobuf_SourceCodeInfo_Location*(): google_protobuf_SourceCodeInfo_Location =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_SourceCodeInfo_LocationProcs()
     result.path = @[]
     result.span = @[]
     result.leadingComments = ""
@@ -1602,9 +1692,19 @@ proc newgoogle_protobuf_SourceCodeInfo_Location*(data: seq[byte]): google_protob
     result = readgoogle_protobuf_SourceCodeInfo_Location(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_SourceCodeInfo]): string = "google.protobuf.SourceCodeInfo"
+
+proc readgoogle_protobuf_SourceCodeInfoImpl(stream: Stream): Message = readgoogle_protobuf_SourceCodeInfo(stream)
+proc writegoogle_protobuf_SourceCodeInfoImpl(stream: Stream, msg: Message) = writegoogle_protobuf_SourceCodeInfo(stream, google_protobuf_SourceCodeInfo(msg))
+
+proc google_protobuf_SourceCodeInfoProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_SourceCodeInfoImpl
+    result.writeImpl = writegoogle_protobuf_SourceCodeInfoImpl
+
 proc newgoogle_protobuf_SourceCodeInfo*(): google_protobuf_SourceCodeInfo =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_SourceCodeInfoProcs()
     result.location = @[]
 
 proc clearlocation*(message: google_protobuf_SourceCodeInfo) =
@@ -1670,9 +1770,19 @@ proc newgoogle_protobuf_SourceCodeInfo*(data: seq[byte]): google_protobuf_Source
     result = readgoogle_protobuf_SourceCodeInfo(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_FieldOptions]): string = "google.protobuf.FieldOptions"
+
+proc readgoogle_protobuf_FieldOptionsImpl(stream: Stream): Message = readgoogle_protobuf_FieldOptions(stream)
+proc writegoogle_protobuf_FieldOptionsImpl(stream: Stream, msg: Message) = writegoogle_protobuf_FieldOptions(stream, google_protobuf_FieldOptions(msg))
+
+proc google_protobuf_FieldOptionsProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_FieldOptionsImpl
+    result.writeImpl = writegoogle_protobuf_FieldOptionsImpl
+
 proc newgoogle_protobuf_FieldOptions*(): google_protobuf_FieldOptions =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_FieldOptionsProcs()
     result.ctype = google_protobuf_FieldOptions_CType.STRING
     result.packed = false
     result.jstype = google_protobuf_FieldOptions_JSType.JS_NORMAL
@@ -1894,9 +2004,19 @@ proc newgoogle_protobuf_FieldOptions*(data: seq[byte]): google_protobuf_FieldOpt
     result = readgoogle_protobuf_FieldOptions(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_FieldDescriptorProto]): string = "google.protobuf.FieldDescriptorProto"
+
+proc readgoogle_protobuf_FieldDescriptorProtoImpl(stream: Stream): Message = readgoogle_protobuf_FieldDescriptorProto(stream)
+proc writegoogle_protobuf_FieldDescriptorProtoImpl(stream: Stream, msg: Message) = writegoogle_protobuf_FieldDescriptorProto(stream, google_protobuf_FieldDescriptorProto(msg))
+
+proc google_protobuf_FieldDescriptorProtoProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_FieldDescriptorProtoImpl
+    result.writeImpl = writegoogle_protobuf_FieldDescriptorProtoImpl
+
 proc newgoogle_protobuf_FieldDescriptorProto*(): google_protobuf_FieldDescriptorProto =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_FieldDescriptorProtoProcs()
     result.name = ""
     result.number = 0
     result.label = google_protobuf_FieldDescriptorProto_Label.LABEL_OPTIONAL
@@ -2193,9 +2313,19 @@ proc newgoogle_protobuf_FieldDescriptorProto*(data: seq[byte]): google_protobuf_
     result = readgoogle_protobuf_FieldDescriptorProto(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_DescriptorProto_ExtensionRange]): string = "google.protobuf.DescriptorProto.ExtensionRange"
+
+proc readgoogle_protobuf_DescriptorProto_ExtensionRangeImpl(stream: Stream): Message = readgoogle_protobuf_DescriptorProto_ExtensionRange(stream)
+proc writegoogle_protobuf_DescriptorProto_ExtensionRangeImpl(stream: Stream, msg: Message) = writegoogle_protobuf_DescriptorProto_ExtensionRange(stream, google_protobuf_DescriptorProto_ExtensionRange(msg))
+
+proc google_protobuf_DescriptorProto_ExtensionRangeProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_DescriptorProto_ExtensionRangeImpl
+    result.writeImpl = writegoogle_protobuf_DescriptorProto_ExtensionRangeImpl
+
 proc newgoogle_protobuf_DescriptorProto_ExtensionRange*(): google_protobuf_DescriptorProto_ExtensionRange =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_DescriptorProto_ExtensionRangeProcs()
     result.start = 0
     result.fend = 0
     result.options = nil
@@ -2310,9 +2440,19 @@ proc newgoogle_protobuf_DescriptorProto_ExtensionRange*(data: seq[byte]): google
     result = readgoogle_protobuf_DescriptorProto_ExtensionRange(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_MessageOptions]): string = "google.protobuf.MessageOptions"
+
+proc readgoogle_protobuf_MessageOptionsImpl(stream: Stream): Message = readgoogle_protobuf_MessageOptions(stream)
+proc writegoogle_protobuf_MessageOptionsImpl(stream: Stream, msg: Message) = writegoogle_protobuf_MessageOptions(stream, google_protobuf_MessageOptions(msg))
+
+proc google_protobuf_MessageOptionsProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_MessageOptionsImpl
+    result.writeImpl = writegoogle_protobuf_MessageOptionsImpl
+
 proc newgoogle_protobuf_MessageOptions*(): google_protobuf_MessageOptions =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_MessageOptionsProcs()
     result.messageSetWireFormat = false
     result.noStandardDescriptorAccessor = false
     result.deprecated = false
@@ -2482,9 +2622,19 @@ proc newgoogle_protobuf_MessageOptions*(data: seq[byte]): google_protobuf_Messag
     result = readgoogle_protobuf_MessageOptions(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_OneofOptions]): string = "google.protobuf.OneofOptions"
+
+proc readgoogle_protobuf_OneofOptionsImpl(stream: Stream): Message = readgoogle_protobuf_OneofOptions(stream)
+proc writegoogle_protobuf_OneofOptionsImpl(stream: Stream, msg: Message) = writegoogle_protobuf_OneofOptions(stream, google_protobuf_OneofOptions(msg))
+
+proc google_protobuf_OneofOptionsProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_OneofOptionsImpl
+    result.writeImpl = writegoogle_protobuf_OneofOptionsImpl
+
 proc newgoogle_protobuf_OneofOptions*(): google_protobuf_OneofOptions =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_OneofOptionsProcs()
     result.uninterpretedOption = @[]
 
 proc clearuninterpretedOption*(message: google_protobuf_OneofOptions) =
@@ -2550,9 +2700,19 @@ proc newgoogle_protobuf_OneofOptions*(data: seq[byte]): google_protobuf_OneofOpt
     result = readgoogle_protobuf_OneofOptions(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_OneofDescriptorProto]): string = "google.protobuf.OneofDescriptorProto"
+
+proc readgoogle_protobuf_OneofDescriptorProtoImpl(stream: Stream): Message = readgoogle_protobuf_OneofDescriptorProto(stream)
+proc writegoogle_protobuf_OneofDescriptorProtoImpl(stream: Stream, msg: Message) = writegoogle_protobuf_OneofDescriptorProto(stream, google_protobuf_OneofDescriptorProto(msg))
+
+proc google_protobuf_OneofDescriptorProtoProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_OneofDescriptorProtoImpl
+    result.writeImpl = writegoogle_protobuf_OneofDescriptorProtoImpl
+
 proc newgoogle_protobuf_OneofDescriptorProto*(): google_protobuf_OneofDescriptorProto =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_OneofDescriptorProtoProcs()
     result.name = ""
     result.options = nil
 
@@ -2641,9 +2801,19 @@ proc newgoogle_protobuf_OneofDescriptorProto*(data: seq[byte]): google_protobuf_
     result = readgoogle_protobuf_OneofDescriptorProto(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_DescriptorProto_ReservedRange]): string = "google.protobuf.DescriptorProto.ReservedRange"
+
+proc readgoogle_protobuf_DescriptorProto_ReservedRangeImpl(stream: Stream): Message = readgoogle_protobuf_DescriptorProto_ReservedRange(stream)
+proc writegoogle_protobuf_DescriptorProto_ReservedRangeImpl(stream: Stream, msg: Message) = writegoogle_protobuf_DescriptorProto_ReservedRange(stream, google_protobuf_DescriptorProto_ReservedRange(msg))
+
+proc google_protobuf_DescriptorProto_ReservedRangeProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_DescriptorProto_ReservedRangeImpl
+    result.writeImpl = writegoogle_protobuf_DescriptorProto_ReservedRangeImpl
+
 proc newgoogle_protobuf_DescriptorProto_ReservedRange*(): google_protobuf_DescriptorProto_ReservedRange =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_DescriptorProto_ReservedRangeProcs()
     result.start = 0
     result.fend = 0
 
@@ -2731,9 +2901,19 @@ proc newgoogle_protobuf_DescriptorProto_ReservedRange*(data: seq[byte]): google_
     result = readgoogle_protobuf_DescriptorProto_ReservedRange(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_DescriptorProto]): string = "google.protobuf.DescriptorProto"
+
+proc readgoogle_protobuf_DescriptorProtoImpl(stream: Stream): Message = readgoogle_protobuf_DescriptorProto(stream)
+proc writegoogle_protobuf_DescriptorProtoImpl(stream: Stream, msg: Message) = writegoogle_protobuf_DescriptorProto(stream, google_protobuf_DescriptorProto(msg))
+
+proc google_protobuf_DescriptorProtoProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_DescriptorProtoImpl
+    result.writeImpl = writegoogle_protobuf_DescriptorProtoImpl
+
 proc newgoogle_protobuf_DescriptorProto*(): google_protobuf_DescriptorProto =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_DescriptorProtoProcs()
     result.name = ""
     result.field = @[]
     result.extension = @[]
@@ -3061,9 +3241,19 @@ proc newgoogle_protobuf_DescriptorProto*(data: seq[byte]): google_protobuf_Descr
     result = readgoogle_protobuf_DescriptorProto(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_FileOptions]): string = "google.protobuf.FileOptions"
+
+proc readgoogle_protobuf_FileOptionsImpl(stream: Stream): Message = readgoogle_protobuf_FileOptions(stream)
+proc writegoogle_protobuf_FileOptionsImpl(stream: Stream, msg: Message) = writegoogle_protobuf_FileOptions(stream, google_protobuf_FileOptions(msg))
+
+proc google_protobuf_FileOptionsProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_FileOptionsImpl
+    result.writeImpl = writegoogle_protobuf_FileOptionsImpl
+
 proc newgoogle_protobuf_FileOptions*(): google_protobuf_FileOptions =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_FileOptionsProcs()
     result.javaPackage = ""
     result.javaOuterClassname = ""
     result.javaMultipleFiles = false
@@ -3597,9 +3787,19 @@ proc newgoogle_protobuf_FileOptions*(data: seq[byte]): google_protobuf_FileOptio
     result = readgoogle_protobuf_FileOptions(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_ServiceOptions]): string = "google.protobuf.ServiceOptions"
+
+proc readgoogle_protobuf_ServiceOptionsImpl(stream: Stream): Message = readgoogle_protobuf_ServiceOptions(stream)
+proc writegoogle_protobuf_ServiceOptionsImpl(stream: Stream, msg: Message) = writegoogle_protobuf_ServiceOptions(stream, google_protobuf_ServiceOptions(msg))
+
+proc google_protobuf_ServiceOptionsProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_ServiceOptionsImpl
+    result.writeImpl = writegoogle_protobuf_ServiceOptionsImpl
+
 proc newgoogle_protobuf_ServiceOptions*(): google_protobuf_ServiceOptions =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_ServiceOptionsProcs()
     result.deprecated = false
     result.uninterpretedOption = @[]
 
@@ -3691,9 +3891,19 @@ proc newgoogle_protobuf_ServiceOptions*(data: seq[byte]): google_protobuf_Servic
     result = readgoogle_protobuf_ServiceOptions(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_MethodOptions]): string = "google.protobuf.MethodOptions"
+
+proc readgoogle_protobuf_MethodOptionsImpl(stream: Stream): Message = readgoogle_protobuf_MethodOptions(stream)
+proc writegoogle_protobuf_MethodOptionsImpl(stream: Stream, msg: Message) = writegoogle_protobuf_MethodOptions(stream, google_protobuf_MethodOptions(msg))
+
+proc google_protobuf_MethodOptionsProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_MethodOptionsImpl
+    result.writeImpl = writegoogle_protobuf_MethodOptionsImpl
+
 proc newgoogle_protobuf_MethodOptions*(): google_protobuf_MethodOptions =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_MethodOptionsProcs()
     result.deprecated = false
     result.idempotencyLevel = google_protobuf_MethodOptions_IdempotencyLevel.IDEMPOTENCY_UNKNOWN
     result.uninterpretedOption = @[]
@@ -3811,9 +4021,19 @@ proc newgoogle_protobuf_MethodOptions*(data: seq[byte]): google_protobuf_MethodO
     result = readgoogle_protobuf_MethodOptions(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_MethodDescriptorProto]): string = "google.protobuf.MethodDescriptorProto"
+
+proc readgoogle_protobuf_MethodDescriptorProtoImpl(stream: Stream): Message = readgoogle_protobuf_MethodDescriptorProto(stream)
+proc writegoogle_protobuf_MethodDescriptorProtoImpl(stream: Stream, msg: Message) = writegoogle_protobuf_MethodDescriptorProto(stream, google_protobuf_MethodDescriptorProto(msg))
+
+proc google_protobuf_MethodDescriptorProtoProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_MethodDescriptorProtoImpl
+    result.writeImpl = writegoogle_protobuf_MethodDescriptorProtoImpl
+
 proc newgoogle_protobuf_MethodDescriptorProto*(): google_protobuf_MethodDescriptorProto =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_MethodDescriptorProtoProcs()
     result.name = ""
     result.inputType = ""
     result.outputType = ""
@@ -4006,9 +4226,19 @@ proc newgoogle_protobuf_MethodDescriptorProto*(data: seq[byte]): google_protobuf
     result = readgoogle_protobuf_MethodDescriptorProto(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_ServiceDescriptorProto]): string = "google.protobuf.ServiceDescriptorProto"
+
+proc readgoogle_protobuf_ServiceDescriptorProtoImpl(stream: Stream): Message = readgoogle_protobuf_ServiceDescriptorProto(stream)
+proc writegoogle_protobuf_ServiceDescriptorProtoImpl(stream: Stream, msg: Message) = writegoogle_protobuf_ServiceDescriptorProto(stream, google_protobuf_ServiceDescriptorProto(msg))
+
+proc google_protobuf_ServiceDescriptorProtoProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_ServiceDescriptorProtoImpl
+    result.writeImpl = writegoogle_protobuf_ServiceDescriptorProtoImpl
+
 proc newgoogle_protobuf_ServiceDescriptorProto*(): google_protobuf_ServiceDescriptorProto =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_ServiceDescriptorProtoProcs()
     result.name = ""
     result.fmethod = @[]
     result.options = nil
@@ -4127,9 +4357,19 @@ proc newgoogle_protobuf_ServiceDescriptorProto*(data: seq[byte]): google_protobu
     result = readgoogle_protobuf_ServiceDescriptorProto(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_FileDescriptorProto]): string = "google.protobuf.FileDescriptorProto"
+
+proc readgoogle_protobuf_FileDescriptorProtoImpl(stream: Stream): Message = readgoogle_protobuf_FileDescriptorProto(stream)
+proc writegoogle_protobuf_FileDescriptorProtoImpl(stream: Stream, msg: Message) = writegoogle_protobuf_FileDescriptorProto(stream, google_protobuf_FileDescriptorProto(msg))
+
+proc google_protobuf_FileDescriptorProtoProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_FileDescriptorProtoImpl
+    result.writeImpl = writegoogle_protobuf_FileDescriptorProtoImpl
+
 proc newgoogle_protobuf_FileDescriptorProto*(): google_protobuf_FileDescriptorProto =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_FileDescriptorProtoProcs()
     result.name = ""
     result.package = ""
     result.dependency = @[]
@@ -4526,9 +4766,19 @@ proc newgoogle_protobuf_FileDescriptorProto*(data: seq[byte]): google_protobuf_F
     result = readgoogle_protobuf_FileDescriptorProto(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_FileDescriptorSet]): string = "google.protobuf.FileDescriptorSet"
+
+proc readgoogle_protobuf_FileDescriptorSetImpl(stream: Stream): Message = readgoogle_protobuf_FileDescriptorSet(stream)
+proc writegoogle_protobuf_FileDescriptorSetImpl(stream: Stream, msg: Message) = writegoogle_protobuf_FileDescriptorSet(stream, google_protobuf_FileDescriptorSet(msg))
+
+proc google_protobuf_FileDescriptorSetProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_FileDescriptorSetImpl
+    result.writeImpl = writegoogle_protobuf_FileDescriptorSetImpl
+
 proc newgoogle_protobuf_FileDescriptorSet*(): google_protobuf_FileDescriptorSet =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_FileDescriptorSetProcs()
     result.file = @[]
 
 proc clearfile*(message: google_protobuf_FileDescriptorSet) =
@@ -4594,9 +4844,19 @@ proc newgoogle_protobuf_FileDescriptorSet*(data: seq[byte]): google_protobuf_Fil
     result = readgoogle_protobuf_FileDescriptorSet(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_GeneratedCodeInfo_Annotation]): string = "google.protobuf.GeneratedCodeInfo.Annotation"
+
+proc readgoogle_protobuf_GeneratedCodeInfo_AnnotationImpl(stream: Stream): Message = readgoogle_protobuf_GeneratedCodeInfo_Annotation(stream)
+proc writegoogle_protobuf_GeneratedCodeInfo_AnnotationImpl(stream: Stream, msg: Message) = writegoogle_protobuf_GeneratedCodeInfo_Annotation(stream, google_protobuf_GeneratedCodeInfo_Annotation(msg))
+
+proc google_protobuf_GeneratedCodeInfo_AnnotationProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_GeneratedCodeInfo_AnnotationImpl
+    result.writeImpl = writegoogle_protobuf_GeneratedCodeInfo_AnnotationImpl
+
 proc newgoogle_protobuf_GeneratedCodeInfo_Annotation*(): google_protobuf_GeneratedCodeInfo_Annotation =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_GeneratedCodeInfo_AnnotationProcs()
     result.path = @[]
     result.sourceFile = ""
     result.begin = 0
@@ -4753,9 +5013,19 @@ proc newgoogle_protobuf_GeneratedCodeInfo_Annotation*(data: seq[byte]): google_p
     result = readgoogle_protobuf_GeneratedCodeInfo_Annotation(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_GeneratedCodeInfo]): string = "google.protobuf.GeneratedCodeInfo"
+
+proc readgoogle_protobuf_GeneratedCodeInfoImpl(stream: Stream): Message = readgoogle_protobuf_GeneratedCodeInfo(stream)
+proc writegoogle_protobuf_GeneratedCodeInfoImpl(stream: Stream, msg: Message) = writegoogle_protobuf_GeneratedCodeInfo(stream, google_protobuf_GeneratedCodeInfo(msg))
+
+proc google_protobuf_GeneratedCodeInfoProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_GeneratedCodeInfoImpl
+    result.writeImpl = writegoogle_protobuf_GeneratedCodeInfoImpl
+
 proc newgoogle_protobuf_GeneratedCodeInfo*(): google_protobuf_GeneratedCodeInfo =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_GeneratedCodeInfoProcs()
     result.annotation = @[]
 
 proc clearannotation*(message: google_protobuf_GeneratedCodeInfo) =

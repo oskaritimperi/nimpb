@@ -2,6 +2,7 @@ import json
 import strutils
 
 include field_mask_pb
+import utils
 
 const
     LowerCaseLetters = {'a'..'z'}
@@ -64,3 +65,5 @@ proc parsegoogle_protobuf_FieldMask*(node: JsonNode): google_protobuf_FieldMask 
             addPaths(result, camelCaseToSnakeCase(path))
     except ValueError as exc:
         raise newException(nimpb_json.ParseError, exc.msg)
+
+declareJsonProcs(google_protobuf_FieldMask)

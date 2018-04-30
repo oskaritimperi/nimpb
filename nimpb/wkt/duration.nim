@@ -3,6 +3,7 @@ import math
 import strutils
 
 include duration_pb
+import utils
 
 proc toJson*(message: google_protobuf_Duration): JsonNode =
     if (message.seconds < -315_576_000_000'i64) or
@@ -66,3 +67,5 @@ proc parsegoogle_protobuf_Duration*(node: JsonNode): google_protobuf_Duration =
 
     if result.seconds < 0:
         setNanos(result, -result.nanos)
+
+declareJsonProcs(google_protobuf_Duration)

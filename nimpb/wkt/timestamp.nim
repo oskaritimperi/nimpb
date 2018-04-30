@@ -4,6 +4,7 @@ import strutils
 import times
 
 include timestamp_pb
+import utils
 
 proc toJson*(message: google_protobuf_Timestamp): JsonNode =
     let t = utc(fromUnix(message.seconds))
@@ -71,3 +72,5 @@ offset <- 'Z' / (('+' / '-') \d\d ':' \d\d)
 
     setSeconds(result, toUnix(toTime(dt)))
     setNanos(result, int32(nanos))
+
+declareJsonProcs(google_protobuf_Timestamp)

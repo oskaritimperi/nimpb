@@ -122,9 +122,23 @@ proc sizeOfgoogle_protobuf_Enum*(message: google_protobuf_Enum): uint64
 proc toJson*(message: google_protobuf_Enum): JsonNode
 proc parsegoogle_protobuf_Enum*(obj: JsonNode): google_protobuf_Enum
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Option]): string = "google.protobuf.Option"
+
+proc readgoogle_protobuf_OptionImpl(stream: Stream): Message = readgoogle_protobuf_Option(stream)
+proc writegoogle_protobuf_OptionImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Option(stream, google_protobuf_Option(msg))
+proc toJsongoogle_protobuf_OptionImpl(msg: Message): JsonNode = toJson(google_protobuf_Option(msg))
+proc fromJsongoogle_protobuf_OptionImpl(node: JsonNode): Message = parsegoogle_protobuf_Option(node)
+
+proc google_protobuf_OptionProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_OptionImpl
+    result.writeImpl = writegoogle_protobuf_OptionImpl
+    result.toJsonImpl = toJsongoogle_protobuf_OptionImpl
+    result.fromJsonImpl = fromJsongoogle_protobuf_OptionImpl
+
 proc newgoogle_protobuf_Option*(): google_protobuf_Option =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_OptionProcs()
     result.name = ""
     result.value = nil
 
@@ -227,9 +241,23 @@ proc newgoogle_protobuf_Option*(data: seq[byte]): google_protobuf_Option =
     result = readgoogle_protobuf_Option(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Field]): string = "google.protobuf.Field"
+
+proc readgoogle_protobuf_FieldImpl(stream: Stream): Message = readgoogle_protobuf_Field(stream)
+proc writegoogle_protobuf_FieldImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Field(stream, google_protobuf_Field(msg))
+proc toJsongoogle_protobuf_FieldImpl(msg: Message): JsonNode = toJson(google_protobuf_Field(msg))
+proc fromJsongoogle_protobuf_FieldImpl(node: JsonNode): Message = parsegoogle_protobuf_Field(node)
+
+proc google_protobuf_FieldProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_FieldImpl
+    result.writeImpl = writegoogle_protobuf_FieldImpl
+    result.toJsonImpl = toJsongoogle_protobuf_FieldImpl
+    result.fromJsonImpl = fromJsongoogle_protobuf_FieldImpl
+
 proc newgoogle_protobuf_Field*(): google_protobuf_Field =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_FieldProcs()
     result.kind = google_protobuf_Field_Kind.TYPE_UNKNOWN
     result.cardinality = google_protobuf_Field_Cardinality.CARDINALITY_UNKNOWN
     result.number = 0
@@ -549,9 +577,23 @@ proc newgoogle_protobuf_Field*(data: seq[byte]): google_protobuf_Field =
     result = readgoogle_protobuf_Field(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Type]): string = "google.protobuf.Type"
+
+proc readgoogle_protobuf_TypeImpl(stream: Stream): Message = readgoogle_protobuf_Type(stream)
+proc writegoogle_protobuf_TypeImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Type(stream, google_protobuf_Type(msg))
+proc toJsongoogle_protobuf_TypeImpl(msg: Message): JsonNode = toJson(google_protobuf_Type(msg))
+proc fromJsongoogle_protobuf_TypeImpl(node: JsonNode): Message = parsegoogle_protobuf_Type(node)
+
+proc google_protobuf_TypeProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_TypeImpl
+    result.writeImpl = writegoogle_protobuf_TypeImpl
+    result.toJsonImpl = toJsongoogle_protobuf_TypeImpl
+    result.fromJsonImpl = fromJsongoogle_protobuf_TypeImpl
+
 proc newgoogle_protobuf_Type*(): google_protobuf_Type =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_TypeProcs()
     result.name = ""
     result.fields = @[]
     result.oneofs = @[]
@@ -797,9 +839,23 @@ proc newgoogle_protobuf_Type*(data: seq[byte]): google_protobuf_Type =
     result = readgoogle_protobuf_Type(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_EnumValue]): string = "google.protobuf.EnumValue"
+
+proc readgoogle_protobuf_EnumValueImpl(stream: Stream): Message = readgoogle_protobuf_EnumValue(stream)
+proc writegoogle_protobuf_EnumValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_EnumValue(stream, google_protobuf_EnumValue(msg))
+proc toJsongoogle_protobuf_EnumValueImpl(msg: Message): JsonNode = toJson(google_protobuf_EnumValue(msg))
+proc fromJsongoogle_protobuf_EnumValueImpl(node: JsonNode): Message = parsegoogle_protobuf_EnumValue(node)
+
+proc google_protobuf_EnumValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_EnumValueImpl
+    result.writeImpl = writegoogle_protobuf_EnumValueImpl
+    result.toJsonImpl = toJsongoogle_protobuf_EnumValueImpl
+    result.fromJsonImpl = fromJsongoogle_protobuf_EnumValueImpl
+
 proc newgoogle_protobuf_EnumValue*(): google_protobuf_EnumValue =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_EnumValueProcs()
     result.name = ""
     result.number = 0
     result.options = @[]
@@ -937,9 +993,23 @@ proc newgoogle_protobuf_EnumValue*(data: seq[byte]): google_protobuf_EnumValue =
     result = readgoogle_protobuf_EnumValue(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Enum]): string = "google.protobuf.Enum"
+
+proc readgoogle_protobuf_EnumImpl(stream: Stream): Message = readgoogle_protobuf_Enum(stream)
+proc writegoogle_protobuf_EnumImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Enum(stream, google_protobuf_Enum(msg))
+proc toJsongoogle_protobuf_EnumImpl(msg: Message): JsonNode = toJson(google_protobuf_Enum(msg))
+proc fromJsongoogle_protobuf_EnumImpl(node: JsonNode): Message = parsegoogle_protobuf_Enum(node)
+
+proc google_protobuf_EnumProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_EnumImpl
+    result.writeImpl = writegoogle_protobuf_EnumImpl
+    result.toJsonImpl = toJsongoogle_protobuf_EnumImpl
+    result.fromJsonImpl = fromJsongoogle_protobuf_EnumImpl
+
 proc newgoogle_protobuf_Enum*(): google_protobuf_Enum =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_EnumProcs()
     result.name = ""
     result.enumvalue = @[]
     result.options = @[]

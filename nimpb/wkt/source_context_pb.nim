@@ -22,9 +22,23 @@ proc sizeOfgoogle_protobuf_SourceContext*(message: google_protobuf_SourceContext
 proc toJson*(message: google_protobuf_SourceContext): JsonNode
 proc parsegoogle_protobuf_SourceContext*(obj: JsonNode): google_protobuf_SourceContext
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_SourceContext]): string = "google.protobuf.SourceContext"
+
+proc readgoogle_protobuf_SourceContextImpl(stream: Stream): Message = readgoogle_protobuf_SourceContext(stream)
+proc writegoogle_protobuf_SourceContextImpl(stream: Stream, msg: Message) = writegoogle_protobuf_SourceContext(stream, google_protobuf_SourceContext(msg))
+proc toJsongoogle_protobuf_SourceContextImpl(msg: Message): JsonNode = toJson(google_protobuf_SourceContext(msg))
+proc fromJsongoogle_protobuf_SourceContextImpl(node: JsonNode): Message = parsegoogle_protobuf_SourceContext(node)
+
+proc google_protobuf_SourceContextProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_SourceContextImpl
+    result.writeImpl = writegoogle_protobuf_SourceContextImpl
+    result.toJsonImpl = toJsongoogle_protobuf_SourceContextImpl
+    result.fromJsonImpl = fromJsongoogle_protobuf_SourceContextImpl
+
 proc newgoogle_protobuf_SourceContext*(): google_protobuf_SourceContext =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_SourceContextProcs()
     result.fileName = ""
 
 proc clearfileName*(message: google_protobuf_SourceContext) =

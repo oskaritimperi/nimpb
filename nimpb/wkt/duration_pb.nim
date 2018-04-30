@@ -21,9 +21,19 @@ proc writegoogle_protobuf_Duration*(stream: Stream, message: google_protobuf_Dur
 proc readgoogle_protobuf_Duration*(stream: Stream): google_protobuf_Duration
 proc sizeOfgoogle_protobuf_Duration*(message: google_protobuf_Duration): uint64
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Duration]): string = "google.protobuf.Duration"
+
+proc readgoogle_protobuf_DurationImpl(stream: Stream): Message = readgoogle_protobuf_Duration(stream)
+proc writegoogle_protobuf_DurationImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Duration(stream, google_protobuf_Duration(msg))
+
+proc google_protobuf_DurationProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_DurationImpl
+    result.writeImpl = writegoogle_protobuf_DurationImpl
+
 proc newgoogle_protobuf_Duration*(): google_protobuf_Duration =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_DurationProcs()
     result.seconds = 0
     result.nanos = 0
 

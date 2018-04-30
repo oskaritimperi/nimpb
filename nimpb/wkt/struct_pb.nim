@@ -106,9 +106,19 @@ proc readgoogle_protobuf_Struct_FieldsEntryKV(stream: Stream, tbl: TableRef[stri
     tbl[key] = value
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Struct]): string = "google.protobuf.Struct"
+
+proc readgoogle_protobuf_StructImpl(stream: Stream): Message = readgoogle_protobuf_Struct(stream)
+proc writegoogle_protobuf_StructImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Struct(stream, google_protobuf_Struct(msg))
+
+proc google_protobuf_StructProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_StructImpl
+    result.writeImpl = writegoogle_protobuf_StructImpl
+
 proc newgoogle_protobuf_Struct*(): google_protobuf_Struct =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_StructProcs()
     result.fields = newTable[string, google_protobuf_Value]()
 
 proc clearfields*(message: google_protobuf_Struct) =
@@ -174,9 +184,19 @@ proc newgoogle_protobuf_Struct*(data: seq[byte]): google_protobuf_Struct =
     result = readgoogle_protobuf_Struct(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_ListValue]): string = "google.protobuf.ListValue"
+
+proc readgoogle_protobuf_ListValueImpl(stream: Stream): Message = readgoogle_protobuf_ListValue(stream)
+proc writegoogle_protobuf_ListValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_ListValue(stream, google_protobuf_ListValue(msg))
+
+proc google_protobuf_ListValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_ListValueImpl
+    result.writeImpl = writegoogle_protobuf_ListValueImpl
+
 proc newgoogle_protobuf_ListValue*(): google_protobuf_ListValue =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_ListValueProcs()
     result.values = @[]
 
 proc clearvalues*(message: google_protobuf_ListValue) =
@@ -242,9 +262,19 @@ proc newgoogle_protobuf_ListValue*(data: seq[byte]): google_protobuf_ListValue =
     result = readgoogle_protobuf_ListValue(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Value]): string = "google.protobuf.Value"
+
+proc readgoogle_protobuf_ValueImpl(stream: Stream): Message = readgoogle_protobuf_Value(stream)
+proc writegoogle_protobuf_ValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Value(stream, google_protobuf_Value(msg))
+
+proc google_protobuf_ValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_ValueImpl
+    result.writeImpl = writegoogle_protobuf_ValueImpl
+
 proc newgoogle_protobuf_Value*(): google_protobuf_Value =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_ValueProcs()
     result.kind.kind = google_protobuf_Value_kind_Kind.NotSet
 
 proc clearnullValue*(message: google_protobuf_Value) =

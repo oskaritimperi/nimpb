@@ -21,9 +21,19 @@ proc writegoogle_protobuf_Any*(stream: Stream, message: google_protobuf_Any)
 proc readgoogle_protobuf_Any*(stream: Stream): google_protobuf_Any
 proc sizeOfgoogle_protobuf_Any*(message: google_protobuf_Any): uint64
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Any]): string = "google.protobuf.Any"
+
+proc readgoogle_protobuf_AnyImpl(stream: Stream): Message = readgoogle_protobuf_Any(stream)
+proc writegoogle_protobuf_AnyImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Any(stream, google_protobuf_Any(msg))
+
+proc google_protobuf_AnyProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_AnyImpl
+    result.writeImpl = writegoogle_protobuf_AnyImpl
+
 proc newgoogle_protobuf_Any*(): google_protobuf_Any =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_AnyProcs()
     result.typeUrl = ""
     result.value = @[]
 

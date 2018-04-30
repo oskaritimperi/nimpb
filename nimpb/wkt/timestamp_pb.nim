@@ -21,9 +21,19 @@ proc writegoogle_protobuf_Timestamp*(stream: Stream, message: google_protobuf_Ti
 proc readgoogle_protobuf_Timestamp*(stream: Stream): google_protobuf_Timestamp
 proc sizeOfgoogle_protobuf_Timestamp*(message: google_protobuf_Timestamp): uint64
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Timestamp]): string = "google.protobuf.Timestamp"
+
+proc readgoogle_protobuf_TimestampImpl(stream: Stream): Message = readgoogle_protobuf_Timestamp(stream)
+proc writegoogle_protobuf_TimestampImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Timestamp(stream, google_protobuf_Timestamp(msg))
+
+proc google_protobuf_TimestampProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_TimestampImpl
+    result.writeImpl = writegoogle_protobuf_TimestampImpl
+
 proc newgoogle_protobuf_Timestamp*(): google_protobuf_Timestamp =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_TimestampProcs()
     result.seconds = 0
     result.nanos = 0
 

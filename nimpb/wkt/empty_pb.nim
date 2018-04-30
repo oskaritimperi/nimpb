@@ -21,9 +21,23 @@ proc sizeOfgoogle_protobuf_Empty*(message: google_protobuf_Empty): uint64
 proc toJson*(message: google_protobuf_Empty): JsonNode
 proc parsegoogle_protobuf_Empty*(obj: JsonNode): google_protobuf_Empty
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Empty]): string = "google.protobuf.Empty"
+
+proc readgoogle_protobuf_EmptyImpl(stream: Stream): Message = readgoogle_protobuf_Empty(stream)
+proc writegoogle_protobuf_EmptyImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Empty(stream, google_protobuf_Empty(msg))
+proc toJsongoogle_protobuf_EmptyImpl(msg: Message): JsonNode = toJson(google_protobuf_Empty(msg))
+proc fromJsongoogle_protobuf_EmptyImpl(node: JsonNode): Message = parsegoogle_protobuf_Empty(node)
+
+proc google_protobuf_EmptyProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_EmptyImpl
+    result.writeImpl = writegoogle_protobuf_EmptyImpl
+    result.toJsonImpl = toJsongoogle_protobuf_EmptyImpl
+    result.fromJsonImpl = fromJsongoogle_protobuf_EmptyImpl
+
 proc newgoogle_protobuf_Empty*(): google_protobuf_Empty =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_EmptyProcs()
 
 proc sizeOfgoogle_protobuf_Empty*(message: google_protobuf_Empty): uint64 =
     result = result + sizeOfUnknownFields(message)

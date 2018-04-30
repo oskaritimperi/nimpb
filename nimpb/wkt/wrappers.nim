@@ -3,6 +3,7 @@ import strutils
 import base64
 
 include wrappers_pb
+import utils
 
 proc toJson*(message: google_protobuf_DoubleValue): JsonNode =
     toJson(message.value)
@@ -98,3 +99,13 @@ proc parsegoogle_protobuf_BytesValue*(node: JsonNode): google_protobuf_BytesValu
         raise newException(nimpb_json.ParseError, "not a string")
     result = newgoogle_protobuf_BytesValue()
     setValue(result, cast[seq[byte]](base64.decode(node.str)))
+
+declareJsonProcs(google_protobuf_DoubleValue)
+declareJsonProcs(google_protobuf_FloatValue)
+declareJsonProcs(google_protobuf_Int64Value)
+declareJsonProcs(google_protobuf_UInt64Value)
+declareJsonProcs(google_protobuf_Int32Value)
+declareJsonProcs(google_protobuf_UInt32Value)
+declareJsonProcs(google_protobuf_BoolValue)
+declareJsonProcs(google_protobuf_StringValue)
+declareJsonProcs(google_protobuf_BytesValue)

@@ -4,6 +4,7 @@ import streams
 import strformat
 
 import nimpb/nimpb
+import nimpb/wkt/any
 
 import conformance_pb
 import test_messages_proto3_pb
@@ -29,6 +30,8 @@ proc myReadString(s: Stream, size: int): string =
 
 proc errorMessage(exc: ref Exception): string =
     result = $exc.name & ": " & exc.msg & "\n" & getStackTrace(exc)
+
+any.registerType(protobuf_test_messages_proto3_TestAllTypesProto3)
 
 while true:
     var requestSize = 0'i32

@@ -1,6 +1,7 @@
 import json
 
 include struct_pb
+import utils
 
 proc toJson*(message: google_protobuf_Value): JsonNode
 
@@ -78,3 +79,8 @@ proc parsegoogle_protobuf_ListValue*(node: JsonNode): google_protobuf_ListValue 
 
     for value in node:
         addValues(result, parsegoogle_protobuf_Value(value))
+
+declareJsonProcs(google_protobuf_Value)
+declareJsonProcs(google_protobuf_ListValue)
+declareJsonProcs(google_protobuf_Struct)
+# helper(google_protobuf_NullValue)

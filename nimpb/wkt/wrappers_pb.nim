@@ -100,9 +100,19 @@ proc writegoogle_protobuf_UInt32Value*(stream: Stream, message: google_protobuf_
 proc readgoogle_protobuf_UInt32Value*(stream: Stream): google_protobuf_UInt32Value
 proc sizeOfgoogle_protobuf_UInt32Value*(message: google_protobuf_UInt32Value): uint64
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Int32Value]): string = "google.protobuf.Int32Value"
+
+proc readgoogle_protobuf_Int32ValueImpl(stream: Stream): Message = readgoogle_protobuf_Int32Value(stream)
+proc writegoogle_protobuf_Int32ValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Int32Value(stream, google_protobuf_Int32Value(msg))
+
+proc google_protobuf_Int32ValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_Int32ValueImpl
+    result.writeImpl = writegoogle_protobuf_Int32ValueImpl
+
 proc newgoogle_protobuf_Int32Value*(): google_protobuf_Int32Value =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_Int32ValueProcs()
     result.value = 0
 
 proc clearvalue*(message: google_protobuf_Int32Value) =
@@ -159,9 +169,19 @@ proc newgoogle_protobuf_Int32Value*(data: seq[byte]): google_protobuf_Int32Value
     result = readgoogle_protobuf_Int32Value(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Int64Value]): string = "google.protobuf.Int64Value"
+
+proc readgoogle_protobuf_Int64ValueImpl(stream: Stream): Message = readgoogle_protobuf_Int64Value(stream)
+proc writegoogle_protobuf_Int64ValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Int64Value(stream, google_protobuf_Int64Value(msg))
+
+proc google_protobuf_Int64ValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_Int64ValueImpl
+    result.writeImpl = writegoogle_protobuf_Int64ValueImpl
+
 proc newgoogle_protobuf_Int64Value*(): google_protobuf_Int64Value =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_Int64ValueProcs()
     result.value = 0
 
 proc clearvalue*(message: google_protobuf_Int64Value) =
@@ -218,9 +238,19 @@ proc newgoogle_protobuf_Int64Value*(data: seq[byte]): google_protobuf_Int64Value
     result = readgoogle_protobuf_Int64Value(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_DoubleValue]): string = "google.protobuf.DoubleValue"
+
+proc readgoogle_protobuf_DoubleValueImpl(stream: Stream): Message = readgoogle_protobuf_DoubleValue(stream)
+proc writegoogle_protobuf_DoubleValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_DoubleValue(stream, google_protobuf_DoubleValue(msg))
+
+proc google_protobuf_DoubleValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_DoubleValueImpl
+    result.writeImpl = writegoogle_protobuf_DoubleValueImpl
+
 proc newgoogle_protobuf_DoubleValue*(): google_protobuf_DoubleValue =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_DoubleValueProcs()
     result.value = 0
 
 proc clearvalue*(message: google_protobuf_DoubleValue) =
@@ -277,9 +307,19 @@ proc newgoogle_protobuf_DoubleValue*(data: seq[byte]): google_protobuf_DoubleVal
     result = readgoogle_protobuf_DoubleValue(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_StringValue]): string = "google.protobuf.StringValue"
+
+proc readgoogle_protobuf_StringValueImpl(stream: Stream): Message = readgoogle_protobuf_StringValue(stream)
+proc writegoogle_protobuf_StringValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_StringValue(stream, google_protobuf_StringValue(msg))
+
+proc google_protobuf_StringValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_StringValueImpl
+    result.writeImpl = writegoogle_protobuf_StringValueImpl
+
 proc newgoogle_protobuf_StringValue*(): google_protobuf_StringValue =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_StringValueProcs()
     result.value = ""
 
 proc clearvalue*(message: google_protobuf_StringValue) =
@@ -336,9 +376,19 @@ proc newgoogle_protobuf_StringValue*(data: seq[byte]): google_protobuf_StringVal
     result = readgoogle_protobuf_StringValue(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_BoolValue]): string = "google.protobuf.BoolValue"
+
+proc readgoogle_protobuf_BoolValueImpl(stream: Stream): Message = readgoogle_protobuf_BoolValue(stream)
+proc writegoogle_protobuf_BoolValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_BoolValue(stream, google_protobuf_BoolValue(msg))
+
+proc google_protobuf_BoolValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_BoolValueImpl
+    result.writeImpl = writegoogle_protobuf_BoolValueImpl
+
 proc newgoogle_protobuf_BoolValue*(): google_protobuf_BoolValue =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_BoolValueProcs()
     result.value = false
 
 proc clearvalue*(message: google_protobuf_BoolValue) =
@@ -395,9 +445,19 @@ proc newgoogle_protobuf_BoolValue*(data: seq[byte]): google_protobuf_BoolValue =
     result = readgoogle_protobuf_BoolValue(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_BytesValue]): string = "google.protobuf.BytesValue"
+
+proc readgoogle_protobuf_BytesValueImpl(stream: Stream): Message = readgoogle_protobuf_BytesValue(stream)
+proc writegoogle_protobuf_BytesValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_BytesValue(stream, google_protobuf_BytesValue(msg))
+
+proc google_protobuf_BytesValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_BytesValueImpl
+    result.writeImpl = writegoogle_protobuf_BytesValueImpl
+
 proc newgoogle_protobuf_BytesValue*(): google_protobuf_BytesValue =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_BytesValueProcs()
     result.value = @[]
 
 proc clearvalue*(message: google_protobuf_BytesValue) =
@@ -454,9 +514,19 @@ proc newgoogle_protobuf_BytesValue*(data: seq[byte]): google_protobuf_BytesValue
     result = readgoogle_protobuf_BytesValue(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_FloatValue]): string = "google.protobuf.FloatValue"
+
+proc readgoogle_protobuf_FloatValueImpl(stream: Stream): Message = readgoogle_protobuf_FloatValue(stream)
+proc writegoogle_protobuf_FloatValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_FloatValue(stream, google_protobuf_FloatValue(msg))
+
+proc google_protobuf_FloatValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_FloatValueImpl
+    result.writeImpl = writegoogle_protobuf_FloatValueImpl
+
 proc newgoogle_protobuf_FloatValue*(): google_protobuf_FloatValue =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_FloatValueProcs()
     result.value = 0
 
 proc clearvalue*(message: google_protobuf_FloatValue) =
@@ -513,9 +583,19 @@ proc newgoogle_protobuf_FloatValue*(data: seq[byte]): google_protobuf_FloatValue
     result = readgoogle_protobuf_FloatValue(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_UInt64Value]): string = "google.protobuf.UInt64Value"
+
+proc readgoogle_protobuf_UInt64ValueImpl(stream: Stream): Message = readgoogle_protobuf_UInt64Value(stream)
+proc writegoogle_protobuf_UInt64ValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_UInt64Value(stream, google_protobuf_UInt64Value(msg))
+
+proc google_protobuf_UInt64ValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_UInt64ValueImpl
+    result.writeImpl = writegoogle_protobuf_UInt64ValueImpl
+
 proc newgoogle_protobuf_UInt64Value*(): google_protobuf_UInt64Value =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_UInt64ValueProcs()
     result.value = 0
 
 proc clearvalue*(message: google_protobuf_UInt64Value) =
@@ -572,9 +652,19 @@ proc newgoogle_protobuf_UInt64Value*(data: seq[byte]): google_protobuf_UInt64Val
     result = readgoogle_protobuf_UInt64Value(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_UInt32Value]): string = "google.protobuf.UInt32Value"
+
+proc readgoogle_protobuf_UInt32ValueImpl(stream: Stream): Message = readgoogle_protobuf_UInt32Value(stream)
+proc writegoogle_protobuf_UInt32ValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_UInt32Value(stream, google_protobuf_UInt32Value(msg))
+
+proc google_protobuf_UInt32ValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_UInt32ValueImpl
+    result.writeImpl = writegoogle_protobuf_UInt32ValueImpl
+
 proc newgoogle_protobuf_UInt32Value*(): google_protobuf_UInt32Value =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_UInt32ValueProcs()
     result.value = 0
 
 proc clearvalue*(message: google_protobuf_UInt32Value) =

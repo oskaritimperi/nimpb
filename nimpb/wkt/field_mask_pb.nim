@@ -20,9 +20,19 @@ proc writegoogle_protobuf_FieldMask*(stream: Stream, message: google_protobuf_Fi
 proc readgoogle_protobuf_FieldMask*(stream: Stream): google_protobuf_FieldMask
 proc sizeOfgoogle_protobuf_FieldMask*(message: google_protobuf_FieldMask): uint64
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_FieldMask]): string = "google.protobuf.FieldMask"
+
+proc readgoogle_protobuf_FieldMaskImpl(stream: Stream): Message = readgoogle_protobuf_FieldMask(stream)
+proc writegoogle_protobuf_FieldMaskImpl(stream: Stream, msg: Message) = writegoogle_protobuf_FieldMask(stream, google_protobuf_FieldMask(msg))
+
+proc google_protobuf_FieldMaskProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_FieldMaskImpl
+    result.writeImpl = writegoogle_protobuf_FieldMaskImpl
+
 proc newgoogle_protobuf_FieldMask*(): google_protobuf_FieldMask =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_FieldMaskProcs()
     result.paths = @[]
 
 proc clearpaths*(message: google_protobuf_FieldMask) =

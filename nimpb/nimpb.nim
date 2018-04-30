@@ -1,5 +1,6 @@
 import endians
 import intsets
+import std/json
 import macros
 import streams
 import strutils
@@ -67,6 +68,13 @@ type
     MessageObj* = object of RootObj
         hasField: IntSet
         unknownFields: seq[UnknownField]
+        procs*: MessageProcs
+
+    MessageProcs* = object
+        readImpl*: proc (stream: Stream): Message
+        writeImpl*: proc (stream: Stream, msg: Message)
+        toJsonImpl*: proc (msg: Message): JsonNode
+        fromJsonImpl*: proc (node: JsonNode): Message
 
 proc wiretype*(ft: FieldType): WireType =
     case ft

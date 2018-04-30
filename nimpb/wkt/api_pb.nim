@@ -62,9 +62,23 @@ proc sizeOfgoogle_protobuf_Api*(message: google_protobuf_Api): uint64
 proc toJson*(message: google_protobuf_Api): JsonNode
 proc parsegoogle_protobuf_Api*(obj: JsonNode): google_protobuf_Api
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Method]): string = "google.protobuf.Method"
+
+proc readgoogle_protobuf_MethodImpl(stream: Stream): Message = readgoogle_protobuf_Method(stream)
+proc writegoogle_protobuf_MethodImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Method(stream, google_protobuf_Method(msg))
+proc toJsongoogle_protobuf_MethodImpl(msg: Message): JsonNode = toJson(google_protobuf_Method(msg))
+proc fromJsongoogle_protobuf_MethodImpl(node: JsonNode): Message = parsegoogle_protobuf_Method(node)
+
+proc google_protobuf_MethodProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_MethodImpl
+    result.writeImpl = writegoogle_protobuf_MethodImpl
+    result.toJsonImpl = toJsongoogle_protobuf_MethodImpl
+    result.fromJsonImpl = fromJsongoogle_protobuf_MethodImpl
+
 proc newgoogle_protobuf_Method*(): google_protobuf_Method =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_MethodProcs()
     result.name = ""
     result.requestTypeUrl = ""
     result.requestStreaming = false
@@ -306,9 +320,23 @@ proc newgoogle_protobuf_Method*(data: seq[byte]): google_protobuf_Method =
     result = readgoogle_protobuf_Method(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Mixin]): string = "google.protobuf.Mixin"
+
+proc readgoogle_protobuf_MixinImpl(stream: Stream): Message = readgoogle_protobuf_Mixin(stream)
+proc writegoogle_protobuf_MixinImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Mixin(stream, google_protobuf_Mixin(msg))
+proc toJsongoogle_protobuf_MixinImpl(msg: Message): JsonNode = toJson(google_protobuf_Mixin(msg))
+proc fromJsongoogle_protobuf_MixinImpl(node: JsonNode): Message = parsegoogle_protobuf_Mixin(node)
+
+proc google_protobuf_MixinProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_MixinImpl
+    result.writeImpl = writegoogle_protobuf_MixinImpl
+    result.toJsonImpl = toJsongoogle_protobuf_MixinImpl
+    result.fromJsonImpl = fromJsongoogle_protobuf_MixinImpl
+
 proc newgoogle_protobuf_Mixin*(): google_protobuf_Mixin =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_MixinProcs()
     result.name = ""
     result.root = ""
 
@@ -405,9 +433,23 @@ proc newgoogle_protobuf_Mixin*(data: seq[byte]): google_protobuf_Mixin =
     result = readgoogle_protobuf_Mixin(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Api]): string = "google.protobuf.Api"
+
+proc readgoogle_protobuf_ApiImpl(stream: Stream): Message = readgoogle_protobuf_Api(stream)
+proc writegoogle_protobuf_ApiImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Api(stream, google_protobuf_Api(msg))
+proc toJsongoogle_protobuf_ApiImpl(msg: Message): JsonNode = toJson(google_protobuf_Api(msg))
+proc fromJsongoogle_protobuf_ApiImpl(node: JsonNode): Message = parsegoogle_protobuf_Api(node)
+
+proc google_protobuf_ApiProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_ApiImpl
+    result.writeImpl = writegoogle_protobuf_ApiImpl
+    result.toJsonImpl = toJsongoogle_protobuf_ApiImpl
+    result.fromJsonImpl = fromJsongoogle_protobuf_ApiImpl
+
 proc newgoogle_protobuf_Api*(): google_protobuf_Api =
     new(result)
     initMessage(result[])
+    result.procs = google_protobuf_ApiProcs()
     result.name = ""
     result.methods = @[]
     result.options = @[]
