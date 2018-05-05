@@ -1,25 +1,10 @@
 # The list of possible future improvements and ideas
 
-- Should we get rid of ProtobufStream and just use Stream? Can our write/read
-  procs interfere with other versions or should we prefix them with something?
-  Or should we make ProtobufStream a distinct Stream? Or does this matter at
-  all?
-
-- Make field names camelCase. This would make the generated code look more
-  Nim-ish, even though we can use most of the symbols in whatever way we want
-  as Nim ignores most underscores and case.
-
-- Preserve unknown fields on deserialize/serialize. This has been implemented
-  for protobuf 3.5.0 for proto3. I think it's a nice thing.
-
 - Proto2 extensions? This needs some thinking how to do this. How often are
   extensions used? Is this necessary?
 
 - Options?
 
-- has/clear procs for oneofs to check/clear the whole oneof. Has is simple.
-  What about clearing, we are storing the fields in an object tagged with
-  {.union.} pragma. How does Nim behave when one field of a union is reset
-  (was thinking about reference types and GC)?
+- has/clear procs for oneofs to check/clear the whole oneof?
 
-- JSON mapping for proto3?
+- Documentation!
