@@ -9,10 +9,9 @@ import strformat
 import strutils
 import tables
 
-import nimpb/wkt/descriptor_pb
+import nimpb/nimpb
 import nimpb/utils
-
-import ../nimpb
+import nimpb/wkt/descriptor_pb
 
 type
     Names = distinct seq[string]
