@@ -80,6 +80,7 @@ type
         fromJsonImpl*: proc (node: JsonNode): Message
 
 proc wiretype*(ft: FieldType): WireType =
+    ## Return the WireType used for FieldType.
     case ft
     of FieldType.Double: result = WireType.Fixed64
     of FieldType.Float: result = WireType.Fixed32
@@ -101,6 +102,7 @@ proc wiretype*(ft: FieldType): WireType =
     of FieldType.SInt64: result = WireType.Varint
 
 proc isNumeric*(wiretype: WireType): bool =
+    ## Return true if the wiretype is numeric.
     case wiretype
     of WireType.Varint: result = true
     of WireType.Fixed64: result = true
@@ -108,48 +110,60 @@ proc isNumeric*(wiretype: WireType): bool =
     else: result = false
 
 proc isNumeric*(ft: FieldType): bool =
+    ## Return true if the fieldtype is numeric.
     result = isNumeric(wiretype(ft))
 
 proc zigzagEncode*(n: int32): uint32 =
+    ## ZigZag encode a 32-bit signed integer.
     let x = cast[uint32](n)
     let a = cast[int32](x shl 1)
     let b = -cast[int32](x shr 31)
     result = uint32(a xor b)
 
 proc zigzagDecode*(n: uint32): int32 =
+    ## ZigZag decode a 32-bit unsigned integer.
     let a = int32(n shr 1)
     let b = -int32(n and 1)
     result = a xor b
 
 proc zigzagEncode*(n: int64): uint64 =
+    ## ZigZag encode a 64-bit signed integer.
     let x = cast[uint64](n)
     let a = cast[int64](x shl 1)
     let b = -cast[int64](x shr 63)
     result = uint64(a xor b)
 
 proc zigzagDecode*(n: uint64): int64 =
+    ## ZigZag decode a 64-bit unsigned integer.
     let a = int64(n shr 1)
     let b = -int64(n and 1)
     result = a xor b
 
 template makeTag*(fieldNumber: int, wireType: WireType): Tag =
+    ## Return a Tag made from the field number and wiretype.
     ((fieldNumber shl 3).uint32 or wireType.uint32).Tag
 
 template wireType*(tag: Tag): WireType =
+    ## Return the wiretype of the tag.
     (tag.uint32 and WireTypeMask).WireType
 
 template fieldNumber*(tag: Tag): int =
+    ## Return the field number of the tag.
     (tag.uint32 shr 3).int
 
 proc protoReadByte(stream: Stream): byte =
+    ## Read a byte from a stream.
     result = readInt8(stream).byte
 
 proc protoWriteByte(stream: Stream, b: byte) =
+    ## Write a byte to a stream.
     var x: byte
     shallowCopy(x, b)
     writeData(stream, addr(x), sizeof(x))
 
 proc readVarint*(stream: Stream): uint64 =
+    ## Read a varint from a stream. Returns a 64-bit unsigned integer, which you
+    ## should cast to the expected type.
     var
         count = 0
 
@@ -169,6 +183,7 @@ proc readVarint*(stream: Stream): uint64 =
             break
 
 proc writeVarint*(stream: Stream, n: uint64) =
+    ## Write a varint to a stream.
     var value = n
     while value >= 0x80'u64:
         protoWriteByte(stream, (value or 0x80).byte)
@@ -176,42 +191,59 @@ proc writeVarint*(stream: Stream, n: uint64) =
     protoWriteByte(stream, value.byte)
 
 proc writeTag*(stream: Stream, tag: Tag) =
+    ## Write a Tag to a stream.
     writeVarint(stream, tag.uint32)
 
 proc writeTag*(stream: Stream, fieldNumber: int, wireType: WireType) =
+    ## Write a Tag to a stream.
     writeTag(stream, makeTag(fieldNumber, wireType))
 
 proc readTag*(stream: Stream): Tag =
+    ## Read a Tag from a stream.
     result = readVarint(stream).Tag
 
 proc protoWriteInt32*(stream: Stream, n: int32) =
+    ## Write a 32-bit signed integer to a stream. For negative numbers,
+    ## protoWriteSInt32() is more efficient. When using this proc, negative
+    ## numbers will take 10 bytes to encode.
     writeVarint(stream, n.uint64)
 
 proc protoWriteInt32*(stream: Stream, n: int32, fieldNumber: int) =
+    ## Write a 32-bit signed integer with a Tag to a stream. For negative
+    ## numbers, protoWriteSInt32() is more efficient. When using this proc,
+    ## negative numbers will take 10 bytes to encode.
     writeTag(stream, fieldNumber, WireType.Varint)
     protoWriteInt32(stream, n)
 
 proc protoReadInt32*(stream: Stream): int32 =
+    ## Read a varint as 32-bit signed integer from a stream.
     result = readVarint(stream).int32
 
 proc protoWriteSInt32*(stream: Stream, n: int32) =
+    ## Write a 32-bit signed integer using ZigZag encoding to a stream.
     writeVarint(stream, zigzagEncode(n))
 
 proc protoWriteSInt32*(stream: Stream, n: int32, fieldNumber: int) =
+    ## Write a 32-bit signed integer, using ZigZag encoding, with a Tag to a
+    ## stream.
     writeTag(stream, fieldNumber, WireType.Varint)
     writeVarint(stream, zigzagEncode(n))
 
 proc protoReadSInt32*(stream: Stream): int32 =
+    ## Read a 32-bit signed integer, using ZigZag decoding, from a stream.
     result = zigzagDecode(readVarint(stream).uint32)
 
 proc protoWriteUInt32*(stream: Stream, n: uint32) =
+    ## Write a 32-bit unsigned integer to a stream.
     writeVarint(stream, n)
 
 proc protoWriteUInt32*(stream: Stream, n: uint32, fieldNumber: int) =
+    ## Write a 32-bit unsigned integer with a Tag to a stream.
     writeTag(stream, fieldNumber, WireType.Varint)
     writeVarint(stream, n)
 
 proc protoReadUInt32*(stream: Stream): uint32 =
+    ## Read a 32-bit unsigned integer from a stream.
     result = readVarint(stream).uint32
 
 proc protoWriteInt64*(stream: Stream, n: int64) =
@@ -400,6 +432,9 @@ proc sizeOfVarint[T](value: T): uint64 =
     inc(result)
 
 proc packedFieldSize*[T](values: seq[T], fieldtype: FieldType): uint64 =
+    ## Return the size in bytes of a packed field. For fixed size values this is
+    ## O(1). Otherwise O(N) as we need to calculate the size for each value in a
+    ## sequence. The size does not include the size of a Tag.
     case fieldtype
     of FieldType.Fixed64, FieldType.SFixed64, FieldType.Double:
         result = uint64(len(values)) * 8
@@ -467,12 +502,16 @@ proc sizeOfSInt64*(value: int64): uint64 =
     result = sizeOfVarint(zigzagEncode(value))
 
 proc sizeOfEnum*[T](value: T): uint64 =
+    ## Return the size in bytes of an enum.
     result = sizeOfUInt32(value.uint32)
 
 proc sizeOfTag*(fieldNumber: int, wiretype: WireType): uint64 =
+    ## Return the size in bytes of a Tag.
     result = sizeOfUInt32(uint32(makeTag(fieldNumber, wiretype)))
 
 proc skipField*(stream: Stream, wiretype: WireType) =
+    ## Skip a field from a stream. The wiretype is the minimum amount of
+    ## information needed for skipping fields.
     case wiretype
     of WireType.Varint:
         discard readVarint(stream)
@@ -487,6 +526,8 @@ proc skipField*(stream: Stream, wiretype: WireType) =
         raise newException(Exception, "unsupported wiretype: " & $wiretype)
 
 proc expectWireType*(actual: WireType, expected: varargs[WireType]) =
+    ## Check that a wiretype is expected. Raises UnexpectedWireTypeError if the
+    ## wiretype is not expected.
     for exp in expected:
         if actual == exp:
             return
@@ -522,11 +563,14 @@ proc excl*(s: var IntSet, values: openArray[int]) =
         excl(s, value)
 
 proc readLengthDelimited*(stream: Stream): string =
+    ## Read a length delimited field from a stream. The tag should have been
+    ## read already. This proc reads the size of the data and the data itself.
     let size = int(readVarint(stream))
     result = safeReadStr(stream, size)
 
 proc readUnknownField*(stream: Stream, tag: Tag,
                        fields: var seq[UnknownField]) =
+    ## Read an unknown field from a stream and add it to a sequence.
     var field: UnknownField
 
     new(field)
@@ -549,9 +593,11 @@ proc readUnknownField*(stream: Stream, tag: Tag,
     add(fields, field)
 
 proc readUnknownField*(stream: Stream, message: Message, tag: Tag) =
+    ## Read an unkown field from a stream to a message.
     readUnknownField(stream, tag, message.unknownFields)
 
 proc writeUnknownFields*(stream: Stream, fields: seq[UnknownField]) =
+    ## Write unknown fields to a stream.
     for field in fields:
         case field.wiretype
         of WireType.Varint:
@@ -567,12 +613,18 @@ proc writeUnknownFields*(stream: Stream, fields: seq[UnknownField]) =
             raise newException(Exception, "unsupported wiretype: " & $field.wiretype)
 
 proc writeUnknownFields*(stream: Stream, message: Message) =
+    ## Write the unknown fields of a message to a stream.
     writeUnknownFields(stream, message.unknownFields)
 
 proc discardUnknownFields*[T](message: T) =
+    ## Discard the unknown fields from a message. If you call this, the unknown
+    ## fields will be lost and they won't be serialized when serializing the
+    ## message.
     message.unknownFields = @[]
 
 proc sizeOfUnknownField*(field: UnknownField): uint64 =
+    ## Return the size in bytes of an unknown field. The returned size includes
+    ## the size of the Tag.
     result = sizeOfTag(field.fieldNumber, field.wiretype)
     case field.wiretype
     of WireType.Varint:
@@ -587,14 +639,18 @@ proc sizeOfUnknownField*(field: UnknownField): uint64 =
         raise newException(Exception, "unsupported wiretype: " & $field.wiretype)
 
 proc sizeOfUnknownFields*(message: Message): uint64 =
+    ## Return the size in bytes of the unknown fields in a message. The size
+    ## includes tags and data.
     for field in message.unknownFields:
         result = result + sizeOfUnknownField(field)
 
 proc initMessage*(message: var MessageObj) =
+    ## Initialize a message.
     message.hasField = initIntSet()
     message.unknownFields = @[]
 
 proc hasField*(message: Message, fieldNumber: int): bool =
+    ## Check if a field is present in a Message.
     contains(message.hasField, fieldNumber)
 
 proc hasFields*(message: Message, fieldNumbers: openArray[int]): bool =
@@ -603,7 +659,9 @@ proc hasFields*(message: Message, fieldNumbers: openArray[int]): bool =
             return true
 
 proc clearFields*(message: Message, fieldNumbers: openArray[int]) =
+    ## Mark the fields as not present in the Message.
     excl(message.hasField, fieldNumbers)
 
 proc setField*(message: Message, fieldNumber: int) =
+    ## Mark a field as being present in the Message.
     incl(message.hasField, fieldNumber)

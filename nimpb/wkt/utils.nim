@@ -1,3 +1,5 @@
+## This module implements utilities for WKT modules.
+
 template declareJsonProcs*(T: typedesc) =
     proc `T FromJsonImpl`(node: JsonNode): Message =
         `parse T`(node)
