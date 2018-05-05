@@ -1,3 +1,5 @@
+## This module implements some misc utilities.
+
 import strutils
 
 proc toCamelCase*(s: string): string =

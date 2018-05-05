@@ -1,3 +1,6 @@
+## This module implements protobuf3 JSON serializing and deserializing for some
+## primitive types.
+
 import base64
 import math
 import std/json

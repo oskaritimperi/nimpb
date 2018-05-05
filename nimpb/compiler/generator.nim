@@ -1,3 +1,5 @@
+## This module implements Nim code generation from protoc output.
+
 import algorithm
 import os
 import pegs
@@ -1301,6 +1303,12 @@ proc processFileDescriptorSet*(filename: string,
                                outdir: string,
                                protos: openArray[string],
                                serviceGenerator: ServiceGenerator) =
+    ## Generate code from a FileDescriptorSet stored in a file.
+    ##
+    ## ``filename`` is the full path to the file storing the FileDescriptorSet.
+    ## ``outdir`` is the output directory for files. ``protos`` contains the
+    ## paths to the proto files which were passed to the protoc compiler.
+    ## ``serviceGenerator`` specifies the user supplied service generator.
     let s = newFileStream(filename, fmRead)
 
     let fileSet = readgoogle_protobuf_FileDescriptorSet(s)

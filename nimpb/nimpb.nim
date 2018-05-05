@@ -1,3 +1,6 @@
+## This module implements the basic Protocol Buffers serialization and
+## deserialization primitives which are used by the generated code.
+
 import endians
 import intsets
 import std/json
