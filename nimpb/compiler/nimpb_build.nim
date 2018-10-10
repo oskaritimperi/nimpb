@@ -33,7 +33,7 @@ for kind, key, val in getopt():
             usage()
     of cmdEnd: assert(false)
 
-if outdir == nil:
+if outdir == "":
     echo("error: --out is required")
     quit(QuitFailure)
 
