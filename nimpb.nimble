@@ -1,4 +1,4 @@
-version = "0.1.0"
+version = "0.2.0"
 author = "Oskari Timperi"
 description = "protobuf library for Nim"
 license = "MIT"
@@ -7,7 +7,7 @@ skipDirs = @["examples", "tests", "protobuf-3.5.1"]
 
 bin = @["nimpb/compiler/nimpb_build"]
 
-requires "nim >= 0.18.0"
+requires "nim >= 0.19.0"
 
 # Hard dependency for now. In the future we could make nimpb_protoc download
 # stuff on-demand which would make the dependency a bit lighter. Especially
