@@ -265,7 +265,7 @@ proc findEnum(file: ProtoFile, typeName: string): Enum =
             break
 
 proc defaultValue(field: Field): string =
-    if field.defaultValue != nil:
+    if field.defaultValue != "":
         if isEnum(field):
             return &"{field.typeName}.{field.defaultValue}"
         elif field.ftype == google_protobuf_FieldDescriptorProtoType.TypeString:
@@ -1065,7 +1065,10 @@ iterator genMessageFromJsonProc(msg: Message): string =
         elif field.ftype == google_protobuf_FieldDescriptorProto_Type.TypeBool:
             result = &"parseBool({n})"
         elif isNumeric(field):
-            result = &"parseInt[{field.nimTypeName}]({n})"
+            if isUnsigned(field):
+                result = &"parseUInt[{field.nimTypeName}]({n})"
+            else:
+                result = &"parseInt[{field.nimTypeName}]({n})"
         elif field.ftype == google_protobuf_FieldDescriptorProto_Type.TypeString:
             result = &"parseString({n})"
         elif field.ftype == google_protobuf_FieldDescriptorProto_Type.TypeBytes:
@@ -1200,7 +1203,7 @@ proc hasGenService(serviceGenerator: ServiceGenerator): bool =
     serviceGenerator != nil and serviceGenerator.genService != nil
 
 proc ownFile(serviceGenerator: ServiceGenerator): bool =
-    serviceGenerator != nil and serviceGenerator.fileSuffix != nil
+    serviceGenerator != nil and serviceGenerator.fileSuffix != ""
 
 proc processFile(fdesc: google_protobuf_FileDescriptorProto,
                  otherFiles: TableRef[string, ProtoFile],

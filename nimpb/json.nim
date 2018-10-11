@@ -97,7 +97,7 @@ proc parseInt*[T: int32|int64](node: JsonNode): T =
 
 proc high(t: typedesc[uint64]): uint64 = 18446744073709551615'u64
 
-proc parseInt*[T: uint32|uint64](node: JsonNode): T =
+proc parseUInt*[T: uint32|uint64](node: JsonNode): T =
     var big: BiggestUInt
 
     if node.kind == JString:
