@@ -399,7 +399,7 @@ proc protoWriteBytes*(stream: Stream, bytes: seq[byte], fieldNumber: int) =
 
 proc safeReadStr*(stream: Stream, size: int): string =
     result = newString(size)
-    if readData(stream, addr(result[0]), size) != size:
+    if 0 < size and readData(stream, addr(result[0]), size) != size:
         raise newException(IOError, "cannot read from stream")
 
 proc protoReadString*(stream: Stream): string =
