@@ -118,7 +118,7 @@ proc zigzagEncode*(n: int32): uint32 =
     let x = cast[uint32](n)
     let a = cast[int32](x shl 1)
     let b = -cast[int32](x shr 31)
-    result = uint32(a xor b)
+    result = cast[uint32](a xor b)
 
 proc zigzagDecode*(n: uint32): int32 =
     ## ZigZag decode a 32-bit unsigned integer.
