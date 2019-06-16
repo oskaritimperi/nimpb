@@ -153,7 +153,7 @@ template fieldNumber*(tag: Tag): int =
 
 proc protoReadByte(stream: Stream): byte =
     ## Read a byte from a stream.
-    result = readInt8(stream).byte
+    result = cast[byte](readInt8(stream))
 
 proc protoWriteByte(stream: Stream, b: byte) =
     ## Write a byte to a stream.
