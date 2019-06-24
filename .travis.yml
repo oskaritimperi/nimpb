@@ -23,7 +23,8 @@ install:
     if [ ! -x nim-$nim_branch/bin/nim ]; then
       git clone -b $nim_branch --depth 1 git://github.com/nim-lang/nim nim-$nim_branch/
       cd nim-$nim_branch
-      git clone -b $nim_branch --depth 1 git://github.com/nim-lang/csources csources/
+      # https://github.com/nim-lang/Nim/issues/11454
+      git clone -b v0.19.0 --depth 1 git://github.com/nim-lang/csources csources/
       cd csources
       sh build.sh
       cd ..
