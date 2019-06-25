@@ -118,7 +118,7 @@ proc zigzagEncode*(n: int32): uint32 =
     let x = cast[uint32](n)
     let a = cast[int32](x shl 1)
     let b = -cast[int32](x shr 31)
-    result = uint32(a xor b)
+    result = cast[uint32](a xor b)
 
 proc zigzagDecode*(n: uint32): int32 =
     ## ZigZag decode a 32-bit unsigned integer.
@@ -153,7 +153,7 @@ template fieldNumber*(tag: Tag): int =
 
 proc protoReadByte(stream: Stream): byte =
     ## Read a byte from a stream.
-    result = readInt8(stream).byte
+    result = cast[byte](readInt8(stream))
 
 proc protoWriteByte(stream: Stream, b: byte) =
     ## Write a byte to a stream.
@@ -399,8 +399,9 @@ proc protoWriteBytes*(stream: Stream, bytes: seq[byte], fieldNumber: int) =
 
 proc safeReadStr*(stream: Stream, size: int): string =
     result = newString(size)
-    if readData(stream, addr(result[0]), size) != size:
-        raise newException(IOError, "cannot read from stream")
+    if size > 0:
+        if readData(stream, addr(result[0]), size) != size:
+            raise newException(IOError, "cannot read from stream")
 
 proc protoReadString*(stream: Stream): string =
     let size = int(protoReadUInt64(stream))
