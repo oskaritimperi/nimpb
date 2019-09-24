@@ -42,10 +42,6 @@ type
     google_protobuf_ListValueObj* = object of Message
         values: seq[google_protobuf_Value]
 
-proc writegoogle_protobuf_Struct_FieldsEntryKV(stream: Stream, key: string, value: google_protobuf_Value)
-proc readgoogle_protobuf_Struct_FieldsEntryKV(stream: Stream, tbl: TableRef[string, google_protobuf_Value])
-proc sizeOfgoogle_protobuf_Struct_FieldsEntryKV(key: string, value: google_protobuf_Value): uint64
-
 proc newgoogle_protobuf_Struct*(): google_protobuf_Struct
 proc newgoogle_protobuf_Struct*(data: string): google_protobuf_Struct
 proc newgoogle_protobuf_Struct*(data: seq[byte]): google_protobuf_Struct
@@ -67,44 +63,9 @@ proc writegoogle_protobuf_Value*(stream: Stream, message: google_protobuf_Value)
 proc readgoogle_protobuf_Value*(stream: Stream): google_protobuf_Value
 proc sizeOfgoogle_protobuf_Value*(message: google_protobuf_Value): uint64
 
-proc sizeOfgoogle_protobuf_Struct_FieldsEntryKV(key: string, value: google_protobuf_Value): uint64 =
-    result = result + sizeOfTag(1, WireType.LengthDelimited)
-    result = result + sizeOfString(key)
-    result = result + sizeOfTag(2, WireType.LengthDelimited)
-    result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_Value(value))
-
-proc writegoogle_protobuf_Struct_FieldsEntryKV(stream: Stream, key: string, value: google_protobuf_Value) =
-    protoWriteString(stream, key, 1)
-    writeMessage(stream, value, 2)
-
-proc readgoogle_protobuf_Struct_FieldsEntryKV(stream: Stream, tbl: TableRef[string, google_protobuf_Value]) =
-    var
-        key: string
-        gotKey = false
-        value: google_protobuf_Value
-        gotValue = false
-    while not atEnd(stream):
-        let
-            tag = readTag(stream)
-            wireType = wireType(tag)
-        case fieldNumber(tag)
-        of 1:
-            key = protoReadString(stream)
-            gotKey = true
-        of 2:
-            let
-                size = readVarint(stream)
-                data = safeReadStr(stream, int(size))
-                pbs = newStringStream(data)
-            value = readgoogle_protobuf_Value(pbs)
-            gotValue = true
-        else: skipField(stream, wireType)
-    if not gotKey:
-        raise newException(Exception, "missing key")
-    if not gotValue:
-        raise newException(Exception, "missing value")
-    tbl[key] = value
-
+proc writegoogle_protobuf_Struct_FieldsEntryKV(stream: Stream, key: string, value: google_protobuf_Value)
+proc readgoogle_protobuf_Struct_FieldsEntryKV(stream: Stream, tbl: TableRef[string, google_protobuf_Value])
+proc sizeOfgoogle_protobuf_Struct_FieldsEntryKV(key: string, value: google_protobuf_Value): uint64
 
 proc fullyQualifiedName*(T: typedesc[google_protobuf_Struct]): string = "google.protobuf.Struct"
 
@@ -275,7 +236,7 @@ proc newgoogle_protobuf_Value*(): google_protobuf_Value =
     new(result)
     initMessage(result[])
     result.procs = google_protobuf_ValueProcs()
-    result.kind.kind = google_protobuf_Value_kind_Kind.NotSet
+    result.kind = google_protobuf_Value_kind_OneOf(kind: google_protobuf_Value_kind_Kind.NotSet)
 
 proc clearnullValue*(message: google_protobuf_Value) =
     reset(message.kind)
@@ -287,9 +248,9 @@ proc hasnullValue*(message: google_protobuf_Value): bool =
 
 proc setnullValue*(message: google_protobuf_Value, value: google_protobuf_NullValue) =
     if message.kind.kind != google_protobuf_Value_kind_Kind.NullValue:
-        reset(message.kind)
-        message.kind.kind = google_protobuf_Value_kind_Kind.NullValue
-    message.kind.nullValue = value
+        message.kind = google_protobuf_Value_kind_OneOf(kind: google_protobuf_Value_kind_Kind.NullValue, nullValue: value)
+    else:
+        message.kind.nullValue = value
     setField(message, 1)
     clearFields(message, [2, 3, 4, 5, 6])
 
@@ -309,9 +270,9 @@ proc hasnumberValue*(message: google_protobuf_Value): bool =
 
 proc setnumberValue*(message: google_protobuf_Value, value: float64) =
     if message.kind.kind != google_protobuf_Value_kind_Kind.NumberValue:
-        reset(message.kind)
-        message.kind.kind = google_protobuf_Value_kind_Kind.NumberValue
-    message.kind.numberValue = value
+        message.kind = google_protobuf_Value_kind_OneOf(kind: google_protobuf_Value_kind_Kind.NumberValue, numberValue: value)
+    else:
+        message.kind.numberValue = value
     setField(message, 2)
     clearFields(message, [1, 3, 4, 5, 6])
 
@@ -331,9 +292,9 @@ proc hasstringValue*(message: google_protobuf_Value): bool =
 
 proc setstringValue*(message: google_protobuf_Value, value: string) =
     if message.kind.kind != google_protobuf_Value_kind_Kind.StringValue:
-        reset(message.kind)
-        message.kind.kind = google_protobuf_Value_kind_Kind.StringValue
-    message.kind.stringValue = value
+        message.kind = google_protobuf_Value_kind_OneOf(kind: google_protobuf_Value_kind_Kind.StringValue, stringValue: value)
+    else:
+        message.kind.stringValue = value
     setField(message, 3)
     clearFields(message, [1, 2, 4, 5, 6])
 
@@ -353,9 +314,9 @@ proc hasboolValue*(message: google_protobuf_Value): bool =
 
 proc setboolValue*(message: google_protobuf_Value, value: bool) =
     if message.kind.kind != google_protobuf_Value_kind_Kind.BoolValue:
-        reset(message.kind)
-        message.kind.kind = google_protobuf_Value_kind_Kind.BoolValue
-    message.kind.boolValue = value
+        message.kind = google_protobuf_Value_kind_OneOf(kind: google_protobuf_Value_kind_Kind.BoolValue, boolValue: value)
+    else:
+        message.kind.boolValue = value
     setField(message, 4)
     clearFields(message, [1, 2, 3, 5, 6])
 
@@ -375,9 +336,9 @@ proc hasstructValue*(message: google_protobuf_Value): bool =
 
 proc setstructValue*(message: google_protobuf_Value, value: google_protobuf_Struct) =
     if message.kind.kind != google_protobuf_Value_kind_Kind.StructValue:
-        reset(message.kind)
-        message.kind.kind = google_protobuf_Value_kind_Kind.StructValue
-    message.kind.structValue = value
+        message.kind = google_protobuf_Value_kind_OneOf(kind: google_protobuf_Value_kind_Kind.StructValue, structValue: value)
+    else:
+        message.kind.structValue = value
     setField(message, 5)
     clearFields(message, [1, 2, 3, 4, 6])
 
@@ -397,9 +358,9 @@ proc haslistValue*(message: google_protobuf_Value): bool =
 
 proc setlistValue*(message: google_protobuf_Value, value: google_protobuf_ListValue) =
     if message.kind.kind != google_protobuf_Value_kind_Kind.ListValue:
-        reset(message.kind)
-        message.kind.kind = google_protobuf_Value_kind_Kind.ListValue
-    message.kind.listValue = value
+        message.kind = google_protobuf_Value_kind_OneOf(kind: google_protobuf_Value_kind_Kind.ListValue, listValue: value)
+    else:
+        message.kind.listValue = value
     setField(message, 6)
     clearFields(message, [1, 2, 3, 4, 5])
 
@@ -491,5 +452,44 @@ proc newgoogle_protobuf_Value*(data: seq[byte]): google_protobuf_Value =
     let
         ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_Value(ss)
+
+
+proc sizeOfgoogle_protobuf_Struct_FieldsEntryKV(key: string, value: google_protobuf_Value): uint64 =
+    result = result + sizeOfTag(1, WireType.LengthDelimited)
+    result = result + sizeOfString(key)
+    result = result + sizeOfTag(2, WireType.LengthDelimited)
+    result = result + sizeOfLengthDelimited(sizeOfgoogle_protobuf_Value(value))
+
+proc writegoogle_protobuf_Struct_FieldsEntryKV(stream: Stream, key: string, value: google_protobuf_Value) =
+    protoWriteString(stream, key, 1)
+    writeMessage(stream, value, 2)
+
+proc readgoogle_protobuf_Struct_FieldsEntryKV(stream: Stream, tbl: TableRef[string, google_protobuf_Value]) =
+    var
+        key: string
+        gotKey = false
+        value: google_protobuf_Value
+        gotValue = false
+    while not atEnd(stream):
+        let
+            tag = readTag(stream)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
+        of 1:
+            key = protoReadString(stream)
+            gotKey = true
+        of 2:
+            let
+                size = readVarint(stream)
+                data = safeReadStr(stream, int(size))
+                pbs = newStringStream(data)
+            value = readgoogle_protobuf_Value(pbs)
+            gotValue = true
+        else: skipField(stream, wireType)
+    if not gotKey:
+        raise newException(Exception, "missing key")
+    if not gotValue:
+        raise newException(Exception, "missing value")
+    tbl[key] = value
 
 

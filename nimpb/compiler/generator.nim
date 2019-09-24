@@ -691,7 +691,7 @@ iterator genNewMessageProc(msg: Message): string =
         if field.oneof == nil:
             yield indent(&"result.{field.accessor} = {defaultValue(field)}", 4)
     for oneof in msg.oneofs:
-        yield indent(&"result.{oneof.name}.kind = {msg.names}_{oneof.name}_Kind.NotSet", 4)
+        yield indent(&"result.{oneof.name} = {msg.names}_{oneof.name}_OneOf(kind: {msg.names}_{oneof.name}_Kind.NotSet)", 4)
     yield ""
 
 iterator oneofSiblings(field: Field): Field =
@@ -730,9 +730,9 @@ iterator genSetFieldProc(msg: Message, field: Field): string =
         yield indent(&"message.{field.accessor} = value", 4)
     else:
         yield indent(&"if message.{field.oneof.name}.kind != {msg.names}_{field.oneof.name}_Kind.{field.name.capitalizeAscii}:", 4)
-        yield indent(&"reset(message.{field.oneof.name})", 8)
-        yield indent(&"message.{field.oneof.name}.kind = {msg.names}_{field.oneof.name}_Kind.{field.name.capitalizeAscii}", 8)
-        yield indent(&"message.{field.accessor} = value", 4)
+        yield indent(&"message.{field.oneof.name} = {msg.names}_{field.oneof.name}_OneOf(kind: {msg.names}_{field.oneof.name}_Kind.{field.name.capitalizeAscii}, {quoteReserved(field.name)}: value)", 8)
+        yield indent(&"else:", 4)
+        yield indent(&"message.{field.accessor} = value", 8)
     if shouldGenerateHasField(msg, field):
         yield indent(&"setField(message, {field.number})", 4)
         var numbers: seq[int] = @[]

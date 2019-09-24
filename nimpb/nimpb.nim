@@ -186,9 +186,9 @@ proc writeVarint*(stream: Stream, n: uint64) =
     ## Write a varint to a stream.
     var value = n
     while value >= 0x80'u64:
-        protoWriteByte(stream, (value or 0x80).byte)
+        protoWriteByte(stream, cast[byte](value or 0x80))
         value = value shr 7
-    protoWriteByte(stream, value.byte)
+    protoWriteByte(stream, cast[byte](value))
 
 proc writeTag*(stream: Stream, tag: Tag) =
     ## Write a Tag to a stream.
@@ -217,7 +217,7 @@ proc protoWriteInt32*(stream: Stream, n: int32, fieldNumber: int) =
 
 proc protoReadInt32*(stream: Stream): int32 =
     ## Read a varint as 32-bit signed integer from a stream.
-    result = readVarint(stream).int32
+    result = cast[int32](readVarint(stream))
 
 proc protoWriteSInt32*(stream: Stream, n: int32) =
     ## Write a 32-bit signed integer using ZigZag encoding to a stream.
@@ -231,7 +231,7 @@ proc protoWriteSInt32*(stream: Stream, n: int32, fieldNumber: int) =
 
 proc protoReadSInt32*(stream: Stream): int32 =
     ## Read a 32-bit signed integer, using ZigZag decoding, from a stream.
-    result = zigzagDecode(readVarint(stream).uint32)
+    result = zigzagDecode(cast[uint32](readVarint(stream)))
 
 proc protoWriteUInt32*(stream: Stream, n: uint32) =
     ## Write a 32-bit unsigned integer to a stream.
@@ -244,7 +244,7 @@ proc protoWriteUInt32*(stream: Stream, n: uint32, fieldNumber: int) =
 
 proc protoReadUInt32*(stream: Stream): uint32 =
     ## Read a 32-bit unsigned integer from a stream.
-    result = readVarint(stream).uint32
+    result = cast[uint32](readVarint(stream))
 
 proc protoWriteInt64*(stream: Stream, n: int64) =
     writeVarint(stream, n.uint64)
@@ -254,7 +254,7 @@ proc protoWriteInt64*(stream: Stream, n: int64, fieldNumber: int) =
     writeVarint(stream, n.uint64)
 
 proc protoReadInt64*(stream: Stream): int64 =
-    result = readVarint(stream).int64
+    result = cast[int64](readVarint(stream))
 
 proc protoWriteSInt64*(stream: Stream, n: int64) =
     writeVarint(stream, zigzagEncode(n))
@@ -284,7 +284,7 @@ proc protoWriteBool*(stream: Stream, n: bool, fieldNumber: int) =
     writeVarint(stream, n.uint32)
 
 proc protoReadBool*(stream: Stream): bool =
-    result = readVarint(stream).bool
+    result = cast[bool](readVarint(stream))
 
 proc protoWriteFixed64*(stream: Stream, value: uint64) =
     var
@@ -572,11 +572,7 @@ proc readLengthDelimited*(stream: Stream): string =
 proc readUnknownField*(stream: Stream, tag: Tag,
                        fields: var seq[UnknownField]) =
     ## Read an unknown field from a stream and add it to a sequence.
-    var field: UnknownField
-
-    new(field)
-    field.fieldNumber = fieldNumber(tag)
-    field.wireType = wiretype(tag)
+    var field = UnknownField(fieldNumber: fieldNumber(tag), wireType: wiretype(tag))
 
     case field.wiretype
     of WireType.Varint:

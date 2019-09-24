@@ -37,54 +37,12 @@ type
     google_protobuf_BytesValueObj* = object of Message
         value: seq[byte]
 
-proc newgoogle_protobuf_Int32Value*(): google_protobuf_Int32Value
-proc newgoogle_protobuf_Int32Value*(data: string): google_protobuf_Int32Value
-proc newgoogle_protobuf_Int32Value*(data: seq[byte]): google_protobuf_Int32Value
-proc writegoogle_protobuf_Int32Value*(stream: Stream, message: google_protobuf_Int32Value)
-proc readgoogle_protobuf_Int32Value*(stream: Stream): google_protobuf_Int32Value
-proc sizeOfgoogle_protobuf_Int32Value*(message: google_protobuf_Int32Value): uint64
-
-proc newgoogle_protobuf_Int64Value*(): google_protobuf_Int64Value
-proc newgoogle_protobuf_Int64Value*(data: string): google_protobuf_Int64Value
-proc newgoogle_protobuf_Int64Value*(data: seq[byte]): google_protobuf_Int64Value
-proc writegoogle_protobuf_Int64Value*(stream: Stream, message: google_protobuf_Int64Value)
-proc readgoogle_protobuf_Int64Value*(stream: Stream): google_protobuf_Int64Value
-proc sizeOfgoogle_protobuf_Int64Value*(message: google_protobuf_Int64Value): uint64
-
-proc newgoogle_protobuf_DoubleValue*(): google_protobuf_DoubleValue
-proc newgoogle_protobuf_DoubleValue*(data: string): google_protobuf_DoubleValue
-proc newgoogle_protobuf_DoubleValue*(data: seq[byte]): google_protobuf_DoubleValue
-proc writegoogle_protobuf_DoubleValue*(stream: Stream, message: google_protobuf_DoubleValue)
-proc readgoogle_protobuf_DoubleValue*(stream: Stream): google_protobuf_DoubleValue
-proc sizeOfgoogle_protobuf_DoubleValue*(message: google_protobuf_DoubleValue): uint64
-
-proc newgoogle_protobuf_StringValue*(): google_protobuf_StringValue
-proc newgoogle_protobuf_StringValue*(data: string): google_protobuf_StringValue
-proc newgoogle_protobuf_StringValue*(data: seq[byte]): google_protobuf_StringValue
-proc writegoogle_protobuf_StringValue*(stream: Stream, message: google_protobuf_StringValue)
-proc readgoogle_protobuf_StringValue*(stream: Stream): google_protobuf_StringValue
-proc sizeOfgoogle_protobuf_StringValue*(message: google_protobuf_StringValue): uint64
-
 proc newgoogle_protobuf_BoolValue*(): google_protobuf_BoolValue
 proc newgoogle_protobuf_BoolValue*(data: string): google_protobuf_BoolValue
 proc newgoogle_protobuf_BoolValue*(data: seq[byte]): google_protobuf_BoolValue
 proc writegoogle_protobuf_BoolValue*(stream: Stream, message: google_protobuf_BoolValue)
 proc readgoogle_protobuf_BoolValue*(stream: Stream): google_protobuf_BoolValue
 proc sizeOfgoogle_protobuf_BoolValue*(message: google_protobuf_BoolValue): uint64
-
-proc newgoogle_protobuf_BytesValue*(): google_protobuf_BytesValue
-proc newgoogle_protobuf_BytesValue*(data: string): google_protobuf_BytesValue
-proc newgoogle_protobuf_BytesValue*(data: seq[byte]): google_protobuf_BytesValue
-proc writegoogle_protobuf_BytesValue*(stream: Stream, message: google_protobuf_BytesValue)
-proc readgoogle_protobuf_BytesValue*(stream: Stream): google_protobuf_BytesValue
-proc sizeOfgoogle_protobuf_BytesValue*(message: google_protobuf_BytesValue): uint64
-
-proc newgoogle_protobuf_FloatValue*(): google_protobuf_FloatValue
-proc newgoogle_protobuf_FloatValue*(data: string): google_protobuf_FloatValue
-proc newgoogle_protobuf_FloatValue*(data: seq[byte]): google_protobuf_FloatValue
-proc writegoogle_protobuf_FloatValue*(stream: Stream, message: google_protobuf_FloatValue)
-proc readgoogle_protobuf_FloatValue*(stream: Stream): google_protobuf_FloatValue
-proc sizeOfgoogle_protobuf_FloatValue*(message: google_protobuf_FloatValue): uint64
 
 proc newgoogle_protobuf_UInt64Value*(): google_protobuf_UInt64Value
 proc newgoogle_protobuf_UInt64Value*(data: string): google_protobuf_UInt64Value
@@ -93,6 +51,34 @@ proc writegoogle_protobuf_UInt64Value*(stream: Stream, message: google_protobuf_
 proc readgoogle_protobuf_UInt64Value*(stream: Stream): google_protobuf_UInt64Value
 proc sizeOfgoogle_protobuf_UInt64Value*(message: google_protobuf_UInt64Value): uint64
 
+proc newgoogle_protobuf_DoubleValue*(): google_protobuf_DoubleValue
+proc newgoogle_protobuf_DoubleValue*(data: string): google_protobuf_DoubleValue
+proc newgoogle_protobuf_DoubleValue*(data: seq[byte]): google_protobuf_DoubleValue
+proc writegoogle_protobuf_DoubleValue*(stream: Stream, message: google_protobuf_DoubleValue)
+proc readgoogle_protobuf_DoubleValue*(stream: Stream): google_protobuf_DoubleValue
+proc sizeOfgoogle_protobuf_DoubleValue*(message: google_protobuf_DoubleValue): uint64
+
+proc newgoogle_protobuf_FloatValue*(): google_protobuf_FloatValue
+proc newgoogle_protobuf_FloatValue*(data: string): google_protobuf_FloatValue
+proc newgoogle_protobuf_FloatValue*(data: seq[byte]): google_protobuf_FloatValue
+proc writegoogle_protobuf_FloatValue*(stream: Stream, message: google_protobuf_FloatValue)
+proc readgoogle_protobuf_FloatValue*(stream: Stream): google_protobuf_FloatValue
+proc sizeOfgoogle_protobuf_FloatValue*(message: google_protobuf_FloatValue): uint64
+
+proc newgoogle_protobuf_Int64Value*(): google_protobuf_Int64Value
+proc newgoogle_protobuf_Int64Value*(data: string): google_protobuf_Int64Value
+proc newgoogle_protobuf_Int64Value*(data: seq[byte]): google_protobuf_Int64Value
+proc writegoogle_protobuf_Int64Value*(stream: Stream, message: google_protobuf_Int64Value)
+proc readgoogle_protobuf_Int64Value*(stream: Stream): google_protobuf_Int64Value
+proc sizeOfgoogle_protobuf_Int64Value*(message: google_protobuf_Int64Value): uint64
+
+proc newgoogle_protobuf_BytesValue*(): google_protobuf_BytesValue
+proc newgoogle_protobuf_BytesValue*(data: string): google_protobuf_BytesValue
+proc newgoogle_protobuf_BytesValue*(data: seq[byte]): google_protobuf_BytesValue
+proc writegoogle_protobuf_BytesValue*(stream: Stream, message: google_protobuf_BytesValue)
+proc readgoogle_protobuf_BytesValue*(stream: Stream): google_protobuf_BytesValue
+proc sizeOfgoogle_protobuf_BytesValue*(message: google_protobuf_BytesValue): uint64
+
 proc newgoogle_protobuf_UInt32Value*(): google_protobuf_UInt32Value
 proc newgoogle_protobuf_UInt32Value*(data: string): google_protobuf_UInt32Value
 proc newgoogle_protobuf_UInt32Value*(data: seq[byte]): google_protobuf_UInt32Value
@@ -100,281 +86,19 @@ proc writegoogle_protobuf_UInt32Value*(stream: Stream, message: google_protobuf_
 proc readgoogle_protobuf_UInt32Value*(stream: Stream): google_protobuf_UInt32Value
 proc sizeOfgoogle_protobuf_UInt32Value*(message: google_protobuf_UInt32Value): uint64
 
-proc fullyQualifiedName*(T: typedesc[google_protobuf_Int32Value]): string = "google.protobuf.Int32Value"
+proc newgoogle_protobuf_StringValue*(): google_protobuf_StringValue
+proc newgoogle_protobuf_StringValue*(data: string): google_protobuf_StringValue
+proc newgoogle_protobuf_StringValue*(data: seq[byte]): google_protobuf_StringValue
+proc writegoogle_protobuf_StringValue*(stream: Stream, message: google_protobuf_StringValue)
+proc readgoogle_protobuf_StringValue*(stream: Stream): google_protobuf_StringValue
+proc sizeOfgoogle_protobuf_StringValue*(message: google_protobuf_StringValue): uint64
 
-proc readgoogle_protobuf_Int32ValueImpl(stream: Stream): Message = readgoogle_protobuf_Int32Value(stream)
-proc writegoogle_protobuf_Int32ValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Int32Value(stream, google_protobuf_Int32Value(msg))
-
-proc google_protobuf_Int32ValueProcs*(): MessageProcs =
-    result.readImpl = readgoogle_protobuf_Int32ValueImpl
-    result.writeImpl = writegoogle_protobuf_Int32ValueImpl
-
-proc newgoogle_protobuf_Int32Value*(): google_protobuf_Int32Value =
-    new(result)
-    initMessage(result[])
-    result.procs = google_protobuf_Int32ValueProcs()
-    result.value = 0
-
-proc clearvalue*(message: google_protobuf_Int32Value) =
-    message.value = 0
-
-proc setvalue*(message: google_protobuf_Int32Value, value: int32) =
-    message.value = value
-
-proc value*(message: google_protobuf_Int32Value): int32 {.inline.} =
-    message.value
-
-proc `value=`*(message: google_protobuf_Int32Value, value: int32) {.inline.} =
-    setvalue(message, value)
-
-proc sizeOfgoogle_protobuf_Int32Value*(message: google_protobuf_Int32Value): uint64 =
-    if message.value != 0:
-        result = result + sizeOfTag(1, WireType.Varint)
-        result = result + sizeOfInt32(message.value)
-    result = result + sizeOfUnknownFields(message)
-
-proc writegoogle_protobuf_Int32Value*(stream: Stream, message: google_protobuf_Int32Value) =
-    if message.value != 0:
-        protoWriteInt32(stream, message.value, 1)
-    writeUnknownFields(stream, message)
-
-proc readgoogle_protobuf_Int32Value*(stream: Stream): google_protobuf_Int32Value =
-    result = newgoogle_protobuf_Int32Value()
-    while not atEnd(stream):
-        let
-            tag = readTag(stream)
-            wireType = wireType(tag)
-        case fieldNumber(tag)
-        of 0:
-            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
-        of 1:
-            expectWireType(wireType, WireType.Varint)
-            setvalue(result, protoReadInt32(stream))
-        else: readUnknownField(stream, result, tag)
-
-proc serialize*(message: google_protobuf_Int32Value): string =
-    let
-        ss = newStringStream()
-    writegoogle_protobuf_Int32Value(ss, message)
-    result = ss.data
-
-proc newgoogle_protobuf_Int32Value*(data: string): google_protobuf_Int32Value =
-    let
-        ss = newStringStream(data)
-    result = readgoogle_protobuf_Int32Value(ss)
-
-proc newgoogle_protobuf_Int32Value*(data: seq[byte]): google_protobuf_Int32Value =
-    let
-        ss = newStringStream(cast[string](data))
-    result = readgoogle_protobuf_Int32Value(ss)
-
-
-proc fullyQualifiedName*(T: typedesc[google_protobuf_Int64Value]): string = "google.protobuf.Int64Value"
-
-proc readgoogle_protobuf_Int64ValueImpl(stream: Stream): Message = readgoogle_protobuf_Int64Value(stream)
-proc writegoogle_protobuf_Int64ValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Int64Value(stream, google_protobuf_Int64Value(msg))
-
-proc google_protobuf_Int64ValueProcs*(): MessageProcs =
-    result.readImpl = readgoogle_protobuf_Int64ValueImpl
-    result.writeImpl = writegoogle_protobuf_Int64ValueImpl
-
-proc newgoogle_protobuf_Int64Value*(): google_protobuf_Int64Value =
-    new(result)
-    initMessage(result[])
-    result.procs = google_protobuf_Int64ValueProcs()
-    result.value = 0
-
-proc clearvalue*(message: google_protobuf_Int64Value) =
-    message.value = 0
-
-proc setvalue*(message: google_protobuf_Int64Value, value: int64) =
-    message.value = value
-
-proc value*(message: google_protobuf_Int64Value): int64 {.inline.} =
-    message.value
-
-proc `value=`*(message: google_protobuf_Int64Value, value: int64) {.inline.} =
-    setvalue(message, value)
-
-proc sizeOfgoogle_protobuf_Int64Value*(message: google_protobuf_Int64Value): uint64 =
-    if message.value != 0:
-        result = result + sizeOfTag(1, WireType.Varint)
-        result = result + sizeOfInt64(message.value)
-    result = result + sizeOfUnknownFields(message)
-
-proc writegoogle_protobuf_Int64Value*(stream: Stream, message: google_protobuf_Int64Value) =
-    if message.value != 0:
-        protoWriteInt64(stream, message.value, 1)
-    writeUnknownFields(stream, message)
-
-proc readgoogle_protobuf_Int64Value*(stream: Stream): google_protobuf_Int64Value =
-    result = newgoogle_protobuf_Int64Value()
-    while not atEnd(stream):
-        let
-            tag = readTag(stream)
-            wireType = wireType(tag)
-        case fieldNumber(tag)
-        of 0:
-            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
-        of 1:
-            expectWireType(wireType, WireType.Varint)
-            setvalue(result, protoReadInt64(stream))
-        else: readUnknownField(stream, result, tag)
-
-proc serialize*(message: google_protobuf_Int64Value): string =
-    let
-        ss = newStringStream()
-    writegoogle_protobuf_Int64Value(ss, message)
-    result = ss.data
-
-proc newgoogle_protobuf_Int64Value*(data: string): google_protobuf_Int64Value =
-    let
-        ss = newStringStream(data)
-    result = readgoogle_protobuf_Int64Value(ss)
-
-proc newgoogle_protobuf_Int64Value*(data: seq[byte]): google_protobuf_Int64Value =
-    let
-        ss = newStringStream(cast[string](data))
-    result = readgoogle_protobuf_Int64Value(ss)
-
-
-proc fullyQualifiedName*(T: typedesc[google_protobuf_DoubleValue]): string = "google.protobuf.DoubleValue"
-
-proc readgoogle_protobuf_DoubleValueImpl(stream: Stream): Message = readgoogle_protobuf_DoubleValue(stream)
-proc writegoogle_protobuf_DoubleValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_DoubleValue(stream, google_protobuf_DoubleValue(msg))
-
-proc google_protobuf_DoubleValueProcs*(): MessageProcs =
-    result.readImpl = readgoogle_protobuf_DoubleValueImpl
-    result.writeImpl = writegoogle_protobuf_DoubleValueImpl
-
-proc newgoogle_protobuf_DoubleValue*(): google_protobuf_DoubleValue =
-    new(result)
-    initMessage(result[])
-    result.procs = google_protobuf_DoubleValueProcs()
-    result.value = 0
-
-proc clearvalue*(message: google_protobuf_DoubleValue) =
-    message.value = 0
-
-proc setvalue*(message: google_protobuf_DoubleValue, value: float64) =
-    message.value = value
-
-proc value*(message: google_protobuf_DoubleValue): float64 {.inline.} =
-    message.value
-
-proc `value=`*(message: google_protobuf_DoubleValue, value: float64) {.inline.} =
-    setvalue(message, value)
-
-proc sizeOfgoogle_protobuf_DoubleValue*(message: google_protobuf_DoubleValue): uint64 =
-    if message.value != 0:
-        result = result + sizeOfTag(1, WireType.Fixed64)
-        result = result + sizeOfDouble(message.value)
-    result = result + sizeOfUnknownFields(message)
-
-proc writegoogle_protobuf_DoubleValue*(stream: Stream, message: google_protobuf_DoubleValue) =
-    if message.value != 0:
-        protoWriteDouble(stream, message.value, 1)
-    writeUnknownFields(stream, message)
-
-proc readgoogle_protobuf_DoubleValue*(stream: Stream): google_protobuf_DoubleValue =
-    result = newgoogle_protobuf_DoubleValue()
-    while not atEnd(stream):
-        let
-            tag = readTag(stream)
-            wireType = wireType(tag)
-        case fieldNumber(tag)
-        of 0:
-            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
-        of 1:
-            expectWireType(wireType, WireType.Fixed64)
-            setvalue(result, protoReadDouble(stream))
-        else: readUnknownField(stream, result, tag)
-
-proc serialize*(message: google_protobuf_DoubleValue): string =
-    let
-        ss = newStringStream()
-    writegoogle_protobuf_DoubleValue(ss, message)
-    result = ss.data
-
-proc newgoogle_protobuf_DoubleValue*(data: string): google_protobuf_DoubleValue =
-    let
-        ss = newStringStream(data)
-    result = readgoogle_protobuf_DoubleValue(ss)
-
-proc newgoogle_protobuf_DoubleValue*(data: seq[byte]): google_protobuf_DoubleValue =
-    let
-        ss = newStringStream(cast[string](data))
-    result = readgoogle_protobuf_DoubleValue(ss)
-
-
-proc fullyQualifiedName*(T: typedesc[google_protobuf_StringValue]): string = "google.protobuf.StringValue"
-
-proc readgoogle_protobuf_StringValueImpl(stream: Stream): Message = readgoogle_protobuf_StringValue(stream)
-proc writegoogle_protobuf_StringValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_StringValue(stream, google_protobuf_StringValue(msg))
-
-proc google_protobuf_StringValueProcs*(): MessageProcs =
-    result.readImpl = readgoogle_protobuf_StringValueImpl
-    result.writeImpl = writegoogle_protobuf_StringValueImpl
-
-proc newgoogle_protobuf_StringValue*(): google_protobuf_StringValue =
-    new(result)
-    initMessage(result[])
-    result.procs = google_protobuf_StringValueProcs()
-    result.value = ""
-
-proc clearvalue*(message: google_protobuf_StringValue) =
-    message.value = ""
-
-proc setvalue*(message: google_protobuf_StringValue, value: string) =
-    message.value = value
-
-proc value*(message: google_protobuf_StringValue): string {.inline.} =
-    message.value
-
-proc `value=`*(message: google_protobuf_StringValue, value: string) {.inline.} =
-    setvalue(message, value)
-
-proc sizeOfgoogle_protobuf_StringValue*(message: google_protobuf_StringValue): uint64 =
-    if len(message.value) > 0:
-        result = result + sizeOfTag(1, WireType.LengthDelimited)
-        result = result + sizeOfString(message.value)
-    result = result + sizeOfUnknownFields(message)
-
-proc writegoogle_protobuf_StringValue*(stream: Stream, message: google_protobuf_StringValue) =
-    if len(message.value) > 0:
-        protoWriteString(stream, message.value, 1)
-    writeUnknownFields(stream, message)
-
-proc readgoogle_protobuf_StringValue*(stream: Stream): google_protobuf_StringValue =
-    result = newgoogle_protobuf_StringValue()
-    while not atEnd(stream):
-        let
-            tag = readTag(stream)
-            wireType = wireType(tag)
-        case fieldNumber(tag)
-        of 0:
-            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
-        of 1:
-            expectWireType(wireType, WireType.LengthDelimited)
-            setvalue(result, protoReadString(stream))
-        else: readUnknownField(stream, result, tag)
-
-proc serialize*(message: google_protobuf_StringValue): string =
-    let
-        ss = newStringStream()
-    writegoogle_protobuf_StringValue(ss, message)
-    result = ss.data
-
-proc newgoogle_protobuf_StringValue*(data: string): google_protobuf_StringValue =
-    let
-        ss = newStringStream(data)
-    result = readgoogle_protobuf_StringValue(ss)
-
-proc newgoogle_protobuf_StringValue*(data: seq[byte]): google_protobuf_StringValue =
-    let
-        ss = newStringStream(cast[string](data))
-    result = readgoogle_protobuf_StringValue(ss)
-
+proc newgoogle_protobuf_Int32Value*(): google_protobuf_Int32Value
+proc newgoogle_protobuf_Int32Value*(data: string): google_protobuf_Int32Value
+proc newgoogle_protobuf_Int32Value*(data: seq[byte]): google_protobuf_Int32Value
+proc writegoogle_protobuf_Int32Value*(stream: Stream, message: google_protobuf_Int32Value)
+proc readgoogle_protobuf_Int32Value*(stream: Stream): google_protobuf_Int32Value
+proc sizeOfgoogle_protobuf_Int32Value*(message: google_protobuf_Int32Value): uint64
 
 proc fullyQualifiedName*(T: typedesc[google_protobuf_BoolValue]): string = "google.protobuf.BoolValue"
 
@@ -443,144 +167,6 @@ proc newgoogle_protobuf_BoolValue*(data: seq[byte]): google_protobuf_BoolValue =
     let
         ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_BoolValue(ss)
-
-
-proc fullyQualifiedName*(T: typedesc[google_protobuf_BytesValue]): string = "google.protobuf.BytesValue"
-
-proc readgoogle_protobuf_BytesValueImpl(stream: Stream): Message = readgoogle_protobuf_BytesValue(stream)
-proc writegoogle_protobuf_BytesValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_BytesValue(stream, google_protobuf_BytesValue(msg))
-
-proc google_protobuf_BytesValueProcs*(): MessageProcs =
-    result.readImpl = readgoogle_protobuf_BytesValueImpl
-    result.writeImpl = writegoogle_protobuf_BytesValueImpl
-
-proc newgoogle_protobuf_BytesValue*(): google_protobuf_BytesValue =
-    new(result)
-    initMessage(result[])
-    result.procs = google_protobuf_BytesValueProcs()
-    result.value = @[]
-
-proc clearvalue*(message: google_protobuf_BytesValue) =
-    message.value = @[]
-
-proc setvalue*(message: google_protobuf_BytesValue, value: seq[byte]) =
-    message.value = value
-
-proc value*(message: google_protobuf_BytesValue): seq[byte] {.inline.} =
-    message.value
-
-proc `value=`*(message: google_protobuf_BytesValue, value: seq[byte]) {.inline.} =
-    setvalue(message, value)
-
-proc sizeOfgoogle_protobuf_BytesValue*(message: google_protobuf_BytesValue): uint64 =
-    if len(message.value) > 0:
-        result = result + sizeOfTag(1, WireType.LengthDelimited)
-        result = result + sizeOfBytes(message.value)
-    result = result + sizeOfUnknownFields(message)
-
-proc writegoogle_protobuf_BytesValue*(stream: Stream, message: google_protobuf_BytesValue) =
-    if len(message.value) > 0:
-        protoWriteBytes(stream, message.value, 1)
-    writeUnknownFields(stream, message)
-
-proc readgoogle_protobuf_BytesValue*(stream: Stream): google_protobuf_BytesValue =
-    result = newgoogle_protobuf_BytesValue()
-    while not atEnd(stream):
-        let
-            tag = readTag(stream)
-            wireType = wireType(tag)
-        case fieldNumber(tag)
-        of 0:
-            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
-        of 1:
-            expectWireType(wireType, WireType.LengthDelimited)
-            setvalue(result, protoReadBytes(stream))
-        else: readUnknownField(stream, result, tag)
-
-proc serialize*(message: google_protobuf_BytesValue): string =
-    let
-        ss = newStringStream()
-    writegoogle_protobuf_BytesValue(ss, message)
-    result = ss.data
-
-proc newgoogle_protobuf_BytesValue*(data: string): google_protobuf_BytesValue =
-    let
-        ss = newStringStream(data)
-    result = readgoogle_protobuf_BytesValue(ss)
-
-proc newgoogle_protobuf_BytesValue*(data: seq[byte]): google_protobuf_BytesValue =
-    let
-        ss = newStringStream(cast[string](data))
-    result = readgoogle_protobuf_BytesValue(ss)
-
-
-proc fullyQualifiedName*(T: typedesc[google_protobuf_FloatValue]): string = "google.protobuf.FloatValue"
-
-proc readgoogle_protobuf_FloatValueImpl(stream: Stream): Message = readgoogle_protobuf_FloatValue(stream)
-proc writegoogle_protobuf_FloatValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_FloatValue(stream, google_protobuf_FloatValue(msg))
-
-proc google_protobuf_FloatValueProcs*(): MessageProcs =
-    result.readImpl = readgoogle_protobuf_FloatValueImpl
-    result.writeImpl = writegoogle_protobuf_FloatValueImpl
-
-proc newgoogle_protobuf_FloatValue*(): google_protobuf_FloatValue =
-    new(result)
-    initMessage(result[])
-    result.procs = google_protobuf_FloatValueProcs()
-    result.value = 0
-
-proc clearvalue*(message: google_protobuf_FloatValue) =
-    message.value = 0
-
-proc setvalue*(message: google_protobuf_FloatValue, value: float32) =
-    message.value = value
-
-proc value*(message: google_protobuf_FloatValue): float32 {.inline.} =
-    message.value
-
-proc `value=`*(message: google_protobuf_FloatValue, value: float32) {.inline.} =
-    setvalue(message, value)
-
-proc sizeOfgoogle_protobuf_FloatValue*(message: google_protobuf_FloatValue): uint64 =
-    if message.value != 0:
-        result = result + sizeOfTag(1, WireType.Fixed32)
-        result = result + sizeOfFloat(message.value)
-    result = result + sizeOfUnknownFields(message)
-
-proc writegoogle_protobuf_FloatValue*(stream: Stream, message: google_protobuf_FloatValue) =
-    if message.value != 0:
-        protoWriteFloat(stream, message.value, 1)
-    writeUnknownFields(stream, message)
-
-proc readgoogle_protobuf_FloatValue*(stream: Stream): google_protobuf_FloatValue =
-    result = newgoogle_protobuf_FloatValue()
-    while not atEnd(stream):
-        let
-            tag = readTag(stream)
-            wireType = wireType(tag)
-        case fieldNumber(tag)
-        of 0:
-            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
-        of 1:
-            expectWireType(wireType, WireType.Fixed32)
-            setvalue(result, protoReadFloat(stream))
-        else: readUnknownField(stream, result, tag)
-
-proc serialize*(message: google_protobuf_FloatValue): string =
-    let
-        ss = newStringStream()
-    writegoogle_protobuf_FloatValue(ss, message)
-    result = ss.data
-
-proc newgoogle_protobuf_FloatValue*(data: string): google_protobuf_FloatValue =
-    let
-        ss = newStringStream(data)
-    result = readgoogle_protobuf_FloatValue(ss)
-
-proc newgoogle_protobuf_FloatValue*(data: seq[byte]): google_protobuf_FloatValue =
-    let
-        ss = newStringStream(cast[string](data))
-    result = readgoogle_protobuf_FloatValue(ss)
 
 
 proc fullyQualifiedName*(T: typedesc[google_protobuf_UInt64Value]): string = "google.protobuf.UInt64Value"
@@ -652,6 +238,282 @@ proc newgoogle_protobuf_UInt64Value*(data: seq[byte]): google_protobuf_UInt64Val
     result = readgoogle_protobuf_UInt64Value(ss)
 
 
+proc fullyQualifiedName*(T: typedesc[google_protobuf_DoubleValue]): string = "google.protobuf.DoubleValue"
+
+proc readgoogle_protobuf_DoubleValueImpl(stream: Stream): Message = readgoogle_protobuf_DoubleValue(stream)
+proc writegoogle_protobuf_DoubleValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_DoubleValue(stream, google_protobuf_DoubleValue(msg))
+
+proc google_protobuf_DoubleValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_DoubleValueImpl
+    result.writeImpl = writegoogle_protobuf_DoubleValueImpl
+
+proc newgoogle_protobuf_DoubleValue*(): google_protobuf_DoubleValue =
+    new(result)
+    initMessage(result[])
+    result.procs = google_protobuf_DoubleValueProcs()
+    result.value = 0
+
+proc clearvalue*(message: google_protobuf_DoubleValue) =
+    message.value = 0
+
+proc setvalue*(message: google_protobuf_DoubleValue, value: float64) =
+    message.value = value
+
+proc value*(message: google_protobuf_DoubleValue): float64 {.inline.} =
+    message.value
+
+proc `value=`*(message: google_protobuf_DoubleValue, value: float64) {.inline.} =
+    setvalue(message, value)
+
+proc sizeOfgoogle_protobuf_DoubleValue*(message: google_protobuf_DoubleValue): uint64 =
+    if message.value != 0:
+        result = result + sizeOfTag(1, WireType.Fixed64)
+        result = result + sizeOfDouble(message.value)
+    result = result + sizeOfUnknownFields(message)
+
+proc writegoogle_protobuf_DoubleValue*(stream: Stream, message: google_protobuf_DoubleValue) =
+    if message.value != 0:
+        protoWriteDouble(stream, message.value, 1)
+    writeUnknownFields(stream, message)
+
+proc readgoogle_protobuf_DoubleValue*(stream: Stream): google_protobuf_DoubleValue =
+    result = newgoogle_protobuf_DoubleValue()
+    while not atEnd(stream):
+        let
+            tag = readTag(stream)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
+        of 1:
+            expectWireType(wireType, WireType.Fixed64)
+            setvalue(result, protoReadDouble(stream))
+        else: readUnknownField(stream, result, tag)
+
+proc serialize*(message: google_protobuf_DoubleValue): string =
+    let
+        ss = newStringStream()
+    writegoogle_protobuf_DoubleValue(ss, message)
+    result = ss.data
+
+proc newgoogle_protobuf_DoubleValue*(data: string): google_protobuf_DoubleValue =
+    let
+        ss = newStringStream(data)
+    result = readgoogle_protobuf_DoubleValue(ss)
+
+proc newgoogle_protobuf_DoubleValue*(data: seq[byte]): google_protobuf_DoubleValue =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_DoubleValue(ss)
+
+
+proc fullyQualifiedName*(T: typedesc[google_protobuf_FloatValue]): string = "google.protobuf.FloatValue"
+
+proc readgoogle_protobuf_FloatValueImpl(stream: Stream): Message = readgoogle_protobuf_FloatValue(stream)
+proc writegoogle_protobuf_FloatValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_FloatValue(stream, google_protobuf_FloatValue(msg))
+
+proc google_protobuf_FloatValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_FloatValueImpl
+    result.writeImpl = writegoogle_protobuf_FloatValueImpl
+
+proc newgoogle_protobuf_FloatValue*(): google_protobuf_FloatValue =
+    new(result)
+    initMessage(result[])
+    result.procs = google_protobuf_FloatValueProcs()
+    result.value = 0
+
+proc clearvalue*(message: google_protobuf_FloatValue) =
+    message.value = 0
+
+proc setvalue*(message: google_protobuf_FloatValue, value: float32) =
+    message.value = value
+
+proc value*(message: google_protobuf_FloatValue): float32 {.inline.} =
+    message.value
+
+proc `value=`*(message: google_protobuf_FloatValue, value: float32) {.inline.} =
+    setvalue(message, value)
+
+proc sizeOfgoogle_protobuf_FloatValue*(message: google_protobuf_FloatValue): uint64 =
+    if message.value != 0:
+        result = result + sizeOfTag(1, WireType.Fixed32)
+        result = result + sizeOfFloat(message.value)
+    result = result + sizeOfUnknownFields(message)
+
+proc writegoogle_protobuf_FloatValue*(stream: Stream, message: google_protobuf_FloatValue) =
+    if message.value != 0:
+        protoWriteFloat(stream, message.value, 1)
+    writeUnknownFields(stream, message)
+
+proc readgoogle_protobuf_FloatValue*(stream: Stream): google_protobuf_FloatValue =
+    result = newgoogle_protobuf_FloatValue()
+    while not atEnd(stream):
+        let
+            tag = readTag(stream)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
+        of 1:
+            expectWireType(wireType, WireType.Fixed32)
+            setvalue(result, protoReadFloat(stream))
+        else: readUnknownField(stream, result, tag)
+
+proc serialize*(message: google_protobuf_FloatValue): string =
+    let
+        ss = newStringStream()
+    writegoogle_protobuf_FloatValue(ss, message)
+    result = ss.data
+
+proc newgoogle_protobuf_FloatValue*(data: string): google_protobuf_FloatValue =
+    let
+        ss = newStringStream(data)
+    result = readgoogle_protobuf_FloatValue(ss)
+
+proc newgoogle_protobuf_FloatValue*(data: seq[byte]): google_protobuf_FloatValue =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_FloatValue(ss)
+
+
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Int64Value]): string = "google.protobuf.Int64Value"
+
+proc readgoogle_protobuf_Int64ValueImpl(stream: Stream): Message = readgoogle_protobuf_Int64Value(stream)
+proc writegoogle_protobuf_Int64ValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Int64Value(stream, google_protobuf_Int64Value(msg))
+
+proc google_protobuf_Int64ValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_Int64ValueImpl
+    result.writeImpl = writegoogle_protobuf_Int64ValueImpl
+
+proc newgoogle_protobuf_Int64Value*(): google_protobuf_Int64Value =
+    new(result)
+    initMessage(result[])
+    result.procs = google_protobuf_Int64ValueProcs()
+    result.value = 0
+
+proc clearvalue*(message: google_protobuf_Int64Value) =
+    message.value = 0
+
+proc setvalue*(message: google_protobuf_Int64Value, value: int64) =
+    message.value = value
+
+proc value*(message: google_protobuf_Int64Value): int64 {.inline.} =
+    message.value
+
+proc `value=`*(message: google_protobuf_Int64Value, value: int64) {.inline.} =
+    setvalue(message, value)
+
+proc sizeOfgoogle_protobuf_Int64Value*(message: google_protobuf_Int64Value): uint64 =
+    if message.value != 0:
+        result = result + sizeOfTag(1, WireType.Varint)
+        result = result + sizeOfInt64(message.value)
+    result = result + sizeOfUnknownFields(message)
+
+proc writegoogle_protobuf_Int64Value*(stream: Stream, message: google_protobuf_Int64Value) =
+    if message.value != 0:
+        protoWriteInt64(stream, message.value, 1)
+    writeUnknownFields(stream, message)
+
+proc readgoogle_protobuf_Int64Value*(stream: Stream): google_protobuf_Int64Value =
+    result = newgoogle_protobuf_Int64Value()
+    while not atEnd(stream):
+        let
+            tag = readTag(stream)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
+        of 1:
+            expectWireType(wireType, WireType.Varint)
+            setvalue(result, protoReadInt64(stream))
+        else: readUnknownField(stream, result, tag)
+
+proc serialize*(message: google_protobuf_Int64Value): string =
+    let
+        ss = newStringStream()
+    writegoogle_protobuf_Int64Value(ss, message)
+    result = ss.data
+
+proc newgoogle_protobuf_Int64Value*(data: string): google_protobuf_Int64Value =
+    let
+        ss = newStringStream(data)
+    result = readgoogle_protobuf_Int64Value(ss)
+
+proc newgoogle_protobuf_Int64Value*(data: seq[byte]): google_protobuf_Int64Value =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_Int64Value(ss)
+
+
+proc fullyQualifiedName*(T: typedesc[google_protobuf_BytesValue]): string = "google.protobuf.BytesValue"
+
+proc readgoogle_protobuf_BytesValueImpl(stream: Stream): Message = readgoogle_protobuf_BytesValue(stream)
+proc writegoogle_protobuf_BytesValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_BytesValue(stream, google_protobuf_BytesValue(msg))
+
+proc google_protobuf_BytesValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_BytesValueImpl
+    result.writeImpl = writegoogle_protobuf_BytesValueImpl
+
+proc newgoogle_protobuf_BytesValue*(): google_protobuf_BytesValue =
+    new(result)
+    initMessage(result[])
+    result.procs = google_protobuf_BytesValueProcs()
+    result.value = @[]
+
+proc clearvalue*(message: google_protobuf_BytesValue) =
+    message.value = @[]
+
+proc setvalue*(message: google_protobuf_BytesValue, value: seq[byte]) =
+    message.value = value
+
+proc value*(message: google_protobuf_BytesValue): seq[byte] {.inline.} =
+    message.value
+
+proc `value=`*(message: google_protobuf_BytesValue, value: seq[byte]) {.inline.} =
+    setvalue(message, value)
+
+proc sizeOfgoogle_protobuf_BytesValue*(message: google_protobuf_BytesValue): uint64 =
+    if len(message.value) > 0:
+        result = result + sizeOfTag(1, WireType.LengthDelimited)
+        result = result + sizeOfBytes(message.value)
+    result = result + sizeOfUnknownFields(message)
+
+proc writegoogle_protobuf_BytesValue*(stream: Stream, message: google_protobuf_BytesValue) =
+    if len(message.value) > 0:
+        protoWriteBytes(stream, message.value, 1)
+    writeUnknownFields(stream, message)
+
+proc readgoogle_protobuf_BytesValue*(stream: Stream): google_protobuf_BytesValue =
+    result = newgoogle_protobuf_BytesValue()
+    while not atEnd(stream):
+        let
+            tag = readTag(stream)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
+        of 1:
+            expectWireType(wireType, WireType.LengthDelimited)
+            setvalue(result, protoReadBytes(stream))
+        else: readUnknownField(stream, result, tag)
+
+proc serialize*(message: google_protobuf_BytesValue): string =
+    let
+        ss = newStringStream()
+    writegoogle_protobuf_BytesValue(ss, message)
+    result = ss.data
+
+proc newgoogle_protobuf_BytesValue*(data: string): google_protobuf_BytesValue =
+    let
+        ss = newStringStream(data)
+    result = readgoogle_protobuf_BytesValue(ss)
+
+proc newgoogle_protobuf_BytesValue*(data: seq[byte]): google_protobuf_BytesValue =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_BytesValue(ss)
+
+
 proc fullyQualifiedName*(T: typedesc[google_protobuf_UInt32Value]): string = "google.protobuf.UInt32Value"
 
 proc readgoogle_protobuf_UInt32ValueImpl(stream: Stream): Message = readgoogle_protobuf_UInt32Value(stream)
@@ -719,5 +581,143 @@ proc newgoogle_protobuf_UInt32Value*(data: seq[byte]): google_protobuf_UInt32Val
     let
         ss = newStringStream(cast[string](data))
     result = readgoogle_protobuf_UInt32Value(ss)
+
+
+proc fullyQualifiedName*(T: typedesc[google_protobuf_StringValue]): string = "google.protobuf.StringValue"
+
+proc readgoogle_protobuf_StringValueImpl(stream: Stream): Message = readgoogle_protobuf_StringValue(stream)
+proc writegoogle_protobuf_StringValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_StringValue(stream, google_protobuf_StringValue(msg))
+
+proc google_protobuf_StringValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_StringValueImpl
+    result.writeImpl = writegoogle_protobuf_StringValueImpl
+
+proc newgoogle_protobuf_StringValue*(): google_protobuf_StringValue =
+    new(result)
+    initMessage(result[])
+    result.procs = google_protobuf_StringValueProcs()
+    result.value = ""
+
+proc clearvalue*(message: google_protobuf_StringValue) =
+    message.value = ""
+
+proc setvalue*(message: google_protobuf_StringValue, value: string) =
+    message.value = value
+
+proc value*(message: google_protobuf_StringValue): string {.inline.} =
+    message.value
+
+proc `value=`*(message: google_protobuf_StringValue, value: string) {.inline.} =
+    setvalue(message, value)
+
+proc sizeOfgoogle_protobuf_StringValue*(message: google_protobuf_StringValue): uint64 =
+    if len(message.value) > 0:
+        result = result + sizeOfTag(1, WireType.LengthDelimited)
+        result = result + sizeOfString(message.value)
+    result = result + sizeOfUnknownFields(message)
+
+proc writegoogle_protobuf_StringValue*(stream: Stream, message: google_protobuf_StringValue) =
+    if len(message.value) > 0:
+        protoWriteString(stream, message.value, 1)
+    writeUnknownFields(stream, message)
+
+proc readgoogle_protobuf_StringValue*(stream: Stream): google_protobuf_StringValue =
+    result = newgoogle_protobuf_StringValue()
+    while not atEnd(stream):
+        let
+            tag = readTag(stream)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
+        of 1:
+            expectWireType(wireType, WireType.LengthDelimited)
+            setvalue(result, protoReadString(stream))
+        else: readUnknownField(stream, result, tag)
+
+proc serialize*(message: google_protobuf_StringValue): string =
+    let
+        ss = newStringStream()
+    writegoogle_protobuf_StringValue(ss, message)
+    result = ss.data
+
+proc newgoogle_protobuf_StringValue*(data: string): google_protobuf_StringValue =
+    let
+        ss = newStringStream(data)
+    result = readgoogle_protobuf_StringValue(ss)
+
+proc newgoogle_protobuf_StringValue*(data: seq[byte]): google_protobuf_StringValue =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_StringValue(ss)
+
+
+proc fullyQualifiedName*(T: typedesc[google_protobuf_Int32Value]): string = "google.protobuf.Int32Value"
+
+proc readgoogle_protobuf_Int32ValueImpl(stream: Stream): Message = readgoogle_protobuf_Int32Value(stream)
+proc writegoogle_protobuf_Int32ValueImpl(stream: Stream, msg: Message) = writegoogle_protobuf_Int32Value(stream, google_protobuf_Int32Value(msg))
+
+proc google_protobuf_Int32ValueProcs*(): MessageProcs =
+    result.readImpl = readgoogle_protobuf_Int32ValueImpl
+    result.writeImpl = writegoogle_protobuf_Int32ValueImpl
+
+proc newgoogle_protobuf_Int32Value*(): google_protobuf_Int32Value =
+    new(result)
+    initMessage(result[])
+    result.procs = google_protobuf_Int32ValueProcs()
+    result.value = 0
+
+proc clearvalue*(message: google_protobuf_Int32Value) =
+    message.value = 0
+
+proc setvalue*(message: google_protobuf_Int32Value, value: int32) =
+    message.value = value
+
+proc value*(message: google_protobuf_Int32Value): int32 {.inline.} =
+    message.value
+
+proc `value=`*(message: google_protobuf_Int32Value, value: int32) {.inline.} =
+    setvalue(message, value)
+
+proc sizeOfgoogle_protobuf_Int32Value*(message: google_protobuf_Int32Value): uint64 =
+    if message.value != 0:
+        result = result + sizeOfTag(1, WireType.Varint)
+        result = result + sizeOfInt32(message.value)
+    result = result + sizeOfUnknownFields(message)
+
+proc writegoogle_protobuf_Int32Value*(stream: Stream, message: google_protobuf_Int32Value) =
+    if message.value != 0:
+        protoWriteInt32(stream, message.value, 1)
+    writeUnknownFields(stream, message)
+
+proc readgoogle_protobuf_Int32Value*(stream: Stream): google_protobuf_Int32Value =
+    result = newgoogle_protobuf_Int32Value()
+    while not atEnd(stream):
+        let
+            tag = readTag(stream)
+            wireType = wireType(tag)
+        case fieldNumber(tag)
+        of 0:
+            raise newException(InvalidFieldNumberError, "Invalid field number: 0")
+        of 1:
+            expectWireType(wireType, WireType.Varint)
+            setvalue(result, protoReadInt32(stream))
+        else: readUnknownField(stream, result, tag)
+
+proc serialize*(message: google_protobuf_Int32Value): string =
+    let
+        ss = newStringStream()
+    writegoogle_protobuf_Int32Value(ss, message)
+    result = ss.data
+
+proc newgoogle_protobuf_Int32Value*(data: string): google_protobuf_Int32Value =
+    let
+        ss = newStringStream(data)
+    result = readgoogle_protobuf_Int32Value(ss)
+
+proc newgoogle_protobuf_Int32Value*(data: seq[byte]): google_protobuf_Int32Value =
+    let
+        ss = newStringStream(cast[string](data))
+    result = readgoogle_protobuf_Int32Value(ss)
 
 
