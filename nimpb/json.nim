@@ -16,7 +16,7 @@ proc `%`*(u: uint32): JsonNode =
     newJFloat(float(u))
 
 proc `%`*(b: seq[byte]): JsonNode =
-    result = newJString(base64.encode(cast[string](b), newLine=""))
+    result = newJString(base64.encode(cast[string](b)))
 
 proc toJson*(value: float): JsonNode =
     case classify(value)
