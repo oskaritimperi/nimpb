@@ -39,8 +39,11 @@ proc toJson*(value: uint64): JsonNode =
     newJString($value)
 
 proc toJson*[Enum: enum](value: Enum): JsonNode =
-    for v in Enum:
-        if value == v:
+    # TODO: If the enum has holes, this will go through some unnecessary iterations.
+    # It should be possible to create a macro to get all the possible values of the
+    # enum and only check those.
+    for v in Enum.low.int..Enum.high.int:
+        if ord(value) == v:
             return %($v)
     # The enum has a value that is not defined in the enum type
     result = %(cast[int](value))
