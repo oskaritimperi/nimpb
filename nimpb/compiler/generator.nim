@@ -582,7 +582,7 @@ iterator sortDependencies(messages: seq[Message]): Message =
         byname = newTable[string, Message]()
 
     for message in messages:
-        deps[$message.names] = toSet(dependencies(message))
+        deps[$message.names] = toHashSet(dependencies(message))
         byname[$message.names] = message
 
     let order = reversed(toposort(deps))
@@ -627,7 +627,7 @@ proc parseFile(name: string, fdesc: google_protobuf_FileDescriptorProto): ProtoF
             add(result.enums, newEnum(name, e))
 
 proc addLine(s: var string, line: string) =
-    if not isNilOrWhitespace(line):
+    if not isEmptyOrWhitespace(line):
         s &= line
     s &= "\n"
 

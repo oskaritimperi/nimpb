@@ -1,6 +1,6 @@
 import os
 import osproc
-import parseopt2
+import parseopt
 import strformat
 import strutils
 
